@@ -15,7 +15,7 @@ export default function WhyPragna() {
     {
       title: 'Ethical, Transparent Costing',
       description:
-        'We believe excellent dermatology should be accessible and honest. Every recommendation is medically justified, every plan is explained, and our pricing is transparent and ethical—so you know you're paying for what you actually need, nothing more.',
+        'We believe excellent dermatology should be accessible and honest. Every recommendation is medically justified, every plan is explained, and our pricing is transparent and ethical—so you know you\'re paying for what you actually need, nothing more.',
       icon: '💎',
     },
   ];

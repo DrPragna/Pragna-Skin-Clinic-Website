@@ -18,7 +18,7 @@ export default function Blog() {
       title: 'The Science of Beauty',
       date: 'Nov 25, 2024',
       excerpt:
-        'An exploration of facial aesthetics through a dermatologist's lens—balancing symmetry, proportion, and natural results with scientifically sound treatments.',
+        'An exploration of facial aesthetics through a dermatologist\'s lens—balancing symmetry, proportion, and natural results with scientifically sound treatments.',
       image: 'science',
     },
     {

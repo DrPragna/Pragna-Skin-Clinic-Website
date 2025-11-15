@@ -4,7 +4,7 @@ export default function Doctors() {
       name: 'Dr. Padmavathi Surapaneni',
       title: 'Senior Dermatologist, Pragna Skin & Laser Clinics',
       description:
-        'With decades of dermatology experience in Hyderabad and an active role as an international speaker and researcher, Dr. Padmavathi leads Pragna's clinical vision. Her focus is on safe, effective treatments that respect both medical ethics and patient comfort.',
+        'With decades of dermatology experience in Hyderabad and an active role as an international speaker and researcher, Dr. Padmavathi leads Pragna\'s clinical vision. Her focus is on safe, effective treatments that respect both medical ethics and patient comfort.',
     },
     {
       name: 'Dr. Pragna Surapaneni',

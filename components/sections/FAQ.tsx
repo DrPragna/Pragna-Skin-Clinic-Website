@@ -24,7 +24,7 @@ export default function FAQ() {
     {
       question: 'How do I prepare for my first consultation?',
       answer:
-        'Just come as you are. If you're currently using any skincare products or medications, it helps to bring a list or photos of them so we can understand your routine better.',
+        'Just come as you are. If you\'re currently using any skincare products or medications, it helps to bring a list or photos of them so we can understand your routine better.',
     },
     {
       question: 'Do you offer packages for treatments?',

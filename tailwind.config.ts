@@ -22,10 +22,12 @@ export default {
           DEFAULT: '#F9F7F6',
           warm: '#FAF4F0',
         },
+        'beige-warm': '#FAF4F0',
         charcoal: '#111111',
         dust: {
           red: '#C35A4A',
         },
+        'dust-red': '#C35A4A',
       },
       fontFamily: {
         serif: ['Playfair Display', 'Georgia', 'serif'],
