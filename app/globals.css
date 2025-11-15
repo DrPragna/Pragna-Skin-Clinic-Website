@@ -48,20 +48,9 @@
     @apply bg-gradient-to-br from-terracotta via-terracotta-light to-beige;
   }
   
-  /* Staggered animations */
-  .animate-stagger-1 {
-    animation: slideInLeft 0.8s ease-out forwards;
-    opacity: 0;
-  }
-  
-  .animate-stagger-2 {
-    animation: slideInLeft 0.8s ease-out 0.1s forwards;
-    opacity: 0;
-  }
-  
-  .animate-stagger-3 {
-    animation: slideInLeft 0.8s ease-out 0.2s forwards;
-    opacity: 0;
+  /* Fade in animation */
+  .animate-fade-in {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   /* Floating animation */
@@ -115,14 +104,14 @@
 }
 
 /* Custom animations */
-@keyframes slideInLeft {
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateX(-60px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 

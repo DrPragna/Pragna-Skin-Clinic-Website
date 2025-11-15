@@ -43,16 +43,18 @@ export default function TrustStrip() {
   ];
 
   return (
-    <section className="bg-beige-warm section-padding">
+    <section className="bg-beige-warm py-12 lg:py-16 border-t border-maroon/5">
       <div className="section-container">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="bg-beige rounded-2xl p-6 text-center space-y-3 hover:shadow-card transition-all duration-300 hover:scale-[1.02]"
+              className="text-center space-y-3 group"
             >
-              <div className="flex justify-center text-maroon">{stat.icon}</div>
-              <p className="text-sm text-charcoal/80 leading-relaxed">
+              <div className="flex justify-center text-maroon/80 group-hover:text-maroon transition-colors duration-300">
+                {stat.icon}
+              </div>
+              <p className="text-sm text-charcoal/70 leading-relaxed">
                 {stat.text}
               </p>
             </div>
