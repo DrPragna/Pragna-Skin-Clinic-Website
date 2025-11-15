@@ -123,3 +123,4 @@ Private - Built for Pragna Skin & Laser Clinics
 ---
 
 **For deployment instructions, start with [QUICK_START.md](QUICK_START.md)**
+# Deploy trigger
