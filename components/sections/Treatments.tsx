@@ -76,18 +76,18 @@ export default function Treatments() {
   };
 
   const tabs = [
-    { id: 'skin', label: 'Skin', icon: '✨' },
-    { id: 'hair', label: 'Hair', icon: '💇' },
-    { id: 'body', label: 'Body', icon: '💪' },
-    { id: 'wellness', label: 'Wellness', icon: '🧘' },
+    { id: 'skin', label: 'Skin' },
+    { id: 'hair', label: 'Hair' },
+    { id: 'body', label: 'Body' },
+    { id: 'wellness', label: 'Wellness' },
   ];
 
   return (
     <section id="treatments" className="section-padding bg-beige">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-charcoal">
-            Treatments we offer
+          <h2 className="text-4xl lg:text-5xl font-display font-normal text-charcoal">
+            Treatments <span className="italic">we offer</span>
           </h2>
           <p className="text-lg text-charcoal/70">
             Every treatment at Pragna is dermatologist-led, evidence-based, and customized. 
@@ -97,18 +97,17 @@ export default function Treatments() {
 
         {/* Tabs */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-beige-warm rounded-full p-2 gap-2">
+          <div className="inline-flex bg-beige-warm rounded-full p-2 gap-2 border border-maroon/10">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 relative ${
                   activeTab === tab.id
                     ? 'bg-maroon text-beige-warm shadow-soft'
                     : 'text-charcoal/70 hover:text-maroon'
                 }`}
               >
-                <span className="mr-2">{tab.icon}</span>
                 {tab.label}
               </button>
             ))}

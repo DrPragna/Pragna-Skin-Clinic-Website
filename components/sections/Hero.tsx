@@ -27,8 +27,8 @@ export default function Hero() {
               <p className="text-maroon font-medium tracking-wide uppercase text-sm">
                 Advanced Skin & Hair Dermatology in Hyderabad
               </p>
-              <h1 className="text-hero-mobile lg:text-hero font-serif font-bold text-charcoal text-balance">
-                Radiant skin, backed by 30+ years of trusted dermatology.
+              <h1 className="text-hero-mobile lg:text-hero font-display font-normal text-charcoal text-balance leading-tight">
+                Radiant skin, backed by <span className="italic">30+ years</span> of trusted dermatology.
               </h1>
               <p className="text-lg text-charcoal/70 leading-relaxed max-w-xl">
                 Pragna Skin & Laser Clinics combines decades of clinical experience, globally recognized expertise, 

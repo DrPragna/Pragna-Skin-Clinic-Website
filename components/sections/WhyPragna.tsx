@@ -36,8 +36,8 @@ export default function WhyPragna() {
     <section className="section-padding bg-beige-warm">
       <div className="section-container">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-charcoal">
-            Why patients trust Pragna for their skin & hair
+          <h2 className="text-4xl lg:text-5xl font-display font-normal text-charcoal leading-tight">
+            Why patients <span className="italic">trust Pragna</span> for their skin & hair
           </h2>
         </div>
 

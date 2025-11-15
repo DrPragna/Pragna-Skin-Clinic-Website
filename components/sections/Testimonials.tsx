@@ -47,11 +47,17 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="section-padding gradient-terracotta">
-      <div className="section-container">
+    <section className="section-padding gradient-terracotta relative overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute top-20 left-10 w-3 h-3 bg-maroon rounded-full opacity-30"></div>
+      <div className="absolute top-32 left-16 w-16 h-px bg-maroon opacity-20"></div>
+      <div className="absolute bottom-20 right-10 w-3 h-3 bg-maroon rounded-full opacity-30"></div>
+      <div className="absolute bottom-32 right-16 w-16 h-px bg-maroon opacity-20"></div>
+      
+      <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-charcoal">
-            What our patients say
+          <h2 className="text-4xl lg:text-5xl font-display font-normal text-charcoal">
+            What our <span className="italic">patients</span> say
           </h2>
           <p className="text-lg text-charcoal/70">
             Our patients are at the heart of everything we do. Here are a few of their stories, 
@@ -60,8 +66,14 @@ export default function Testimonials() {
         </div>
 
         <div className="max-w-4xl mx-auto relative">
+          {/* Decorative corner dots */}
+          <div className="absolute -top-4 -left-4 w-2 h-2 bg-maroon rounded-full opacity-40"></div>
+          <div className="absolute -top-4 -right-4 w-2 h-2 bg-maroon rounded-full opacity-40"></div>
+          <div className="absolute -bottom-4 -left-4 w-2 h-2 bg-maroon rounded-full opacity-40"></div>
+          <div className="absolute -bottom-4 -right-4 w-2 h-2 bg-maroon rounded-full opacity-40"></div>
+          
           {/* Testimonial Card */}
-          <div className="bg-beige rounded-3xl p-8 md:p-12 shadow-soft-lg">
+          <div className="bg-beige rounded-3xl p-8 md:p-12 shadow-soft-lg border border-maroon/10">
             <div className="space-y-6">
               {/* Stars */}
               <div className="flex gap-1">
