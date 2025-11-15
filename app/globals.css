@@ -1,26 +1,56 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-beige-warm text-charcoal font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+  
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+  
+  .btn-primary {
+    @apply px-8 py-4 bg-charcoal text-beige-warm rounded-full font-medium 
+           hover:bg-maroon transition-all duration-300 
+           hover:shadow-soft-lg hover:scale-[1.02];
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-4 border-2 border-maroon text-maroon rounded-full font-medium
+           hover:bg-maroon hover:text-beige-warm transition-all duration-300;
+  }
+  
+  .card {
+    @apply bg-beige rounded-3xl p-8 shadow-card 
+           hover:shadow-soft-lg transition-all duration-300
+           hover:scale-[1.01];
+  }
+  
+  .gradient-terracotta {
+    @apply bg-gradient-to-br from-terracotta via-terracotta-light to-beige;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
