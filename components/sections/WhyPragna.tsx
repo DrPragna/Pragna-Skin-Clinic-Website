@@ -33,30 +33,45 @@ export default function WhyPragna() {
   ];
 
   return (
-    <section className="section-padding bg-beige-warm">
-      <div className="section-container">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-display font-normal text-charcoal leading-tight">
-            Why patients <span className="italic">trust Pragna</span> for their skin & hair
+    <section className="section-padding bg-beige-warm relative overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-full h-full" style={{
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, #722B2B 35px, #722B2B 70px)`,
+        }}></div>
+      </div>
+
+      <div className="section-container relative z-10">
+        <div className="lg:text-left text-center max-w-4xl mb-16 space-y-4">
+          <h2 className="text-4xl lg:text-6xl font-display font-normal text-charcoal leading-tight">
+            Why patients<br/>
+            <span className="italic text-maroon lg:ml-20">trust Pragna</span><br/>
+            for their skin & hair
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="space-y-8">
           {pillars.map((pillar, index) => (
             <div
               key={index}
-              className="card group cursor-pointer"
+              className={`group cursor-pointer ${
+                index % 2 === 0 ? 'lg:ml-0' : 'lg:ml-32'
+              }`}
             >
-              <div className="space-y-4">
-                <div className="text-maroon transform group-hover:scale-110 transition-transform duration-300">
+              <div className={`flex flex-col lg:flex-row gap-8 items-center p-8 rounded-3xl hover:bg-beige transition-all duration-500 ${
+                index % 2 === 0 ? '' : 'lg:flex-row-reverse'
+              }`}>
+                <div className="text-maroon transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                   {pillar.icon}
                 </div>
-                <h3 className="text-2xl font-serif font-semibold text-maroon">
-                  {pillar.title}
-                </h3>
-                <p className="text-charcoal/70 leading-relaxed">
-                  {pillar.description}
-                </p>
+                <div className="flex-1 space-y-3">
+                  <h3 className="text-3xl font-serif text-maroon">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-charcoal/70 leading-relaxed text-lg">
+                    {pillar.description}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
