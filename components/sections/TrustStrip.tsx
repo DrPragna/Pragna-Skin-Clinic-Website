@@ -4,11 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function TrustStrip() {
   const [isVisible, setIsVisible] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
   const [counts, setCounts] = useState<number[]>([30, 50000, 20]); // Start with final values
-  const [canAnimate, setCanAnimate] = useState(true);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const timersRef = useRef<NodeJS.Timeout[]>([]);
+  const animationRef = useRef<any>(null);
+  const lastAnimationTime = useRef<number>(0);
 
   const stats = [
     {
@@ -32,58 +31,56 @@ export default function TrustStrip() {
   ];
 
   const animateNumbers = () => {
-    // Clear any existing timers
-    timersRef.current.forEach(timer => clearInterval(timer));
-    timersRef.current = [];
-    
-    // Reset to 0
-    setCounts([0, 0, 0]);
-    setIsVisible(true);
-    setHasAnimated(true);
-    
-    // Animate numbers
+    const startTime = performance.now();
     const duration = 1500;
-    const steps = 50;
-    const intervalTime = duration / steps;
+    const startValues = [0, 0, 0];
+    const endValues = [30, 50000, 20];
     
-    stats.forEach((stat, index) => {
-      let current = 0;
-      const increment = stat.target / steps;
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
       
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= stat.target) {
-          current = stat.target;
-          clearInterval(timer);
-        }
-        setCounts(prev => {
-          const newCounts = [...prev];
-          newCounts[index] = Math.floor(current);
-          return newCounts;
-        });
-      }, intervalTime);
+      // Easing function for smooth animation
+      const easeOutQuad = (t: number) => t * (2 - t);
+      const easedProgress = easeOutQuad(progress);
       
-      timersRef.current.push(timer);
-    });
+      const newCounts = startValues.map((start, i) => {
+        const end = endValues[i];
+        return Math.floor(start + (end - start) * easedProgress);
+      });
+      
+      setCounts(newCounts);
+      
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(animate);
+      }
+    };
     
-    // Set cooldown period (4 seconds)
-    setCanAnimate(false);
-    setTimeout(() => {
-      setCanAnimate(true);
-    }, 4000);
+    // Cancel any existing animation
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+    
+    animationRef.current = requestAnimationFrame(animate);
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && canAnimate) {
-          animateNumbers();
-        } else if (!entry.isIntersecting) {
-          // Keep final values visible when out of view
-          if (hasAnimated) {
-            setCounts([30, 50000, 20]);
+        const now = Date.now();
+        const timeSinceLastAnimation = now - lastAnimationTime.current;
+        
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Only animate if enough time has passed (4 second cooldown)
+          if (timeSinceLastAnimation > 4000) {
+            animateNumbers();
+            lastAnimationTime.current = now;
           }
+        } else {
           setIsVisible(false);
+          // Reset to final values when out of view
+          setCounts([30, 50000, 20]);
         }
       },
       { threshold: 0.3 }
@@ -95,9 +92,11 @@ export default function TrustStrip() {
 
     return () => {
       observer.disconnect();
-      timersRef.current.forEach(timer => clearInterval(timer));
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
-  }, [canAnimate, hasAnimated]);
+  }, []);
 
   return (
     <section ref={sectionRef} className="py-20 bg-gradient-to-b from-beige-warm to-beige relative">
