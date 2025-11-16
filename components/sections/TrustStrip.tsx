@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function TrustStrip() {
   const [isVisible, setIsVisible] = useState(false);
-  const [counts, setCounts] = useState<number[]>([0, 0, 0]);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [counts, setCounts] = useState<number[]>([30, 50000, 20]); // Start with final values
   const [canAnimate, setCanAnimate] = useState(true);
   const sectionRef = useRef<HTMLDivElement>(null);
   const timersRef = useRef<NodeJS.Timeout[]>([]);
@@ -14,16 +15,19 @@ export default function TrustStrip() {
       number: '30+',
       label: 'Years',
       description: 'of dermatology excellence in Hyderabad',
+      target: 30,
     },
     {
       number: '50,000+',
       label: 'Patients',
       description: 'treated with personalized care',
+      target: 50000,
     },
     {
       number: '20+',
       label: 'Awards',
       description: 'and international recognitions',
+      target: 20,
     },
   ];
 
@@ -35,21 +39,21 @@ export default function TrustStrip() {
     // Reset to 0
     setCounts([0, 0, 0]);
     setIsVisible(true);
+    setHasAnimated(true);
     
     // Animate numbers
-    const duration = 1500; // Slightly faster for re-triggers
+    const duration = 1500;
     const steps = 50;
-    const interval = duration / steps;
+    const intervalTime = duration / steps;
     
     stats.forEach((stat, index) => {
-      const target = parseInt(stat.number.replace(/[^0-9]/g, ''));
       let current = 0;
-      const increment = target / steps;
+      const increment = stat.target / steps;
       
       const timer = setInterval(() => {
         current += increment;
-        if (current >= target) {
-          current = target;
+        if (current >= stat.target) {
+          current = stat.target;
           clearInterval(timer);
         }
         setCounts(prev => {
@@ -57,7 +61,7 @@ export default function TrustStrip() {
           newCounts[index] = Math.floor(current);
           return newCounts;
         });
-      }, interval);
+      }, intervalTime);
       
       timersRef.current.push(timer);
     });
@@ -75,7 +79,10 @@ export default function TrustStrip() {
         if (entry.isIntersecting && canAnimate) {
           animateNumbers();
         } else if (!entry.isIntersecting) {
-          // Reset visual state when out of view
+          // Keep final values visible when out of view
+          if (hasAnimated) {
+            setCounts([30, 50000, 20]);
+          }
           setIsVisible(false);
         }
       },
@@ -90,7 +97,7 @@ export default function TrustStrip() {
       observer.disconnect();
       timersRef.current.forEach(timer => clearInterval(timer));
     };
-  }, [canAnimate]);
+  }, [canAnimate, hasAnimated]);
 
   return (
     <section ref={sectionRef} className="py-20 bg-gradient-to-b from-beige-warm to-beige relative">
@@ -112,14 +119,10 @@ export default function TrustStrip() {
               {/* Number with animation */}
               <div className="relative">
                 <h3 className="text-5xl lg:text-6xl font-display text-maroon">
-                  {isVisible ? (
-                    <>
-                      {index === 1 
-                        ? counts[index].toLocaleString() 
-                        : counts[index]}
-                      {stat.number.includes('+') && '+'}
-                    </>
-                  ) : '0'}
+                  {index === 1 
+                    ? counts[index].toLocaleString() 
+                    : counts[index]}
+                  {stat.number.includes('+') && '+'}
                 </h3>
                 {/* Subtle underline */}
                 <div 
