@@ -4,37 +4,43 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function TrustStrip() {
   const [isVisible, setIsVisible] = useState(false);
-  const [counts, setCounts] = useState<number[]>([25, 50000, 20]); // Start with final values
+  const [counts, setCounts] = useState<number[]>([30000, 100000, 25, 30]); // Start with final values
   const sectionRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<any>(null);
   const lastAnimationTime = useRef<number>(0);
 
   const stats = [
     {
+      number: '30,000+',
+      label: 'Happy clients',
+      description: '',
+      target: 30000,
+    },
+    {
+      number: '1,00,000+',
+      label: 'Successful treatments delivered',
+      description: '',
+      target: 100000,
+    },
+    {
       number: '25+',
-      label: 'Years',
-      description: 'of dermatology excellence in Hyderabad',
+      label: 'Years of expertise',
+      description: '',
       target: 25,
     },
     {
-      number: '50,000+',
-      label: 'Patients',
-      description: 'treated with personalized care',
-      target: 50000,
-    },
-    {
-      number: '20+',
-      label: 'Awards',
-      description: 'and international recognitions',
-      target: 20,
+      number: '30++',
+      label: 'Advanced technologies',
+      description: '',
+      target: 30,
     },
   ];
 
   const animateNumbers = () => {
     const startTime = performance.now();
     const duration = 1500;
-    const startValues = [0, 0, 0];
-    const endValues = [25, 50000, 20];
+    const startValues = [0, 0, 0, 0];
+    const endValues = [30000, 100000, 25, 30];
     
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
@@ -72,15 +78,13 @@ export default function TrustStrip() {
         
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Only animate if enough time has passed (4 second cooldown)
           if (timeSinceLastAnimation > 4000) {
             animateNumbers();
             lastAnimationTime.current = now;
           }
         } else {
           setIsVisible(false);
-          // Reset to final values when out of view
-          setCounts([25, 50000, 20]);
+          setCounts([30000, 100000, 25, 30]);
         }
       },
       { threshold: 0.3 }
@@ -104,7 +108,7 @@ export default function TrustStrip() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/20 to-transparent"></div>
       
       <div className="section-container">
-        <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-4 gap-12 lg:gap-16">
           {stats.map((stat, index) => (
             <div
               key={index}
@@ -113,34 +117,33 @@ export default function TrustStrip() {
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-8'
               }`}
-              style={{ transitionDelay: `${index * 200}ms` }}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
               {/* Number with animation */}
               <div className="relative">
-                <h3 className="text-5xl lg:text-6xl font-display text-maroon">
-                  {index === 1 
-                    ? counts[index].toLocaleString() 
-                    : counts[index]}
-                  {stat.number.includes('+') && '+'}
+                <h3 className="text-4xl lg:text-5xl font-display text-maroon">
+                  {counts[index].toLocaleString('en-IN')}
+                  {stat.number.replace(/[0-9,]/g, '')}
                 </h3>
                 {/* Subtle underline */}
                 <div 
                   className={`h-0.5 bg-terracotta mx-auto mt-3 transition-all duration-1000 ${
                     isVisible ? 'w-12' : 'w-0'
                   }`}
-                  style={{ transitionDelay: `${index * 200 + 500}ms` }}
+                  style={{ transitionDelay: `${index * 150 + 400}ms` }}
                 ></div>
               </div>
               
               {/* Label */}
-              <p className="text-maroon font-semibold text-lg tracking-wide uppercase">
+              <p className="text-maroon font-semibold text-base lg:text-lg tracking-wide">
                 {stat.label}
               </p>
               
-              {/* Description */}
-              <p className="text-charcoal/60 text-sm max-w-xs mx-auto leading-relaxed">
-                {stat.description}
-              </p>
+              {stat.description && (
+                <p className="text-charcoal/60 text-sm max-w-xs mx-auto leading-relaxed">
+                  {stat.description}
+                </p>
+              )}
             </div>
           ))}
         </div>
