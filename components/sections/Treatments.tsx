@@ -43,6 +43,7 @@ export default function Treatments() {
         'GFC/PRP',
         'Mesotherapy',
         'PRF',
+        'Exosomes',
       ],
     },
     body: {

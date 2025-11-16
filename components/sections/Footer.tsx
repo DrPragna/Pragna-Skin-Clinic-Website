@@ -43,7 +43,7 @@ export default function Footer() {
             </h3>
             <p className="text-beige-warm/70 leading-relaxed max-w-xl">
               Pragna Skin & Laser Clinics was established in 2001 under the supervision of 
-              Senior Dermatologist Dr. Padmavathi Surapaneni. Today, with 30+ years of dermatology 
+              Senior Dermatologist Dr. Padmavathi Surapaneni. Today, with 25+ years of dermatology 
               experience in Hyderabad, the clinic continues to combine ethical practice, advanced 
               technology, and personalized care to deliver radiant, healthy skin.
             </p>

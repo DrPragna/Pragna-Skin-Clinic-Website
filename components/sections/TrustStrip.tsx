@@ -4,17 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function TrustStrip() {
   const [isVisible, setIsVisible] = useState(false);
-  const [counts, setCounts] = useState<number[]>([30, 50000, 20]); // Start with final values
+  const [counts, setCounts] = useState<number[]>([25, 50000, 20]); // Start with final values
   const sectionRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<any>(null);
   const lastAnimationTime = useRef<number>(0);
 
   const stats = [
     {
-      number: '30+',
+      number: '25+',
       label: 'Years',
       description: 'of dermatology excellence in Hyderabad',
-      target: 30,
+      target: 25,
     },
     {
       number: '50,000+',
@@ -34,7 +34,7 @@ export default function TrustStrip() {
     const startTime = performance.now();
     const duration = 1500;
     const startValues = [0, 0, 0];
-    const endValues = [30, 50000, 20];
+    const endValues = [25, 50000, 20];
     
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
@@ -80,7 +80,7 @@ export default function TrustStrip() {
         } else {
           setIsVisible(false);
           // Reset to final values when out of view
-          setCounts([30, 50000, 20]);
+          setCounts([25, 50000, 20]);
         }
       },
       { threshold: 0.3 }

@@ -51,7 +51,7 @@ export default function Hero() {
               </p>
               <h1 className="text-5xl lg:text-[4rem] font-display font-normal text-charcoal leading-[1.1] animate-fade-in opacity-0" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
                 Radiant skin,<br/>
-                backed by <span className="italic text-maroon">30+ years</span><br/>
+                backed by <span className="italic text-maroon">25+ years</span><br/>
                 of trusted dermatology.
               </h1>
               <p className="text-lg text-charcoal/60 leading-relaxed max-w-lg animate-fade-in opacity-0" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
