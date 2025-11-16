@@ -5,7 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 export default function TrustStrip() {
   const [isVisible, setIsVisible] = useState(false);
   const [counts, setCounts] = useState<number[]>([0, 0, 0]);
+  const [canAnimate, setCanAnimate] = useState(true);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const timersRef = useRef<NodeJS.Timeout[]>([]);
 
   const stats = [
     {
@@ -25,34 +27,56 @@ export default function TrustStrip() {
     },
   ];
 
+  const animateNumbers = () => {
+    // Clear any existing timers
+    timersRef.current.forEach(timer => clearInterval(timer));
+    timersRef.current = [];
+    
+    // Reset to 0
+    setCounts([0, 0, 0]);
+    setIsVisible(true);
+    
+    // Animate numbers
+    const duration = 1500; // Slightly faster for re-triggers
+    const steps = 50;
+    const interval = duration / steps;
+    
+    stats.forEach((stat, index) => {
+      const target = parseInt(stat.number.replace(/[^0-9]/g, ''));
+      let current = 0;
+      const increment = target / steps;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        setCounts(prev => {
+          const newCounts = [...prev];
+          newCounts[index] = Math.floor(current);
+          return newCounts;
+        });
+      }, interval);
+      
+      timersRef.current.push(timer);
+    });
+    
+    // Set cooldown period (4 seconds)
+    setCanAnimate(false);
+    setTimeout(() => {
+      setCanAnimate(true);
+    }, 4000);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true);
-          // Animate numbers
-          const duration = 2000;
-          const steps = 60;
-          const interval = duration / steps;
-          
-          stats.forEach((stat, index) => {
-            const target = parseInt(stat.number.replace(/[^0-9]/g, ''));
-            let current = 0;
-            const increment = target / steps;
-            
-            const timer = setInterval(() => {
-              current += increment;
-              if (current >= target) {
-                current = target;
-                clearInterval(timer);
-              }
-              setCounts(prev => {
-                const newCounts = [...prev];
-                newCounts[index] = Math.floor(current);
-                return newCounts;
-              });
-            }, interval);
-          });
+        if (entry.isIntersecting && canAnimate) {
+          animateNumbers();
+        } else if (!entry.isIntersecting) {
+          // Reset visual state when out of view
+          setIsVisible(false);
         }
       },
       { threshold: 0.3 }
@@ -62,8 +86,11 @@ export default function TrustStrip() {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
-  }, [isVisible]);
+    return () => {
+      observer.disconnect();
+      timersRef.current.forEach(timer => clearInterval(timer));
+    };
+  }, [canAnimate]);
 
   return (
     <section ref={sectionRef} className="py-20 bg-gradient-to-b from-beige-warm to-beige relative">
