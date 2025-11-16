@@ -29,7 +29,7 @@ export default function TrustStrip() {
       target: 25,
     },
     {
-      number: '30++',
+      number: '30+',
       label: 'Advanced technologies',
       description: '',
       target: 30,
