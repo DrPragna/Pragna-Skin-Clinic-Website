@@ -177,7 +177,7 @@ const acneScarContent = {
     },
     {
       title: "Realistic, staged approach",
-      text: "We set achievable goals and focus on steady improvement rather than promising "100% scar removal"."
+      text: "We set achievable goals and focus on steady improvement rather than promising \"100% scar removal\"."
     }
   ],
   faq: [
@@ -270,7 +270,7 @@ const activeAcneContent = {
     },
     {
       title: "Advanced, Customisable Options",
-      text: "From medical-grade peels and medifacials to blue-light and laser-based therapies, we have a wide range of options to customise your treatment instead of forcing one “standard” procedure on everyone."
+      text: "From medical-grade peels and medifacials to blue-light and laser-based therapies, we have a wide range of options to customise your treatment instead of forcing one 'standard' procedure on everyone."
     },
     {
       title: "Long-Term, Holistic Approach",
