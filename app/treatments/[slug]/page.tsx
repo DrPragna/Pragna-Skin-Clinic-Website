@@ -333,6 +333,8 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
       content = acneScarContent;
       break;
     case 'active-acne-treatment':
+    case 'post-acne-marks-redness':
+    case 'teen-acne-treatment':
       content = activeAcneContent;
       break;
     default:
@@ -555,9 +557,13 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
               <div className="bg-beige-warm p-8 rounded-xl border border-maroon/10 mt-8">
                 <h4 className="font-serif text-xl text-maroon mb-3">Downtime & Aftercare</h4>
                 <div className="space-y-4 text-charcoal/70">
-                  {content.expect.downtime.map((para, i) => (
-                    <p key={i}>{para}</p>
-                  ))}
+                  {Array.isArray(content.expect.downtime) ? (
+                    content.expect.downtime.map((para, i) => (
+                      <p key={i}>{para}</p>
+                    ))
+                  ) : (
+                    <p>{content.expect.downtime}</p>
+                  )}
                 </div>
               </div>
             </div>
