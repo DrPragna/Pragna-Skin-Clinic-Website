@@ -14,7 +14,197 @@ export function generateStaticParams() {
   return params;
 }
 
-// Content Data for Active Acne Treatment
+// =========================================
+// TREATMENT CONTENT DATA
+// =========================================
+
+// 1. Laser Hair Reduction
+const laserHairReductionContent = {
+  hero: {
+    title: "Laser Hair Reduction",
+    summary: "Long-term reduction of unwanted hair on the face and body using safe, advanced laser technology, customised for your skin and hair type."
+  },
+  isForYou: [
+    "You're tired of frequent waxing, threading or shaving and the irritation that comes with it.",
+    "You get ingrown hairs, bumps or darkening after hair removal.",
+    "You want smoother skin and slower regrowth in commonly treated areas like face, underarms, bikini line or limbs.",
+    "You're looking for a medically supervised solution that is safe for your skin tone."
+  ],
+  whatIs: {
+    description: [
+      "Laser Hair Reduction uses focused light energy to target the pigment in hair follicles. The light converts to heat, which damages the active follicles so they produce finer, slower-growing hair over time.",
+      "Unlike temporary methods such as waxing or shaving, laser targets the root of the hair. Multiple sessions are needed because hair grows in cycles and only follicles in the active phase respond optimally in each session."
+    ],
+    helpsWith: [
+      "Unwanted hair on the upper lip, chin and cheeks",
+      "Excessive hair on arms, legs and underarms",
+      "Bikini and Brazilian hair removal",
+      "Back and chest hair in men",
+      "Ingrown hairs and post-waxing bumps/pigmentation in many areas"
+    ]
+  },
+  howWeTreat: [
+    {
+      title: "Comprehensive Consultation & Patch Test",
+      text: "We begin by assessing your skin tone, hair thickness, growth pattern and medical history. A test patch is done where needed to check your skin's response to the laser before planning full treatment."
+    },
+    {
+      title: "Custom Parameters for Each Area",
+      text: "Our dermatologists select laser settings based on your skin type and hair colour, and adjust energy, pulse duration and cooling to maximise efficacy while keeping you comfortable and safe."
+    },
+    {
+      title: "Progress Tracking & Maintenance Planning",
+      text: "After every few sessions, we review progress, tweak parameters and plan maintenance sessions if needed. We also guide you on shaving, sun care and interval spacing between sessions."
+    }
+  ],
+  expect: {
+    steps: [
+      {
+        title: "Consultation & Prep",
+        text: "We explain the procedure, shave the treatment area if required, cleanse it and provide eye protection. Numbing cream may be applied for sensitive areas."
+      },
+      {
+        title: "Laser Session",
+        text: "Short pulses of laser light are delivered to the area. You may feel a mild snapping or warmth, but built-in cooling helps maintain comfort. The duration depends on the size of the area."
+      },
+      {
+        title: "Follow-up & Maintenance",
+        text: "Most people need 6–8 sessions, spaced 4–8 weeks apart depending on the area and hair growth cycle. Occasional maintenance sessions may be recommended later."
+      }
+    ],
+    downtime: "Mild redness or warmth may appear for a few hours post-treatment. We advise avoiding hot showers, saunas, direct sun exposure and waxing/threading of the treated area. Liberal moisturiser and sunscreen are essential for a few days."
+  },
+  whyPragna: [
+    {
+      title: "Dermatologist-supervised protocols",
+      text: "Parameters are chosen and overseen by skin specialists who understand Indian skin tones and their unique needs."
+    },
+    {
+      title: "Advanced laser technology",
+      text: "We use medical-grade systems with cooling and adjustable settings, allowing safe, effective hair reduction across different body areas and skin types."
+    },
+    {
+      title: "Focus on safety and long-term results",
+      text: "We plan realistic timelines, monitor progress and prioritise skin health so you get smoother, clearer skin with minimal side effects."
+    }
+  ],
+  faq: [
+    {
+      q: "How many sessions will I need?",
+      a: "Most people need around 6–8 sessions for noticeable long-term reduction, but this can vary based on area, hair thickness, hormones and genetics. Maintenance sessions may be needed once or twice a year."
+    },
+    {
+      q: "Is laser hair reduction permanent?",
+      a: "It significantly reduces hair growth, leading to finer, fewer hairs over time. While complete, lifelong removal is not guaranteed, many people enjoy long gaps between sessions and minimal regrowth."
+    },
+    {
+      q: "Is it painful?",
+      a: "You may feel a mild snapping or warm sensation with each pulse. Cooling and numbing creams, where needed, make the procedure generally well-tolerated."
+    },
+    {
+      q: "Is it safe for my skin tone?",
+      a: "Yes, when performed with the right technology and parameters. At Pragna, we adjust settings for different Indian skin tones to minimise risks like burns or pigmentation."
+    },
+    {
+      q: "Can I wax or thread between sessions?",
+      a: "We usually recommend shaving instead of waxing or threading between sessions, because laser works best when the hair root is present but the shaft is short."
+    }
+  ]
+};
+
+// 2. Acne Scar Treatment
+const acneScarContent = {
+  hero: {
+    title: "Acne Scar Treatment",
+    summary: "Advanced procedures that stimulate collagen, lift depressed scars and smooth uneven skin texture after acne."
+  },
+  isForYou: [
+    "Your acne has healed but left pits, dents or uneven texture.",
+    "Makeup highlights your scars instead of hiding them.",
+    "You want visible improvement without aggressive or unsafe procedures."
+  ],
+  whatIs: {
+    description: [
+      "Acne Scar Treatment at Pragna is a combination of procedures designed to remodel collagen and improve the appearance of pitted or uneven scars. We first classify your scars (ice-pick, rolling, boxcar, mixed patterns) and assess your skin tone and sensitivity.",
+      "Based on this assessment, we use one or more modalities such as subcision, microneedling or Dermapen, microneedling radiofrequency (MNRF), fractional CO₂ or Erbium glass lasers, TCA-based techniques for specific scars, and sometimes dermal fillers for very deep depressions."
+    ],
+    helpsWith: [
+      "Pitted or boxcar scars on cheeks, temples and forehead",
+      "Rolling scars and uneven skin texture",
+      "Enlarged pores related to old acne",
+      "Mixed scar patterns with both depressions and marks"
+    ]
+  },
+  howWeTreat: [
+    {
+      title: "Detailed Scar Mapping",
+      text: "We examine your scars in good lighting, sometimes from multiple angles and with photography, to identify types and depth. This helps us choose the right combination of treatments."
+    },
+    {
+      title: "Combination Procedure Planning",
+      text: "Most patients benefit from combining methods like subcision plus MNRF, or fractional lasers plus microneedling over a series of sessions. Plans are tailored to your skin's healing capacity."
+    },
+    {
+      title: "Ongoing Review & Support",
+      text: "We monitor your skin's response, adjust intervals and support you with aftercare and pigmentation control measures, especially important in Indian skin."
+    }
+  ],
+  expect: {
+    steps: [
+      {
+        title: "Assessment & Planning",
+        text: "Your first visit focuses on scar assessment, goal-setting and planning the sequence of procedures."
+      },
+      {
+        title: "Treatment Sessions",
+        text: "Treatments are carried out every 4–8 weeks depending on intensity and recovery. You may have mild redness, swelling or micro-crusting for a few days."
+      },
+      {
+        title: "Gradual Improvement",
+        text: "Collagen remodelling is gradual. Visible improvements usually build over 3–6 sessions and continue for months after the last procedure."
+      }
+    ],
+    downtime: "Downtime varies by procedure—from a day of redness with microneedling to several days of recovery with fractional CO₂. We give specific aftercare, including soothing products and strict sun protection, to minimise risks and optimise results."
+  },
+  whyPragna: [
+    {
+      title: "Full spectrum of scar treatments",
+      text: "We offer subcision, microneedling, MNRF, fractional lasers, peels and fillers under one roof."
+    },
+    {
+      title: "Safe for Indian skin",
+      text: "Parameters are chosen carefully to balance results with the risk of pigmentation, which is especially important in our skin types."
+    },
+    {
+      title: "Realistic, staged approach",
+      text: "We set achievable goals and focus on steady improvement rather than promising "100% scar removal"."
+    }
+  ],
+  faq: [
+    {
+      q: "How many sessions will I need?",
+      a: "Most mild-to-moderate scars need 3–6 sessions; deeper or complex patterns may need more. Your dermatologist will give you an approximate plan after assessment."
+    },
+    {
+      q: "Will the scars disappear completely?",
+      a: "Complete erasure is unlikely, but scars can often be made significantly less visible so overall texture looks smoother and more even."
+    },
+    {
+      q: "Is acne scar treatment painful?",
+      a: "Numbing creams, cooling and other comfort measures are used. You may feel pressure, pricking or warmth, but most patients tolerate the procedures well."
+    },
+    {
+      q: "Can these treatments worsen my marks or pigmentation?",
+      a: "When done correctly with proper aftercare, risks are low. However, Indian skin is prone to pigment changes, which is why we choose conservative settings and emphasise sun care."
+    },
+    {
+      q: "Can I do this if I still get occasional pimples?",
+      a: "We usually aim to bring active acne under good control first. Mild occasional pimples are acceptable, but frequent breakouts may need further stabilisation before intensive scar work."
+    }
+  ]
+};
+
+// 3. Active Acne Treatment
 const activeAcneContent = {
   hero: {
     title: "Active Acne Treatment",
@@ -126,10 +316,27 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
     if (treatment) break;
   }
 
-  const isAcne = slug === 'active-acne-treatment';
+  // Select content based on slug
+  let content;
   
-  // Fallback placeholder data
-  const content = isAcne ? activeAcneContent : {
+  switch (slug) {
+    case 'full-body-laser-hair-reduction':
+    case 'facial-hair-reduction':
+    case 'upper-lip-chin-hair-reduction':
+    case 'underarm-hair-reduction':
+    case 'bikini-brazilian-hair-reduction':
+    case 'arms-legs-hair-reduction':
+    case 'back-chest-hair-reduction':
+      content = laserHairReductionContent;
+      break;
+    case 'acne-scar-treatment':
+      content = acneScarContent;
+      break;
+    case 'active-acne-treatment':
+      content = activeAcneContent;
+      break;
+    default:
+      content = {
     hero: {
       title: treatment?.name || "Treatment Overview",
       summary: "Detailed information about this treatment will be available soon. A personalised, dermatologist-led plan designed for your specific needs."
@@ -215,10 +422,11 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
       },
       {
         q: "Is it safe?",
-        a: "Yes, all our procedures are safe when performed by our trained medical professionals using approved protocols."
-      }
-    ]
-  };
+      a: "Yes, all our procedures are safe when performed by our trained medical professionals using approved protocols."
+    }
+  ]
+      };
+  }
 
   return (
     <main className="overflow-x-hidden bg-beige-warm">

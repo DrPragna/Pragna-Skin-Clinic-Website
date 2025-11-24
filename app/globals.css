@@ -119,25 +119,8 @@ html.lenis, html.lenis body {
      =========================================== */
   .btn-primary {
     @apply relative px-8 py-4 bg-charcoal text-beige-warm rounded-full font-medium 
-           overflow-hidden transition-all duration-300 
-           hover:shadow-soft-lg active:scale-[0.98];
-  }
-  
-  /* Button fill animation on hover */
-  .btn-primary::before {
-    content: '';
-    @apply absolute inset-0 bg-maroon rounded-full;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .btn-primary:hover::before {
-    transform: translateY(0);
-  }
-  
-  .btn-primary span,
-  .btn-primary {
-    @apply relative z-10;
+           transition-all duration-300 
+           hover:bg-maroon hover:shadow-soft-lg active:scale-[0.98];
   }
   
   .btn-secondary {
