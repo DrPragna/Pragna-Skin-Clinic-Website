@@ -6,12 +6,16 @@ export default function Hero() {
   const imageRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    // Trigger entrance animations
+    setIsLoaded(true);
+
     const handleScroll = () => {
       if (imageRef.current) {
         const scrolled = window.scrollY;
-        imageRef.current.style.transform = `translateY(${scrolled * 0.3}px) rotateY(${scrolled * 0.02}deg)`;
+        imageRef.current.style.transform = `translateY(${scrolled * 0.2}px)`;
       }
     };
 
@@ -19,13 +23,13 @@ export default function Hero() {
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
         setMousePos({
-          x: (e.clientX - rect.left - rect.width / 2) / 50,
-          y: (e.clientY - rect.top - rect.height / 2) / 50,
+          x: (e.clientX - rect.left - rect.width / 2) / 80,
+          y: (e.clientY - rect.top - rect.height / 2) / 80,
         });
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -34,71 +38,211 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="home" className="relative min-h-screen flex items-center gradient-terracotta overflow-hidden">
-      {/* Subtle animated background */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-terracotta/20 rounded-full filter blur-[100px] animate-float-slow"></div>
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-maroon/10 rounded-full filter blur-[100px] animate-float-slow" style={{ animationDelay: '3s' }}></div>
+    <section 
+      ref={sectionRef} 
+      id="home" 
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
+      {/* Layered Background */}
+      <div className="absolute inset-0 gradient-warm" />
+      
+      {/* Animated Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div 
+          className="absolute top-[-10%] right-[-5%] w-[700px] h-[700px] bg-terracotta/20 rounded-full filter blur-[120px]"
+          style={{
+            transform: `translate(${mousePos.x * 2}px, ${mousePos.y * 2}px)`,
+            transition: 'transform 0.8s ease-out',
+          }}
+        />
+        <div 
+          className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-maroon/5 rounded-full filter blur-[100px]"
+          style={{
+            transform: `translate(${-mousePos.x * 1.5}px, ${-mousePos.y * 1.5}px)`,
+            transition: 'transform 1s ease-out',
+          }}
+        />
       </div>
 
       <div className="section-container py-24 lg:py-32 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left Content - Clean and sophisticated */}
-          <div className="space-y-10">
-            <div className="space-y-6">
-              <p className="text-maroon font-medium tracking-[0.2em] uppercase text-xs animate-fade-in opacity-0" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
-                Advanced Skin & Hair Dermatology in Hyderabad
-              </p>
-              <h1 className="text-5xl lg:text-[4rem] font-display font-normal text-charcoal leading-[1.1] animate-fade-in opacity-0" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-                Radiant skin,<br/>
-                backed by <span className="italic text-maroon">25+ years</span><br/>
-                of trusted dermatology.
-              </h1>
-              <p className="text-lg text-charcoal/60 leading-relaxed max-w-lg animate-fade-in opacity-0" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
-                Pragna Skin & Laser Clinics combines decades of clinical experience, globally recognized expertise, 
-                and state-of-the-art technology to offer ethical, personalized care for every skin and hair concern.
-              </p>
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Left Content */}
+          <div className="lg:col-span-6 space-y-8">
+            {/* Eyebrow */}
+            <p 
+              className={`text-maroon font-medium tracking-[0.25em] uppercase text-xs transition-all duration-700 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
+              Advanced Skin & Hair Dermatology in Hyderabad
+            </p>
+
+            {/* Main Headline */}
+            <h1 
+              className={`text-display-lg font-display font-normal text-charcoal leading-[1.05] transition-all duration-700 delay-100 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              Radiant skin,<br/>
+              backed by{' '}
+              <span className="relative inline-block">
+                <span className="italic text-maroon">25+ years</span>
+                <svg 
+                  className="absolute -bottom-2 left-0 w-full h-3 text-terracotta/40" 
+                  viewBox="0 0 200 12" 
+                  fill="none"
+                >
+                  <path 
+                    d="M2 8.5C50 2 100 2 198 8.5" 
+                    stroke="currentColor" 
+                    strokeWidth="4" 
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <br/>
+              of trusted care.
+            </h1>
+
+            {/* Subheadline */}
+            <p 
+              className={`text-xl text-charcoal/60 leading-relaxed max-w-lg transition-all duration-700 delay-200 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              Pragna Skin & Laser Clinics combines decades of clinical experience, 
+              globally recognized expertise, and state-of-the-art technology to offer 
+              ethical, personalized care for every skin and hair concern.
+            </p>
+
+            {/* CTAs */}
+            <div 
+              className={`flex flex-col sm:flex-row gap-4 pt-4 transition-all duration-700 delay-300 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              <a href="#contact" className="btn-primary text-center group">
+                <span>Book a Consultation</span>
+              </a>
+              <a 
+                href="#about" 
+                className="btn-ghost text-center flex items-center justify-center gap-2 group"
+              >
+                <span>Meet Our Dermatologists</span>
+                <svg 
+                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in opacity-0" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-              <a href="#contact" className="btn-primary text-center group relative overflow-hidden">
-                <span className="relative z-10">Book a Consultation</span>
-                <div className="absolute inset-0 bg-maroon transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-              </a>
-              <a href="#about" className="btn-secondary text-center hover:shadow-soft transition-all duration-300">
-                Meet Our Dermatologists
-              </a>
+            {/* Trust Badges */}
+            <div 
+              className={`flex items-center gap-8 pt-8 border-t border-charcoal/10 transition-all duration-700 delay-400 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              <div>
+                <p className="text-3xl font-serif text-maroon">25+</p>
+                <p className="text-xs text-charcoal/50 uppercase tracking-wider">Years Experience</p>
+              </div>
+              <div className="w-px h-12 bg-charcoal/10" />
+              <div>
+                <p className="text-3xl font-serif text-maroon">10k+</p>
+                <p className="text-xs text-charcoal/50 uppercase tracking-wider">Happy Patients</p>
+              </div>
+              <div className="w-px h-12 bg-charcoal/10" />
+              <div>
+                <p className="text-3xl font-serif text-maroon">3</p>
+                <p className="text-xs text-charcoal/50 uppercase tracking-wider">Locations</p>
+              </div>
             </div>
           </div>
 
-          {/* Right Image - 3D card with subtle effect */}
-          <div className="relative lg:h-[600px] h-[400px] perspective-1000" ref={imageRef}>
+          {/* Right Image */}
+          <div className="lg:col-span-6 relative" ref={imageRef}>
             <div 
-              className="absolute inset-0 transform-3d transition-transform duration-700 ease-out animate-fade-in opacity-0"
-              style={{
-                transform: `rotateY(${mousePos.x * 0.5}deg) rotateX(${-mousePos.y * 0.5}deg)`,
-                animationDelay: '0.5s',
-                animationFillMode: 'forwards'
-              }}
+              className={`relative h-[500px] lg:h-[650px] transition-all duration-1000 delay-300 ${
+                isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              }`}
             >
-              <div className="w-full h-full bg-gradient-to-br from-beige via-terracotta-light/30 to-beige rounded-3xl shadow-2xl overflow-hidden border border-maroon/5">
-                <div className="w-full h-full flex items-center justify-center relative">
-                  <div className="text-center text-maroon/15 font-serif text-5xl">
-                    Clinic Photo
+              {/* Main Image Container */}
+              <div 
+                className="absolute inset-0 rounded-[2.5rem] overflow-hidden shadow-soft-xl border border-white/50"
+                style={{
+                  transform: `rotateY(${mousePos.x * 0.3}deg) rotateX(${-mousePos.y * 0.3}deg)`,
+                  transition: 'transform 0.6s ease-out',
+                }}
+              >
+                {/* Placeholder - Replace with actual image */}
+                <div className="w-full h-full bg-gradient-to-br from-beige via-terracotta-light/40 to-white flex items-center justify-center relative">
+                  <div className="text-center">
+                    <p className="text-maroon/20 font-serif text-4xl mb-2">Add image</p>
+                    <p className="text-maroon/15 text-sm">Doctor portrait or clinic interior</p>
                   </div>
-                  {/* Subtle floating accent */}
-                  <div className="absolute top-12 right-12 w-3 h-3 bg-maroon/20 rounded-full"></div>
-                  <div className="absolute bottom-12 left-12 w-3 h-3 bg-terracotta/30 rounded-full"></div>
+                  
+                  {/* Decorative Elements */}
+                  <div className="absolute top-8 right-8 w-20 h-20 border border-maroon/10 rounded-full" />
+                  <div className="absolute bottom-8 left-8 w-32 h-32 border border-terracotta/20 rounded-full" />
                 </div>
+              </div>
+
+              {/* Floating Accent Card */}
+              <div 
+                className={`absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-soft-lg border border-maroon/5 transition-all duration-700 delay-500 ${
+                  isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{
+                  transform: `translate(${-mousePos.x * 4}px, ${-mousePos.y * 4}px)`,
+                  transition: 'transform 0.8s ease-out, opacity 0.7s ease-out',
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-terracotta/20 rounded-full flex items-center justify-center">
+                    <svg className="w-5 h-5 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-charcoal">US-FDA Approved</p>
+                    <p className="text-xs text-charcoal/50">Technology & Protocols</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Rating */}
+              <div 
+                className={`absolute -top-4 -right-4 bg-maroon text-beige-warm rounded-2xl px-4 py-3 shadow-soft-lg transition-all duration-700 delay-600 ${
+                  isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
+                }`}
+                style={{
+                  transform: `translate(${mousePos.x * 3}px, ${mousePos.y * 3}px)`,
+                  transition: 'transform 0.8s ease-out, opacity 0.7s ease-out',
+                }}
+              >
+                <div className="flex items-center gap-2">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-4 h-4 text-terracotta-light fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <span className="text-sm font-medium">4.9</span>
+                </div>
+                <p className="text-xs text-beige-warm/70 mt-1">Google Reviews</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Subtle decorative element */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/10 to-transparent"></div>
+      {/* Bottom Gradient Fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
     </section>
   );
 }
-

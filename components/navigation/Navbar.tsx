@@ -65,7 +65,10 @@ export default function Navbar() {
   }`;
 
   const linkClasses = "text-charcoal/80 hover:text-maroon transition-colors duration-200 font-medium cursor-pointer flex items-center gap-1";
-  const dropdownClasses = "absolute top-full left-0 bg-[#FAF4F0] shadow-soft-lg rounded-xl border border-maroon/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-4 group-hover:translate-y-0 z-50";
+  // Base dropdown classes without positioning (to be used for standard dropdowns)
+  const baseDropdownClasses = "bg-[#FAF4F0] shadow-soft-lg rounded-xl border border-maroon/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50";
+  // Positioning for standard dropdowns
+  const standardDropdownPosition = "absolute top-full left-1/2 -translate-x-1/2 translate-y-4 group-hover:translate-y-0";
 
   return (
     <nav className={navbarClasses}>
@@ -88,7 +91,8 @@ export default function Navbar() {
                 Treatments
                 <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
               </button>
-              <div className={`${dropdownClasses} w-[95vw] max-w-[1400px] p-8 fixed left-1/2 -translate-x-1/2 mt-2`}>
+              {/* Fixed positioning relative to viewport for robustness */}
+              <div className={`${baseDropdownClasses} fixed top-[80px] left-4 right-4 mx-auto max-w-[1400px] p-8 translate-y-4 group-hover:translate-y-0 mt-2`}>
                 <div className="grid grid-cols-4 gap-8 max-h-[80vh] overflow-y-auto scrollbar-hide">
                   {navigationData.treatments.map((pillar) => (
                     <div key={pillar.pillar} className="space-y-6">
@@ -128,7 +132,8 @@ export default function Navbar() {
                 Conditions
                 <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
               </button>
-              <div className={`${dropdownClasses} w-[1100px] p-8 left-1/2 -translate-x-1/2`}>
+              {/* Use max-w-[90vw] to prevent overflow on smaller screens */}
+              <div className={`${baseDropdownClasses} ${standardDropdownPosition} w-[1100px] max-w-[95vw] p-8`}>
                 <div className="grid grid-cols-12 gap-10">
                   {/* Face & Skin - Spans 5 columns */}
                   <div className="col-span-5 space-y-4 border-r border-maroon/10 pr-6">

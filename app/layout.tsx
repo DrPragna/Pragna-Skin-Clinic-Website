@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import GrainOverlay from "@/components/ui/GrainOverlay";
+import FloatingActions from "@/components/ui/FloatingActions";
+import SmoothScroll from "@/components/ui/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Pragna Skin & Laser Clinics | Advanced Dermatology in Hyderabad",
@@ -13,8 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className="scroll-smooth">
+      <body>
+        <SmoothScroll>
+          {children}
+          
+          {/* Global UI Elements */}
+          <GrainOverlay />
+          <FloatingActions />
+        </SmoothScroll>
+      </body>
     </html>
   );
 }

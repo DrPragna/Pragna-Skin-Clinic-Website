@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import Navbar from '@/components/navigation/Navbar';
 import Hero from '@/components/sections/Hero';
 import TrustStrip from '@/components/sections/TrustStrip';
@@ -15,34 +14,24 @@ import FAQ from '@/components/sections/FAQ';
 import Contact from '@/components/sections/Contact';
 import Footer from '@/components/sections/Footer';
 
+/**
+ * Home Page
+ * 
+ * Main landing page for Pragna Skin & Laser Clinics.
+ * 
+ * Design Philosophy:
+ * - Clean, confident, and fast
+ * - Trust > Animation
+ * - Mobile-first with desktop enhancements
+ * 
+ * Color Theme: Full warm palette (welcoming)
+ * - Primary backgrounds: beige-warm, gradient-warm
+ * - Accents: maroon, terracotta
+ * - Clinical sections: white backgrounds
+ */
 export default function Home() {
-  const cursorGlowRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (cursorGlowRef.current) {
-        cursorGlowRef.current.style.left = `${e.clientX}px`;
-        cursorGlowRef.current.style.top = `${e.clientY}px`;
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
     <main className="overflow-x-hidden">
-      {/* Cursor glow effect - subtle and elegant */}
-      <div 
-        ref={cursorGlowRef}
-        className="fixed w-[500px] h-[500px] pointer-events-none z-50 opacity-20 hidden lg:block"
-        style={{
-          background: 'radial-gradient(circle, rgba(234, 199, 187, 0.3) 0%, transparent 50%)',
-          transform: 'translate(-50%, -50%)',
-          filter: 'blur(40px)',
-        }}
-      />
-      
       <Navbar />
       <Hero />
       <TrustStrip />
