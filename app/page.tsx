@@ -7,7 +7,6 @@ import TrustStrip from '@/components/sections/TrustStrip';
 import WhyPragna from '@/components/sections/WhyPragna';
 import SignaturePrograms from '@/components/sections/SignaturePrograms';
 import Conditions from '@/components/sections/Conditions';
-import Treatments from '@/components/sections/Treatments';
 import Doctors from '@/components/sections/Doctors';
 import Testimonials from '@/components/sections/Testimonials';
 import Branches from '@/components/sections/Branches';
@@ -50,7 +49,6 @@ export default function Home() {
       <WhyPragna />
       <SignaturePrograms />
       <Conditions />
-      <Treatments />
       <Doctors />
       <Testimonials />
       <Branches />
