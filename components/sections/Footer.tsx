@@ -40,31 +40,42 @@ export default function Footer() {
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
 
   return (
-    <footer ref={containerRef} className="relative bg-black text-cream overflow-hidden">
+    <footer ref={containerRef} className="relative text-cream overflow-hidden">
+      {/* Background Image with Dark Overlay */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/clinic-interior.png)' }}
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/85" />
+      </div>
       {/* Top Marquee */}
-      <div className="py-8 border-b border-cream/10 overflow-hidden">
+      <div className="relative z-10 py-4 border-b border-cream/10 overflow-hidden">
         <motion.div
           animate={{ x: ['0%', '-50%'] }}
           transition={{
-            x: { duration: 20, repeat: Infinity, ease: 'linear' },
+            x: { duration: 30, repeat: Infinity, ease: 'linear' },
           }}
           className="flex whitespace-nowrap"
         >
-          {[...Array(4)].map((_, i) => (
-            <span key={i} className="flex items-center gap-8 px-8">
-              <span className="text-6xl lg:text-8xl font-display text-cream/5">Pragna</span>
-              <span className="w-3 h-3 rounded-full bg-rose-gold/20" />
-              <span className="text-6xl lg:text-8xl font-display text-cream/5 italic">Radiance</span>
-              <span className="w-3 h-3 rounded-full bg-rose-gold/20" />
-              <span className="text-6xl lg:text-8xl font-display text-cream/5">Skin</span>
-              <span className="w-3 h-3 rounded-full bg-rose-gold/20" />
+          {[...Array(2)].map((_, i) => (
+            <span key={i} className="flex items-center gap-12 px-12">
+              <span className="text-3xl lg:text-4xl font-display text-cream/30">Skin</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-gold/40" />
+              <span className="text-3xl lg:text-4xl font-display text-cream/30">Hair</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-gold/40" />
+              <span className="text-3xl lg:text-4xl font-display text-cream/30">Body</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-gold/40" />
+              <span className="text-3xl lg:text-4xl font-display text-cream/30">Wellness</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-gold/40" />
             </span>
           ))}
         </motion.div>
       </div>
 
       {/* Main Footer Content */}
-      <div className="section-container py-16 lg:py-24">
+      <div className="relative z-10 section-container py-16 lg:py-24">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-5">
@@ -163,7 +174,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-cream/10">
+      <div className="relative z-10 border-t border-cream/10">
         <div className="section-container py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-cream/40 text-sm">
             © {new Date().getFullYear()} Pragna Skin & Laser Clinics. All rights reserved.

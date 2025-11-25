@@ -165,25 +165,6 @@ export default function Navbar() {
                     : 'opacity-0 invisible translate-y-4'
                 }`}
               >
-                {/* Dropdown Header */}
-                <div className="px-8 py-4 border-b border-maroon/10 bg-gradient-to-r from-beige-warm to-beige rounded-t-2xl">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="font-serif text-xl text-charcoal">
-                        Our <span className="italic text-maroon">Treatments</span>
-                      </h2>
-                      <p className="text-charcoal/50 text-sm mt-0.5">Explore our comprehensive range of dermatological services</p>
-                    </div>
-                    <Link 
-                      href="/treatments" 
-                      className="text-sm text-maroon font-medium hover:underline underline-offset-4 flex items-center gap-1"
-                    >
-                      View all treatments
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </div>
-                
                 {/* Scrollable Content */}
                 <div 
                   ref={treatmentsRef}
@@ -259,25 +240,6 @@ export default function Navbar() {
                     : 'opacity-0 invisible translate-y-4'
                 }`}
               >
-                {/* Dropdown Header */}
-                <div className="px-8 py-4 border-b border-maroon/10 bg-gradient-to-r from-beige-warm to-beige rounded-t-2xl">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="font-serif text-xl text-charcoal">
-                        Common <span className="italic text-maroon">Conditions</span> We Treat
-                      </h2>
-                      <p className="text-charcoal/50 text-sm mt-0.5">Find solutions for your specific skin, hair, and body concerns</p>
-                    </div>
-                    <Link 
-                      href="/conditions" 
-                      className="text-sm text-maroon font-medium hover:underline underline-offset-4 flex items-center gap-1"
-                    >
-                      View all conditions
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </div>
-                
                 {/* Scrollable Content */}
                 <div 
                   ref={conditionsRef}
@@ -412,7 +374,6 @@ export default function Navbar() {
             </div>
 
             <Link href="/#about" className={linkClasses}>About</Link>
-            <Link href="/#blog" className={linkClasses}>Blog</Link>
             <Link href="/#contact" className={linkClasses}>Contact</Link>
           </div>
 
@@ -540,9 +501,6 @@ export default function Navbar() {
 
             <Link href="/#about" className="block text-xl font-medium text-charcoal hover:text-maroon">
               About
-            </Link>
-            <Link href="/#blog" className="block text-xl font-medium text-charcoal hover:text-maroon">
-              Blog
             </Link>
             <Link href="/#contact" className="block text-xl font-medium text-charcoal hover:text-maroon">
               Contact

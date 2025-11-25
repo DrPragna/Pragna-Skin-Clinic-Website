@@ -63,7 +63,7 @@ export default function SignaturePrograms() {
       
       <div className="section-container">
         {/* Section Header - Centered */}
-        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}

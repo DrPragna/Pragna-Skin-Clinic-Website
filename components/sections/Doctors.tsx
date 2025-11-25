@@ -37,14 +37,14 @@ export default function Doctors() {
     <section 
       id="about"
       ref={containerRef}
-      className="relative py-20 lg:py-32 bg-cream overflow-hidden"
+      className="relative py-14 lg:py-20 bg-cream overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute top-20 right-20 w-64 h-64 bg-terracotta/10 rounded-full blur-3xl" />
 
       <div className="section-container relative">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}

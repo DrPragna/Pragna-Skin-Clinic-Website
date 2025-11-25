@@ -38,11 +38,11 @@ export default function Branches() {
   return (
     <section 
       ref={containerRef}
-      className="relative py-24 lg:py-32 bg-beige-warm overflow-hidden"
+      className="relative py-14 lg:py-20 bg-beige-warm overflow-hidden"
     >
       <div className="section-container">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}

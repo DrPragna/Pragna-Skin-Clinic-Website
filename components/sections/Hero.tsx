@@ -178,17 +178,15 @@ export default function Hero() {
                   transition: 'transform 0.6s ease-out',
                 }}
               >
-                {/* Placeholder - Replace with actual image */}
-                <div className="w-full h-full bg-gradient-to-br from-beige via-terracotta-light/40 to-white flex items-center justify-center relative">
-                  <div className="text-center">
-                    <p className="text-maroon/20 font-serif text-4xl mb-2">Add image</p>
-                    <p className="text-maroon/15 text-sm">Doctor portrait or clinic interior</p>
-                  </div>
-                  
-                  {/* Decorative Elements */}
-                  <div className="absolute top-8 right-8 w-20 h-20 border border-maroon/10 rounded-full" />
-                  <div className="absolute bottom-8 left-8 w-32 h-32 border border-terracotta/20 rounded-full" />
-                </div>
+                {/* Hero Image */}
+                <img 
+                  src="/doctors-hero.png" 
+                  alt="Dr. Mounika and Dr. Karuna at Pragna Skin & Laser Clinics"
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Subtle Overlay for better text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
               </div>
 
               {/* Floating Accent Card */}

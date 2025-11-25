@@ -61,7 +61,7 @@ export default function Contact() {
     <section 
       id="contact"
       ref={containerRef}
-      className="relative py-24 lg:py-40 overflow-hidden"
+      className="relative py-16 lg:py-24 overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-terracotta-light/30 via-cream to-rose-gold/10" />
