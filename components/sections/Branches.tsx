@@ -38,9 +38,23 @@ export default function Branches() {
   return (
     <section 
       ref={containerRef}
-      className="relative py-14 lg:py-20 bg-beige-warm overflow-hidden"
+      className="relative py-14 lg:py-20 overflow-hidden"
     >
-      <div className="section-container">
+      {/* Warm beige gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F5F2EF] via-[#FAF6F2] to-[#FDF8F4]" />
+      
+      {/* Subtle accent gradients */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_80%_20%,rgba(234,199,187,0.1),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_10%_80%,rgba(183,110,121,0.06),transparent)]" />
+      
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-terracotta/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-rose-gold/5 rounded-full blur-3xl" />
+      
+      {/* Top transition line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/8 to-transparent" />
+      
+      <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
           <motion.span

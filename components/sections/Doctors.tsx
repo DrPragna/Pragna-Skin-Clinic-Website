@@ -37,10 +37,20 @@ export default function Doctors() {
     <section 
       id="about"
       ref={containerRef}
-      className="relative py-14 lg:py-20 bg-cream overflow-hidden"
+      className="relative py-14 lg:py-20 overflow-hidden"
     >
-      {/* Background Elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-terracotta/10 rounded-full blur-3xl" />
+      {/* Rich gradient background - distinctly different */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F0] via-[#FDF4ED] to-[#FBF0E8]" />
+      
+      {/* Diagonal warm glow */}
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(234,199,187,0.15)_0%,transparent_50%,rgba(183,110,121,0.08)_100%)]" />
+      
+      {/* Decorative blobs */}
+      <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-terracotta/12 to-rose-gold/8 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-20 w-56 h-56 bg-gradient-to-tr from-rose-gold/8 to-terracotta/6 rounded-full blur-3xl" />
+      
+      {/* Top transition */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/10 to-transparent" />
 
       <div className="section-container relative">
         {/* Section Header */}

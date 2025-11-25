@@ -103,11 +103,21 @@ export default function TrustStrip() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-b from-beige-warm to-beige relative">
-      {/* Subtle top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/20 to-transparent"></div>
+    <section ref={sectionRef} className="py-20 relative overflow-hidden">
+      {/* Layered gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#FAF4F0] via-[#F5EDE8] to-[#F0E8E2]" />
       
-      <div className="section-container">
+      {/* Subtle radial glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_100%_at_50%_0%,rgba(234,199,187,0.25),transparent_60%)]" />
+      
+      {/* Decorative elements */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-rose-gold/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-terracotta/5 rounded-full blur-3xl" />
+      
+      {/* Subtle top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/15 to-transparent"></div>
+      
+      <div className="section-container relative z-10">
         <div className="grid md:grid-cols-4 gap-12 lg:gap-16">
           {stats.map((stat, index) => (
             <div
@@ -149,7 +159,8 @@ export default function TrustStrip() {
         </div>
       </div>
       
-      {/* Subtle bottom accent */}
+      {/* Bottom gradient fade to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#FAF6F3] to-transparent"></div>
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/10 to-transparent"></div>
     </section>
   );

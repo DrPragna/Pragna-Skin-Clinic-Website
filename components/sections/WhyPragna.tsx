@@ -40,14 +40,22 @@ export default function WhyPragna() {
   return (
     <section 
       ref={containerRef}
-      className="section-padding bg-beige-warm relative overflow-hidden"
+      className="section-padding relative overflow-hidden"
     >
-      {/* Subtle background texture */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute top-0 left-0 w-full h-full" style={{
-          backgroundImage: `repeating-linear-gradient(90deg, transparent, transparent 200px, #722B2B 200px, #722B2B 201px)`,
-        }}></div>
-      </div>
+      {/* Diagonal gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FAF6F3] via-[#F8F0EB] to-[#F5EBE4]" />
+      
+      {/* Subtle diagonal pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `repeating-linear-gradient(135deg, transparent, transparent 60px, #722B2B 60px, #722B2B 61px)`,
+      }} />
+      
+      {/* Decorative gradient orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-terracotta/8 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-rose-gold/6 to-transparent rounded-full blur-3xl" />
+      
+      {/* Top decorative line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/8 to-transparent" />
 
       <div className="section-container relative">
         {/* Section Header - Centered */}

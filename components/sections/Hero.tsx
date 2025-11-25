@@ -43,25 +43,30 @@ export default function Hero() {
       id="home" 
       className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Layered Background */}
-      <div className="absolute inset-0 gradient-warm" />
+      {/* Layered Background - Enhanced gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F0] via-[#F9E4D8] to-[#F3D0C4]" />
+      
+      {/* Subtle radial accent */}
+      <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_80%_50%_at_80%_-20%,rgba(183,110,121,0.15),transparent)]" />
       
       {/* Animated Background Shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute top-[-10%] right-[-5%] w-[700px] h-[700px] bg-terracotta/20 rounded-full filter blur-[120px]"
+          className="absolute top-[-10%] right-[-5%] w-[700px] h-[700px] bg-gradient-to-br from-terracotta/25 to-rose-gold/15 rounded-full filter blur-[120px]"
           style={{
             transform: `translate(${mousePos.x * 2}px, ${mousePos.y * 2}px)`,
             transition: 'transform 0.8s ease-out',
           }}
         />
         <div 
-          className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-maroon/5 rounded-full filter blur-[100px]"
+          className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-maroon/8 to-terracotta/10 rounded-full filter blur-[100px]"
           style={{
             transform: `translate(${-mousePos.x * 1.5}px, ${-mousePos.y * 1.5}px)`,
             transition: 'transform 1s ease-out',
           }}
         />
+        {/* Additional subtle orb */}
+        <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-rose-gold/5 rounded-full filter blur-[80px]" />
       </div>
 
       <div className="section-container py-24 lg:py-32 relative z-10">
@@ -239,8 +244,11 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
+      {/* Bottom Gradient Fade - Smoother transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#FAF4F0] via-[#FAF4F0]/80 to-transparent" />
+      
+      {/* Decorative bottom divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/10 to-transparent" />
     </section>
   );
 }
