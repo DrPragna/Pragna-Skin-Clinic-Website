@@ -1,62 +1,66 @@
-/**
- * Content for Laser Hair Reduction Treatment Family
- */
+import { TreatmentFamilyContent } from '@/lib/navigationData';
 
-export const laserHairReductionFamily = {
+/**
+ * Laser Hair Reduction - Treatment Family Content
+ * 
+ * This is a sample content file showing the new schema structure.
+ * Create similar files for each treatment family with custom content.
+ */
+export const laserHairReductionContent: TreatmentFamilyContent = {
   hero: {
-    title: "Laser Hair Reduction",
-    subtitle: "Long-term reduction of unwanted hair with advanced triple-wavelength technology.",
-    intro: "At Pragna, laser hair reduction is about more than \"hair removal\". Using diode, alexandrite and IPL platforms together, we safely target hair at the root across a wide range of skin tones and hair types, helping you move away from constant shaving or waxing towards smoother, low-maintenance skin."
+    title: 'Laser Hair Reduction',
+    subtitle: 'Smooth skin, permanent results',
+    intro: 'Say goodbye to razors, waxing, and ingrown hairs. Our advanced laser technology targets hair at the root, giving you long-lasting smoothness with minimal discomfort.',
+    // image: '/images/treatments/laser-hair-hero.jpg' // Need: Editorial hero image - smooth skin texture with soft lighting
   },
-  
-  whoIsThisFor: {
-    intro: "Laser hair reduction may be right for you if you:",
-    points: [
-      "Have unwanted hair on the face, underarms, arms, legs, bikini area or trunk.",
-      "Struggle with in-grown hairs, razor bumps or darkening from frequent hair removal.",
-      "Prefer a longer-term reduction instead of regular waxing or threading.",
-      "Want a safe, dermatologist-supervised option that works across different skin tones."
-    ]
-  },
-  
-  howItHelps: {
-    description: "The laser light is absorbed by the pigment in the hair shaft and converted to heat, which selectively damages the hair follicle while protecting the surrounding skin. With each session, active hairs become finer and fewer, leading to a significant and often permanent reduction in growth over time.",
-    keyPoints: [
-      {
-        title: "Customised settings",
-        text: "based on your skin tone, hair thickness and treatment area."
-      },
-      {
-        title: "Series of sessions",
-        text: "(usually 6–8) timed with the hair growth cycle for best results."
-      },
-      {
-        title: "Minimal discomfort",
-        text: "often described as a light snapping sensation, with cooling and numbing options if needed."
-      },
-      {
-        title: "Little to no downtime",
-        text: "mild redness or swelling usually settles within hours."
-      }
-    ]
-  },
-  
-  whatToExpect: {
-    intro: "Every laser hair reduction plan at Pragna is customised and supervised by experienced dermatologists to keep you comfortable and informed at every step.",
+  trustIndicators: [
+    { value: '25+', label: 'Years Experience' },
+    { value: 'FDA', label: 'Approved Lasers' },
+    { value: '50K+', label: 'Sessions Performed' },
+  ],
+  howItWorks: {
+    description: 'Our laser systems deliver concentrated light energy that is absorbed by the pigment in hair follicles. This damages the follicle and inhibits future hair growth, while leaving surrounding skin unharmed.',
     steps: [
       {
-        title: "Consultation & Patch Test",
-        text: "We review your medical history, examine the hair and skin in the treatment area, and perform a patch test to choose the safest, most effective laser settings."
+        title: 'Consultation',
+        text: 'We assess your skin type, hair colour, and treatment areas to select the optimal laser settings for you.',
+        icon: 'consultation',
       },
       {
-        title: "Treatment Sessions",
-        text: "Sessions are spaced a few weeks apart. Most people notice hair becoming finer and sparser after the first few sittings, with more visible change after 4–6 sessions."
+        title: 'Treatment',
+        text: 'The laser is applied to the treatment area. You\'ll feel a mild warming sensation. Sessions are quick—underarms take just 10-15 minutes.',
+        icon: 'treatment',
       },
       {
-        title: "Aftercare & Maintenance",
-        text: "You can usually resume normal activities the same day. We'll guide you on sun protection, skincare and any maintenance sessions that may be needed to keep results stable over time."
-      }
-    ]
-  }
+        title: 'Results',
+        text: 'Hair falls out over 1-2 weeks. With each session, regrowth becomes finer and sparser until permanent reduction is achieved.',
+        icon: 'results',
+      },
+    ],
+  },
+  whoIsThisFor: {
+    headline: 'Ideal for you if...',
+    list: [
+      'You\'re tired of constant shaving, waxing, or threading',
+      'You experience ingrown hairs or razor bumps',
+      'You want long-term hair reduction, not temporary removal',
+      'You prefer a low-maintenance grooming routine',
+      'You have dark hair (works best) on any skin tone',
+    ],
+  },
+  whyPragna: [
+    {
+      title: 'Candela GentleMax Pro',
+      description: 'We use the gold-standard Candela laser system, trusted worldwide for its safety and efficacy on all skin types, including Indian skin.',
+    },
+    {
+      title: 'Customised Settings',
+      description: 'Our dermatologists adjust laser parameters for your unique skin tone and hair type—no one-size-fits-all approach.',
+    },
+    {
+      title: 'Comfort-Focused',
+      description: 'Built-in cooling technology and trained technicians ensure a comfortable experience with minimal discomfort.',
+    },
+  ],
+  relatedConditionSlugs: ['unwanted-facial-body-hair'],
 };
-

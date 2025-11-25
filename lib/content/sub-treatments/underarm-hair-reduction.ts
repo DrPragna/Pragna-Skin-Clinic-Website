@@ -1,87 +1,74 @@
-/**
- * Content for Underarm Hair Reduction Sub-Treatment
- */
+import { SubTreatmentContent } from '@/lib/navigationData';
 
-export const underarmHairReduction = {
+/**
+ * Underarm Hair Reduction - Sub-Treatment Content
+ * 
+ * This is a sample content file showing the new schema structure.
+ * Create similar files for each sub-treatment with custom content.
+ */
+export const underarmHairReductionContent: SubTreatmentContent = {
   hero: {
-    title: "Underarm Hair Reduction",
-    subtitle: "Smoother, clearer underarms with less shadow, in-growth and daily upkeep.",
-    intro: "Underarm hair can be tricky – frequent shaving and waxing often lead to in-grown hairs, darkening and irritation. Our laser-based underarm hair reduction targets the follicles directly, helping you achieve longer-lasting smoothness with minimal discomfort and downtime.",
-    quickFacts: {
-      sessions: "6–8 sessions",
-      sessionTime: "Few minutes",
-      painLevel: "Mild",
-      downtime: "Minimal"
-    }
+    title: 'Underarm Laser Hair Reduction',
+    tagline: 'Freedom from daily shaving',
+    intro: 'Smooth, hair-free underarms without the hassle of razors or the pain of waxing. Our laser treatment targets hair follicles for long-lasting results in just a few quick sessions.',
   },
-  
+  quickStats: {
+    sessions: '6-8 sessions',
+    duration: '10-15 mins',
+    downtime: 'None',
+    painLevel: 'Mild warmth',
+  },
+  overview: 'Underarm laser hair reduction is one of our most popular treatments. The underarm area responds exceptionally well to laser treatment due to the dark, coarse nature of the hair. Most patients see significant reduction after just a few sessions.',
   isThisForYou: [
-    "You shave or wax your underarms frequently and notice bumps, redness or dark patches.",
-    "You prefer sleeveless clothing but feel conscious about underarm shadow or roughness.",
-    "You're looking for a more convenient, dermatologist-supervised alternative to routine hair removal.",
-    "You're okay with multiple sessions for a more lasting reduction in growth."
+    'You shave or wax your underarms regularly',
+    'You experience razor burn, bumps, or ingrown hairs',
+    'You want to feel confident in sleeveless clothing',
+    'You\'re looking for a long-term solution, not temporary removal',
+    'You want to save time on daily grooming',
   ],
-  
-  howItWorks: {
-    description: "A focused laser beam is passed over the underarm area, where the light is absorbed by pigment in the hair shaft and converted to heat, selectively disabling the hair follicles. Modern cooling technology and, when needed, topical numbing cream help keep the procedure comfortable.",
-    keyPoints: [
-      "Sessions are quick – usually a few minutes per underarm.",
-      "Multiple sessions (typically 6–8) are scheduled to match the hair growth cycle.",
-      "The treatment is suitable for most skin types; parameters are customised during consultation."
-    ]
-  },
-  
-  resultsAndRecovery: {
-    description: "You may notice some hair shedding within 1–2 weeks after each session. With successive visits, regrowth becomes finer and sparser, and many patients see a marked reduction after 4–6 sittings.",
-    points: [
-      "Mild redness or swelling can occur, similar to a light sunburn, and usually settles within a few hours.",
-      "We recommend avoiding waxing and plucking between sessions; shaving is usually allowed if needed.",
-      "Occasional maintenance sessions may be advised to keep results stable in the long term."
-    ]
-  },
-  
-  oftenCombinedWith: {
-    intro: "Many patients choose to pair underarm hair reduction with:",
-    items: [
+  process: {
+    steps: [
       {
-        name: "Bikini & Brazilian Hair Reduction",
-        reason: "for a cohesive grooming plan."
+        phase: 'before',
+        title: 'Preparation',
+        description: 'Shave the area 24 hours before your appointment. Avoid deodorant on the day of treatment. We\'ll cleanse the area and apply a cooling gel if needed.',
       },
       {
-        name: "Arms Hair Reduction",
-        reason: "to reduce contrast between smoother underarms and forearms."
+        phase: 'during',
+        title: 'Treatment',
+        description: 'The laser handpiece is passed over your underarms. You\'ll feel a mild warming sensation with each pulse. The built-in cooling system keeps you comfortable. The entire process takes about 10-15 minutes.',
       },
       {
-        name: "Excessive Sweating (Hyperhidrosis) treatments",
-        reason: "to address sweat concerns in the same area (Botox or other modalities as clinically appropriate)."
-      }
-    ]
+        phase: 'after',
+        title: 'Aftercare',
+        description: 'You can return to normal activities immediately. Avoid hot showers, saunas, and intense exercise for 24 hours. Apply soothing aloe if needed. Hair will shed naturally over 1-2 weeks.',
+      },
+    ],
   },
-  
-  whyPragna: [
-    {
-      title: "Quick & Convenient",
-      text: "Sessions take just a few minutes, making it easy to fit into your schedule."
-    },
-    {
-      title: "Safe for Indian Skin",
-      text: "Parameters are customised for your specific skin tone to minimise risks of burns or pigmentation."
-    }
-  ],
-  
+  results: {
+    timeline: 'You\'ll notice hair shedding 1-2 weeks after each session. After 3-4 sessions, you\'ll see significant reduction. Full results (80-90% permanent reduction) typically achieved after 6-8 sessions.',
+    recovery: 'Zero downtime. Some mild redness may occur immediately after treatment but resolves within a few hours. You can apply deodorant the next day.',
+  },
   faqs: [
     {
-      q: "Will it darken my underarms?",
-      a: "When done correctly with proper settings for your skin type, laser hair reduction typically improves darkening over time by eliminating the need for constant shaving and waxing, which can cause pigmentation."
+      question: 'How many sessions will I need?',
+      answer: 'Most patients need 6-8 sessions spaced 4-6 weeks apart. This is because hair grows in cycles, and we can only treat hair in the active growth phase. Your dermatologist will create a personalised plan.',
     },
     {
-      q: "How long should I avoid deodorant after treatment?",
-      a: "We usually recommend avoiding deodorant for 24 hours after each session to prevent irritation. Your dermatologist will give you specific aftercare instructions."
+      question: 'Does it hurt?',
+      answer: 'Most patients describe it as a mild warming or snapping sensation. Our Candela laser has built-in cooling that makes the treatment very tolerable. Underarms are one of the least sensitive areas to treat.',
     },
     {
-      q: "Can I wax between sessions?",
-      a: "No, waxing and plucking pull out the hair root, which the laser needs to target. Shaving is allowed if needed between sessions."
-    }
-  ]
+      question: 'Is it safe for dark skin?',
+      answer: 'Absolutely. Our Nd:YAG laser is specifically designed for all skin types, including darker Indian skin tones. We adjust settings based on your individual skin type for safe, effective results.',
+    },
+    {
+      question: 'Can I shave between sessions?',
+      answer: 'Yes, you can shave between sessions. In fact, we recommend shaving rather than waxing or plucking, as these methods remove the hair root that the laser needs to target.',
+    },
+    {
+      question: 'Will the hair grow back?',
+      answer: 'Laser hair reduction is permanent for the follicles that are destroyed. You can expect 80-90% permanent reduction. Some fine, light hair may remain, and occasional maintenance sessions (once a year) may be needed.',
+    },
+  ],
 };
-

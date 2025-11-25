@@ -1,123 +1,102 @@
-/**
- * Content for Acne & Breakouts Condition
- */
+import { ConditionContent } from '@/lib/navigationData';
 
-export const acneBreakouts = {
+/**
+ * Acne & Breakouts - Condition Content
+ * 
+ * This is a sample content file showing the new schema structure.
+ * Create similar files for each condition with custom content.
+ */
+export const acneBreakoutsContent: ConditionContent = {
   hero: {
-    title: "Acne & Breakouts",
-    subtitle: "Pimples, whiteheads or cystic acne that keep coming back.",
-    intro: "Acne doesn't just affect your skin – it can impact confidence, mood and how you show up in daily life. At Pragna, we look beyond quick fixes to understand what's driving your breakouts and build a plan that fits your skin, lifestyle and any underlying hormonal or medical factors."
+    title: 'Acne & Breakouts',
+    empathyStatement: 'Those stubborn pimples that keep coming back no matter what you try',
+    intro: 'Acne isn\'t just a teenage problem. It affects people of all ages and can significantly impact confidence. The good news? With the right approach, it\'s highly treatable.',
+    // image: '/images/conditions/acne-hero.jpg' // Need: Empathetic hero image
   },
-  
-  isThisYou: {
-    intro: "You may be dealing with acne & breakouts if you notice:",
-    symptoms: [
-      "Repeated whiteheads, blackheads or painful red bumps on your face, back or chest.",
-      "Breakouts that flare around your periods, stress or changes in routine.",
-      "Dark marks or scars that remain long after the pimples heal.",
-      "Skin that feels oily and sensitive, despite trying multiple \"acne\" products.",
-      "Feeling frustrated that over-the-counter creams are no longer enough."
-    ]
-  },
-  
-  whatItIs: {
-    description: "Acne happens when hair follicles become clogged with oil (sebum) and dead skin cells. This blockage can lead to whiteheads, blackheads, red inflamed pimples or deeper, painful cysts. It's common in both teenagers and adults, but the pattern and severity can differ from person to person."
-  },
-  
-  whyItHappens: {
-    intro: "Acne has many possible triggers, often working together:",
-    causes: [
-      {
-        title: "Hormonal shifts",
-        text: "puberty, periods, PCOS and other hormonal conditions."
-      },
-      {
-        title: "Stress and lifestyle",
-        text: "poor sleep, high stress and irregular routines."
-      },
-      {
-        title: "Medications",
-        text: "certain drugs like steroids, phenytoin and isoniazid can aggravate acne."
-      },
-      {
-        title: "Diet and skincare",
-        text: "high-glycaemic diets, comedogenic products or harsh treatments that disrupt the skin barrier."
-      },
-      {
-        title: "Genetic tendency",
-        text: "some skins are simply more acne-prone than others."
-      }
-    ]
-  },
-  
-  howWeTreat: {
-    intro: "There is no one \"acne facial\" that suits everyone. We create layered plans that may include prescription medicines, medical-grade skincare and in-clinic procedures, adjusted over time as your skin improves.",
-    treatments: [
-      {
-        title: "Medical Treatment & Skincare Planning",
-        description: "Combination of topical and, when needed, oral medications tailored to your acne type and skin sensitivity – using actives like retinoids, azelaic acid, benzoyl peroxide, clindamycin, niacinamide and salicylic acid. We also design a simple, sustainable everyday routine (cleanser, moisturiser, sunscreen) to support treatment."
-      },
-      {
-        title: "Advanced Procedures for Active Acne",
-        description: "Chemical peels and other dermatology-grade procedures to speed up clearance, reduce marks and smooth texture. Options may include salicylic acid facials, Hydrafacial, blue light therapy and carbon laser peels, selected based on how inflamed or sensitive your skin is."
-      },
-      {
-        title: "Holistic Evaluation & Long-Term Control",
-        description: "Screening for triggers such as PCOS or medication-related acne, and coordinating with other specialists if needed. Gradual shift from \"fire-fighting\" breakouts to maintaining clear, healthy skin once acne is controlled."
-      }
-    ]
-  },
-  
-  whatToExpect: {
-    steps: [
-      {
-        title: "Consultation & Analysis",
-        text: "Detailed skin and acne mapping, review of your medical history, triggers and current products. Photos may be taken to track progress."
-      },
-      {
-        title: "Personalised Plan",
-        text: "A clear plan combining medication, skincare and procedures, broken down by what you do daily at home versus what happens in-clinic."
-      },
-      {
-        title: "Treatment & Results",
-        text: "Mild to moderate acne may start improving within weeks; more severe cases can take around three months to show significant change, though some patients notice earlier relief."
-      }
+  symptoms: {
+    headline: 'Do you recognise these signs?',
+    list: [
+      'Recurring pimples, whiteheads, or blackheads on face, chest, or back',
+      'Painful, deep cysts that take weeks to heal',
+      'Oily skin that feels greasy even after washing',
+      'Dark marks or scars left behind after breakouts clear',
+      'Breakouts that worsen around your period or during stress',
+      'Products that worked before no longer seem effective',
     ],
-    downtime: "Most acne treatments have little to no downtime, though some peels or procedures may cause temporary redness or mild peeling. We'll guide you on sun protection, moisturising and what to avoid (like picking or harsh scrubs) so your skin can heal smoothly."
   },
-  
-  whyPragna: [
-    {
-      title: "Dermatologist-Led Care",
-      text: "All treatment plans are designed and supervised by qualified dermatologists experienced in managing everything from the first few pimples to long-standing cystic acne."
-    },
-    {
-      title: "Evidence-Based Combinations",
-      text: "We combine proven topical and oral therapies with procedures like peels, blue light and lasers, selecting only what is necessary for your skin – nothing more, nothing less."
-    },
-    {
-      title: "Holistic & Root-Cause Focused",
-      text: "We look for underlying drivers like PCOS, nutritional gaps or medication side-effects and work with you to address them, so results are more sustainable over time."
-    }
+  quickStats: [
+    { stat: '85%', text: 'of people aged 12-24 experience acne' },
+    { stat: 'Treatable', text: 'with dermatologist-led care' },
+    { stat: '4-8 weeks', text: 'to see significant improvement' },
   ],
-  
+  understanding: {
+    whatItIs: 'Acne occurs when hair follicles become clogged with oil and dead skin cells. This creates an environment where bacteria thrive, leading to inflammation and those frustrating breakouts. It\'s not about being "dirty" or having bad hygiene—it\'s a complex condition influenced by hormones, genetics, and other factors.',
+    whyItHappens: [
+      'Hormonal fluctuations (puberty, menstrual cycle, PCOS)',
+      'Excess oil (sebum) production',
+      'Bacterial overgrowth (C. acnes)',
+      'Genetics and family history',
+      'Certain medications or supplements',
+      'Stress and lifestyle factors',
+      'Using comedogenic (pore-clogging) products',
+    ],
+  },
+  pragnaApproach: {
+    description: 'We don\'t believe in one-size-fits-all acne treatment. Our dermatologists assess your specific acne type, triggers, and skin type to create a multi-pronged approach that addresses active breakouts, prevents new ones, and heals existing damage.',
+  },
+  recommendedTreatments: [
+    {
+      type: 'family',
+      slug: 'acne-acne-scar-solutions',
+      name: 'Acne & Acne Scar Solutions',
+      bestFor: 'Comprehensive acne management',
+    },
+    {
+      type: 'sub-treatment',
+      slug: 'chemical-peels',
+      name: 'Chemical Peels',
+      bestFor: 'Unclogging pores and reducing oil',
+    },
+    {
+      type: 'family',
+      slug: 'advanced-facials-boosters',
+      name: 'Advanced Facials',
+      bestFor: 'Regular maintenance and prevention',
+    },
+  ],
+  timeline: {
+    steps: [
+      { title: 'Week 1-2', description: 'Initial consultation and treatment begins. Some purging may occur.' },
+      { title: 'Week 4-6', description: 'Active breakouts start reducing. Skin begins to clear.' },
+      { title: 'Week 8-12', description: 'Significant improvement visible. Focus shifts to maintenance.' },
+      { title: 'Ongoing', description: 'Maintenance routine to prevent recurrence and address scarring.' },
+    ],
+  },
   faqs: [
     {
-      q: "How long will it take for my acne to clear?",
-      a: "For severe acne, it may take around three months to see significant improvement, while milder cases may respond sooner. Your doctor will review progress regularly and fine-tune medicines and procedures as your skin improves."
+      question: 'Will my acne ever go away completely?',
+      answer: 'For many people, yes. With proper treatment, acne can be controlled and often cleared. Some may need ongoing maintenance, especially if hormonal factors are involved. Our dermatologists will give you realistic expectations based on your specific situation.',
     },
     {
-      q: "Will I definitely need oral medicines?",
-      a: "Not always. Very mild acne may respond well to a good skincare routine and topical medications alone. For moderate to severe or stubborn acne, oral medicines may be added to control inflammation and prevent scarring – this is decided after a detailed consultation and, if needed, basic investigations."
+      question: 'Is it okay to pop pimples?',
+      answer: 'We strongly advise against it. Popping can push bacteria deeper, cause scarring, and spread infection. If you have a particularly bothersome pimple, come see us—we can safely extract it without damage.',
     },
     {
-      q: "Will this treatment remove my old acne scars?",
-      a: "Active acne treatment focuses on controlling current breakouts and preventing new scars. Once your acne is stable, we can plan dedicated scar-revision procedures."
+      question: 'Will I have to give up makeup?',
+      answer: 'Not necessarily. We\'ll guide you on non-comedogenic products that won\'t clog pores. During certain treatments, you may need to avoid makeup briefly, but we\'ll work with your lifestyle.',
     },
     {
-      q: "Can I wear makeup during treatment?",
-      a: "Yes, but we'll guide you to use non-comedogenic products that won't clog pores or interfere with your treatment."
-    }
-  ]
+      question: 'Why do I still get acne as an adult?',
+      answer: 'Adult acne is common, especially in women. Hormonal fluctuations, stress, and even certain skincare products can trigger breakouts. The good news is adult acne responds well to treatment.',
+    },
+  ],
+  selfCareTips: [
+    'Cleanse twice daily with a gentle, non-foaming cleanser',
+    'Use non-comedogenic moisturisers and sunscreen',
+    'Avoid touching your face throughout the day',
+    'Change pillowcases frequently (every 2-3 days)',
+    'Don\'t over-wash or use harsh scrubs—this can worsen acne',
+    'Be patient—most treatments take 6-8 weeks to show results',
+  ],
+  relatedConditionSlugs: ['acne-scars', 'dark-spots-tan-pigmentation'],
 };
-

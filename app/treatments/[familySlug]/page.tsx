@@ -1,14 +1,47 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getTreatmentFamily, getConditionsForFamily } from '@/lib/navigationData';
-import { laserHairReductionFamily } from '@/lib/content/treatment-families/laser-hair-reduction';
 
 export function generateStaticParams() {
   return treatmentFamilies.map((family) => ({
     familySlug: family.slug,
   }));
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ familySlug: string }> 
+}): Promise<Metadata> {
+  const { familySlug } = await params;
+  const family = getTreatmentFamily(familySlug);
+  
+  if (!family) {
+    return { title: 'Treatment Not Found' };
+  }
+  
+  return {
+    title: `${family.name} | ${family.pillar} Treatments | Pragna Skin Clinic`,
+    description: `${family.summary} Expert ${family.name.toLowerCase()} treatments by qualified dermatologists at Pragna Skin Clinic Hyderabad.`,
+    keywords: [
+      family.name,
+      `${family.name} treatment`,
+      `${family.name} Hyderabad`,
+      family.pillar.toLowerCase(),
+      'dermatologist',
+      'skin clinic',
+      ...family.subTreatments.map(st => st.name),
+    ],
+    openGraph: {
+      title: `${family.name} | Pragna Skin Clinic`,
+      description: family.summary,
+      type: 'website',
+    },
+  };
 }
 
 export default async function TreatmentFamilyPage({ 
@@ -24,121 +57,292 @@ export default async function TreatmentFamilyPage({
   }
 
   const relatedConditions = getConditionsForFamily(familySlug);
-  
-  // Get custom content if available
-  const customContent = familySlug === 'laser-hair-reduction' ? laserHairReductionFamily : null;
-  
-  // Pillar-based accent colors
-  const pillarColors = {
-    Skin: { accent: 'terracotta', bg: 'bg-gradient-to-br from-beige-warm via-white to-terracotta/5' },
-    Hair: { accent: 'maroon', bg: 'bg-gradient-to-br from-beige-warm via-white to-maroon/5' },
-    Body: { accent: 'terracotta', bg: 'bg-gradient-to-br from-white via-beige-warm/50 to-terracotta/5' },
-    Wellness: { accent: 'maroon', bg: 'bg-gradient-to-br from-beige-warm via-white to-maroon/5' },
+
+  // Breadcrumb Schema for SEO
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Treatments',
+        item: 'https://pragnaskinclinic.com/treatments',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: family.pillar,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: family.name,
+        item: `https://pragnaskinclinic.com/treatments/${family.slug}`,
+      },
+    ],
   };
-  
-  const colors = pillarColors[family.pillar];
+
+  // Service Schema for SEO
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalProcedure',
+    name: family.name,
+    description: family.summary,
+    procedureType: 'https://schema.org/CosmeticProcedure',
+    howPerformed: 'By qualified dermatologists using advanced technology',
+    preparation: 'Initial consultation and skin assessment',
+    followup: 'Regular monitoring and aftercare support',
+  };
 
   return (
-    <main className="overflow-x-hidden">
+    <>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      
+    <main className="overflow-x-hidden bg-beige-warm">
       <Navbar />
       
       {/* ============================================
-          SECTION 1: HERO (Family Overview)
+          HERO - Editorial Split Layout
           ============================================ */}
-      <section className={`pt-32 pb-20 md:pt-40 md:pb-28 ${colors.bg} relative overflow-hidden`}>
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-terracotta/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-radial from-maroon/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
-        
+      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
         <div className="section-container relative z-10">
-          <div className="max-w-4xl">
-            {/* Label */}
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-maroon font-medium uppercase tracking-[0.2em] text-xs">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 text-sm mb-10">
+            <Link href="/treatments" className="text-charcoal/40 hover:text-maroon transition-colors">
+              Treatments
+            </Link>
+            <span className="text-charcoal/20">/</span>
+            <span className="text-charcoal/40">{family.pillar}</span>
+            <span className="text-charcoal/20">/</span>
+            <span className="text-maroon">{family.name}</span>
+          </nav>
+          
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left: Content */}
+            <div className="order-2 lg:order-1">
+              {/* Tiny label */}
+              <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-6 block">
                 Treatment Family
               </span>
-              <span className="w-12 h-px bg-maroon/30" />
-              <span className="text-charcoal/40 text-xs uppercase tracking-wider">
-                {family.pillar}
-              </span>
+              
+              {/* Title */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-charcoal leading-[1.05] mb-6">
+                {family.name}
+              </h1>
+              
+              {/* Subtitle/Hook */}
+              <p className="text-xl md:text-2xl text-charcoal/60 font-light leading-relaxed mb-8">
+                {family.summary}
+              </p>
+              
+              {/* CTA */}
+              <a 
+                href="#treatments" 
+                className="inline-flex items-center gap-3 bg-charcoal text-beige-warm px-8 py-4 rounded-full font-medium hover:bg-maroon transition-colors duration-300 group"
+              >
+                Explore Treatments
+                <svg 
+                  className="w-4 h-4 transform group-hover:translate-y-0.5 transition-transform" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </a>
             </div>
             
-            {/* Title */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-charcoal mb-6 leading-[1.1]">
-              {customContent?.hero.title || family.name}
-            </h1>
-            
-            {/* Subtitle */}
-            {customContent?.hero.subtitle && (
-              <p className="text-2xl md:text-3xl text-maroon/70 font-light italic mb-6">
-                {customContent.hero.subtitle}
-              </p>
-            )}
-            
-            {/* Summary/Intro */}
-            <p className="text-xl md:text-2xl text-charcoal/60 font-light leading-relaxed max-w-2xl mb-10">
-              {customContent?.hero.intro || family.summary}
-            </p>
-            
-            {/* CTA */}
-            <a 
-              href="#treatments" 
-              className="btn-primary inline-flex items-center gap-2 group"
-            >
-              View Treatment Options
-              <svg 
-                className="w-4 h-4 transform group-hover:translate-y-0.5 transition-transform" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </a>
+            {/* Right: Hero Image */}
+            <div className="order-1 lg:order-2">
+              {/* 
+                IMAGE NEEDED: Abstract/artistic image related to {family.name}
+                Style: Soft, editorial, macro texture or treatment-related abstract
+                Aspect: 4:5 portrait or square
+                Examples: 
+                - For Laser Hair Reduction: Close-up of smooth skin with soft lighting
+                - For Acne Solutions: Abstract water/clarity texture
+                - For Anti-Ageing: Soft botanical or light refraction
+              */}
+              <div className="aspect-[4/5] bg-gradient-to-br from-maroon/5 via-beige-warm to-terracotta/10 rounded-[2rem] overflow-hidden relative">
+                {/* Decorative elements */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-32 h-32 border border-maroon/10 rounded-full" />
+                  <div className="absolute w-48 h-48 border border-terracotta/10 rounded-full" />
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-maroon/30 text-sm italic">
+                    Need: Editorial hero image for {family.name}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ============================================
-          SECTION 2: WHO THIS IS FOR
+          TRUST STRIP - The Badge
+          ============================================ */}
+      <section className="py-8 border-y border-charcoal/5 bg-white/50">
+        <div className="section-container">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+            {[
+              { value: '25+', label: 'Years Experience' },
+              { value: 'FDA', label: 'Approved Technology' },
+              { value: '10K+', label: 'Patients Treated' },
+            ].map((stat, i) => (
+              <div key={i} className="flex items-center gap-3 text-charcoal/60">
+                <span className="text-2xl md:text-3xl font-display text-maroon">{stat.value}</span>
+                <span className="text-xs uppercase tracking-wider">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          HOW IT WORKS - The Science (Simplified)
           ============================================ */}
       <section className="py-20 md:py-28 bg-white">
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Image placeholder */}
-            <div className="order-2 lg:order-1">
-              <div className="aspect-[4/3] bg-gradient-to-br from-beige-warm to-terracotta/10 rounded-3xl flex items-center justify-center border border-maroon/5">
-                <p className="text-maroon/30 text-lg italic">Add image: Patient scenario</p>
+          <div className="max-w-4xl mx-auto">
+            {/* Section header */}
+            <div className="text-center mb-16">
+              <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
+                The Approach
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-6">
+                How it works
+              </h2>
+              <p className="text-lg text-charcoal/50 max-w-2xl mx-auto">
+                Our dermatologists use advanced, evidence-based techniques tailored to your unique needs.
+              </p>
+            </div>
+            
+            {/* 3-Step Process */}
+            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+              {[
+                {
+                  step: '01',
+                  title: 'Assessment',
+                  text: 'We evaluate your skin type, concerns, and goals to create a personalised treatment plan.',
+                  icon: (
+                    <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <circle cx="16" cy="16" r="12" />
+                      <path d="M16 10v6l4 2" strokeLinecap="round" />
+                    </svg>
+                  ),
+                },
+                {
+                  step: '02',
+                  title: 'Treatment',
+                  text: 'Using state-of-the-art technology, we deliver precise, comfortable treatments with optimal results.',
+                  icon: (
+                    <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M16 4v24M4 16h24" strokeLinecap="round" />
+                      <circle cx="16" cy="16" r="6" />
+                    </svg>
+                  ),
+                },
+                {
+                  step: '03',
+                  title: 'Results',
+                  text: 'We monitor your progress and adjust as needed to ensure lasting, beautiful outcomes.',
+                  icon: (
+                    <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M6 16l6 6L26 8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  ),
+                },
+              ].map((item, i) => (
+                <div key={i} className="text-center">
+                  {/* Icon */}
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-beige-warm text-maroon mb-6">
+                    {item.icon}
+                  </div>
+                  
+                  {/* Step number */}
+                  <p className="text-[10px] font-mono text-charcoal/30 uppercase tracking-wider mb-2">
+                    Step {item.step}
+                  </p>
+                  
+                  {/* Title */}
+                  <h3 className="text-xl font-display text-charcoal mb-3">
+                    {item.title}
+                  </h3>
+                  
+                  {/* Description */}
+                  <p className="text-charcoal/50 text-sm leading-relaxed">
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
+          WHO IS THIS FOR - Checklist Card
+          ============================================ */}
+      <section className="py-20 md:py-28 bg-beige-warm">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left: Image */}
+            <div>
+              {/* 
+                IMAGE NEEDED: Lifestyle/aspirational image
+                Style: Person in soft light, contemplative, or abstract skin texture
+                Aspect: 1:1 square
+              */}
+              <div className="aspect-square bg-gradient-to-br from-terracotta/10 via-white to-maroon/5 rounded-[2rem] relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-40 h-40 border border-maroon/10 rounded-full animate-pulse" />
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-maroon/30 text-sm italic">
+                    Need: Lifestyle image for {family.name}
+                  </p>
+                </div>
               </div>
             </div>
             
-            {/* Content */}
-            <div className="order-1 lg:order-2 space-y-8">
-              <div>
-                <span className="text-maroon font-medium uppercase tracking-[0.2em] text-xs mb-4 block">
-                  Who This Is For
-                </span>
-                <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-6">
-                  Is this right for you?
-                </h2>
-                <p className="text-lg text-charcoal/60 leading-relaxed">
-                  {customContent?.whoIsThisFor.intro || 'This treatment family may be a good fit if you recognise yourself in any of these situations:'}
-                </p>
-              </div>
+            {/* Right: Content */}
+            <div>
+              <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
+                Is This For You?
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-6">
+                Who this is for
+              </h2>
+              <p className="text-lg text-charcoal/50 mb-8">
+                This treatment family may be right for you if:
+              </p>
               
+              {/* Checklist */}
               <ul className="space-y-4">
-                {(customContent?.whoIsThisFor.points || [
-                  'You want long-lasting results, not temporary fixes.',
-                  'You prefer medically supervised care over salon treatments.',
-                  'You have tried over-the-counter solutions without success.'
-                ]).map((point, i) => (
+                {[
+                  'You want long-lasting results, not temporary fixes',
+                  'You prefer medically supervised care over salon treatments',
+                  'You have tried over-the-counter solutions without success',
+                  'You value personalised treatment plans over one-size-fits-all',
+                ].map((item, i) => (
                   <li key={i} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-terracotta/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-4 h-4 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <div className="w-6 h-6 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg className="w-3 h-3 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <p className="text-charcoal/80 text-lg">{point}</p>
+                    <span className="text-charcoal/70">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -148,86 +352,62 @@ export default async function TreatmentFamilyPage({
       </section>
 
       {/* ============================================
-          SECTION 3: HOW THIS TREATMENT FAMILY WORKS
-          ============================================ */}
-      <section className="py-20 md:py-28 bg-beige-warm/50">
-        <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="text-maroon font-medium uppercase tracking-[0.2em] text-xs mb-4 block">
-              The Approach
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-8">
-              How {customContent?.hero.title || family.name} works
-            </h2>
-            <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed mb-8">
-              {customContent?.howItHelps.description || 
-               'Our dermatologists use advanced, evidence-based techniques tailored to your unique needs. Each treatment in this family is designed to deliver safe, effective, and long-lasting results while prioritising your comfort and skin health throughout the process.'}
-            </p>
-            
-            {customContent?.howItHelps.keyPoints && (
-              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                {customContent.howItHelps.keyPoints.map((point, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-maroon font-semibold">{i + 1}</span>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-charcoal mb-1">{point.title}</h4>
-                      <p className="text-charcoal/60 text-sm">{point.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
-          SECTION 4: TREATMENT OPTIONS IN THIS FAMILY
+          TREATMENT OPTIONS - The Menu
           ============================================ */}
       <section id="treatments" className="py-20 md:py-28 bg-white">
         <div className="section-container">
+          {/* Section header */}
           <div className="text-center mb-16">
-            <span className="text-maroon font-medium uppercase tracking-[0.2em] text-xs mb-4 block">
+            <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
               Your Options
             </span>
             <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-4">
               Treatments in this family
             </h2>
-            <p className="text-lg text-charcoal/60 max-w-2xl mx-auto">
+            <p className="text-lg text-charcoal/50 max-w-2xl mx-auto">
               Choose the specific treatment that matches your goals. Each is customised to your needs.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Treatment cards - Magazine style list */}
+          <div className="space-y-4">
             {family.subTreatments.map((treatment, index) => (
               <Link
                 key={treatment.slug}
                 href={`/treatments/${family.slug}/${treatment.slug}`}
-                className="group relative bg-beige-warm/30 hover:bg-white rounded-2xl p-8 border border-transparent hover:border-maroon/10 hover:shadow-soft-xl transition-all duration-300"
+                className="group block bg-beige-warm/30 hover:bg-beige-warm rounded-2xl p-6 md:p-8 border border-transparent hover:border-charcoal/5 transition-all duration-300"
               >
-                {/* Number badge */}
-                <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-maroon/5 flex items-center justify-center">
-                  <span className="text-xs font-mono text-maroon/40">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                </div>
-                
-                <div className="space-y-4">
-                  <h3 className="text-xl font-display text-charcoal group-hover:text-maroon transition-colors pr-10">
-                    {treatment.name}
-                  </h3>
-                  <p className="text-charcoal/60 leading-relaxed">
-                    {treatment.description}
-                  </p>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  {/* Left: Number + Content */}
+                  <div className="flex items-start gap-6">
+                    {/* Number */}
+                    <span className="text-4xl md:text-5xl font-display text-charcoal/10 group-hover:text-maroon/20 transition-colors">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    
+                    {/* Content */}
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-display text-charcoal group-hover:text-maroon transition-colors mb-2">
+                        {treatment.name}
+                      </h3>
+                      <p className="text-charcoal/50 text-sm md:text-base">
+                        {treatment.description}
+                      </p>
+                    </div>
+                  </div>
                   
-                  {/* Arrow */}
-                  <div className="flex items-center gap-2 text-maroon opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-sm font-medium">Learn more</span>
-                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                  {/* Right: Arrow */}
+                  <div className="flex-shrink-0 self-end md:self-center">
+                    <div className="w-12 h-12 rounded-full bg-white group-hover:bg-maroon flex items-center justify-center transition-all duration-300 shadow-soft">
+                      <svg 
+                        className="w-5 h-5 text-charcoal/30 group-hover:text-beige-warm transition-colors" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -237,43 +417,56 @@ export default async function TreatmentFamilyPage({
       </section>
 
       {/* ============================================
-          SECTION 5: WHY CHOOSE PRAGNA
+          WHY PRAGNA - The Differentiators
           ============================================ */}
-      <section className="py-20 md:py-28 bg-maroon text-beige-warm relative overflow-hidden">
-        {/* Decorative */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      <section className="py-20 md:py-28 bg-charcoal text-beige-warm relative overflow-hidden">
+        {/* Background texture */}
+        <div className="absolute inset-0 opacity-5">
+          <div 
+            className="absolute inset-0" 
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
+        
+        {/* 
+          IMAGE NEEDED: Atmospheric background image (very subtle, behind content)
+          Style: Abstract, warm tones, could be clinic interior blur or botanical
+          Opacity: Will be set to ~10%
+        */}
         
         <div className="section-container relative z-10">
           <div className="text-center mb-16">
-            <span className="text-terracotta-light font-medium uppercase tracking-[0.2em] text-xs mb-4 block">
+            <span className="text-terracotta-light font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
               The Pragna Difference
             </span>
             <h2 className="text-3xl md:text-4xl font-display mb-4">
-              Why choose Pragna for {family.name}?
+              Why choose Pragna?
             </h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
-                title: 'Dermatologist-Led Care',
-                description: 'Every treatment is designed and supervised by qualified dermatologists with 25+ years of experience.'
+                title: 'Dermatologist-Led',
+                description: 'Every treatment is designed and supervised by qualified dermatologists with decades of experience.',
               },
               {
                 title: 'Advanced Technology',
-                description: 'We use only US-FDA approved devices and medical-grade protocols for optimal safety and results.'
+                description: 'We use only US-FDA approved devices and medical-grade protocols for optimal safety and results.',
               },
               {
-                title: 'Long-Term Results',
-                description: 'Our focus is on sustainable outcomes, not quick fixes. We treat the root cause, not just symptoms.'
-              }
+                title: 'Personalised Care',
+                description: 'No cookie-cutter treatments. Every plan is tailored to your unique skin type, concerns, and goals.',
+              },
             ].map((item, i) => (
-              <div key={i} className="text-center space-y-4">
-                <div className="w-16 h-16 mx-auto rounded-full bg-white/10 flex items-center justify-center">
+              <div key={i} className="text-center">
+                <div className="w-16 h-16 mx-auto rounded-full bg-beige-warm/10 flex items-center justify-center mb-6">
                   <span className="text-2xl font-display text-terracotta-light">{i + 1}</span>
                 </div>
-                <h3 className="text-xl font-display">{item.title}</h3>
-                <p className="text-beige-warm/70 leading-relaxed">{item.description}</p>
+                <h3 className="text-xl font-display mb-3">{item.title}</h3>
+                <p className="text-beige-warm/60 text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
@@ -282,7 +475,7 @@ export default async function TreatmentFamilyPage({
           <div className="text-center mt-16">
             <a 
               href="#contact" 
-              className="inline-flex items-center gap-2 bg-beige-warm text-maroon px-8 py-4 rounded-full font-medium hover:bg-white transition-colors"
+              className="inline-flex items-center gap-2 bg-terracotta-light text-charcoal px-8 py-4 rounded-full font-medium hover:bg-beige-warm transition-colors"
             >
               Book a Consultation
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -293,21 +486,27 @@ export default async function TreatmentFamilyPage({
         </div>
       </section>
 
-      {/* Related Conditions */}
+      {/* ============================================
+          RELATED CONDITIONS - The Bridge
+          ============================================ */}
       {relatedConditions.length > 0 && (
-        <section className="py-16 bg-beige-warm/30">
+        <section className="py-12 bg-beige-warm border-t border-charcoal/5">
           <div className="section-container">
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <span className="text-charcoal/50 text-sm">Related conditions:</span>
-              {relatedConditions.map((condition) => (
-                <Link
-                  key={condition.slug}
-                  href={`/conditions/${condition.slug}`}
-                  className="text-sm text-maroon hover:text-maroon/70 underline underline-offset-4 transition-colors"
-                >
-                  {condition.name}
-                </Link>
-              ))}
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
+              <span className="text-charcoal/40 text-sm flex-shrink-0">
+                This treatment helps with:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {relatedConditions.map((condition) => (
+                  <Link
+                    key={condition.slug}
+                    href={`/conditions/${condition.slug}`}
+                    className="text-sm text-maroon hover:text-maroon/70 bg-white px-4 py-2 rounded-full border border-maroon/10 hover:border-maroon/30 transition-colors"
+                  >
+                    {condition.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -315,6 +514,6 @@ export default async function TreatmentFamilyPage({
 
       <Footer />
     </main>
+    </>
   );
 }
-

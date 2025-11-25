@@ -13,7 +13,7 @@
  */
 
 // ============================================
-// TREATMENT FAMILIES
+// TREATMENT FAMILIES (Base Data)
 // ============================================
 export interface TreatmentFamily {
   slug: string;
@@ -156,7 +156,7 @@ export const treatmentFamilies: TreatmentFamily[] = [
 ];
 
 // ============================================
-// CONDITIONS
+// CONDITIONS (Base Data)
 // ============================================
 export interface Condition {
   slug: string;
@@ -294,6 +294,122 @@ export const conditions: Condition[] = [
 ];
 
 // ============================================
+// CONTENT SCHEMAS (For Rich Page Content)
+// ============================================
+
+/**
+ * Treatment Family Content
+ * Used for: /treatments/[familySlug]
+ */
+export interface TreatmentFamilyContent {
+  hero: {
+    title: string;
+    subtitle: string;
+    intro: string;
+    image?: string;
+  };
+  trustIndicators?: {
+    value: string;
+    label: string;
+  }[];
+  howItWorks: {
+    description: string;
+    steps: {
+      title: string;
+      text: string;
+      icon?: string;
+    }[];
+  };
+  whoIsThisFor: {
+    headline?: string;
+    list: string[];
+  };
+  whyPragna?: {
+    title: string;
+    description: string;
+  }[];
+  relatedConditionSlugs?: string[];
+}
+
+/**
+ * Sub-Treatment Content
+ * Used for: /treatments/[familySlug]/[subTreatmentSlug]
+ */
+export interface SubTreatmentContent {
+  hero: {
+    title: string;
+    tagline?: string;
+    intro: string;
+  };
+  quickStats: {
+    sessions: string;
+    duration: string;
+    downtime: string;
+    painLevel: string;
+  };
+  overview?: string;
+  isThisForYou: string[];
+  process: {
+    steps: {
+      phase: 'before' | 'during' | 'after';
+      title: string;
+      description: string;
+    }[];
+  };
+  results: {
+    timeline: string;
+    recovery: string;
+  };
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+}
+
+/**
+ * Condition Content
+ * Used for: /conditions/[slug]
+ */
+export interface ConditionContent {
+  hero: {
+    title: string;
+    empathyStatement: string;
+    intro?: string;
+    image?: string;
+  };
+  symptoms: {
+    headline?: string;
+    list: string[];
+  };
+  quickStats?: {
+    stat: string;
+    text: string;
+  }[];
+  understanding: {
+    whatItIs: string;
+    whyItHappens: string[];
+  };
+  pragnaApproach?: {
+    description: string;
+  };
+  recommendedTreatments: {
+    type: 'family' | 'sub-treatment';
+    slug: string;
+    name: string;
+    bestFor: string;
+  }[];
+  timeline?: {
+    steps: { title: string; description: string }[];
+  };
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+  selfCareTips?: string[];
+  relatedConditionSlugs?: string[];
+}
+
+// ============================================
 // HELPER FUNCTIONS
 // ============================================
 
@@ -376,3 +492,4 @@ export const navigationData = {
     }))
   }))
 };
+
