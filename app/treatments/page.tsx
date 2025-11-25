@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
@@ -13,7 +13,7 @@ const pillars = ['All', 'Skin', 'Hair', 'Body', 'Wellness'] as const;
 type Pillar = typeof pillars[number];
 
 // Pillar icons (minimal line art style)
-const pillarIcons: Record<string, JSX.Element> = {
+const pillarIcons: Record<string, React.ReactNode> = {
   Skin: (
     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <circle cx="12" cy="12" r="10" />

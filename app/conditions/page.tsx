@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
@@ -13,7 +13,7 @@ const groups = ['Face & Skin', 'Hair & Scalp', 'Body Shape & Texture', 'Other Co
 type Group = typeof groups[number];
 
 // Group icons (elegant silhouettes)
-const groupIcons: Record<Group, JSX.Element> = {
+const groupIcons: Record<Group, React.ReactNode> = {
   'Face & Skin': (
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
       <ellipse cx="12" cy="11" rx="8" ry="10" />
