@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getTreatmentFamily, getConditionsForFamily } from '@/lib/navigationData';
+import { laserHairReductionFamily } from '@/lib/content/treatment-families/laser-hair-reduction';
 
 export function generateStaticParams() {
   return treatmentFamilies.map((family) => ({
@@ -23,6 +24,9 @@ export default async function TreatmentFamilyPage({
   }
 
   const relatedConditions = getConditionsForFamily(familySlug);
+  
+  // Get custom content if available
+  const customContent = familySlug === 'laser-hair-reduction' ? laserHairReductionFamily : null;
   
   // Pillar-based accent colors
   const pillarColors = {
@@ -61,12 +65,19 @@ export default async function TreatmentFamilyPage({
             
             {/* Title */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-charcoal mb-6 leading-[1.1]">
-              {family.name}
+              {customContent?.hero.title || family.name}
             </h1>
             
-            {/* Summary */}
+            {/* Subtitle */}
+            {customContent?.hero.subtitle && (
+              <p className="text-2xl md:text-3xl text-maroon/70 font-light italic mb-6">
+                {customContent.hero.subtitle}
+              </p>
+            )}
+            
+            {/* Summary/Intro */}
             <p className="text-xl md:text-2xl text-charcoal/60 font-light leading-relaxed max-w-2xl mb-10">
-              {family.summary}
+              {customContent?.hero.intro || family.summary}
             </p>
             
             {/* CTA */}
@@ -111,15 +122,16 @@ export default async function TreatmentFamilyPage({
                   Is this right for you?
                 </h2>
                 <p className="text-lg text-charcoal/60 leading-relaxed">
-                  This treatment family may be a good fit if you recognise yourself in any of these situations:
+                  {customContent?.whoIsThisFor.intro || 'This treatment family may be a good fit if you recognise yourself in any of these situations:'}
                 </p>
               </div>
               
               <ul className="space-y-4">
-                {['You want long-lasting results, not temporary fixes.',
+                {(customContent?.whoIsThisFor.points || [
+                  'You want long-lasting results, not temporary fixes.',
                   'You prefer medically supervised care over salon treatments.',
                   'You have tried over-the-counter solutions without success.'
-                ].map((point, i) => (
+                ]).map((point, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-terracotta/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <svg className="w-4 h-4 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -145,13 +157,28 @@ export default async function TreatmentFamilyPage({
               The Approach
             </span>
             <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-8">
-              How {family.name} works
+              How {customContent?.hero.title || family.name} works
             </h2>
-            <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed">
-              Our dermatologists use advanced, evidence-based techniques tailored to your unique needs. 
-              Each treatment in this family is designed to deliver safe, effective, and long-lasting results 
-              while prioritising your comfort and skin health throughout the process.
+            <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed mb-8">
+              {customContent?.howItHelps.description || 
+               'Our dermatologists use advanced, evidence-based techniques tailored to your unique needs. Each treatment in this family is designed to deliver safe, effective, and long-lasting results while prioritising your comfort and skin health throughout the process.'}
             </p>
+            
+            {customContent?.howItHelps.keyPoints && (
+              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {customContent.howItHelps.keyPoints.map((point, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-maroon font-semibold">{i + 1}</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-charcoal mb-1">{point.title}</h4>
+                      <p className="text-charcoal/60 text-sm">{point.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>

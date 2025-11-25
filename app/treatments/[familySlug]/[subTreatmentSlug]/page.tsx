@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getSubTreatment, conditions } from '@/lib/navigationData';
+import { underarmHairReduction } from '@/lib/content/sub-treatments/underarm-hair-reduction';
 
 export function generateStaticParams() {
   const params: { familySlug: string; subTreatmentSlug: string }[] = [];
@@ -37,6 +38,9 @@ export default async function SubTreatmentPage({
   const relatedConditions = conditions.filter(c => 
     subTreatment.relatedConditions?.includes(c.slug)
   );
+  
+  // Get custom content if available
+  const customContent = subTreatmentSlug === 'underarm-hair-reduction' ? underarmHairReduction : null;
 
   return (
     <main className="overflow-x-hidden">
@@ -73,10 +77,15 @@ export default async function SubTreatmentPage({
                 Treatment Detail
               </span>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-display text-charcoal mb-6 leading-[1.1]">
-                {subTreatment.name}
+                {customContent?.hero.title || subTreatment.name}
               </h1>
+              {customContent?.hero.subtitle && (
+                <p className="text-2xl text-maroon/70 italic mb-4">
+                  {customContent.hero.subtitle}
+                </p>
+              )}
               <p className="text-xl text-charcoal/60 leading-relaxed mb-8">
-                {subTreatment.description}
+                {customContent?.hero.intro || subTreatment.description}
               </p>
               <a href="#book" className="btn-primary inline-block">
                 Book This Treatment
@@ -90,10 +99,10 @@ export default async function SubTreatmentPage({
               </h3>
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { label: 'Sessions', value: '~6-8 sessions', icon: '📅' },
-                  { label: 'Duration', value: '15-45 mins', icon: '⏱' },
-                  { label: 'Comfort', value: 'Mild sensation', icon: '✨' },
-                  { label: 'Downtime', value: 'Minimal', icon: '🌟' },
+                  { label: 'Sessions', value: customContent?.hero.quickFacts.sessions || '~6-8 sessions', icon: '📅' },
+                  { label: 'Duration', value: customContent?.hero.quickFacts.sessionTime || '15-45 mins', icon: '⏱' },
+                  { label: 'Comfort', value: customContent?.hero.quickFacts.painLevel || 'Mild sensation', icon: '✨' },
+                  { label: 'Downtime', value: customContent?.hero.quickFacts.downtime || 'Minimal', icon: '🌟' },
                 ].map((fact) => (
                   <div key={fact.label} className="space-y-1">
                     <div className="text-2xl">{fact.icon}</div>
@@ -127,11 +136,11 @@ export default async function SubTreatmentPage({
                 This treatment is ideal if you experience any of the following:
               </p>
               <ul className="space-y-4 max-w-2xl mx-auto">
-                {[
+                {(customContent?.isThisForYou || [
                   'You want a safe, long-lasting solution for this specific concern.',
                   'You prefer medical-grade treatment over temporary home remedies.',
                   'You are looking for results customised to your skin type and needs.',
-                ].map((point, i) => (
+                ]).map((point, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <div className="w-6 h-6 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 mt-1">
                       <svg className="w-3 h-3 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor">

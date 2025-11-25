@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { conditions, getCondition, getTreatmentFamiliesForCondition } from '@/lib/navigationData';
+import { acneBreakouts } from '@/lib/content/conditions/acne-breakouts';
 
 export function generateStaticParams() {
   return conditions.map((condition) => ({
@@ -23,6 +24,9 @@ export default async function ConditionPage({
   }
 
   const relatedFamilies = getTreatmentFamiliesForCondition(slug);
+  
+  // Get custom content if available
+  const customContent = slug === 'acne-breakouts' ? acneBreakouts : null;
 
   return (
     <main className="overflow-x-hidden">
@@ -51,13 +55,20 @@ export default async function ConditionPage({
             
             {/* Title */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-charcoal mb-6 leading-[1.1]">
-              {condition.name}
+              {customContent?.hero.title || condition.name}
             </h1>
             
             {/* Empathy line */}
-            <p className="text-xl md:text-2xl text-charcoal/60 font-light leading-relaxed max-w-2xl mb-10 italic">
-              &ldquo;{condition.subtitle}&rdquo;
+            <p className="text-xl md:text-2xl text-charcoal/60 font-light leading-relaxed max-w-2xl mb-6 italic">
+              &ldquo;{customContent?.hero.subtitle || condition.subtitle}&rdquo;
             </p>
+            
+            {/* Additional intro if available */}
+            {customContent?.hero.intro && (
+              <p className="text-lg text-charcoal/70 leading-relaxed max-w-2xl mb-10">
+                {customContent.hero.intro}
+              </p>
+            )}
             
             {/* CTA */}
             <a 
@@ -104,18 +115,18 @@ export default async function ConditionPage({
                   Is this you?
                 </h2>
                 <p className="text-lg text-charcoal/60 leading-relaxed">
-                  You might be dealing with this condition if you notice any of these signs:
+                  {customContent?.isThisYou.intro || 'You might be dealing with this condition if you notice any of these signs:'}
                 </p>
               </div>
               
               <ul className="space-y-4">
-                {[
+                {(customContent?.isThisYou.symptoms || [
                   'Visible symptoms that bother you or affect your confidence.',
                   'The issue keeps coming back despite trying various products.',
                   'You notice the problem getting worse over time.',
                   'It impacts your daily life, work, or social interactions.',
                   'You want to understand what is actually causing it.',
-                ].map((symptom, i) => (
+                ]).map((symptom, i) => (
                   <li key={i} className="flex items-start gap-4 group">
                     <div className="w-8 h-8 rounded-full bg-terracotta/10 group-hover:bg-terracotta/20 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors">
                       <span className="text-maroon text-sm font-mono">{i + 1}</span>
@@ -149,25 +160,29 @@ export default async function ConditionPage({
               <div className="bg-white rounded-2xl p-8 shadow-soft border border-maroon/5">
                 <h3 className="text-xl font-display text-maroon mb-4">What it is</h3>
                 <p className="text-charcoal/70 leading-relaxed">
-                  This is a common concern that affects many people. It involves specific 
-                  changes to your skin or hair that can be visible, uncomfortable, or both. 
-                  Understanding the condition is the first step toward finding the right solution.
+                  {customContent?.whatItIs.description || 
+                   'This is a common concern that affects many people. It involves specific changes to your skin or hair that can be visible, uncomfortable, or both. Understanding the condition is the first step toward finding the right solution.'}
                 </p>
               </div>
               
               {/* Why it happens */}
               <div className="bg-white rounded-2xl p-8 shadow-soft border border-maroon/5">
-                <h3 className="text-xl font-display text-maroon mb-4">Common causes</h3>
+                <h3 className="text-xl font-display text-maroon mb-4">
+                  {customContent?.whyItHappens.intro || 'Common causes'}
+                </h3>
                 <ul className="space-y-3">
-                  {[
-                    'Genetics and family history',
-                    'Hormonal changes or imbalances',
-                    'Environmental factors and sun exposure',
-                    'Lifestyle, stress, or dietary factors',
-                  ].map((cause, i) => (
+                  {(customContent?.whyItHappens.causes || [
+                    { title: 'Genetics and family history', text: '' },
+                    { title: 'Hormonal changes or imbalances', text: '' },
+                    { title: 'Environmental factors and sun exposure', text: '' },
+                    { title: 'Lifestyle, stress, or dietary factors', text: '' },
+                  ]).map((cause, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-maroon mt-2.5 flex-shrink-0" />
-                      <span className="text-charcoal/70">{cause}</span>
+                      <span className="text-charcoal/70">
+                        <strong>{cause.title}</strong>
+                        {cause.text && ` – ${cause.text}`}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -195,15 +210,33 @@ export default async function ConditionPage({
                 How we treat this at Pragna
               </h2>
               <p className="text-lg text-beige-warm/70 leading-relaxed max-w-2xl mx-auto">
-                Our dermatologists take a personalised, multi-step approach. We assess your unique 
-                situation, identify root causes, and create a treatment plan combining the most 
-                effective options for your skin type and goals.
+                {customContent?.howWeTreat.intro || 
+                 'Our dermatologists take a personalised, multi-step approach. We assess your unique situation, identify root causes, and create a treatment plan combining the most effective options for your skin type and goals.'}
               </p>
             </div>
           </div>
           
-          {/* Treatment Families */}
-          {relatedFamilies.length > 0 ? (
+          {/* Treatment Families or Custom Treatment Cards */}
+          {customContent?.howWeTreat.treatments ? (
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {customContent.howWeTreat.treatments.map((treatment, index) => (
+                <div
+                  key={index}
+                  className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+                >
+                  <div className="w-12 h-12 rounded-full bg-terracotta-light/20 flex items-center justify-center mb-4">
+                    <span className="text-xl font-display text-terracotta-light">{index + 1}</span>
+                  </div>
+                  <h3 className="text-xl font-display mb-3 text-beige-warm">
+                    {treatment.title}
+                  </h3>
+                  <p className="text-beige-warm/60 text-sm leading-relaxed">
+                    {treatment.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : relatedFamilies.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {relatedFamilies.map((family) => (
                 <Link
@@ -269,12 +302,12 @@ export default async function ConditionPage({
             </div>
             
             <div className="space-y-4">
-              {[
+              {(customContent?.faqs || [
                 { q: 'Will this go away completely?', a: 'Many conditions can be significantly improved or fully resolved with the right treatment. Our dermatologists will give you realistic expectations based on your specific situation.' },
                 { q: 'Is it my fault?', a: 'Absolutely not. Most skin and hair conditions are influenced by genetics, hormones, and environmental factors beyond your control. What matters now is finding the right solution.' },
                 { q: 'Can I still wear makeup / continue my routine?', a: 'In most cases, yes. We will guide you on any temporary adjustments needed during active treatment phases.' },
                 { q: 'What happens if I ignore it?', a: 'Some conditions may worsen over time if left untreated, while others may stabilise. Early intervention often leads to better outcomes and prevents complications.' },
-              ].map((faq, i) => (
+              ]).map((faq, i) => (
                 <details 
                   key={i} 
                   className="group bg-beige-warm/30 rounded-2xl overflow-hidden border border-maroon/5 hover:border-maroon/10 transition-colors"
