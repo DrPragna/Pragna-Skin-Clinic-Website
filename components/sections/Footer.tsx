@@ -41,19 +41,14 @@ export default function Footer() {
 
   return (
     <footer ref={containerRef} className="relative text-cream overflow-hidden">
-      {/* Top transition gradient from Contact section */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#FBF0EA]/50 to-transparent z-20 pointer-events-none" />
-      
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: 'url(/clinic-interior.png)' }}
         />
-        {/* Rich dark overlay with gradient for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/85 to-black/90" />
-        {/* Subtle maroon tint overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-maroon/10 via-transparent to-rose-gold/5" />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/85" />
       </div>
       {/* Top Marquee */}
       <div className="relative z-10 py-4 border-b border-cream/10 overflow-hidden">

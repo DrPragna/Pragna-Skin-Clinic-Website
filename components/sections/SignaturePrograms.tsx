@@ -58,23 +58,10 @@ export default function SignaturePrograms() {
   return (
     <section 
       ref={containerRef}
-      className="section-padding relative overflow-hidden"
+      className="section-padding bg-beige overflow-hidden"
     >
-      {/* Warm gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#F9F7F6] via-[#FBF8F5] to-[#FEF9F4]" />
       
-      {/* Subtle warm accent gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_70%_20%,rgba(234,199,187,0.12),transparent)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_20%_80%,rgba(183,110,121,0.05),transparent)]" />
-      
-      {/* Decorative elements */}
-      <div className="absolute top-20 right-0 w-64 h-64 bg-terracotta/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-0 w-48 h-48 bg-rose-gold/5 rounded-full blur-3xl" />
-      
-      {/* Top transition line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/8 to-transparent" />
-      
-      <div className="section-container relative z-10">
+      <div className="section-container">
         {/* Section Header - Centered */}
         <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
           <motion.span

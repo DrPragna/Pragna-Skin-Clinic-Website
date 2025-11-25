@@ -63,18 +63,13 @@ export default function Contact() {
       ref={containerRef}
       className="relative py-16 lg:py-24 overflow-hidden"
     >
-      {/* Rich layered gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#F9E4D8] via-[#FDF6F0] to-[#FBF0EA]" />
-      
-      {/* Additional gradient layers for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_60%_at_0%_0%,rgba(243,215,205,0.5),transparent)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_100%_100%,rgba(183,110,121,0.08),transparent)]" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-terracotta-light/30 via-cream to-rose-gold/10" />
       
       {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-maroon/12 to-transparent" />
-      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-bl from-rose-gold/15 to-terracotta/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] bg-gradient-to-tr from-terracotta/12 to-rose-gold/8 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/20 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-maroon/10 to-transparent" />
+      <div className="absolute -top-40 -right-40 w-80 h-80 bg-rose-gold/10 rounded-full blur-3xl" />
+      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-terracotta/10 rounded-full blur-3xl" />
 
       <div className="section-container relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">

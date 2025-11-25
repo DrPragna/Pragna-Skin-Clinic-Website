@@ -91,22 +91,13 @@ export default function Testimonials() {
   return (
     <section 
       ref={containerRef}
-      className="relative py-12 lg:py-16 overflow-hidden"
+      className="relative py-12 lg:py-16 bg-cream overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Gradient background - cooler tone to distinguish from Doctors */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#FBF0E8] via-[#F8F5F2] to-[#F5F2EF]" />
-      
-      {/* Subtle center glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,rgba(255,255,255,0.5),transparent)]" />
-      
-      {/* Decorative elements */}
-      <div className="absolute top-10 right-0 w-80 h-80 bg-gradient-to-bl from-terracotta/8 to-transparent rounded-full blur-3xl" />
-      <div className="absolute bottom-10 left-0 w-64 h-64 bg-gradient-to-tr from-rose-gold/6 to-transparent rounded-full blur-3xl" />
-      
-      {/* Top transition line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-maroon/8 to-transparent" />
+      {/* Subtle background decoration */}
+      <div className="absolute top-10 right-0 w-72 h-72 bg-terracotta/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 left-0 w-48 h-48 bg-rose-gold/5 rounded-full blur-3xl" />
 
       <div className="section-container relative">
         {/* Section Header */}

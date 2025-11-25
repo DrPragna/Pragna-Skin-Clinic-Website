@@ -36,25 +36,8 @@ export default function TreatmentPillars() {
   return (
     <section 
       ref={containerRef} 
-      className="relative py-12 lg:py-16 overflow-hidden"
+      className="relative py-12 lg:py-16 bg-[#d4a59a] overflow-hidden"
     >
-      {/* Rich gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#D9AFA3] via-[#D4A59A] to-[#CFA096]" />
-      
-      {/* Overlay gradient for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(255,255,255,0.12),transparent)]" />
-      
-      {/* Subtle noise texture effect */}
-      <div className="absolute inset-0 opacity-[0.015]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-      }} />
-      
-      {/* Top gradient transition from previous section */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#F5EBE4]/50 to-transparent" />
-      
-      {/* Bottom gradient transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#F9F7F6]/30 to-transparent" />
-      
       <div className="section-container relative z-10">
         {/* Section intro */}
         <motion.div
