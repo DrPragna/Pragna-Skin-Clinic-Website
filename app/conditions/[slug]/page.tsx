@@ -1,219 +1,126 @@
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
-import { navigationData } from '@/lib/navigationData';
+import { conditions, getCondition, getTreatmentFamiliesForCondition } from '@/lib/navigationData';
 
 export function generateStaticParams() {
-  const params: { slug: string | undefined }[] = [];
-  for (const group of navigationData.conditions) {
-    for (const item of group.items) {
-      params.push({ slug: item.href.split('/').pop() });
-    }
-  }
-  return params;
+  return conditions.map((condition) => ({
+    slug: condition.slug,
+  }));
 }
 
-// Content for Acne & Breakouts
-const acneBreakoutsContent = {
-  hero: {
-    label: "Condition overview",
-    title: "Acne & Breakouts",
-    subtitle: "Pimples, whiteheads or cystic acne that keep coming back — treated with science, not guesswork."
-  },
-  isYou: [
-    "You keep getting new pimples just as the old ones are healing.",
-    "Your skin flares up around your period, stress, or certain foods.",
-    "You’ve tried over-the-counter creams but nothing seems to work for long.",
-    "You’re worried existing breakouts will leave marks or scars.",
-    "Acne is starting to affect your confidence at work, college, or in photos."
-  ],
-  whatIs: [
-    "Acne happens when tiny openings in the skin (pores) get clogged with oil, dead skin cells and bacteria. This can lead to whiteheads, blackheads, red bumps, painful cysts and occasional pus-filled lesions.",
-    "It is common in teenagers but increasingly affects adults as well. The pattern and severity of your breakouts can be very different from someone else’s, which is why copy-paste routines or random products from social media rarely work. At Pragna, we first understand *what kind* of acne you have and *why* it is happening, then plan treatment accordingly."
-  ],
-  whyHappens: {
-    intro: "Several factors can trigger or worsen acne. We look at all of these before deciding your plan:",
-    list: [
-      "Hormonal changes – especially around puberty, PCOS, pre-menopause or certain contraceptive pills.",
-      "Excess oil production and clogged pores from genetics or incorrect skin care.",
-      "Bacteria in the follicles, leading to inflammation and painful red bumps.",
-      "Lifestyle triggers such as stress, lack of sleep and high-glycaemic diets.",
-      "Medications like steroids, some anti-epileptics and others can also play a role.",
-      "We also screen for underlying health issues (like PCOS) when needed, so we’re treating the root cause, not just the surface."
-    ]
-  },
-  howTreat: {
-    intro: "There is no one “best acne treatment” — the right plan is usually a smart combination of medical treatment, clinic procedures and a simple, sustainable skin-care routine. Your dermatologist will design this based on your skin type, acne severity and lifestyle.",
-    cards: [
-      {
-        title: "Dermatologist-led medical treatment",
-        body: "We start with a detailed consultation to understand your triggers, medical history and current products. Based on this, we may prescribe a mix of topical creams, gels and sometimes oral medication to calm inflammation, clear clogged pores and prevent new lesions. We also set up a simple daily routine with the right cleanser, moisturizer and sunscreen for acne-prone skin."
-      },
-      {
-        title: "Targeted peels & acne facials",
-        body: "To speed up results, we often add in-clinic procedures such as salicylic acid or other chemical peels, Hydrafacial, medical-grade facials and deep-cleansing treatments. These help unclog pores, reduce oiliness, dry out active lesions and brighten post-inflammatory marks, with minimal downtime."
-      },
-      {
-        title: "Light & laser-based therapies",
-        body: "For stubborn or frequently recurring acne, we may use blue-light therapy and carbon laser peels to reduce acne-causing bacteria and oil activity, calm redness and improve overall skin texture. These technologies are carefully selected and customised to your skin tone and sensitivity."
-      }
-    ]
-  },
-  expect: {
-    steps: [
-      {
-        title: "Consultation & Analysis",
-        text: "Your first visit includes a detailed consultation, skin examination and, if needed, questions about your periods, medications and lifestyle. This helps us identify the *type* of acne you have (comedonal, inflammatory, cystic, hormonal, etc.) and any underlying medical triggers."
-      },
-      {
-        title: "Personalised plan",
-        text: "We design a plan that fits your skin and schedule — usually a mix of home-care products, medication where required, and clinic procedures spaced a few weeks apart. You’ll know exactly what to use, when to come in, and what results to expect at each stage."
-      },
-      {
-        title: "Treatment & results",
-        text: "Most people start noticing calmer, fewer breakouts within a few weeks. Deeper improvement, especially for long-standing or severe acne, typically takes around three months of consistent treatment. We adjust the plan as your skin improves so that results are long-term, not temporary."
-      }
-    ],
-    downtime: "Most active-acne procedures have minimal downtime. You may experience mild redness or dryness for a day or two after peels or light-based treatments. We’ll give you clear aftercare instructions, including gentle products and strict sun protection, so your skin heals quickly and comfortably."
-  },
-  whyPragna: [
-    {
-      title: "Dermatologist-led, not trial-and-error",
-      text: "All acne plans are designed and supervised by qualified dermatologists — not technicians — so you’re getting evidence-based treatment instead of random product trials."
-    },
-    {
-      title: "Advanced technology with medical insight",
-      text: "From medical-grade peels and Hydrafacial to blue-light therapy, lasers and microneedling, we combine global-standard technology with careful diagnosis to choose what *actually* suits your skin."
-    },
-    {
-      title: "Holistic, root-cause approach",
-      text: "We don’t just chase individual pimples. When needed, we screen for hormonal and medication-related triggers, work alongside your other doctors and help you build habits that keep your skin clearer in the long run."
-    }
-  ],
-  faq: [
-    {
-      q: "How long will it take for my acne to improve?",
-      a: "You may notice calmer, fewer breakouts within a few weeks of starting treatment. For moderate to severe acne, meaningful, stable improvement usually takes around three months of consistent treatment because acne forms deep inside the skin before it appears on the surface."
-    },
-    {
-      q: "Will I definitely need oral medication?",
-      a: "Not always. Mild acne may respond well to the right cleansers, moisturisers and topical creams alone. We consider oral medicines only when necessary — for example, in more severe, widespread or hormonally driven acne — and always after discussing benefits and possible side-effects with you."
-    },
-    {
-      q: "Can acne be treated if I have sensitive skin?",
-      a: "Yes. We adjust the strength and frequency of peels, facials and active ingredients to suit your skin’s tolerance. Sensitive or reactive skin often does better with slower, gentler layering of treatments rather than aggressive quick fixes."
-    },
-    {
-      q: "Will my acne leave scars? Can you help with that?",
-      a: "Active acne can leave dark marks and textural scars if not treated early or if lesions are picked. Our first goal is always to calm active breakouts. If scars are already present, we can plan dedicated scar-revision procedures such as microneedling, MNRF, fractional lasers, subcision or Dermapen in a later phase to improve texture once the acne is under control."
-    },
-    {
-      q: "What can I do at home to support my treatment?",
-      a: "Stick to the products and routine prescribed for you, avoid picking or squeezing pimples, use non-comedogenic makeup, manage stress and follow strict sun protection. Small, consistent habits make a big difference to how well your in-clinic treatments work."
-    }
-  ]
-};
-
-export default async function ConditionPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ConditionPage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
   const { slug } = await params;
-  let condition;
-
-  for (const group of navigationData.conditions) {
-    const found = group.items.find(c => c.href.endsWith(slug));
-    if (found) {
-      condition = found;
-      break;
-    }
+  const condition = getCondition(slug);
+  
+  if (!condition) {
+    notFound();
   }
 
-  const isAcneBreakouts = slug === 'acne-breakouts';
-  
-  // Placeholder content for other conditions
-  const placeholderContent = {
-    hero: {
-      label: "Condition Overview",
-      title: condition?.name || 'Condition',
-      subtitle: condition?.subtitle || 'Detailed information about this condition will be available soon.'
-    },
-    isYou: [1, 2, 3].map(i => `Common symptom or feeling ${i} related to ${condition?.name}...`),
-    whatIs: [
-      "Short explanation of the condition in plain English. Describe what the patient sees/feels, not just the medical definition.",
-      "It affects the skin by..."
-    ],
-    whyHappens: {
-      intro: "Brief, patient-friendly explanation of common causes or contributing factors:",
-      list: ["Hormonal changes", "Environmental factors", "Lifestyle and diet", "Genetics"]
-    },
-    howTreat: {
-      intro: "We use a combination of advanced technology and medical expertise to create a personalized treatment plan.",
-      cards: [1, 2, 3].map(i => ({
-        title: `Treatment Option ${i}`,
-        body: "Specific laser or procedure description. How it helps reduce the symptoms effectively."
-      }))
-    },
-    expect: {
-      steps: [
-        { title: "Consultation & Analysis", text: "In-depth skin analysis to understand the severity and underlying causes." },
-        { title: "Personalized Plan", text: "Custom protocol designed for your specific skin type and lifestyle." },
-        { title: "Treatment & Results", text: "Sessions typically take 30-60 mins. Visible improvements often seen after 2-3 sessions." }
-      ],
-      downtime: "Most treatments have minimal to zero downtime. You can return to work immediately. Sun protection is mandatory."
-    },
-    whyPragna: [
-      { title: "Dermatologist-Led", text: "All treatments are supervised by experienced medical professionals." },
-      { title: "US-FDA Approved", text: "We use only the safest, gold-standard technology globally." },
-      { title: "Holistic Approach", text: "Addressing internal health and external symptoms together." }
-    ],
-    faq: [1, 2].map(i => ({
-      q: `Common question about ${condition?.name}?`,
-      a: "Answer explaining the details simply and clearly to the patient."
-    }))
-  };
-
-  const content = isAcneBreakouts ? acneBreakoutsContent : placeholderContent;
+  const relatedFamilies = getTreatmentFamiliesForCondition(slug);
 
   return (
-    <main className="overflow-x-hidden bg-beige-warm">
+    <main className="overflow-x-hidden">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-terracotta relative overflow-hidden">
+      {/* ============================================
+          SECTION 1: HERO (Condition Overview)
+          ============================================ */}
+      <section className="pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-terracotta/10 via-beige-warm to-white relative overflow-hidden">
+        {/* Decorative blobs */}
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-terracotta/5 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-maroon/5 rounded-full blur-3xl translate-y-1/2" />
+        
         <div className="section-container relative z-10">
           <div className="max-w-4xl">
-             <span className="text-maroon font-medium uppercase tracking-wider text-sm mb-4 block">
-              {content.hero.label}
-            </span>
-            <h1 className="text-4xl md:text-6xl font-display text-charcoal mb-6 leading-tight">
-              {content.hero.title}
+            {/* Label */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-maroon font-medium uppercase tracking-[0.2em] text-xs">
+                Condition Overview
+              </span>
+              <span className="w-12 h-px bg-maroon/30" />
+              <span className="text-charcoal/40 text-xs uppercase tracking-wider">
+                {condition.group}
+              </span>
+            </div>
+            
+            {/* Title */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-charcoal mb-6 leading-[1.1]">
+              {condition.name}
             </h1>
-            <p className="text-xl md:text-2xl text-charcoal/70 font-light leading-relaxed max-w-2xl mb-8">
-              {content.hero.subtitle}
+            
+            {/* Empathy line */}
+            <p className="text-xl md:text-2xl text-charcoal/60 font-light leading-relaxed max-w-2xl mb-10 italic">
+              &ldquo;{condition.subtitle}&rdquo;
             </p>
-            <a href="#book" className="btn-primary inline-block">
-              Book a consultation
+            
+            {/* CTA */}
+            <a 
+              href="#treatments" 
+              className="btn-primary inline-flex items-center gap-2 group"
+            >
+              See Treatment Options
+              <svg 
+                className="w-4 h-4 transform group-hover:translate-y-0.5 transition-transform" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
             </a>
           </div>
         </div>
-        {/* Decorative Background Element */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-white/10 rounded-l-full blur-3xl transform translate-x-1/4"></div>
       </section>
 
-      {/* Is this you? Section */}
-      <section className="section-padding bg-white">
+      {/* ============================================
+          SECTION 2: IS THIS YOU? (Symptoms)
+          ============================================ */}
+      <section className="py-20 md:py-28 bg-white">
         <div className="section-container">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-serif text-maroon mb-8 text-center">Is this you?</h2>
-            <div className="bg-beige-warm rounded-2xl p-8 md:p-10 shadow-soft">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Image placeholder */}
+            <div className="order-2 lg:order-1">
+              <div className="aspect-square bg-gradient-to-br from-beige-warm to-terracotta/10 rounded-3xl flex items-center justify-center border border-maroon/5 relative overflow-hidden">
+                <p className="text-maroon/30 text-lg italic">Add image: Visual representation</p>
+                {/* Decorative circles */}
+                <div className="absolute -bottom-10 -right-10 w-40 h-40 border border-maroon/10 rounded-full" />
+                <div className="absolute -top-5 -left-5 w-24 h-24 border border-terracotta/20 rounded-full" />
+              </div>
+            </div>
+            
+            {/* Content */}
+            <div className="order-1 lg:order-2 space-y-8">
+              <div>
+                <span className="text-maroon font-medium uppercase tracking-[0.2em] text-xs mb-4 block">
+                  Recognise This?
+                </span>
+                <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-6">
+                  Is this you?
+                </h2>
+                <p className="text-lg text-charcoal/60 leading-relaxed">
+                  You might be dealing with this condition if you notice any of these signs:
+                </p>
+              </div>
+              
               <ul className="space-y-4">
-                {content.isYou.map((item, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <svg className="w-3 h-3 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                {[
+                  'Visible symptoms that bother you or affect your confidence.',
+                  'The issue keeps coming back despite trying various products.',
+                  'You notice the problem getting worse over time.',
+                  'It impacts your daily life, work, or social interactions.',
+                  'You want to understand what is actually causing it.',
+                ].map((symptom, i) => (
+                  <li key={i} className="flex items-start gap-4 group">
+                    <div className="w-8 h-8 rounded-full bg-terracotta/10 group-hover:bg-terracotta/20 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors">
+                      <span className="text-maroon text-sm font-mono">{i + 1}</span>
                     </div>
-                    <p className="text-charcoal/80 text-lg">
-                      {item}
-                    </p>
+                    <p className="text-charcoal/80 text-lg">{symptom}</p>
                   </li>
                 ))}
               </ul>
@@ -222,130 +129,185 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* What is it & Why it happens Grid */}
-      <section className="section-padding bg-beige-warm">
+      {/* ============================================
+          SECTION 3: WHAT IT IS & WHY IT HAPPENS
+          ============================================ */}
+      <section className="py-20 md:py-28 bg-beige-warm/50">
         <div className="section-container">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* What is it */}
-            <div className="space-y-6">
-              <h2 className="text-3xl font-serif text-charcoal">What is {content.hero.title}?</h2>
-              <div className="prose prose-lg text-charcoal/70 space-y-4">
-                {content.whatIs.map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-maroon font-medium uppercase tracking-[0.2em] text-xs mb-4 block">
+                Understanding Your Concern
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display text-charcoal">
+                What is it & why does it happen?
+              </h2>
             </div>
             
-             {/* Why it happens */}
-            <div className="bg-white rounded-2xl p-8 shadow-card space-y-6">
-               <h3 className="text-2xl font-serif text-maroon">Why does it happen?</h3>
-               <p className="text-charcoal/70">
-                 {content.whyHappens.intro}
-               </p>
-               <ul className="space-y-3 pl-4 list-disc text-charcoal/70 marker:text-maroon">
-                 {content.whyHappens.list.map((item, i) => (
-                   <li key={i}>{item}</li>
-                 ))}
-               </ul>
+            <div className="grid md:grid-cols-2 gap-12">
+              {/* What it is */}
+              <div className="bg-white rounded-2xl p-8 shadow-soft border border-maroon/5">
+                <h3 className="text-xl font-display text-maroon mb-4">What it is</h3>
+                <p className="text-charcoal/70 leading-relaxed">
+                  This is a common concern that affects many people. It involves specific 
+                  changes to your skin or hair that can be visible, uncomfortable, or both. 
+                  Understanding the condition is the first step toward finding the right solution.
+                </p>
+              </div>
+              
+              {/* Why it happens */}
+              <div className="bg-white rounded-2xl p-8 shadow-soft border border-maroon/5">
+                <h3 className="text-xl font-display text-maroon mb-4">Common causes</h3>
+                <ul className="space-y-3">
+                  {[
+                    'Genetics and family history',
+                    'Hormonal changes or imbalances',
+                    'Environmental factors and sun exposure',
+                    'Lifestyle, stress, or dietary factors',
+                  ].map((cause, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-maroon mt-2.5 flex-shrink-0" />
+                      <span className="text-charcoal/70">{cause}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How we treat it */}
-      <section className="section-padding bg-maroon text-beige-warm relative overflow-hidden">
+      {/* ============================================
+          SECTION 4: HOW WE TREAT THIS AT PRAGNA
+          ============================================ */}
+      <section id="treatments" className="py-20 md:py-28 bg-maroon text-beige-warm relative overflow-hidden">
+        {/* Decorative */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-terracotta/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        
         <div className="section-container relative z-10">
-           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif mb-6">How we treat {content.hero.title} at Pragna</h2>
-            <p className="text-beige-warm/80 text-lg">
-              {content.howTreat.intro}
-            </p>
+          <div className="max-w-4xl mx-auto mb-16">
+            <div className="text-center">
+              <span className="text-terracotta-light font-medium uppercase tracking-[0.2em] text-xs mb-4 block">
+                Your Treatment Options
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display mb-6">
+                How we treat this at Pragna
+              </h2>
+              <p className="text-lg text-beige-warm/70 leading-relaxed max-w-2xl mx-auto">
+                Our dermatologists take a personalised, multi-step approach. We assess your unique 
+                situation, identify root causes, and create a treatment plan combining the most 
+                effective options for your skin type and goals.
+              </p>
+            </div>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            {content.howTreat.cards.map((card, i) => (
-              <div key={i} className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl hover:bg-white/10 transition-colors">
-                <h3 className="text-xl font-serif mb-3 text-terracotta-light">{card.title}</h3>
-                <p className="text-beige-warm/80 leading-relaxed">
-                  {card.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What to expect */}
-      <section className="section-padding bg-white">
-        <div className="section-container">
-          <div className="grid lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5">
-               <div className="w-full aspect-[4/5] bg-terracotta/20 rounded-2xl flex items-center justify-center sticky top-32">
-                 <p className="text-maroon/50 italic">Add photo/Add image: Doctor consultation or treatment</p>
-               </div>
-            </div>
-            <div className="lg:col-span-7 space-y-8">
-              <h2 className="text-3xl font-serif text-charcoal">What to expect</h2>
-              
-              <div className="space-y-8">
-                {content.expect.steps.map((step, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="w-12 h-12 bg-beige-warm rounded-full flex items-center justify-center text-maroon font-serif text-xl font-bold flex-shrink-0 border border-maroon/10">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-medium text-charcoal mb-2">{step.title}</h4>
-                      <p className="text-charcoal/70 leading-relaxed">{step.text}</p>
-                    </div>
+          {/* Treatment Families */}
+          {relatedFamilies.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {relatedFamilies.map((family) => (
+                <Link
+                  key={family.slug}
+                  href={`/treatments/${family.slug}`}
+                  className="group bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/20 transition-all"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="text-xs uppercase tracking-wider text-terracotta-light/70">
+                      {family.pillar}
+                    </span>
+                    <svg className="w-5 h-5 text-terracotta-light opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </div>
-                ))}
-              </div>
+                  <h3 className="text-xl font-display mb-3 group-hover:text-terracotta-light transition-colors">
+                    {family.name}
+                  </h3>
+                  <p className="text-beige-warm/60 text-sm leading-relaxed">
+                    {family.summary}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-beige-warm/60">
+              <p>Treatment options for this condition are being updated.</p>
+              <a href="#contact" className="text-terracotta-light underline underline-offset-4 mt-2 inline-block">
+                Contact us for more information
+              </a>
+            </div>
+          )}
+          
+          {/* CTA */}
+          <div className="text-center mt-16">
+            <p className="text-beige-warm/60 mb-6">Not sure which treatment is right for you?</p>
+            <a 
+              href="#contact" 
+              className="inline-flex items-center gap-2 bg-beige-warm text-maroon px-8 py-4 rounded-full font-medium hover:bg-white transition-colors"
+            >
+              Book a Consultation
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
 
-              <div className="bg-beige-warm p-8 rounded-xl border border-maroon/10 mt-8">
-                <h4 className="font-serif text-xl text-maroon mb-3">Downtime & Aftercare</h4>
-                <p className="text-charcoal/70 leading-relaxed">
-                  {content.expect.downtime}
-                </p>
-              </div>
+      {/* ============================================
+          SECTION 5: QUESTIONS PATIENTS USUALLY ASK
+          ============================================ */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-maroon font-medium uppercase tracking-[0.2em] text-xs mb-4 block">
+                Your Questions Answered
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display text-charcoal">
+                Questions patients usually ask
+              </h2>
+            </div>
+            
+            <div className="space-y-4">
+              {[
+                { q: 'Will this go away completely?', a: 'Many conditions can be significantly improved or fully resolved with the right treatment. Our dermatologists will give you realistic expectations based on your specific situation.' },
+                { q: 'Is it my fault?', a: 'Absolutely not. Most skin and hair conditions are influenced by genetics, hormones, and environmental factors beyond your control. What matters now is finding the right solution.' },
+                { q: 'Can I still wear makeup / continue my routine?', a: 'In most cases, yes. We will guide you on any temporary adjustments needed during active treatment phases.' },
+                { q: 'What happens if I ignore it?', a: 'Some conditions may worsen over time if left untreated, while others may stabilise. Early intervention often leads to better outcomes and prevents complications.' },
+              ].map((faq, i) => (
+                <details 
+                  key={i} 
+                  className="group bg-beige-warm/30 rounded-2xl overflow-hidden border border-maroon/5 hover:border-maroon/10 transition-colors"
+                >
+                  <summary className="flex items-center justify-between p-6 cursor-pointer">
+                    <span className="font-medium text-charcoal pr-8">{faq.q}</span>
+                    <div className="w-8 h-8 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 group-open:bg-maroon group-open:text-beige-warm transition-colors">
+                      <svg className="w-4 h-4 transform group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </summary>
+                  <div className="px-6 pb-6 text-charcoal/70 leading-relaxed">
+                    {faq.a}
+                  </div>
+                </details>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Pragna & FAQ */}
-      <section className="section-padding bg-beige-warm">
+      {/* Back link */}
+      <section className="py-8 bg-beige-warm/30">
         <div className="section-container">
-           <div className="max-w-4xl mx-auto text-center mb-20">
-             <h2 className="text-3xl md:text-4xl font-serif text-charcoal mb-12">Why choose Pragna for {content.hero.title}?</h2>
-             <div className="grid md:grid-cols-3 gap-8 text-left">
-               {content.whyPragna.map((pillar, i) => (
-                 <div key={i} className="space-y-3 bg-white p-6 rounded-xl shadow-sm border border-maroon/5 h-full">
-                   <h4 className="text-maroon font-medium text-lg font-serif">{pillar.title}</h4>
-                   <p className="text-charcoal/70 text-sm leading-relaxed">{pillar.text}</p>
-                 </div>
-               ))}
-             </div>
-           </div>
-
-           {/* FAQs */}
-           <div className="max-w-3xl mx-auto">
-             <h3 className="text-2xl md:text-3xl font-serif text-charcoal mb-8 text-center">Frequently Asked Questions</h3>
-             <div className="space-y-4">
-               {content.faq.map((item, i) => (
-                 <details key={i} className="group bg-white rounded-xl shadow-sm overflow-hidden border border-maroon/5">
-                   <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-beige/50 transition-colors">
-                     <span className="font-medium text-charcoal pr-4">{item.q}</span>
-                     <svg className="w-5 h-5 text-maroon transition-transform duration-300 group-open:rotate-180 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                     </svg>
-                   </summary>
-                   <div className="px-5 pb-5 pt-0 text-charcoal/70 leading-relaxed">
-                     <p>{item.a}</p>
-                   </div>
-                 </details>
-               ))}
-             </div>
-           </div>
+          <div className="flex justify-center">
+            <Link 
+              href="/conditions"
+              className="text-sm text-maroon hover:underline underline-offset-4"
+            >
+              ← View all conditions
+            </Link>
+          </div>
         </div>
       </section>
 

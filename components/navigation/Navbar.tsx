@@ -65,9 +65,7 @@ export default function Navbar() {
   }`;
 
   const linkClasses = "text-charcoal/80 hover:text-maroon transition-colors duration-200 font-medium cursor-pointer flex items-center gap-1";
-  // Base dropdown classes without positioning (to be used for standard dropdowns)
   const baseDropdownClasses = "bg-[#FAF4F0] shadow-soft-lg rounded-xl border border-maroon/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50";
-  // Positioning for standard dropdowns
   const standardDropdownPosition = "absolute top-full left-1/2 -translate-x-1/2 translate-y-4 group-hover:translate-y-0";
 
   return (
@@ -87,11 +85,11 @@ export default function Navbar() {
             
             {/* Treatments Dropdown (Mega Menu) */}
             <div className="group relative py-4">
-              <button className={linkClasses}>
+              <Link href="/treatments" className={linkClasses}>
                 Treatments
                 <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
-              </button>
-              {/* Fixed positioning relative to viewport for robustness */}
+              </Link>
+              {/* Fixed positioning for mega menu */}
               <div className={`${baseDropdownClasses} fixed top-[80px] left-4 right-4 mx-auto max-w-[1400px] p-8 translate-y-4 group-hover:translate-y-0 mt-2`}>
                 <div className="grid grid-cols-4 gap-8 max-h-[80vh] overflow-y-auto scrollbar-hide">
                   {navigationData.treatments.map((pillar) => (
@@ -102,9 +100,19 @@ export default function Navbar() {
                       <div className="space-y-8">
                         {pillar.categories.map((category) => (
                           <div key={category.category} className="space-y-3 break-inside-avoid">
-                            <h4 className="font-serif text-maroon font-semibold text-lg">
-                              {category.category}
-                            </h4>
+                            {/* Treatment Family - NOW CLICKABLE */}
+                            <Link 
+                              href={category.href}
+                              className="font-serif text-maroon font-semibold text-lg hover:underline underline-offset-4 block group/family"
+                            >
+                              <span className="flex items-center gap-2">
+                                {category.category}
+                                <svg className="w-4 h-4 opacity-0 group-hover/family:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                              </span>
+                            </Link>
+                            {/* Sub-treatments */}
                             <ul className="space-y-1.5">
                               {category.items.map((item) => (
                                 <li key={item.name}>
@@ -128,11 +136,10 @@ export default function Navbar() {
 
             {/* Conditions Dropdown */}
             <div className="group relative py-4">
-              <button className={linkClasses}>
+              <Link href="/conditions" className={linkClasses}>
                 Conditions
                 <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
-              </button>
-              {/* Use max-w-[90vw] to prevent overflow on smaller screens */}
+              </Link>
               <div className={`${baseDropdownClasses} ${standardDropdownPosition} w-[1100px] max-w-[95vw] p-8`}>
                 <div className="grid grid-cols-12 gap-10">
                   {/* Face & Skin - Spans 5 columns */}
@@ -317,7 +324,16 @@ export default function Navbar() {
                     <div className="space-y-6 pl-2">
                       {pillar.categories.map((category) => (
                         <div key={category.category} className="space-y-2">
-                          <h4 className="font-serif text-maroon font-medium text-lg">{category.category}</h4>
+                          {/* Treatment Family Link - NOW CLICKABLE */}
+                          <Link 
+                            href={category.href}
+                            className="font-serif text-maroon font-medium text-lg hover:underline underline-offset-4 flex items-center gap-2"
+                          >
+                            {category.category}
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
                           <div className="pl-2 space-y-2">
                             {category.items.map((item) => (
                               <Link key={item.name} href={item.href} className="block text-sm text-charcoal/70 hover:text-maroon py-1">
