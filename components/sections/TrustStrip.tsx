@@ -6,7 +6,7 @@ export default function TrustStrip() {
   const [isVisible, setIsVisible] = useState(false);
   const [counts, setCounts] = useState<number[]>([30000, 100000, 25, 30]); // Start with final values
   const sectionRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<any>(null);
+  const animationRef = useRef<number | null>(null);
   const lastAnimationTime = useRef<number>(0);
 
   const stats = [
@@ -154,4 +154,3 @@ export default function TrustStrip() {
     </section>
   );
 }
-

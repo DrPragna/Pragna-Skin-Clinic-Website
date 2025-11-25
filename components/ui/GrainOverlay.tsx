@@ -3,12 +3,15 @@
 /**
  * GrainOverlay Component
  * 
- * Adds a subtle noise/grain texture overlay to the entire page.
- * This removes the "digital flatness" and gives the site a more
- * tactile, premium feel - similar to high-end print materials.
+ * Adds a subtle film grain texture over the entire page.
+ * This removes the "too digital" feeling and adds warmth.
  * 
- * The effect is very subtle (3% opacity) and doesn't impact readability.
+ * The grain is:
+ * - Very subtle (3.5% opacity)
+ * - Animated for a living feel
+ * - Non-interactive (pointer-events: none)
  */
+
 export default function GrainOverlay() {
   return (
     <div 
@@ -17,4 +20,3 @@ export default function GrainOverlay() {
     />
   );
 }
-

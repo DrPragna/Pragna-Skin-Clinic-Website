@@ -15,19 +15,27 @@ import Contact from '@/components/sections/Contact';
 import Footer from '@/components/sections/Footer';
 
 /**
- * Home Page
- * 
- * Main landing page for Pragna Skin & Laser Clinics.
+ * PRAGNA SKIN CLINIC - WORLD CLASS HOMEPAGE
  * 
  * Design Philosophy:
- * - Clean, confident, and fast
- * - Trust > Animation
- * - Mobile-first with desktop enhancements
+ * - Cinematic, editorial experience
+ * - Premium typography and animations
+ * - Trust-building through sophistication
+ * - Mobile-first, desktop-enhanced
  * 
- * Color Theme: Full warm palette (welcoming)
- * - Primary backgrounds: beige-warm, gradient-warm
- * - Accents: maroon, terracotta
- * - Clinical sections: white backgrounds
+ * Section Flow:
+ * 1. Hero - Immediate impact, brand statement
+ * 2. TrustStrip - Quick credibility markers
+ * 3. WhyPragna - Core value propositions
+ * 4. SignaturePrograms - Curated offerings
+ * 5. Conditions - What we treat
+ * 6. Doctors - Human connection
+ * 7. Testimonials - Social proof
+ * 8. Branches - Physical presence
+ * 9. Blog - Thought leadership
+ * 10. FAQ - Remove friction
+ * 11. Contact - Conversion point
+ * 12. Footer - Brand closure
  */
 export default function Home() {
   return (

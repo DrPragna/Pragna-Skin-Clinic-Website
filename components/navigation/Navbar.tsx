@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigationData } from '@/lib/navigationData';
@@ -21,6 +21,22 @@ const ChevronDown = ({ className }: { className?: string }) => (
   </svg>
 );
 
+// Arrow Icon for clickable items
+const ArrowRight = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M5 12h14M12 5l7 7-7 7"/>
+  </svg>
+);
+
 // Star Icon for Top Concerns
 const StarIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -33,11 +49,34 @@ const StarIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+// Helper component for stylized ampersand - now more prominent
+const StylizedText = ({ text, className = '' }: { text: string; className?: string }) => {
+  const parts = text.split('&');
+  if (parts.length === 1) return <span className={className}>{text}</span>;
+  
+  return (
+    <span className={className}>
+      {parts.map((part, index) => (
+        <span key={index}>
+          {part}
+          {index < parts.length - 1 && (
+            <span className="font-serif italic text-[1.15em] text-maroon mx-0.5">&amp;</span>
+          )}
+        </span>
+      ))}
+    </span>
+  );
+};
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+  
+  const treatmentsRef = useRef<HTMLDivElement>(null);
+  const conditionsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,9 +92,35 @@ export default function Navbar() {
     setActiveMobileDropdown(null);
   }, [pathname]);
 
+  // Prevent body scroll when dropdown is open
+  useEffect(() => {
+    if (activeDropdown) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeDropdown]);
+
   const toggleMobileDropdown = (name: string) => {
     setActiveMobileDropdown(activeMobileDropdown === name ? null : name);
   };
+
+  // Handle scroll within dropdown - prevent propagation to body
+  const handleDropdownScroll = useCallback((e: React.WheelEvent) => {
+    const target = e.currentTarget as HTMLDivElement;
+    const { scrollTop, scrollHeight, clientHeight } = target;
+    const isAtTop = scrollTop === 0;
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight;
+    
+    // Prevent scroll propagation when at boundaries
+    if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+      e.preventDefault();
+    }
+    e.stopPropagation();
+  }, []);
 
   // Determine navbar styles based on scroll state
   const navbarClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -65,8 +130,6 @@ export default function Navbar() {
   }`;
 
   const linkClasses = "text-charcoal/80 hover:text-maroon transition-colors duration-200 font-medium cursor-pointer flex items-center gap-1";
-  const baseDropdownClasses = "bg-[#FAF4F0] shadow-soft-lg rounded-xl border border-maroon/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50";
-  const standardDropdownPosition = "absolute top-full left-1/2 -translate-x-1/2 translate-y-4 group-hover:translate-y-0";
 
   return (
     <nav className={navbarClasses}>
@@ -84,174 +147,264 @@ export default function Navbar() {
             <Link href="/" className={linkClasses}>Home</Link>
             
             {/* Treatments Dropdown (Mega Menu) */}
-            <div className="group relative py-4">
-              <Link href="/treatments" className={linkClasses}>
+            <div 
+              className="relative py-4"
+              onMouseEnter={() => setActiveDropdown('treatments')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <Link href="/treatments" className={`${linkClasses} ${activeDropdown === 'treatments' ? 'text-maroon' : ''}`}>
                 Treatments
-                <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+                <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'treatments' ? 'rotate-180' : ''}`} />
               </Link>
-              {/* Fixed positioning for mega menu */}
-              <div className={`${baseDropdownClasses} fixed top-[80px] left-4 right-4 mx-auto max-w-[1400px] p-8 translate-y-4 group-hover:translate-y-0 mt-2`}>
-                <div className="grid grid-cols-4 gap-8 max-h-[80vh] overflow-y-auto scrollbar-hide">
-                  {navigationData.treatments.map((pillar) => (
-                    <div key={pillar.pillar} className="space-y-6">
-                      <h3 className="font-serif text-2xl text-maroon/40 font-bold border-b-2 border-maroon/10 pb-2 mb-4 uppercase tracking-widest">
-                        {pillar.pillar}
-                      </h3>
-                      <div className="space-y-8">
-                        {pillar.categories.map((category) => (
-                          <div key={category.category} className="space-y-3 break-inside-avoid">
-                            {/* Treatment Family - NOW CLICKABLE */}
-                            <Link 
-                              href={category.href}
-                              className="font-serif text-maroon font-semibold text-lg hover:underline underline-offset-4 block group/family"
-                            >
-                              <span className="flex items-center gap-2">
-                                {category.category}
-                                <svg className="w-4 h-4 opacity-0 group-hover/family:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                              </span>
-                            </Link>
-                            {/* Sub-treatments */}
-                            <ul className="space-y-1.5">
-                              {category.items.map((item) => (
-                                <li key={item.name}>
-                                  <Link 
-                                    href={item.href}
-                                    className="text-sm text-charcoal/70 hover:text-maroon hover:translate-x-1 transition-all duration-200 block py-0.5"
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
+              
+              {/* Mega Menu Dropdown */}
+              <div 
+                className={`fixed top-[80px] left-4 right-4 mx-auto max-w-[1400px] bg-cream shadow-2xl rounded-2xl border border-maroon/10 transition-all duration-300 z-50 ${
+                  activeDropdown === 'treatments' 
+                    ? 'opacity-100 visible translate-y-0' 
+                    : 'opacity-0 invisible translate-y-4'
+                }`}
+              >
+                {/* Dropdown Header */}
+                <div className="px-8 py-4 border-b border-maroon/10 bg-gradient-to-r from-beige-warm to-beige rounded-t-2xl">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="font-serif text-xl text-charcoal">
+                        Our <span className="italic text-maroon">Treatments</span>
+                      </h2>
+                      <p className="text-charcoal/50 text-sm mt-0.5">Explore our comprehensive range of dermatological services</p>
                     </div>
-                  ))}
+                    <Link 
+                      href="/treatments" 
+                      className="text-sm text-maroon font-medium hover:underline underline-offset-4 flex items-center gap-1"
+                    >
+                      View all treatments
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+                
+                {/* Scrollable Content */}
+                <div 
+                  ref={treatmentsRef}
+                  className="p-8 max-h-[60vh] overflow-y-auto"
+                  onWheel={handleDropdownScroll}
+                  style={{ overscrollBehavior: 'contain' }}
+                >
+                  <div className="grid grid-cols-4 gap-8">
+                    {navigationData.treatments.map((pillar) => (
+                      <div key={pillar.pillar} className="space-y-5">
+                        {/* Pillar Header */}
+                        <div className="border-b-2 border-maroon/20 pb-2">
+                          <h3 className="font-serif text-lg text-maroon/60 font-bold uppercase tracking-widest">
+                            {pillar.pillar}
+                          </h3>
+                        </div>
+                        
+                        {/* Categories */}
+                        <div className="space-y-5">
+                          {pillar.categories.map((category) => (
+                            <div key={category.category} className="space-y-2">
+                              {/* Treatment Family - Button Style */}
+                              <Link 
+                                href={category.href}
+                                className="group/btn flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-maroon/5 hover:bg-maroon hover:shadow-md border border-maroon/10 hover:border-maroon transition-all duration-300"
+                              >
+                                <StylizedText 
+                                  text={category.category} 
+                                  className="font-serif text-maroon group-hover/btn:text-cream font-semibold text-base transition-colors"
+                                />
+                                <ArrowRight className="w-4 h-4 text-maroon/40 group-hover/btn:text-cream group-hover/btn:translate-x-1 transition-all duration-300" />
+                              </Link>
+                              
+                              {/* Sub-treatments */}
+                              <ul className="space-y-0.5 pl-4 border-l-2 border-maroon/10">
+                                {category.items.map((item) => (
+                                  <li key={item.name}>
+                                    <Link 
+                                      href={item.href}
+                                      className="text-sm text-charcoal/60 hover:text-maroon hover:pl-1 py-1 block transition-all duration-200"
+                                    >
+                                      {item.name}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Conditions Dropdown */}
-            <div className="group relative py-4">
-              <Link href="/conditions" className={linkClasses}>
+            <div 
+              className="relative py-4"
+              onMouseEnter={() => setActiveDropdown('conditions')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <Link href="/conditions" className={`${linkClasses} ${activeDropdown === 'conditions' ? 'text-maroon' : ''}`}>
                 Conditions
-                <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+                <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'conditions' ? 'rotate-180' : ''}`} />
               </Link>
-              <div className={`${baseDropdownClasses} ${standardDropdownPosition} w-[1100px] max-w-[95vw] p-8`}>
-                <div className="grid grid-cols-12 gap-10">
-                  {/* Face & Skin - Spans 5 columns */}
-                  <div className="col-span-5 space-y-4 border-r border-maroon/10 pr-6">
-                     <h3 className="font-serif text-maroon font-semibold text-lg border-b border-maroon/10 pb-2 uppercase tracking-wider">
-                        {navigationData.conditions[0].group}
+              
+              {/* Conditions Dropdown */}
+              <div 
+                className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[1100px] max-w-[95vw] bg-cream shadow-2xl rounded-2xl border border-maroon/10 transition-all duration-300 z-50 ${
+                  activeDropdown === 'conditions' 
+                    ? 'opacity-100 visible translate-y-0' 
+                    : 'opacity-0 invisible translate-y-4'
+                }`}
+              >
+                {/* Dropdown Header */}
+                <div className="px-8 py-4 border-b border-maroon/10 bg-gradient-to-r from-beige-warm to-beige rounded-t-2xl">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="font-serif text-xl text-charcoal">
+                        Common <span className="italic text-maroon">Conditions</span> We Treat
+                      </h2>
+                      <p className="text-charcoal/50 text-sm mt-0.5">Find solutions for your specific skin, hair, and body concerns</p>
+                    </div>
+                    <Link 
+                      href="/conditions" 
+                      className="text-sm text-maroon font-medium hover:underline underline-offset-4 flex items-center gap-1"
+                    >
+                      View all conditions
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+                
+                {/* Scrollable Content */}
+                <div 
+                  ref={conditionsRef}
+                  className="p-8 max-h-[60vh] overflow-y-auto"
+                  onWheel={handleDropdownScroll}
+                  style={{ overscrollBehavior: 'contain' }}
+                >
+                  <div className="grid grid-cols-12 gap-8">
+                    {/* Face & Skin - Spans 5 columns */}
+                    <div className="col-span-5 space-y-4 border-r border-maroon/10 pr-6">
+                      <h3 className="font-serif text-maroon font-semibold text-base border-b border-maroon/10 pb-2 uppercase tracking-wider">
+                        <StylizedText text={navigationData.conditions[0].group} />
                       </h3>
-                      <div className="grid grid-cols-1 gap-3">
+                      <div className="grid grid-cols-1 gap-1">
                         {navigationData.conditions[0].items.map((item) => (
                           <Link 
                             key={item.name} 
                             href={item.href}
-                            className="group/item block p-2 rounded-lg hover:bg-white/50 transition-all duration-200"
+                            className="group/item flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-maroon/5 border border-transparent hover:border-maroon/10 transition-all duration-200"
                           >
-                            <div className="flex items-start justify-between">
-                              <span className={`font-medium text-[15px] ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/80'} group-hover/item:text-maroon transition-colors`}>
+                            <div className="flex-1">
+                              <span className={`font-medium text-sm ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors`}>
                                 {item.name}
                               </span>
-                              {item.isTopConcern && <StarIcon className="w-3 h-3 text-maroon/60 mt-1" />}
+                              {item.subtitle && (
+                                <p className="text-xs text-charcoal/40 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/60">
+                                  {item.subtitle}
+                                </p>
+                              )}
                             </div>
-                            {item.subtitle && (
-                              <p className="text-xs text-charcoal/50 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/70">
-                                {item.subtitle}
-                              </p>
-                            )}
+                            <div className="flex items-center gap-1">
+                              {item.isTopConcern && <StarIcon className="w-3 h-3 text-maroon/50" />}
+                              <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all duration-200" />
+                            </div>
                           </Link>
                         ))}
                       </div>
-                  </div>
+                    </div>
 
-                  {/* Hair & Scalp - Spans 3 columns */}
-                  <div className="col-span-3 space-y-4 border-r border-maroon/10 pr-6">
-                    <h3 className="font-serif text-maroon font-semibold text-lg border-b border-maroon/10 pb-2 uppercase tracking-wider">
-                        {navigationData.conditions[1].group}
+                    {/* Hair & Scalp - Spans 3 columns */}
+                    <div className="col-span-3 space-y-4 border-r border-maroon/10 pr-6">
+                      <h3 className="font-serif text-maroon font-semibold text-base border-b border-maroon/10 pb-2 uppercase tracking-wider">
+                        <StylizedText text={navigationData.conditions[1].group} />
                       </h3>
-                      <div className="space-y-3">
+                      <div className="space-y-1">
                         {navigationData.conditions[1].items.map((item) => (
                           <Link 
                             key={item.name} 
                             href={item.href}
-                            className="group/item block p-2 rounded-lg hover:bg-white/50 transition-all duration-200"
+                            className="group/item flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-maroon/5 border border-transparent hover:border-maroon/10 transition-all duration-200"
                           >
-                            <div className="flex items-start justify-between">
-                              <span className={`font-medium text-[15px] ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/80'} group-hover/item:text-maroon transition-colors`}>
+                            <div className="flex-1">
+                              <span className={`font-medium text-sm ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors`}>
                                 {item.name}
                               </span>
-                              {item.isTopConcern && <StarIcon className="w-3 h-3 text-maroon/60 mt-1" />}
+                              {item.subtitle && (
+                                <p className="text-xs text-charcoal/40 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/60">
+                                  {item.subtitle}
+                                </p>
+                              )}
                             </div>
-                            {item.subtitle && (
-                              <p className="text-xs text-charcoal/50 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/70">
-                                {item.subtitle}
-                              </p>
-                            )}
+                            <div className="flex items-center gap-1">
+                              {item.isTopConcern && <StarIcon className="w-3 h-3 text-maroon/50" />}
+                              <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all duration-200" />
+                            </div>
                           </Link>
                         ))}
                       </div>
-                  </div>
+                    </div>
 
-                  {/* Body & Other - Spans 4 columns */}
-                  <div className="col-span-4 space-y-8">
-                    {/* Body Shape */}
-                    <div className="space-y-4">
-                      <h3 className="font-serif text-maroon font-semibold text-lg border-b border-maroon/10 pb-2 uppercase tracking-wider">
-                          {navigationData.conditions[2].group}
+                    {/* Body & Other - Spans 4 columns */}
+                    <div className="col-span-4 space-y-6">
+                      {/* Body Shape */}
+                      <div className="space-y-3">
+                        <h3 className="font-serif text-maroon font-semibold text-base border-b border-maroon/10 pb-2 uppercase tracking-wider">
+                          <StylizedText text={navigationData.conditions[2].group} />
                         </h3>
-                        <div className="space-y-3">
+                        <div className="space-y-1">
                           {navigationData.conditions[2].items.map((item) => (
                             <Link 
                               key={item.name} 
                               href={item.href}
-                              className="group/item block p-2 rounded-lg hover:bg-white/50 transition-all duration-200"
+                              className="group/item flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-maroon/5 border border-transparent hover:border-maroon/10 transition-all duration-200"
                             >
-                              <div className="flex items-start justify-between">
-                                <span className={`font-medium text-[15px] ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/80'} group-hover/item:text-maroon transition-colors`}>
+                              <div className="flex-1">
+                                <span className={`font-medium text-sm ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors`}>
                                   {item.name}
                                 </span>
+                                {item.subtitle && (
+                                  <p className="text-xs text-charcoal/40 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/60">
+                                    {item.subtitle}
+                                  </p>
+                                )}
                               </div>
-                              {item.subtitle && (
-                                <p className="text-xs text-charcoal/50 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/70">
-                                  {item.subtitle}
-                                </p>
-                              )}
+                              <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all duration-200" />
                             </Link>
                           ))}
                         </div>
-                    </div>
-                    
-                    {/* Other Concerns */}
-                    <div className="space-y-4">
-                       <h3 className="font-serif text-maroon font-semibold text-lg border-b border-maroon/10 pb-2 uppercase tracking-wider">
+                      </div>
+                      
+                      {/* Other Concerns */}
+                      <div className="space-y-3">
+                        <h3 className="font-serif text-maroon font-semibold text-base border-b border-maroon/10 pb-2 uppercase tracking-wider">
                           {navigationData.conditions[3].group}
                         </h3>
-                        <div className="space-y-3">
+                        <div className="space-y-1">
                           {navigationData.conditions[3].items.map((item) => (
                             <Link 
                               key={item.name} 
                               href={item.href}
-                              className="group/item block p-2 rounded-lg hover:bg-white/50 transition-all duration-200"
+                              className="group/item flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-maroon/5 border border-transparent hover:border-maroon/10 transition-all duration-200"
                             >
-                              <div className="flex items-start justify-between">
-                                <span className={`font-medium text-[15px] ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/80'} group-hover/item:text-maroon transition-colors`}>
+                              <div className="flex-1">
+                                <span className={`font-medium text-sm ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors`}>
                                   {item.name}
                                 </span>
+                                {item.subtitle && (
+                                  <p className="text-xs text-charcoal/40 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/60">
+                                    {item.subtitle}
+                                  </p>
+                                )}
                               </div>
-                              {item.subtitle && (
-                                <p className="text-xs text-charcoal/50 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/70">
-                                  {item.subtitle}
-                                </p>
-                              )}
+                              <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all duration-200" />
                             </Link>
                           ))}
                         </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -324,15 +477,16 @@ export default function Navbar() {
                     <div className="space-y-6 pl-2">
                       {pillar.categories.map((category) => (
                         <div key={category.category} className="space-y-2">
-                          {/* Treatment Family Link - NOW CLICKABLE */}
+                          {/* Treatment Family Link */}
                           <Link 
                             href={category.href}
-                            className="font-serif text-maroon font-medium text-lg hover:underline underline-offset-4 flex items-center gap-2"
+                            className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-maroon/5 hover:bg-maroon hover:text-cream border border-maroon/10 transition-all group/btn"
                           >
-                            {category.category}
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+                            <StylizedText 
+                              text={category.category} 
+                              className="font-serif text-maroon group-hover/btn:text-cream font-medium text-lg transition-colors"
+                            />
+                            <ArrowRight className="w-4 h-4 text-maroon/40 group-hover/btn:text-cream" />
                           </Link>
                           <div className="pl-2 space-y-2">
                             {category.items.map((item) => (

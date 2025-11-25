@@ -1,39 +1,47 @@
+'use client';
+
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+
+/**
+ * WHY PRAGNA - Centered Balanced Layout
+ * 
+ * Design Philosophy:
+ * - Centered headline for balance
+ * - Three pillars in clean grid
+ * - No extra CTAs - let content speak
+ */
+
+const pillars = [
+  {
+    number: '01',
+    title: 'Deep Experience',
+    subtitle: 'Real Results',
+    description: 'For over 25 years, our dermatologists have treated everything from everyday concerns to complex cases. Our approach is rooted in science, backed by research, and refined by thousands of patient journeys.',
+  },
+  {
+    number: '02',
+    title: 'Technology',
+    subtitle: 'That Leads',
+    description: 'Pragna has consistently been ahead of the curve – introducing advanced devices and procedures before they became mainstream. Our clinics house cutting-edge lasers and protocols chosen for safety and effectiveness.',
+  },
+  {
+    number: '03',
+    title: 'Ethical',
+    subtitle: 'Transparent Care',
+    description: 'We believe excellent dermatology should be accessible and honest. Every recommendation is medically justified, every plan explained, and our pricing transparent.',
+  },
+];
+
 export default function WhyPragna() {
-  const pillars = [
-    {
-      title: 'Deep Experience, Real Results',
-      description:
-        'For over three decades, our dermatologists have been treating everyday concerns and complex cases in Hyderabad. From acne and melasma to hair thinning and aging skin, our approach is rooted in science, backed by research, and refined by thousands of patient journeys.',
-      icon: (
-        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      ),
-    },
-    {
-      title: 'Technology That Leads, Not Follows',
-      description:
-        'Pragna has consistently been ahead of the curve – introducing several advanced devices and procedures to India and Hyderabad before they became mainstream. Today, our clinics house cutting-edge lasers, skin resurfacing systems, body contouring technologies, and hair restoration protocols, all chosen for safety and effectiveness.',
-      icon: (
-        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-        </svg>
-      ),
-    },
-    {
-      title: 'Ethical, Transparent Costing',
-      description:
-        'We believe excellent dermatology should be accessible and honest. Every recommendation is medically justified, every plan is explained, and our pricing is transparent and ethical—so you know you\'re paying for what you actually need, nothing more.',
-      icon: (
-        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-    },
-  ];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: '-100px' });
 
   return (
-    <section className="section-padding bg-beige-warm relative overflow-hidden">
+    <section 
+      ref={containerRef}
+      className="section-padding bg-beige-warm relative overflow-hidden"
+    >
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute top-0 left-0 w-full h-full" style={{
@@ -41,40 +49,93 @@ export default function WhyPragna() {
         }}></div>
       </div>
 
-      <div className="section-container relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-display font-normal text-charcoal leading-tight">
-            Why patients <span className="italic text-maroon">trust Pragna</span><br/>
-            for their skin & hair
-          </h2>
+      <div className="section-container relative">
+        {/* Section Header - Centered */}
+        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-3 mb-6"
+          >
+            <span className="w-8 h-px bg-maroon/40" />
+            <span className="text-maroon font-medium tracking-[0.2em] uppercase text-xs">
+              Why Choose Us
+            </span>
+            <span className="w-8 h-px bg-maroon/40" />
+          </motion.span>
+          
+          <div className="overflow-hidden">
+            <motion.h2
+              initial={{ y: 80 }}
+              animate={isInView ? { y: 0 } : {}}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl lg:text-5xl font-display text-charcoal leading-[1.15]"
+            >
+              Why patients{' '}
+              <span className="italic text-maroon">trust Pragna</span>
+              <br />
+              for their care
+            </motion.h2>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        {/* Pillars Grid */}
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
           {pillars.map((pillar, index) => (
-            <div
-              key={index}
+            <motion.div
+              key={pillar.number}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ 
+                duration: 0.7, 
+                delay: index * 0.15,
+                ease: [0.16, 1, 0.3, 1]
+              }}
               className="group cursor-pointer"
             >
-              <div className="bg-beige rounded-3xl p-10 h-full hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-2">
-                <div className="space-y-6">
-                  <div className="text-maroon transform group-hover:scale-105 transition-transform duration-500">
-                    {pillar.icon}
+              {/* Card Container - unified tile with image + content */}
+              <div className="h-full bg-beige rounded-3xl overflow-hidden border-2 border-transparent hover:border-maroon/10 shadow-soft hover:shadow-soft-xl transition-all duration-500 hover:-translate-y-2">
+                {/* Image Container */}
+                <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-terracotta/25 via-beige-warm to-terracotta/15">
+                  {/* Placeholder */}
+                  <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+                    <span className="text-maroon/20 font-display text-lg italic">Add image</span>
                   </div>
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-serif text-maroon">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-charcoal/60 leading-relaxed">
-                      {pillar.description}
-                    </p>
+                  
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-maroon/0 group-hover:bg-maroon/10 transition-colors duration-500" />
+                  
+                  {/* Number badge */}
+                  <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center transition-all duration-300 group-hover:bg-maroon group-hover:scale-110">
+                    <span className="font-mono text-xs text-maroon transition-colors duration-300 group-hover:text-white">{pillar.number}</span>
+                  </div>
+                </div>
+
+                {/* Content - with distinct background */}
+                <div className="p-6 lg:p-8 space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-display text-charcoal transition-colors duration-300 group-hover:text-maroon">
+                    {pillar.title}
+                    <br />
+                    <span className="italic text-maroon">{pillar.subtitle}</span>
+                  </h3>
+                  <p className="text-charcoal/70 leading-relaxed text-sm lg:text-base">
+                    {pillar.description}
+                  </p>
+                  
+                  {/* Learn more link */}
+                  <div className="pt-2 flex items-center gap-2 text-maroon font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm">Learn more</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
 }
-
