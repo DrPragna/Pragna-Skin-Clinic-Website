@@ -1,96 +1,199 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
-
-/**
- * TREATMENT PILLARS SECTION
- * 
- * Minimal, elegant design - Skin, Hair, Body
- * Using organic blob shapes for a unique, premium aesthetic
- */
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const pillars = [
   {
     id: 'skin',
     title: 'Skin',
-    href: '/treatments',
+    subtitle: 'Rejuvenate & Restore',
+    description: 'Advanced dermatological solutions for glowing, healthy skin.',
+    href: '/treatments/skin', 
+    image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop',
+    color: '#E8D4D0', // Soft Rose
+    hoverColor: '#D4A59A',
   },
   {
     id: 'hair',
     title: 'Hair',
-    href: '/treatments',
+    subtitle: 'Growth & Vitality',
+    description: 'Comprehensive care for restoration and scalp health.',
+    href: '/treatments/hair',
+    image: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop',
+    color: '#F2EBE6', // Warm Cream
+    hoverColor: '#E6D5CD',
   },
   {
     id: 'body',
     title: 'Body',
-    href: '/treatments',
+    subtitle: 'Sculpt & Define',
+    description: 'Non-invasive contouring and wellness treatments.',
+    href: '/treatments/body',
+    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2020&auto=format&fit=crop',
+    color: '#EAE4DD', // Beige
+    hoverColor: '#DBCAC0',
   },
 ];
 
 export default function TreatmentPillars() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: '-100px' });
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative py-12 lg:py-16 bg-[#d4a59a] overflow-hidden"
-    >
-      <div className="section-container relative z-10">
-        {/* Section intro */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
-          className="flex items-center gap-4 mb-8"
-        >
-          <div className="w-8 h-px bg-maroon/40" />
-          <span className="text-maroon/70 text-xs tracking-[0.25em] uppercase">Our Focus</span>
-        </motion.div>
+    <section className="relative py-12 lg:py-24 bg-cream overflow-hidden">
+      <div className="section-container">
+        {/* Section Header - Minimal */}
+        <div className="mb-12 lg:mb-16 flex items-end justify-between">
+          <div>
+            <span className="text-xs tracking-[0.25em] text-maroon/60 uppercase block mb-4">
+              Our Expertise
+            </span>
+            <h2 className="text-4xl lg:text-5xl font-display text-maroon">
+              Areas of Focus
+            </h2>
+          </div>
+          <div className="hidden lg:block max-w-xs text-right text-maroon/60 text-sm">
+            <p>Holistic care tailored to your unique needs.</p>
+          </div>
+        </div>
 
-        {/* Pillars Grid - Organic Shapes */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-          {pillars.map((pillar, index) => (
-            <motion.div
-              key={pillar.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex flex-col items-center"
+        {/* Desktop: Cinematic Accordion */}
+        <div className="hidden lg:flex h-[600px] gap-4">
+          {pillars.map((pillar) => (
+            <Link 
+              key={pillar.id} 
+              href={pillar.href}
+              className="relative flex-1 min-w-[120px] overflow-hidden rounded-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group"
+              style={{ 
+                flexGrow: activeId === pillar.id ? 3.5 : 1,
+                backgroundColor: pillar.color
+              }}
+              onMouseEnter={() => setActiveId(pillar.id)}
+              onMouseLeave={() => setActiveId(null)}
             >
-              <Link href={pillar.href} className="group flex flex-col items-center">
-                {/* Organic Blob Shape */}
+              {/* Background Image - Ghost (Resting) -> Full (Hover) */}
+              <div className="absolute inset-0">
+                <Image 
+                  src={pillar.image} 
+                  alt={pillar.title}
+                  fill
+                  className={`object-cover transition-all duration-1000 ease-out
+                    ${activeId === pillar.id 
+                      ? 'scale-100 grayscale-0 opacity-100' 
+                      : 'scale-110 grayscale opacity-20 mix-blend-multiply'
+                    }
+                  `}
+                  sizes="(max-width: 1200px) 33vw, 50vw"
+                />
+                
+                {/* Active Overlay - Darkens bottom for text readability when expanded */}
                 <div 
-                  className="relative w-36 h-44 lg:w-44 lg:h-52 mb-5 overflow-hidden bg-cream/20 border-2 border-cream/30 transition-all duration-500 group-hover:border-cream/50 group-hover:scale-105"
-                  style={{
-                    borderRadius: index === 0 
-                      ? '60% 40% 55% 45% / 55% 50% 50% 45%'  // Skin - organic top-heavy
-                      : index === 1 
-                      ? '45% 55% 40% 60% / 50% 45% 55% 50%'  // Hair - flowing asymmetric
-                      : '50% 50% 45% 55% / 40% 60% 40% 60%'  // Body - soft bottom curve
-                  }}
-                >
-                  {/* Placeholder */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-8 h-8 mx-auto mb-1 rounded-full bg-cream/20 flex items-center justify-center">
-                        <svg className="w-3.5 h-3.5 text-cream/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                      <p className="text-cream/40 text-[8px] tracking-wider uppercase">Add image</p>
-                    </div>
-                  </div>
+                  className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-700 ${
+                    activeId === pillar.id ? 'opacity-100' : 'opacity-0'
+                  }`} 
+                />
+              </div>
+
+              <div className="absolute inset-0 flex flex-col justify-between p-10 z-10">
+                {/* Number/Index */}
+                <div className="flex justify-between items-start">
+                  <span className={`text-lg font-mono transition-colors duration-300 ${activeId === pillar.id ? 'text-white/90' : 'text-maroon/40'}`}>
+                    0{pillars.indexOf(pillar) + 1}
+                  </span>
+                  
+                  {/* Arrow Icon */}
+                  <motion.div 
+                    className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                      activeId === pillar.id ? 'border-white/40 text-white' : 'border-maroon/10 text-maroon/40'
+                    }`}
+                    animate={{ 
+                      rotate: activeId === pillar.id ? 0 : -45,
+                      scale: activeId === pillar.id ? 1 : 0.9
+                    }}
+                  >
+                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                     </svg>
+                  </motion.div>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-2xl lg:text-3xl font-display text-maroon italic tracking-tight group-hover:text-maroon/70 transition-colors duration-300">
-                  {pillar.title}
-                </h3>
-              </Link>
-            </motion.div>
+                {/* Content */}
+                <div className="relative h-full flex flex-col justify-end">
+                  <div className="relative">
+                    {/* Vertical Text Title */}
+                    <h3 className={`text-5xl font-display transition-all duration-500 whitespace-nowrap origin-bottom-left ${
+                      activeId === pillar.id 
+                        ? 'text-white translate-y-0 rotate-0' 
+                        : 'text-maroon/80 -rotate-90 absolute bottom-0 left-2 translate-x-0'
+                    }`}>
+                      {pillar.title}
+                    </h3>
+                    
+                    {/* Description - Reveals on Expand */}
+                    <AnimatePresence>
+                      {activeId === pillar.id && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 20, height: 0 }}
+                          animate={{ opacity: 1, y: 0, height: 'auto' }}
+                          exit={{ opacity: 0, y: 10, height: 0 }}
+                          transition={{ duration: 0.4, delay: 0.1 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-4">
+                            <p className="text-white/90 font-medium text-xl mb-2">
+                              {pillar.subtitle}
+                            </p>
+                            <p className="text-white/70 text-sm max-w-sm leading-relaxed">
+                              {pillar.description}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile: Card Stack with Images */}
+        <div className="lg:hidden space-y-4">
+          {pillars.map((pillar, index) => (
+            <Link
+              key={pillar.id}
+              href={pillar.href}
+              className="block relative overflow-hidden rounded-2xl aspect-[4/3] group"
+            >
+              {/* Background Image */}
+              <Image 
+                src={pillar.image} 
+                alt={pillar.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-maroon/20 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              
+              <div className="absolute inset-0 p-8 flex flex-col justify-between z-10">
+                <div className="flex justify-between items-start">
+                  <span className="text-white/60 font-mono">0{index + 1}</span>
+                  <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">
+                    <svg className="w-3 h-3 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-3xl font-display text-white mb-2">{pillar.title}</h3>
+                  <p className="text-white/90 font-medium mb-1">{pillar.subtitle}</p>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
