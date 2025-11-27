@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getTreatmentFamily, getConditionsForFamily } from '@/lib/navigationData';
+import { getTreatmentFamilyContent } from '@/lib/content';
 
 export function generateStaticParams() {
   return treatmentFamilies.map((family) => ({
@@ -19,6 +20,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { familySlug } = await params;
   const family = getTreatmentFamily(familySlug);
+  const content = getTreatmentFamilyContent(familySlug);
   
   if (!family) {
     return { title: 'Treatment Not Found' };
@@ -26,7 +28,7 @@ export async function generateMetadata({
   
   return {
     title: `${family.name} | ${family.pillar} Treatments | Pragna Skin Clinic`,
-    description: `${family.summary} Expert ${family.name.toLowerCase()} treatments by qualified dermatologists at Pragna Skin Clinic Hyderabad.`,
+    description: content?.hero.intro || `${family.summary} Expert ${family.name.toLowerCase()} treatments by qualified dermatologists at Pragna Skin Clinic Hyderabad.`,
     keywords: [
       family.name,
       `${family.name} treatment`,
@@ -38,7 +40,7 @@ export async function generateMetadata({
     ],
     openGraph: {
       title: `${family.name} | Pragna Skin Clinic`,
-      description: family.summary,
+      description: content?.hero.intro || family.summary,
       type: 'website',
     },
   };
@@ -57,6 +59,62 @@ export default async function TreatmentFamilyPage({
   }
 
   const relatedConditions = getConditionsForFamily(familySlug);
+  const content = getTreatmentFamilyContent(familySlug);
+
+  // Fallback content if no content file exists
+  const heroTitle = content?.hero.title || family.name;
+  const heroSubtitle = content?.hero.subtitle || 'Expert dermatologist care';
+  const heroIntro = content?.hero.intro || family.summary;
+  
+  const trustIndicators = content?.trustIndicators || [
+    { value: '25+', label: 'Years Experience' },
+    { value: 'FDA', label: 'Approved Technology' },
+    { value: '10K+', label: 'Patients Treated' },
+  ];
+  
+  const howItWorksDescription = content?.howItWorks.description || 
+    'Our dermatologists use advanced, evidence-based techniques tailored to your unique needs.';
+  
+  const howItWorksSteps = content?.howItWorks.steps || [
+    {
+      title: 'Assessment',
+      text: 'We evaluate your skin type, concerns, and goals to create a personalised treatment plan.',
+      icon: 'consultation',
+    },
+    {
+      title: 'Treatment',
+      text: 'Using state-of-the-art technology, we deliver precise, comfortable treatments with optimal results.',
+      icon: 'treatment',
+    },
+    {
+      title: 'Results',
+      text: 'We monitor your progress and adjust as needed to ensure lasting, beautiful outcomes.',
+      icon: 'results',
+    },
+  ];
+  
+  const whoIsThisForHeadline = content?.whoIsThisFor.headline || 'Ideal for you if...';
+  const whoIsThisForList = content?.whoIsThisFor.list || [
+    'You want long-lasting results, not temporary fixes',
+    'You prefer medically supervised care over salon treatments',
+    'You have tried over-the-counter solutions without success',
+    'You value personalised treatment plans over one-size-fits-all',
+  ];
+  
+  const whyPragnaItems = content?.whyPragna || [
+    {
+      title: 'Dermatologist-Led',
+      description: 'Every treatment is designed and supervised by qualified dermatologists with decades of experience.',
+    },
+    {
+      title: 'Advanced Technology',
+      description: 'We use only US-FDA approved devices and medical-grade protocols for optimal safety and results.',
+    },
+    {
+      title: 'Personalised Care',
+      description: 'No cookie-cutter treatments. Every plan is tailored to your unique skin type, concerns, and goals.',
+    },
+  ];
 
   // Breadcrumb Schema for SEO
   const breadcrumbSchema = {
@@ -88,11 +146,43 @@ export default async function TreatmentFamilyPage({
     '@context': 'https://schema.org',
     '@type': 'MedicalProcedure',
     name: family.name,
-    description: family.summary,
+    description: heroIntro,
     procedureType: 'https://schema.org/CosmeticProcedure',
     howPerformed: 'By qualified dermatologists using advanced technology',
     preparation: 'Initial consultation and skin assessment',
     followup: 'Regular monitoring and aftercare support',
+  };
+
+  // Icon components for how it works
+  const getStepIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'consultation':
+        return (
+          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="16" cy="16" r="12" />
+            <path d="M16 10v6l4 2" strokeLinecap="round" />
+          </svg>
+        );
+      case 'treatment':
+        return (
+          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M16 4v24M4 16h24" strokeLinecap="round" />
+            <circle cx="16" cy="16" r="6" />
+          </svg>
+        );
+      case 'results':
+        return (
+          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M6 16l6 6L26 8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        );
+      default:
+        return (
+          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="16" cy="16" r="12" />
+          </svg>
+        );
+    }
   };
 
   return (
@@ -113,7 +203,7 @@ export default async function TreatmentFamilyPage({
       {/* ============================================
           HERO - Editorial Split Layout
           ============================================ */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 relative overflow-hidden">
         <div className="section-container relative z-10">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm mb-10">
@@ -135,13 +225,18 @@ export default async function TreatmentFamilyPage({
               </span>
               
               {/* Title */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-charcoal leading-[1.05] mb-6">
-                {family.name}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-charcoal leading-[1.05] mb-4">
+                {heroTitle}
               </h1>
               
-              {/* Subtitle/Hook */}
-              <p className="text-xl md:text-2xl text-charcoal/60 font-light leading-relaxed mb-8">
-                {family.summary}
+              {/* Subtitle */}
+              <p className="text-xl md:text-2xl text-maroon/60 font-light italic mb-6">
+                {heroSubtitle}
+              </p>
+              
+              {/* Intro */}
+              <p className="text-lg text-charcoal/60 leading-relaxed mb-8">
+                {heroIntro}
               </p>
               
               {/* CTA */}
@@ -163,26 +258,28 @@ export default async function TreatmentFamilyPage({
             
             {/* Right: Hero Image */}
             <div className="order-1 lg:order-2">
-              {/* 
-                IMAGE NEEDED: Abstract/artistic image related to {family.name}
-                Style: Soft, editorial, macro texture or treatment-related abstract
-                Aspect: 4:5 portrait or square
-                Examples: 
-                - For Laser Hair Reduction: Close-up of smooth skin with soft lighting
-                - For Acne Solutions: Abstract water/clarity texture
-                - For Anti-Ageing: Soft botanical or light refraction
-              */}
               <div className="aspect-[4/5] bg-gradient-to-br from-maroon/5 via-beige-warm to-terracotta/10 rounded-[2rem] overflow-hidden relative">
-                {/* Decorative elements */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-32 border border-maroon/10 rounded-full" />
-                  <div className="absolute w-48 h-48 border border-terracotta/10 rounded-full" />
-                </div>
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="text-maroon/30 text-sm italic">
-                    Need: Editorial hero image for {family.name}
-                  </p>
-                </div>
+                {content?.hero.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img 
+                    src={content.hero.image} 
+                    alt={heroTitle}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <>
+                    {/* Decorative elements */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-32 h-32 border border-maroon/10 rounded-full" />
+                      <div className="absolute w-48 h-48 border border-terracotta/10 rounded-full" />
+                    </div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <p className="text-maroon/30 text-sm italic">
+                        Need: Editorial hero image for {family.name}
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -195,11 +292,7 @@ export default async function TreatmentFamilyPage({
       <section className="py-8 border-y border-charcoal/5 bg-white/50">
         <div className="section-container">
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {[
-              { value: '25+', label: 'Years Experience' },
-              { value: 'FDA', label: 'Approved Technology' },
-              { value: '10K+', label: 'Patients Treated' },
-            ].map((stat, i) => (
+            {trustIndicators.map((stat, i) => (
               <div key={i} className="flex items-center gap-3 text-charcoal/60">
                 <span className="text-2xl md:text-3xl font-display text-maroon">{stat.value}</span>
                 <span className="text-xs uppercase tracking-wider">{stat.label}</span>
@@ -212,11 +305,11 @@ export default async function TreatmentFamilyPage({
       {/* ============================================
           HOW IT WORKS - The Science (Simplified)
           ============================================ */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
             {/* Section header */}
-            <div className="text-center mb-16">
+            <div className="text-center mb-10">
               <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
                 The Approach
               </span>
@@ -224,55 +317,22 @@ export default async function TreatmentFamilyPage({
                 How it works
               </h2>
               <p className="text-lg text-charcoal/50 max-w-2xl mx-auto">
-                Our dermatologists use advanced, evidence-based techniques tailored to your unique needs.
+                {howItWorksDescription}
               </p>
             </div>
             
             {/* 3-Step Process */}
             <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-              {[
-                {
-                  step: '01',
-                  title: 'Assessment',
-                  text: 'We evaluate your skin type, concerns, and goals to create a personalised treatment plan.',
-                  icon: (
-                    <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <circle cx="16" cy="16" r="12" />
-                      <path d="M16 10v6l4 2" strokeLinecap="round" />
-                    </svg>
-                  ),
-                },
-                {
-                  step: '02',
-                  title: 'Treatment',
-                  text: 'Using state-of-the-art technology, we deliver precise, comfortable treatments with optimal results.',
-                  icon: (
-                    <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M16 4v24M4 16h24" strokeLinecap="round" />
-                      <circle cx="16" cy="16" r="6" />
-                    </svg>
-                  ),
-                },
-                {
-                  step: '03',
-                  title: 'Results',
-                  text: 'We monitor your progress and adjust as needed to ensure lasting, beautiful outcomes.',
-                  icon: (
-                    <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M6 16l6 6L26 8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  ),
-                },
-              ].map((item, i) => (
+              {howItWorksSteps.map((item, i) => (
                 <div key={i} className="text-center">
                   {/* Icon */}
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-beige-warm text-maroon mb-6">
-                    {item.icon}
+                    {getStepIcon(item.icon || 'default')}
                   </div>
                   
                   {/* Step number */}
                   <p className="text-[10px] font-mono text-charcoal/30 uppercase tracking-wider mb-2">
-                    Step {item.step}
+                    Step {String(i + 1).padStart(2, '0')}
                   </p>
                   
                   {/* Title */}
@@ -294,25 +354,31 @@ export default async function TreatmentFamilyPage({
       {/* ============================================
           WHO IS THIS FOR - Checklist Card
           ============================================ */}
-      <section className="py-20 md:py-28 bg-beige-warm">
+      <section className="py-14 md:py-20 bg-beige-warm">
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left: Image */}
             <div>
-              {/* 
-                IMAGE NEEDED: Lifestyle/aspirational image
-                Style: Person in soft light, contemplative, or abstract skin texture
-                Aspect: 1:1 square
-              */}
-              <div className="aspect-square bg-gradient-to-br from-terracotta/10 via-white to-maroon/5 rounded-[2rem] relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-40 h-40 border border-maroon/10 rounded-full animate-pulse" />
-                </div>
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="text-maroon/30 text-sm italic">
-                    Need: Lifestyle image for {family.name}
-                  </p>
-                </div>
+              <div className="aspect-square bg-gradient-to-br from-terracotta/10 via-white to-maroon/5 rounded-[2rem] relative overflow-hidden group">
+                {content?.whoIsThisFor.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={content.whoIsThisFor.image}
+                    alt="Is this for you?"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-40 h-40 border border-maroon/10 rounded-full animate-pulse" />
+                    </div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <p className="text-maroon/30 text-sm italic">
+                        Need: Lifestyle image for {family.name}
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
             
@@ -322,20 +388,12 @@ export default async function TreatmentFamilyPage({
                 Is This For You?
               </span>
               <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-6">
-                Who this is for
+                {whoIsThisForHeadline}
               </h2>
-              <p className="text-lg text-charcoal/50 mb-8">
-                This treatment family may be right for you if:
-              </p>
               
               {/* Checklist */}
               <ul className="space-y-4">
-                {[
-                  'You want long-lasting results, not temporary fixes',
-                  'You prefer medically supervised care over salon treatments',
-                  'You have tried over-the-counter solutions without success',
-                  'You value personalised treatment plans over one-size-fits-all',
-                ].map((item, i) => (
+                {whoIsThisForList.map((item, i) => (
                   <li key={i} className="flex items-start gap-4">
                     <div className="w-6 h-6 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <svg className="w-3 h-3 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -354,10 +412,10 @@ export default async function TreatmentFamilyPage({
       {/* ============================================
           TREATMENT OPTIONS - The Menu
           ============================================ */}
-      <section id="treatments" className="py-20 md:py-28 bg-white">
+      <section id="treatments" className="py-14 md:py-20 bg-white">
         <div className="section-container">
           {/* Section header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
               Your Options
             </span>
@@ -419,7 +477,7 @@ export default async function TreatmentFamilyPage({
       {/* ============================================
           WHY PRAGNA - The Differentiators
           ============================================ */}
-      <section className="py-20 md:py-28 bg-charcoal text-beige-warm relative overflow-hidden">
+      <section className="py-14 md:py-20 bg-charcoal text-beige-warm relative overflow-hidden">
         {/* Background texture */}
         <div className="absolute inset-0 opacity-5">
           <div 
@@ -430,14 +488,8 @@ export default async function TreatmentFamilyPage({
           />
         </div>
         
-        {/* 
-          IMAGE NEEDED: Atmospheric background image (very subtle, behind content)
-          Style: Abstract, warm tones, could be clinic interior blur or botanical
-          Opacity: Will be set to ~10%
-        */}
-        
         <div className="section-container relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <span className="text-terracotta-light font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
               The Pragna Difference
             </span>
@@ -447,20 +499,7 @@ export default async function TreatmentFamilyPage({
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                title: 'Dermatologist-Led',
-                description: 'Every treatment is designed and supervised by qualified dermatologists with decades of experience.',
-              },
-              {
-                title: 'Advanced Technology',
-                description: 'We use only US-FDA approved devices and medical-grade protocols for optimal safety and results.',
-              },
-              {
-                title: 'Personalised Care',
-                description: 'No cookie-cutter treatments. Every plan is tailored to your unique skin type, concerns, and goals.',
-              },
-            ].map((item, i) => (
+            {whyPragnaItems.map((item, i) => (
               <div key={i} className="text-center">
                 <div className="w-16 h-16 mx-auto rounded-full bg-beige-warm/10 flex items-center justify-center mb-6">
                   <span className="text-2xl font-display text-terracotta-light">{i + 1}</span>
@@ -472,7 +511,7 @@ export default async function TreatmentFamilyPage({
           </div>
           
           {/* CTA */}
-          <div className="text-center mt-16">
+          <div className="text-center mt-10">
             <a 
               href="#contact" 
               className="inline-flex items-center gap-2 bg-terracotta-light text-charcoal px-8 py-4 rounded-full font-medium hover:bg-beige-warm transition-colors"

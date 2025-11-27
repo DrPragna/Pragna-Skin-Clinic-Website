@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getSubTreatment, conditions } from '@/lib/navigationData';
+import { getSubTreatmentContent } from '@/lib/content';
 import SubTreatmentClientContent from './SubTreatmentClientContent';
 
 // Generate static params for all sub-treatments
@@ -30,6 +30,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { familySlug, subTreatmentSlug } = await params;
   const result = getSubTreatment(subTreatmentSlug);
+  const content = getSubTreatmentContent(subTreatmentSlug);
   
   if (!result || result.family.slug !== familySlug) {
     return { title: 'Treatment Not Found' };
@@ -39,7 +40,7 @@ export async function generateMetadata({
   
   return {
     title: `${subTreatment.name} | ${family.name} | Pragna Skin Clinic`,
-    description: `${subTreatment.description}. Professional ${subTreatment.name.toLowerCase()} treatment by expert dermatologists at Pragna Skin Clinic. Safe, effective results.`,
+    description: content?.hero.intro || `${subTreatment.description}. Professional ${subTreatment.name.toLowerCase()} treatment by expert dermatologists at Pragna Skin Clinic. Safe, effective results.`,
     keywords: [
       subTreatment.name,
       family.name,
@@ -51,7 +52,7 @@ export async function generateMetadata({
     ],
     openGraph: {
       title: `${subTreatment.name} Treatment | Pragna Skin Clinic`,
-      description: subTreatment.description,
+      description: content?.hero.intro || subTreatment.description,
       type: 'website',
     },
   };
@@ -70,6 +71,7 @@ export default async function SubTreatmentPage({
   }
 
   const { subTreatment, family } = result;
+  const content = getSubTreatmentContent(subTreatmentSlug);
   
   // Get related conditions
   const relatedConditions = conditions.filter(c => 
@@ -79,52 +81,42 @@ export default async function SubTreatmentPage({
   // Get sibling treatments (other treatments in same family)
   const siblingTreatments = family.subTreatments.filter(t => t.slug !== subTreatment.slug);
 
+  // Use content FAQs or fallback
+  const faqItems = content?.faqs || [
+    {
+      question: 'How many sessions will I need?',
+      answer: 'Typically 6-8 sessions are recommended, depending on your individual response and goals. Your dermatologist will create a personalised plan during your consultation.',
+    },
+    {
+      question: 'Is it painful?',
+      answer: 'Most patients find the treatment comfortable. You may feel a mild warming or tingling sensation. We use cooling and numbing techniques when needed to ensure your comfort.',
+    },
+    {
+      question: 'When will I see results?',
+      answer: 'Initial improvements may be visible after 2-3 sessions, with full results developing over time. Results continue to improve for several weeks after your treatment course.',
+    },
+    {
+      question: 'Is there any downtime?',
+      answer: 'Minimal to none. Most patients return to normal activities immediately. Some mild redness may occur but typically resolves within a few hours to a day.',
+    },
+    {
+      question: 'Is it safe for all skin types?',
+      answer: 'Our treatments are customised for Indian skin types. During your consultation, we assess your skin and select the most appropriate settings and protocols for you.',
+    },
+  ];
+
   // FAQ Schema for SEO
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'How many sessions will I need?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Typically 6-8 sessions are recommended, depending on your individual response and goals. Your dermatologist will create a personalised plan during your consultation.',
-        },
+    mainEntity: faqItems.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
       },
-      {
-        '@type': 'Question',
-        name: 'Is it painful?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Most patients find the treatment comfortable. You may feel a mild warming or tingling sensation. We use cooling and numbing techniques when needed to ensure your comfort.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'When will I see results?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Initial improvements may be visible after 2-3 sessions, with full results developing over time. Results continue to improve for several weeks after your treatment course.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is there any downtime?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Minimal to none. Most patients return to normal activities immediately. Some mild redness may occur but typically resolves within a few hours to a day.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is it safe for all skin types?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Our treatments are customised for Indian skin types. During your consultation, we assess your skin and select the most appropriate settings and protocols for you.',
-        },
-      },
-    ],
+    })),
   };
 
   // Breadcrumb Schema for SEO
@@ -174,6 +166,7 @@ export default async function SubTreatmentPage({
           family={family}
           relatedConditions={relatedConditions}
           siblingTreatments={siblingTreatments}
+          content={content}
         />
 
         <Footer />

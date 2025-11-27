@@ -50,7 +50,7 @@ const StarIcon = ({ className }: { className?: string }) => (
 );
 
 // Helper component for stylized ampersand - now more prominent
-const StylizedText = ({ text, className = '' }: { text: string; className?: string }) => {
+const StylizedText = ({ text, className = '', ampersandClassName = 'text-maroon' }: { text: string; className?: string; ampersandClassName?: string }) => {
   const parts = text.split('&');
   if (parts.length === 1) return <span className={className}>{text}</span>;
   
@@ -60,7 +60,7 @@ const StylizedText = ({ text, className = '' }: { text: string; className?: stri
         <span key={index}>
           {part}
           {index < parts.length - 1 && (
-            <span className="font-serif italic text-[1.15em] text-maroon mx-0.5">&amp;</span>
+            <span className={`font-serif italic text-[1.15em] mx-0.5 ${ampersandClassName}`}>&amp;</span>
           )}
         </span>
       ))}
@@ -194,6 +194,7 @@ export default function Navbar() {
                                 <StylizedText 
                                   text={category.category} 
                                   className="font-serif text-maroon group-hover/btn:text-cream font-semibold text-base transition-colors"
+                                  ampersandClassName="text-maroon group-hover/btn:text-cream transition-colors"
                                 />
                                 <ArrowRight className="w-4 h-4 text-maroon/40 group-hover/btn:text-cream group-hover/btn:translate-x-1 transition-all duration-300" />
                               </Link>
@@ -446,6 +447,7 @@ export default function Navbar() {
                             <StylizedText 
                               text={category.category} 
                               className="font-serif text-maroon group-hover/btn:text-cream font-medium text-lg transition-colors"
+                              ampersandClassName="text-maroon group-hover/btn:text-cream transition-colors"
                             />
                             <ArrowRight className="w-4 h-4 text-maroon/40 group-hover/btn:text-cream" />
                           </Link>

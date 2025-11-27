@@ -323,6 +323,7 @@ export interface TreatmentFamilyContent {
   whoIsThisFor: {
     headline?: string;
     list: string[];
+    image?: string;
   };
   whyPragna?: {
     title: string;
@@ -359,6 +360,7 @@ export interface SubTreatmentContent {
   results: {
     timeline: string;
     recovery: string;
+    image?: string;
   };
   faqs: {
     question: string;
