@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface RevealProps {
@@ -10,8 +10,8 @@ interface RevealProps {
   className?: string;
 }
 
-// Smooth cubic-bezier for premium feel
-const smoothEase = [0.22, 1, 0.36, 1];
+// Smooth cubic-bezier for premium feel - typed as tuple for framer-motion
+const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 // Custom hook that only triggers once and never resets
 function useOnceInView(threshold = 0.2) {
