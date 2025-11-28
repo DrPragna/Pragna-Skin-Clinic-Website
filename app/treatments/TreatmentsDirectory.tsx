@@ -90,46 +90,31 @@ export default function TreatmentsDirectory({ families }: TreatmentsDirectoryPro
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12"
+                className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-20"
             >
               {filteredFamilies.map((family, index) => (
                 <Link 
                     key={family.slug} 
                     href={`/treatments/${family.slug}`}
-                    className="group block relative pl-6 border-l border-charcoal/10 hover:border-maroon/40 transition-colors duration-500"
+                    className="group block relative"
                 >
-                    {/* Index Number - The Visual Anchor */}
-                    <span className="absolute -top-2 right-0 text-4xl font-display text-charcoal/5 group-hover:text-maroon/10 transition-colors duration-500">
+                    {/* Top Line - The Anchor */}
+                    <div className="h-px w-full bg-charcoal/20 mb-6 group-hover:bg-maroon transition-colors duration-500 origin-left group-hover:scale-x-100" />
+
+                    {/* Index Number - Floating */}
+                    <span className="absolute -top-10 right-0 text-6xl font-display text-maroon/5 group-hover:text-maroon/10 transition-colors duration-500 select-none">
                         {index < 9 ? `0${index + 1}` : index + 1}
                     </span>
 
-                    <div className="flex justify-between items-start mb-2">
-                        <span className="text-[10px] uppercase tracking-widest text-maroon/60 font-medium">
-                            {family.pillar}
-                        </span>
-                    </div>
-
-                    <h3 className="text-3xl font-display text-charcoal mb-3 group-hover:text-maroon transition-colors duration-300 pr-8">
-                        {family.name}
-                    </h3>
-                    
-                    <p className="text-charcoal/60 text-sm leading-relaxed mb-5 font-light line-clamp-3">
-                        {family.summary}
-                    </p>
-
-                    {/* Sub-treatment Mini List */}
-                    <div className="space-y-1.5">
-                        {family.subTreatments.slice(0, 3).map(st => (
-                            <div key={st.slug} className="flex items-center gap-2 text-xs text-charcoal/40 group-hover:text-charcoal/70 transition-colors">
-                                <span className="w-1 h-1 rounded-full bg-charcoal/20 group-hover:bg-maroon/40" />
-                                {st.name}
-                            </div>
-                        ))}
-                        {family.subTreatments.length > 3 && (
-                            <div className="text-[10px] uppercase tracking-wide text-maroon/40 pl-3 pt-1">
-                                + {family.subTreatments.length - 3} more
-                            </div>
-                        )}
+                    {/* Content */}
+                    <div className="pr-4">
+                        <h3 className="text-3xl md:text-4xl font-display text-maroon mb-4 group-hover:translate-x-2 transition-transform duration-500">
+                            {family.name}
+                        </h3>
+                        
+                        <p className="text-charcoal/70 text-base font-light leading-relaxed line-clamp-3 group-hover:text-charcoal transition-colors">
+                            {family.summary}
+                        </p>
                     </div>
                 </Link>
               ))}

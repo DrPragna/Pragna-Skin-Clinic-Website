@@ -200,14 +200,16 @@ export default async function TreatmentFamilyPage({
 
          <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/20 backdrop-blur-md py-3">
             <div className="section-container">
-                 <StaggerContainer className="flex flex-wrap justify-center md:justify-between items-center gap-6 text-white/70 text-xs tracking-widest uppercase">
+                 <div className="flex flex-wrap justify-center md:justify-between items-center gap-6 text-white/70 text-xs tracking-widest uppercase">
                     {trustIndicators.map((stat, i) => (
-                         <StaggerItem key={i} className="flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-maroon" />
-                            {stat.value} {stat.label}
-                         </StaggerItem>
+                         <Reveal key={i} delay={i * 0.1} width="fit-content">
+                            <div className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-maroon" />
+                                {stat.value} {stat.label}
+                            </div>
+                         </Reveal>
                     ))}
-                 </StaggerContainer>
+                 </div>
             </div>
         </div>
       </section>
@@ -228,25 +230,27 @@ export default async function TreatmentFamilyPage({
                 </div>
             </Reveal>
 
-            <StaggerContainer className="grid lg:grid-cols-3 gap-6">
+            <div className="grid lg:grid-cols-3 gap-6">
                  {whyPragnaItems.map((item, i) => (
-                    <StaggerItem key={i} className="group relative bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-lg transition-all duration-400 hover:-translate-y-1 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-white to-maroon/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                        
-                        <div className="relative z-10">
-                             <span className="text-4xl font-display text-charcoal/10 group-hover:text-maroon/15 transition-colors duration-400 block mb-4">
-                                0{i + 1}
-                             </span>
-                             <h3 className="text-lg font-display text-charcoal mb-3 group-hover:text-maroon transition-colors duration-300">
-                                {item.title}
-                             </h3>
-                             <p className="text-charcoal/60 text-sm leading-relaxed">
-                                {item.description}
-                             </p>
+                    <Reveal key={i} delay={i * 0.1} className="h-full">
+                        <div className="group relative bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-lg transition-all duration-400 hover:-translate-y-1 overflow-hidden h-full">
+                            <div className="absolute inset-0 bg-gradient-to-br from-white to-maroon/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                            
+                            <div className="relative z-10">
+                                <span className="text-4xl font-display text-charcoal/10 group-hover:text-maroon/15 transition-colors duration-400 block mb-4">
+                                    0{i + 1}
+                                </span>
+                                <h3 className="text-lg font-display text-charcoal mb-3 group-hover:text-maroon transition-colors duration-300">
+                                    {item.title}
+                                </h3>
+                                <p className="text-charcoal/60 text-sm leading-relaxed">
+                                    {item.description}
+                                </p>
+                            </div>
                         </div>
-                    </StaggerItem>
+                    </Reveal>
                  ))}
-            </StaggerContainer>
+            </div>
         </div>
       </section>
 
@@ -325,12 +329,12 @@ export default async function TreatmentFamilyPage({
             </div>
           </Reveal>
           
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {family.subTreatments.map((treatment) => (
-              <StaggerItem key={treatment.slug}>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {family.subTreatments.map((treatment, i) => (
+              <Reveal key={treatment.slug} delay={i * 0.1} className="h-full">
                 <Link
                     href={`/treatments/${family.slug}/${treatment.slug}`}
-                    className="group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-charcoal"
+                    className="group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-charcoal h-full"
                 >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
@@ -357,9 +361,9 @@ export default async function TreatmentFamilyPage({
                         </div>
                     </div>
                 </Link>
-              </StaggerItem>
+              </Reveal>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
       
@@ -386,18 +390,20 @@ export default async function TreatmentFamilyPage({
                 </div>
                 
                 <div className="lg:col-span-8">
-                     <StaggerContainer className="grid md:grid-cols-2 gap-x-10 gap-y-6">
+                     <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
                         {whoIsThisForList.map((item, i) => (
-                            <StaggerItem key={i} className="group flex items-start gap-4">
-                                <span className="flex-shrink-0 w-7 h-7 rounded-full border border-maroon/20 flex items-center justify-center text-maroon font-display text-sm group-hover:bg-maroon group-hover:text-white transition-all duration-300 mt-0.5">
-                                    {i + 1}
-                                </span>
-                                <p className="text-base text-charcoal/75 leading-relaxed group-hover:text-charcoal transition-colors">
-                                    {item}
-                                </p>
-                            </StaggerItem>
+                            <Reveal key={i} delay={i * 0.05}>
+                                <div className="group flex items-start gap-4">
+                                    <span className="flex-shrink-0 w-7 h-7 rounded-full border border-maroon/20 flex items-center justify-center text-maroon font-display text-sm group-hover:bg-maroon group-hover:text-white transition-all duration-300 mt-0.5">
+                                        {i + 1}
+                                    </span>
+                                    <p className="text-base text-charcoal/75 leading-relaxed group-hover:text-charcoal transition-colors">
+                                        {item}
+                                    </p>
+                                </div>
+                            </Reveal>
                         ))}
-                     </StaggerContainer>
+                     </div>
                 </div>
             </div>
         </div>
@@ -416,9 +422,9 @@ export default async function TreatmentFamilyPage({
                     <span className="w-6 h-px bg-maroon/30" />
                 </span>
             </Reveal>
-            <StaggerContainer className="flex flex-wrap items-center justify-center gap-3">
-                {relatedConditions.map((condition) => (
-                <StaggerItem key={condition.slug}>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+                {relatedConditions.map((condition, i) => (
+                <Reveal key={condition.slug} delay={i * 0.05} width="fit-content">
                     <Link
                         href={`/conditions/${condition.slug}`}
                         className="group flex items-center gap-2 pl-4 pr-3 py-2 rounded-full border border-charcoal/10 hover:border-maroon/30 hover:bg-maroon/5 transition-all duration-300"
@@ -432,9 +438,9 @@ export default async function TreatmentFamilyPage({
                             </svg>
                         </span>
                     </Link>
-                </StaggerItem>
+                </Reveal>
                 ))}
-            </StaggerContainer>
+            </div>
           </div>
         </section>
       )}

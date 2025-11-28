@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { SubTreatment, TreatmentFamily, Condition, SubTreatmentContent } from '@/lib/navigationData';
-import { Reveal, StaggerContainer, StaggerItem } from '@/components/ui/Reveal';
+import { Reveal } from '@/components/ui/Reveal';
 
 interface SubTreatmentClientContentProps {
   subTreatment: SubTreatment;
@@ -25,10 +25,10 @@ export default function SubTreatmentClientContent({
   // Helper for Abstract Gradient Fallback
   const getGradientClass = (pillar: string) => {
     switch (pillar) {
-        case 'Skin': return 'from-rose-100/30 via-amber-50/20 to-rose-50/10';
-        case 'Hair': return 'from-stone-200/30 via-stone-100/20 to-stone-50/10';
-        case 'Body': return 'from-orange-100/30 via-stone-100/20 to-orange-50/10';
-        default: return 'from-gray-200/30 via-gray-100/20 to-white/10';
+        case 'Skin': return 'from-rose-400/40 via-rose-900/40 to-charcoal';
+        case 'Hair': return 'from-amber-700/40 via-stone-800/40 to-charcoal';
+        case 'Body': return 'from-orange-400/40 via-stone-900/40 to-charcoal';
+        default: return 'from-gray-400/40 via-gray-800/40 to-charcoal';
     }
   };
 
@@ -240,11 +240,11 @@ export default function SubTreatmentClientContent({
             </div>
           </Reveal>
           
-          <StaggerContainer className="grid md:grid-cols-3 gap-6 relative">
+          <div className="grid md:grid-cols-3 gap-6 relative">
              <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-charcoal/10 to-transparent" />
 
             {processSteps.map((item, i) => (
-              <StaggerItem key={i} className="relative group">
+              <Reveal key={i} delay={i * 0.1} className="relative group h-full">
                 <div className="w-20 h-20 mx-auto bg-white border border-charcoal/10 rounded-full flex items-center justify-center mb-6 relative z-10 group-hover:border-maroon/30 group-hover:shadow-lg transition-all duration-400">
                     <span className="text-sm font-mono text-charcoal/40 group-hover:text-maroon transition-colors duration-300">0{i + 1}</span>
                 </div>
@@ -260,9 +260,9 @@ export default function SubTreatmentClientContent({
                         {item.description}
                     </p>
                 </div>
-              </StaggerItem>
+              </Reveal>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
 
@@ -324,21 +324,24 @@ export default function SubTreatmentClientContent({
                 </div>
             </Reveal>
             
-            <StaggerContainer className="grid md:grid-cols-2 gap-5 items-start max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-5 items-start max-w-5xl mx-auto">
               {faqs.map((faq, i) => (
-                <StaggerItem 
+                <Reveal 
                   key={i} 
-                  className="bg-white rounded-2xl p-7 border border-charcoal/5 hover:border-maroon/20 hover:shadow-md transition-all duration-300"
+                  delay={i * 0.1}
+                  className="h-full"
                 >
-                  <h3 className="text-lg font-display text-maroon mb-3 leading-snug">
-                    {faq.question}
-                  </h3>
-                  <p className="text-charcoal/70 text-sm leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </StaggerItem>
+                  <div className="bg-white rounded-2xl p-7 border border-charcoal/5 hover:border-maroon/20 hover:shadow-md transition-all duration-300 h-full">
+                    <h3 className="text-lg font-display text-maroon mb-3 leading-snug">
+                      {faq.question}
+                    </h3>
+                    <p className="text-charcoal/70 text-sm leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </Reveal>
               ))}
-            </StaggerContainer>
+            </div>
         </div>
       </section>
 
@@ -385,9 +388,9 @@ export default function SubTreatmentClientContent({
                 Treats Conditions
                 <span className="w-6 h-px bg-maroon/30" />
             </span>
-            <StaggerContainer className="flex flex-wrap items-center justify-center gap-3">
-              {relatedConditions.map((condition) => (
-                <StaggerItem key={condition.slug}>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {relatedConditions.map((condition, i) => (
+                <Reveal key={condition.slug} delay={i * 0.05} width="fit-content">
                     <Link
                         href={`/conditions/${condition.slug}`}
                         className="group flex items-center gap-2 pl-4 pr-3 py-2 rounded-full border border-charcoal/10 hover:border-maroon/30 hover:bg-maroon/5 transition-all duration-300"
@@ -401,9 +404,9 @@ export default function SubTreatmentClientContent({
                             </svg>
                         </span>
                     </Link>
-                </StaggerItem>
+                </Reveal>
               ))}
-            </StaggerContainer>
+            </div>
           </div>
         </section>
       )}
