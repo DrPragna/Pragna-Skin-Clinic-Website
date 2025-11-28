@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
 
 interface RevealProps {
   children: React.ReactNode;
@@ -13,20 +13,48 @@ interface RevealProps {
 // Smooth cubic-bezier for premium feel
 const smoothEase = [0.22, 1, 0.36, 1];
 
+// Custom hook that only triggers once and never resets
+function useOnceInView(threshold = 0.2) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [hasTriggered, setHasTriggered] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || hasTriggered) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setHasTriggered(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [threshold, hasTriggered]);
+
+  return { ref, hasTriggered };
+}
+
 export const Reveal = ({ 
   children, 
   width = '100%', 
   delay = 0,
   className = "",
 }: RevealProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const { ref, hasTriggered } = useOnceInView(0.2);
 
   return (
     <div ref={ref} style={{ width }} className={className}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        animate={hasTriggered ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ 
           duration: 0.6, 
           ease: smoothEase, 
@@ -48,21 +76,14 @@ export const StaggerContainer = ({
     className?: string;
     delay?: number;
 }) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: "-50px 0px" });
-    const hasAnimated = useRef(false);
-    
-    // Once triggered, never reset
-    if (isInView) {
-        hasAnimated.current = true;
-    }
+    const { ref, hasTriggered } = useOnceInView(0.1);
 
     return (
         <motion.div
             ref={ref}
             className={className}
             initial="hidden"
-            animate={hasAnimated.current ? "visible" : "hidden"}
+            animate={hasTriggered ? "visible" : "hidden"}
             variants={{
                 hidden: {},
                 visible: {
@@ -115,15 +136,14 @@ export const FadeIn = ({
     delay?: number;
     className?: string;
 }) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, amount: 0.3 });
+    const { ref, hasTriggered } = useOnceInView(0.3);
 
     return (
         <motion.div
             ref={ref}
             className={className}
             initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            animate={hasTriggered ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.5, delay, ease: "easeOut" }}
         >
             {children}
