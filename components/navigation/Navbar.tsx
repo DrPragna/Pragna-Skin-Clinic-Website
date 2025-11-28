@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigationData } from '@/lib/navigationData';
@@ -92,35 +92,10 @@ export default function Navbar() {
     setActiveMobileDropdown(null);
   }, [pathname]);
 
-  // Prevent body scroll when dropdown is open
-  useEffect(() => {
-    if (activeDropdown) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [activeDropdown]);
 
   const toggleMobileDropdown = (name: string) => {
     setActiveMobileDropdown(activeMobileDropdown === name ? null : name);
   };
-
-  // Handle scroll within dropdown - prevent propagation to body
-  const handleDropdownScroll = useCallback((e: React.WheelEvent) => {
-    const target = e.currentTarget as HTMLDivElement;
-    const { scrollTop, scrollHeight, clientHeight } = target;
-    const isAtTop = scrollTop === 0;
-    const isAtBottom = scrollTop + clientHeight >= scrollHeight;
-    
-    // Prevent scroll propagation when at boundaries
-    if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
-      e.preventDefault();
-    }
-    e.stopPropagation();
-  }, []);
 
   // Check if we're on the homepage (with video hero)
   const isHomepage = pathname === '/';
@@ -170,23 +145,29 @@ export default function Navbar() {
                 Treatments
                 <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'treatments' ? 'rotate-180' : ''}`} />
               </Link>
-              
-              {/* Mega Menu Dropdown */}
+              {/* Bridge element to connect trigger with dropdown */}
+              {activeDropdown === 'treatments' && (
+                <div className="absolute left-0 right-0 h-8 top-full" />
+              )}
+            </div>
+            
+            {/* Mega Menu Dropdown - Positioned outside trigger for proper hover handling */}
+            <div 
+              className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-[1400px] bg-white/95 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-white/40 transition-all duration-500 z-50 overflow-hidden ${
+                activeDropdown === 'treatments' 
+                  ? 'opacity-100 visible translate-y-0 pointer-events-auto' 
+                  : 'opacity-0 invisible translate-y-4 pointer-events-none'
+              }`}
+              onMouseEnter={() => setActiveDropdown('treatments')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              {/* Scrollable Content */}
               <div 
-                className={`fixed top-[80px] left-4 right-4 mx-auto max-w-[1400px] bg-white/95 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-white/40 transition-all duration-500 z-50 ${
-                  activeDropdown === 'treatments' 
-                    ? 'opacity-100 visible translate-y-0' 
-                    : 'opacity-0 invisible translate-y-4'
-                }`}
+                ref={treatmentsRef}
+                className="p-6 md:p-8 lg:p-12 max-h-[80vh] overflow-y-auto overflow-x-hidden custom-scrollbar"
+                data-lenis-prevent
               >
-                {/* Scrollable Content */}
-                <div 
-                  ref={treatmentsRef}
-                  className="p-10 lg:p-12 max-h-[75vh] overflow-y-auto custom-scrollbar"
-                  onWheel={handleDropdownScroll}
-                  style={{ overscrollBehavior: 'contain' }}
-                >
-                  <div className="grid grid-cols-4 gap-12">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
                     {navigationData.treatments.map((pillar) => (
                       <div key={pillar.pillar} className="space-y-8">
                         {/* Pillar Header */}
@@ -242,9 +223,8 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Conditions Dropdown */}
+            {/* Conditions Dropdown Trigger */}
             <div 
               className="relative py-4"
               onMouseEnter={() => setActiveDropdown('conditions')}
@@ -254,25 +234,31 @@ export default function Navbar() {
                 Conditions
                 <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'conditions' ? 'rotate-180' : ''}`} />
               </Link>
-              
-              {/* Conditions Dropdown */}
+              {/* Bridge element to connect trigger with dropdown */}
+              {activeDropdown === 'conditions' && (
+                <div className="absolute left-0 right-0 h-8 top-full" />
+              )}
+            </div>
+            
+            {/* Conditions Mega Menu - Positioned outside trigger for proper hover handling */}
+            <div 
+              className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-[1200px] bg-white/95 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-white/40 transition-all duration-500 z-50 overflow-hidden ${
+                activeDropdown === 'conditions' 
+                  ? 'opacity-100 visible translate-y-0 pointer-events-auto' 
+                  : 'opacity-0 invisible translate-y-4 pointer-events-none'
+              }`}
+              onMouseEnter={() => setActiveDropdown('conditions')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              {/* Scrollable Content */}
               <div 
-                className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[1100px] max-w-[95vw] bg-white/95 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-white/40 transition-all duration-500 z-50 ${
-                  activeDropdown === 'conditions' 
-                    ? 'opacity-100 visible translate-y-0' 
-                    : 'opacity-0 invisible translate-y-4'
-                }`}
+                ref={conditionsRef}
+                className="p-6 md:p-8 lg:p-12 max-h-[80vh] overflow-y-auto overflow-x-hidden custom-scrollbar"
+                data-lenis-prevent
               >
-                {/* Scrollable Content */}
-                <div 
-                  ref={conditionsRef}
-                  className="p-10 lg:p-12 max-h-[75vh] overflow-y-auto custom-scrollbar"
-                  onWheel={handleDropdownScroll}
-                  style={{ overscrollBehavior: 'contain' }}
-                >
-                  <div className="grid grid-cols-12 gap-12">
-                    {/* Face & Skin - Spans 5 columns */}
-                    <div className="col-span-5 space-y-8 border-r border-maroon/5 pr-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-10">
+                    {/* Face & Skin - Spans 5 columns on lg */}
+                    <div className="lg:col-span-5 space-y-6 md:space-y-8 lg:border-r border-maroon/5 lg:pr-8">
                       <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                         <StylizedText text={navigationData.conditions[0].group} />
                       </h3>
@@ -299,8 +285,8 @@ export default function Navbar() {
                       </div>
                     </div>
 
-                    {/* Hair & Scalp - Spans 3 columns */}
-                    <div className="col-span-3 space-y-8 border-r border-maroon/5 pr-8">
+                    {/* Hair & Scalp - Spans 3 columns on lg */}
+                    <div className="lg:col-span-3 space-y-6 md:space-y-8 lg:border-r border-maroon/5 lg:pr-8">
                       <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                         <StylizedText text={navigationData.conditions[1].group} />
                       </h3>
@@ -327,8 +313,8 @@ export default function Navbar() {
                       </div>
                     </div>
 
-                    {/* Body & Other - Spans 4 columns */}
-                    <div className="col-span-4 space-y-10">
+                    {/* Body & Other - Spans 4 columns on lg, full width on md */}
+                    <div className="md:col-span-2 lg:col-span-4 space-y-8 md:space-y-10">
                       {/* Body Shape */}
                       <div>
                         <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
@@ -382,7 +368,6 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-            </div>
 
             <Link href="/#about" className={linkClasses}>About</Link>
             <Link href="/#contact" className={linkClasses}>Contact</Link>
