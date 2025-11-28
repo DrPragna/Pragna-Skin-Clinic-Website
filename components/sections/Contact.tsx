@@ -134,7 +134,7 @@ export default function Contact() {
                         <input
                           type="text"
                           required
-                          className="w-full bg-beige/30 border-2 border-transparent rounded-xl px-4 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/40 font-light"
+                          className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
                           placeholder="Your Name" 
                         />
                       </div>
@@ -144,7 +144,7 @@ export default function Contact() {
                         <input
                           type="email"
                           required
-                          className="w-full bg-beige/30 border-2 border-transparent rounded-xl px-4 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/40 font-light"
+                          className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
                           placeholder="Email Address" 
                         />
                       </div>
@@ -154,7 +154,7 @@ export default function Contact() {
                         <div className="relative w-28 shrink-0">
                           <select 
                             defaultValue="+91" 
-                            className="w-full bg-beige/30 border-2 border-transparent rounded-xl px-3 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer font-light"
+                            className="w-full bg-white border border-charcoal/15 rounded-xl px-3 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm"
                           >
                             <option value="+91">🇮🇳 +91</option>
                             <option value="+1">🇺🇸 +1</option>
@@ -167,7 +167,7 @@ export default function Contact() {
                             <option value="+81">🇯🇵 +81</option>
                             <option value="+86">🇨🇳 +86</option>
                           </select>
-                          <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-charcoal/30">
+                          <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-charcoal/40">
                             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                             </svg>
@@ -176,7 +176,7 @@ export default function Contact() {
                         <input
                           type="tel"
                           required
-                          className="flex-1 bg-beige/30 border-2 border-transparent rounded-xl px-4 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/40 font-light"
+                          className="flex-1 bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
                           placeholder="Phone Number" 
                         />
                       </div>
@@ -185,7 +185,7 @@ export default function Contact() {
                     <div className="group">
                        <textarea
                           rows={2}
-                          className="w-full bg-beige/30 border-2 border-transparent rounded-xl px-4 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/40 font-light resize-none"
+                          className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light resize-none shadow-sm"
                           placeholder="Any specific concerns? (Optional)" 
                         />
                     </div>
@@ -194,7 +194,7 @@ export default function Contact() {
                       <button
                         type="submit"
                         disabled={formState === 'submitting'}
-                        className="w-full bg-charcoal text-cream py-4 rounded-xl text-[10px] uppercase tracking-[0.2em] hover:bg-maroon transition-all duration-500 shadow-lg shadow-charcoal/5 hover:shadow-maroon/20 disabled:opacity-70 group relative overflow-hidden"
+                        className="w-full bg-maroon text-cream py-4 rounded-xl text-[10px] uppercase tracking-[0.2em] hover:bg-maroon-dark transition-all duration-500 shadow-lg shadow-maroon/20 disabled:opacity-70 group relative overflow-hidden"
                       >
                         <span className="relative z-10 flex items-center justify-center gap-2">
                           {formState === 'submitting' ? 'Sending Request...' : 'Book Appointment'}
