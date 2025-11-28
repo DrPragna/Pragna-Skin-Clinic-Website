@@ -29,7 +29,7 @@ export default function Contact() {
     <section 
       id="contact"
       ref={containerRef}
-      className="py-16 lg:py-20 relative overflow-hidden"
+      className="py-12 lg:py-16 relative overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #F5EDE8 0%, #FAF4F0 50%, #F8EFE8 100%)' }}
     >
       {/* Artistic Background Elements */}
@@ -38,7 +38,7 @@ export default function Contact() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('/noise.png')] opacity-[0.03] pointer-events-none" />
       
       <div className="section-container max-w-5xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           
           {/* Left: Artistic Typography & Invite */}
           <div className="lg:col-span-5 relative">
@@ -90,15 +90,15 @@ export default function Contact() {
               className="bg-white/80 backdrop-blur-xl rounded-[2rem] rounded-tr-none p-6 lg:p-8 shadow-[0_15px_30px_-10px_rgba(114,43,43,0.05)] border border-white/50 relative overflow-hidden"
             >
                {/* Rotating Badge - Absolute Positioned on Card */}
-               <div className="absolute -top-4 -right-4 w-20 h-20 hidden md:block pointer-events-none opacity-15 mix-blend-multiply">
-                 <div className="absolute inset-0 animate-[spin_10s_linear_infinite]">
+               <div className="absolute -top-4 -right-4 w-24 h-24 hidden md:block pointer-events-none opacity-40 mix-blend-multiply">
+                 <div className="absolute inset-0 animate-[spin_12s_linear_infinite]">
                    <svg viewBox="0 0 100 100" className="w-full h-full">
                      <defs>
                        <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
                      </defs>
-                     <text fontSize="12" letterSpacing="1.2">
-                       <textPath href="#circle" className="fill-maroon font-mono uppercase">
-                         • Book Now • Pragna Skin Clinic
+                     <text fontSize="10" letterSpacing="2">
+                       <textPath href="#circle" className="fill-maroon font-mono uppercase font-bold">
+                         • PRAGNA SKIN CLINIC • PRAGNA SKIN CLINIC
                        </textPath>
                      </text>
                    </svg>
@@ -127,49 +127,66 @@ export default function Contact() {
                     </button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="space-y-3">
+                      {/* Name Field */}
                       <div className="group">
                         <input
                           type="text"
                           required
-                          className="w-full bg-transparent border-b border-charcoal/10 px-0 py-3 text-base text-charcoal focus:border-maroon focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/30 font-light"
+                          className="w-full bg-beige/30 border-2 border-transparent rounded-xl px-4 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/40 font-light"
                           placeholder="Your Name" 
                         />
                       </div>
+                      
+                      {/* Email Field */}
                       <div className="group">
+                        <input
+                          type="email"
+                          required
+                          className="w-full bg-beige/30 border-2 border-transparent rounded-xl px-4 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/40 font-light"
+                          placeholder="Email Address" 
+                        />
+                      </div>
+                      
+                      {/* Phone with Country Code */}
+                      <div className="flex gap-2">
+                        <div className="relative w-28 shrink-0">
+                          <select 
+                            defaultValue="+91" 
+                            className="w-full bg-beige/30 border-2 border-transparent rounded-xl px-3 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer font-light"
+                          >
+                            <option value="+91">🇮🇳 +91</option>
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+971">🇦🇪 +971</option>
+                            <option value="+65">🇸🇬 +65</option>
+                            <option value="+61">🇦🇺 +61</option>
+                            <option value="+49">🇩🇪 +49</option>
+                            <option value="+33">🇫🇷 +33</option>
+                            <option value="+81">🇯🇵 +81</option>
+                            <option value="+86">🇨🇳 +86</option>
+                          </select>
+                          <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-charcoal/30">
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </div>
                         <input
                           type="tel"
                           required
-                          className="w-full bg-transparent border-b border-charcoal/10 px-0 py-3 text-base text-charcoal focus:border-maroon focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/30 font-light"
+                          className="flex-1 bg-beige/30 border-2 border-transparent rounded-xl px-4 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/40 font-light"
                           placeholder="Phone Number" 
                         />
-                      </div>
-                    </div>
-
-                    <div className="relative group">
-                      <select 
-                        defaultValue="" 
-                        className="w-full bg-transparent border-b border-charcoal/10 px-0 py-3 text-base text-charcoal/80 focus:border-maroon focus:outline-none focus:ring-0 transition-all duration-300 appearance-none cursor-pointer font-light"
-                      >
-                        <option value="" disabled>Select Treatment</option>
-                        <option value="general">General Consultation</option>
-                        <option value="acne">Acne & Scars</option>
-                        <option value="laser">Laser Hair Reduction</option>
-                        <option value="anti-aging">Anti-Aging</option>
-                      </select>
-                      <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-charcoal/30 group-hover:text-maroon transition-colors">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 9l-7 7-7-7" />
-                        </svg>
                       </div>
                     </div>
 
                     <div className="group">
                        <textarea
                           rows={2}
-                          className="w-full bg-transparent border-b border-charcoal/10 px-0 py-3 text-base text-charcoal focus:border-maroon focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/30 font-light resize-none"
-                          placeholder="Tell us about your concerns (Optional)" 
+                          className="w-full bg-beige/30 border-2 border-transparent rounded-xl px-4 py-3 text-base text-charcoal focus:border-maroon/40 focus:bg-white focus:outline-none focus:ring-0 transition-all duration-300 placeholder:text-charcoal/40 font-light resize-none"
+                          placeholder="Any specific concerns? (Optional)" 
                         />
                     </div>
                       
