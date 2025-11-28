@@ -25,10 +25,10 @@ export default function SubTreatmentClientContent({
   // Helper for Abstract Gradient Fallback
   const getGradientClass = (pillar: string) => {
     switch (pillar) {
-        case 'Skin': return 'from-rose-400/40 via-rose-900/40 to-charcoal';
-        case 'Hair': return 'from-amber-700/40 via-stone-800/40 to-charcoal';
-        case 'Body': return 'from-orange-400/40 via-stone-900/40 to-charcoal';
-        default: return 'from-gray-400/40 via-gray-800/40 to-charcoal';
+        case 'Skin': return 'from-rose-400 via-rose-900 to-rose-950';
+        case 'Hair': return 'from-amber-600 via-stone-800 to-stone-900';
+        case 'Body': return 'from-orange-400 via-orange-900 to-orange-950';
+        default: return 'from-teal-400 via-teal-900 to-teal-950';
     }
   };
 
@@ -108,20 +108,24 @@ export default function SubTreatmentClientContent({
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
             {heroImage ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img 
-                    src={heroImage}
-                    alt={heroTitle}
-                    className="w-full h-full object-cover opacity-40"
-                />
+                // Case A: Real Image with Overlay
+                <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                        src={heroImage}
+                        alt={heroTitle}
+                        className="w-full h-full object-cover opacity-40"
+                    />
+                    {/* Overlay Gradient - Only for Image */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent" />
+                </>
             ) : (
-                <div className={`w-full h-full bg-gradient-to-br ${getGradientClass(family.pillar)} opacity-30`}>
+                // Case B: Abstract Gradient Fallback (No dark overlay needed)
+                <div className={`w-full h-full bg-gradient-to-br ${getGradientClass(family.pillar)} opacity-100`}>
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 mix-blend-overlay" />
                 </div>
             )}
-            
-            <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent" />
         </div>
 
         <div className="section-container relative z-10 flex-grow flex flex-col justify-center pt-28 pb-12">

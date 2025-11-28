@@ -330,39 +330,58 @@ export default async function TreatmentFamilyPage({
           </Reveal>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {family.subTreatments.map((treatment, i) => (
-              <Reveal key={treatment.slug} delay={i * 0.1} className="h-full">
-                <Link
-                    href={`/treatments/${family.slug}/${treatment.slug}`}
-                    className="group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-charcoal h-full"
-                >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img 
-                        src={(treatment as any).image || '/images/placeholder-treatment.jpg'}
-                        alt={treatment.name}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-105 opacity-80 group-hover:opacity-100"
-                    />
-                    
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-400" />
+            {family.subTreatments.map((treatment, i) => {
+              const treatmentImage = (treatment as any).image;
+              const gradientClass = family.pillar === 'Skin' 
+                ? 'from-rose-400 via-rose-900 to-rose-950'
+                : family.pillar === 'Hair'
+                ? 'from-amber-600 via-stone-800 to-stone-900'
+                : family.pillar === 'Body'
+                ? 'from-orange-400 via-orange-900 to-orange-950'
+                : 'from-teal-400 via-teal-900 to-teal-950';
+              
+              return (
+                <Reveal key={treatment.slug} delay={i * 0.1} className="h-full">
+                  <Link
+                      href={`/treatments/${family.slug}/${treatment.slug}`}
+                      className="group relative block aspect-[4/5] overflow-hidden rounded-2xl h-full"
+                  >
+                      {/* Background: Image or Gradient */}
+                      {treatmentImage ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img 
+                              src={treatmentImage}
+                              alt={treatment.name}
+                              className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                          />
+                      ) : (
+                          <div className={`absolute inset-0 bg-gradient-to-br ${gradientClass} transition-transform duration-600 group-hover:scale-105`}>
+                              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 mix-blend-overlay" />
+                          </div>
+                      )}
+                      
+                      {/* Overlay - lighter for gradients */}
+                      <div className={`absolute inset-0 bg-gradient-to-t ${treatmentImage ? 'from-black/90 via-black/20' : 'from-black/70 via-transparent'} to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-400`} />
 
-                    <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                        <h3 className="text-xl font-display text-white mb-2 group-hover:text-white/90 transition-colors">
-                            {treatment.name}
-                        </h3>
-                        <p className="text-white/70 text-sm mb-4 line-clamp-2 group-hover:text-white/80 transition-colors">
-                            {treatment.description}
-                        </p>
-                        
-                        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
-                            <span>View Treatment</span>
-                            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </div>
-                    </div>
-                </Link>
-              </Reveal>
-            ))}
+                      <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                          <h3 className="text-xl font-display text-white mb-2 group-hover:text-white/90 transition-colors">
+                              {treatment.name}
+                          </h3>
+                          <p className="text-white/70 text-sm mb-4 line-clamp-2 group-hover:text-white/80 transition-colors">
+                              {treatment.description}
+                          </p>
+                          
+                          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
+                              <span>View Treatment</span>
+                              <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                              </svg>
+                          </div>
+                      </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

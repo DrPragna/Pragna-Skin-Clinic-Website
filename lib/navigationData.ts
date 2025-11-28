@@ -43,28 +43,24 @@ export const treatmentFamilies: TreatmentFamily[] = [
         slug: 'active-acne-treatment', 
         name: 'Active Acne Treatment', 
         description: 'Control ongoing breakouts and prevent new pimples', 
-        image: 'https://images.unsplash.com/photo-1611077544688-475436c96224?q=80&w=2072&auto=format&fit=crop',
         relatedConditions: ['acne-breakouts'] 
       },
       { 
         slug: 'acne-scar-treatment', 
         name: 'Acne Scar Treatment', 
         description: 'Reduce pits, dents and uneven texture from past acne', 
-        image: 'https://images.unsplash.com/photo-1576426863848-c21f53c60b19?q=80&w=2070&auto=format&fit=crop',
         relatedConditions: ['acne-scars'] 
       },
       { 
         slug: 'post-acne-marks-redness', 
         name: 'Post-Acne Marks & Redness', 
         description: 'Fade dark spots and redness left after pimples heal', 
-        image: 'https://images.unsplash.com/photo-1596299855788-9c6965005dfd?q=80&w=2070&auto=format&fit=crop',
         relatedConditions: ['acne-breakouts', 'acne-scars'] 
       },
       { 
         slug: 'teen-acne-treatment', 
         name: 'Teen Acne Treatment', 
         description: 'Gentle, age-appropriate care for adolescent skin', 
-        image: 'https://images.unsplash.com/photo-1513456321295-91d2c2334b9b?q=80&w=2069&auto=format&fit=crop',
         relatedConditions: ['acne-breakouts'] 
       },
     ]
