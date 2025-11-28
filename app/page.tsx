@@ -2,7 +2,6 @@
 
 import Navbar from '@/components/navigation/Navbar';
 import Hero from '@/components/sections/Hero';
-import TrustStrip from '@/components/sections/TrustStrip';
 import WhyPragna from '@/components/sections/WhyPragna';
 import SignaturePrograms from '@/components/sections/SignaturePrograms';
 import TreatmentPillars from '@/components/sections/TreatmentPillars';
@@ -22,16 +21,15 @@ import Footer from '@/components/sections/Footer';
  * - Mobile-first, desktop-enhanced
  * 
  * Section Flow:
- * 1. Hero - Immediate impact, brand statement
- * 2. TrustStrip - Quick credibility markers
- * 3. WhyPragna - Core value propositions
- * 4. TreatmentPillars - Skin, Hair, Body
- * 5. SignaturePrograms - Curated offerings
- * 6. Doctors - Human connection
- * 7. Testimonials - Social proof
- * 8. Branches - Physical presence
- * 9. Contact - Conversion point
- * 10. Footer - Brand closure
+ * 1. Hero - Immediate impact, brand statement (with integrated trust badges)
+ * 2. WhyPragna - Core value propositions
+ * 3. TreatmentPillars - Skin, Hair, Body
+ * 4. SignaturePrograms - Curated offerings
+ * 5. Doctors - Human connection
+ * 6. Testimonials - Social proof
+ * 7. Branches - Physical presence
+ * 8. Contact - Conversion point
+ * 9. Footer - Brand closure
  */
 export default function Home() {
   return (
