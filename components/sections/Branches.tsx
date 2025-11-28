@@ -2,32 +2,35 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 
 /**
- * BRANCHES - Location Cards with Map Integration Ready
+ * BRANCHES - Boutique Locations
  * 
  * Design Philosophy:
- * - Clean, visual location cards
- * - Easy contact access
- * - Premium presentation
+ * - Split card layout (Image + Info)
+ * - Focus on "Destination" feel
+ * - Clear, elegant contact details
  */
 
 const branches = [
   {
+    id: 'punjagutta',
     name: 'Punjagutta',
-    address: '3rd Floor, Above Reliance Trends, Punjagutta, Hyderabad - 500082',
+    label: 'Flagship Clinic',
+    address: '3rd Floor, Above Reliance Trends,\nPunjagutta, Hyderabad - 500082',
     phone: '+91 98765 43210',
-    email: 'punjagutta@pragnaskin.com',
-    hours: 'Mon - Sat: 10 AM - 7 PM',
     mapUrl: 'https://maps.google.com',
+    image: '/clinics/punjagutta.jpg', // Placeholder
   },
   {
+    id: 'kokapet',
     name: 'Kokapet',
-    address: 'Ground Floor, My Home Avatar, Kokapet, Hyderabad - 500075',
+    label: 'Advanced Center',
+    address: 'Ground Floor, My Home Avatar,\nKokapet, Hyderabad - 500075',
     phone: '+91 98765 43211',
-    email: 'kokapet@pragnaskin.com',
-    hours: 'Mon - Sat: 10 AM - 7 PM',
     mapUrl: 'https://maps.google.com',
+    image: '/clinics/kokapet.jpg', // Placeholder
   },
 ];
 
@@ -38,107 +41,93 @@ export default function Branches() {
   return (
     <section 
       ref={containerRef}
-      className="relative py-14 lg:py-20 bg-beige-warm overflow-hidden"
+      className="py-12 lg:py-16 bg-cream overflow-hidden"
     >
-      <div className="section-container">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
+      <div className="section-container max-w-6xl mx-auto">
+        {/* Header - Center Aligned */}
+        <div className="text-center mb-12 lg:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-3 mb-8"
+            className="text-maroon font-medium tracking-[0.2em] uppercase text-xs block mb-4"
           >
-            <span className="w-12 h-px bg-maroon/40" />
-            <span className="text-maroon font-medium tracking-[0.3em] uppercase text-xs">
-              Locations
-            </span>
-            <span className="w-12 h-px bg-maroon/40" />
+            Our Locations
           </motion.span>
-          
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: 100 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-display-md font-display text-charcoal"
-            >
-              Visit our{' '}
-              <span className="italic text-maroon">clinics</span>
-            </motion.h2>
-          </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl lg:text-5xl font-display text-charcoal"
+          >
+            Visit our <span className="italic text-maroon">Sanctuaries</span>
+          </motion.h2>
         </div>
 
-        {/* Branches Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* Locations Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {branches.map((branch, index) => (
             <motion.div
-              key={branch.name}
+              key={branch.id}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
+                duration: 0.8, 
+                delay: index * 0.2,
                 ease: [0.16, 1, 0.3, 1]
               }}
-              className="bg-white rounded-3xl p-8 shadow-soft hover:shadow-soft-lg transition-shadow duration-500"
+              className="group relative bg-white rounded-[2.5rem] overflow-hidden shadow-soft hover:shadow-xl transition-shadow duration-500"
             >
-              {/* Header */}
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <h3 className="text-2xl font-display text-charcoal">{branch.name}</h3>
-                  <p className="text-sm text-maroon font-medium mt-1">Pragna Skin Clinic</p>
+              <div className="flex flex-col h-full">
+                {/* Image Section - Top Half */}
+                <div className="relative h-64 lg:h-72 overflow-hidden bg-beige-warm">
+                  {/* Placeholder for Clinic Image */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-terracotta/20 to-beige flex items-center justify-center group-hover:scale-105 transition-transform duration-1000">
+                     <span className="text-maroon/20 font-display text-xl italic">Clinic Interior</span>
+              </div>
+
+                  {/* Overlay Badge */}
+                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full">
+                    <span className="text-xs font-medium text-maroon uppercase tracking-wider">
+                      {branch.label}
+                    </span>
                 </div>
-                <div className="w-12 h-12 rounded-full bg-maroon/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </div>
+                
+                {/* Info Section - Bottom Half */}
+                <div className="p-8 lg:p-10 flex flex-col flex-grow justify-between">
+                  <div>
+                    <h3 className="text-3xl font-display text-charcoal mb-4">
+                      {branch.name}
+                    </h3>
+                    <div className="flex items-start gap-3 text-charcoal/70 mb-6">
+                      <svg className="w-5 h-5 mt-0.5 text-maroon/60 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
+                      <p className="leading-relaxed font-light whitespace-pre-line">
+                        {branch.address}
+                      </p>
                 </div>
               </div>
 
-              {/* Details */}
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-charcoal/40 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  </svg>
-                  <p className="text-charcoal/70 text-sm leading-relaxed">{branch.address}</p>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-charcoal/40 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <a href={`tel:${branch.phone}`} className="text-charcoal hover:text-maroon transition-colors">
-                    {branch.phone}
-                  </a>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-charcoal/40 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <p className="text-charcoal/70 text-sm">{branch.hours}</p>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex gap-3 mt-8 pt-6 border-t border-charcoal/10">
-                <a
-                  href={branch.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 py-3 px-4 bg-maroon text-cream text-sm font-medium rounded-full text-center hover:bg-maroon-dark transition-colors"
-                >
-                  Get Directions
-                </a>
+                  <div className="pt-8 border-t border-maroon/10 flex gap-4">
                 <a
                   href={`tel:${branch.phone}`}
-                  className="py-3 px-4 border border-charcoal/20 text-charcoal text-sm font-medium rounded-full hover:border-maroon hover:text-maroon transition-colors"
+                      className="flex-1 py-3 flex items-center justify-center gap-2 border border-charcoal/10 rounded-full text-sm uppercase tracking-widest hover:bg-charcoal hover:text-white hover:border-charcoal transition-colors duration-300"
                 >
                   Call Now
                 </a>
+                    <a 
+                      href={branch.mapUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 py-3 flex items-center justify-center gap-2 bg-maroon text-white rounded-full text-sm uppercase tracking-widest hover:bg-maroon-dark transition-colors duration-300"
+                    >
+                      Directions
+                    </a>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}

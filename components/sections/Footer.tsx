@@ -51,28 +51,40 @@ export default function Footer() {
         <div className="absolute inset-0 bg-black/85" />
       </div>
       
-      {/* Top Marquee - Compact */}
+      {/* Top Marquee - Seamless Infinite Scroll */}
       <div className="relative z-10 py-2.5 border-b border-cream/10 overflow-hidden">
-        <motion.div
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{
-            x: { duration: 30, repeat: Infinity, ease: 'linear' },
-          }}
-          className="flex whitespace-nowrap"
-        >
-          {[...Array(2)].map((_, i) => (
-            <span key={i} className="flex items-center gap-6 px-6">
-              <span className="text-xl lg:text-2xl font-display text-cream/25">Skin</span>
-              <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
-              <span className="text-xl lg:text-2xl font-display text-cream/25">Hair</span>
-              <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
-              <span className="text-xl lg:text-2xl font-display text-cream/25">Body</span>
-              <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
-              <span className="text-xl lg:text-2xl font-display text-cream/25">Wellness</span>
-              <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
-            </span>
-          ))}
-        </motion.div>
+        <div className="flex whitespace-nowrap">
+          {/* First set - will scroll out */}
+          <div className="flex shrink-0 animate-marquee">
+            {[...Array(6)].map((_, i) => (
+              <span key={i} className="flex items-center gap-6 px-6 shrink-0">
+                <span className="text-xl lg:text-2xl font-display text-cream/25">Skin</span>
+                <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
+                <span className="text-xl lg:text-2xl font-display text-cream/25">Hair</span>
+                <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
+                <span className="text-xl lg:text-2xl font-display text-cream/25">Body</span>
+                <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
+                <span className="text-xl lg:text-2xl font-display text-cream/25">Wellness</span>
+                <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
+              </span>
+            ))}
+          </div>
+          {/* Second set - duplicate for seamless loop */}
+          <div className="flex shrink-0 animate-marquee" aria-hidden="true">
+            {[...Array(6)].map((_, i) => (
+              <span key={i} className="flex items-center gap-6 px-6 shrink-0">
+                <span className="text-xl lg:text-2xl font-display text-cream/25">Skin</span>
+                <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
+                <span className="text-xl lg:text-2xl font-display text-cream/25">Hair</span>
+                <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
+                <span className="text-xl lg:text-2xl font-display text-cream/25">Body</span>
+                <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
+                <span className="text-xl lg:text-2xl font-display text-cream/25">Wellness</span>
+                <span className="w-1 h-1 rounded-full bg-rose-gold/30" />
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Main Footer Content - Compact */}

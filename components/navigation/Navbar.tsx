@@ -122,14 +122,24 @@ export default function Navbar() {
     e.stopPropagation();
   }, []);
 
-  // Determine navbar styles based on scroll state
+  // Check if we're on the homepage (with video hero)
+  const isHomepage = pathname === '/';
+  
+  // Only use transparent styling on homepage when not scrolled
+  const useTransparentStyle = isHomepage && !isScrolled;
+
+  // Determine navbar styles based on scroll state and page
   const navbarClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-    isScrolled
-      ? 'bg-beige-warm/95 backdrop-blur-md shadow-soft'
-      : 'bg-transparent'
+    useTransparentStyle
+      ? 'bg-gradient-to-b from-black/50 via-black/20 to-transparent'
+      : 'bg-beige-warm/95 backdrop-blur-md shadow-soft'
   }`;
 
-  const linkClasses = "text-charcoal/80 hover:text-maroon transition-colors duration-200 font-medium cursor-pointer flex items-center gap-1";
+  const linkClasses = `transition-colors duration-200 font-medium cursor-pointer flex items-center gap-1 ${
+    useTransparentStyle 
+      ? 'text-white/90 hover:text-white' 
+      : 'text-charcoal/80 hover:text-maroon'
+  }`;
 
   return (
     <nav className={navbarClasses}>
@@ -137,7 +147,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group z-50 relative">
-            <div className="text-2xl font-serif font-bold text-maroon transition-colors group-hover:text-maroon-light">
+            <div className={`text-2xl font-serif font-bold transition-colors ${
+              useTransparentStyle 
+                ? 'text-white group-hover:text-cream' 
+                : 'text-maroon group-hover:text-maroon-light'
+            }`}>
               Pragna
             </div>
           </Link>
@@ -159,7 +173,7 @@ export default function Navbar() {
               
               {/* Mega Menu Dropdown */}
               <div 
-                className={`fixed top-[80px] left-4 right-4 mx-auto max-w-[1400px] bg-cream shadow-2xl rounded-2xl border border-maroon/10 transition-all duration-300 z-50 ${
+                className={`fixed top-[80px] left-4 right-4 mx-auto max-w-[1400px] bg-white/95 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-white/40 transition-all duration-500 z-50 ${
                   activeDropdown === 'treatments' 
                     ? 'opacity-100 visible translate-y-0' 
                     : 'opacity-0 invisible translate-y-4'
@@ -168,46 +182,54 @@ export default function Navbar() {
                 {/* Scrollable Content */}
                 <div 
                   ref={treatmentsRef}
-                  className="p-8 max-h-[60vh] overflow-y-auto"
+                  className="p-10 lg:p-12 max-h-[75vh] overflow-y-auto custom-scrollbar"
                   onWheel={handleDropdownScroll}
                   style={{ overscrollBehavior: 'contain' }}
                 >
-                  <div className="grid grid-cols-4 gap-8">
+                  <div className="grid grid-cols-4 gap-12">
                     {navigationData.treatments.map((pillar) => (
-                      <div key={pillar.pillar} className="space-y-5">
+                      <div key={pillar.pillar} className="space-y-8">
                         {/* Pillar Header */}
-                        <div className="border-b-2 border-maroon/20 pb-2">
-                          <h3 className="font-serif text-lg text-maroon/60 font-bold uppercase tracking-widest">
+                        <div className="relative">
+                          <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                             {pillar.pillar}
                           </h3>
+                          {/* Decorative Line */}
+                          <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
                         </div>
                         
                         {/* Categories */}
-                        <div className="space-y-5">
+                        <div className="space-y-8">
                           {pillar.categories.map((category) => (
-                            <div key={category.category} className="space-y-2">
-                              {/* Treatment Family - Button Style */}
+                            <div key={category.category} className="group/cat">
+                              {/* Treatment Family Title */}
                               <Link 
                                 href={category.href}
-                                className="group/btn flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-maroon/5 hover:bg-maroon hover:shadow-md border border-maroon/10 hover:border-maroon transition-all duration-300"
+                                className="block mb-3 group/title relative pl-4 -ml-4 rounded-lg hover:bg-maroon/5 transition-all duration-300 py-2"
                               >
-                                <StylizedText 
-                                  text={category.category} 
-                                  className="font-serif text-maroon group-hover/btn:text-cream font-semibold text-base transition-colors"
-                                  ampersandClassName="text-maroon group-hover/btn:text-cream transition-colors"
-                                />
-                                <ArrowRight className="w-4 h-4 text-maroon/40 group-hover/btn:text-cream group-hover/btn:translate-x-1 transition-all duration-300" />
+                                <div className="flex items-center justify-between pr-4">
+                                  <h4 className="font-display text-xl text-charcoal group-hover/title:text-maroon transition-colors duration-300 leading-tight relative z-10">
+                                    <StylizedText 
+                                      text={category.category} 
+                                      ampersandClassName="font-serif italic text-maroon/60"
+                                    />
+                                    {/* Underline Expand Animation */}
+                                    <span className="absolute left-0 -bottom-1 w-0 h-px bg-maroon/40 transition-all duration-500 group-hover/title:w-full" />
+                                  </h4>
+                                  <ArrowRight className="w-4 h-4 text-maroon opacity-0 -translate-x-2 group-hover/title:opacity-100 group-hover/title:translate-x-0 transition-all duration-300" />
+                                </div>
                               </Link>
                               
                               {/* Sub-treatments */}
-                              <ul className="space-y-0.5 pl-4 border-l-2 border-maroon/10">
+                              <ul className="space-y-1 pl-2 border-l border-maroon/10 ml-2">
                                 {category.items.map((item) => (
                                   <li key={item.name}>
                                     <Link 
                                       href={item.href}
-                                      className="text-sm text-charcoal/60 hover:text-maroon hover:pl-1 py-1 block transition-all duration-200"
+                                      className="group/item flex items-center justify-between text-sm text-charcoal/60 hover:text-maroon hover:bg-maroon/5 px-3 py-1.5 rounded-md transition-all duration-300 font-light"
                                     >
-                                      {item.name}
+                                      <span>{item.name}</span>
+                                      <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300" />
                                     </Link>
                                   </li>
                                 ))}
@@ -235,7 +257,7 @@ export default function Navbar() {
               
               {/* Conditions Dropdown */}
               <div 
-                className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[1100px] max-w-[95vw] bg-cream shadow-2xl rounded-2xl border border-maroon/10 transition-all duration-300 z-50 ${
+                className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[1100px] max-w-[95vw] bg-white/95 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-white/40 transition-all duration-500 z-50 ${
                   activeDropdown === 'conditions' 
                     ? 'opacity-100 visible translate-y-0' 
                     : 'opacity-0 invisible translate-y-4'
@@ -244,126 +266,114 @@ export default function Navbar() {
                 {/* Scrollable Content */}
                 <div 
                   ref={conditionsRef}
-                  className="p-8 max-h-[60vh] overflow-y-auto"
+                  className="p-10 lg:p-12 max-h-[75vh] overflow-y-auto custom-scrollbar"
                   onWheel={handleDropdownScroll}
                   style={{ overscrollBehavior: 'contain' }}
                 >
-                  <div className="grid grid-cols-12 gap-8">
+                  <div className="grid grid-cols-12 gap-12">
                     {/* Face & Skin - Spans 5 columns */}
-                    <div className="col-span-5 space-y-4 border-r border-maroon/10 pr-6">
-                      <h3 className="font-serif text-maroon font-semibold text-base border-b border-maroon/10 pb-2 uppercase tracking-wider">
+                    <div className="col-span-5 space-y-8 border-r border-maroon/5 pr-8">
+                      <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                         <StylizedText text={navigationData.conditions[0].group} />
                       </h3>
-                      <div className="grid grid-cols-1 gap-1">
+                      <div className="space-y-6">
                         {navigationData.conditions[0].items.map((item) => (
                           <Link 
                             key={item.name} 
                             href={item.href}
-                            className="group/item flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-maroon/5 border border-transparent hover:border-maroon/10 transition-all duration-200"
+                            className="group/item block p-4 -mx-4 rounded-2xl hover:bg-maroon/5 transition-all duration-300 cursor-pointer"
                           >
-                            <div className="flex-1">
-                              <span className={`font-medium text-sm ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors`}>
+                            <div className="flex items-baseline justify-between gap-4 mb-1">
+                              <span className={`text-lg font-display ${item.isTopConcern ? 'text-maroon font-medium' : 'text-charcoal'} group-hover/item:text-maroon group-hover/item:font-medium transition-all duration-300`}>
                                 {item.name}
                               </span>
-                              {item.subtitle && (
-                                <p className="text-xs text-charcoal/40 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/60">
-                                  {item.subtitle}
-                                </p>
-                              )}
+                              {item.isTopConcern && <StarIcon className="w-3 h-3 text-rose-gold shrink-0" />}
                             </div>
-                            <div className="flex items-center gap-1">
-                              {item.isTopConcern && <StarIcon className="w-3 h-3 text-maroon/50" />}
-                              <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all duration-200" />
-                            </div>
+                            {item.subtitle && (
+                              <p className="text-sm text-charcoal/50 font-light leading-relaxed group-hover/item:text-charcoal/70 transition-colors">
+                                {item.subtitle}
+                              </p>
+                            )}
                           </Link>
                         ))}
                       </div>
                     </div>
 
                     {/* Hair & Scalp - Spans 3 columns */}
-                    <div className="col-span-3 space-y-4 border-r border-maroon/10 pr-6">
-                      <h3 className="font-serif text-maroon font-semibold text-base border-b border-maroon/10 pb-2 uppercase tracking-wider">
+                    <div className="col-span-3 space-y-8 border-r border-maroon/5 pr-8">
+                      <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                         <StylizedText text={navigationData.conditions[1].group} />
                       </h3>
-                      <div className="space-y-1">
+                      <div className="space-y-6">
                         {navigationData.conditions[1].items.map((item) => (
                           <Link 
                             key={item.name} 
                             href={item.href}
-                            className="group/item flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-maroon/5 border border-transparent hover:border-maroon/10 transition-all duration-200"
+                            className="group/item block p-4 -mx-4 rounded-2xl hover:bg-maroon/5 transition-all duration-300 cursor-pointer"
                           >
-                            <div className="flex-1">
-                              <span className={`font-medium text-sm ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors`}>
+                            <div className="flex items-baseline justify-between gap-4 mb-1">
+                              <span className={`text-lg font-display ${item.isTopConcern ? 'text-maroon font-medium' : 'text-charcoal'} group-hover/item:text-maroon group-hover/item:font-medium transition-all duration-300`}>
                                 {item.name}
                               </span>
-                              {item.subtitle && (
-                                <p className="text-xs text-charcoal/40 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/60">
-                                  {item.subtitle}
-                                </p>
-                              )}
+                              {item.isTopConcern && <StarIcon className="w-3 h-3 text-rose-gold shrink-0" />}
                             </div>
-                            <div className="flex items-center gap-1">
-                              {item.isTopConcern && <StarIcon className="w-3 h-3 text-maroon/50" />}
-                              <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all duration-200" />
-                            </div>
+                            {item.subtitle && (
+                              <p className="text-sm text-charcoal/50 font-light leading-relaxed group-hover/item:text-charcoal/70 transition-colors">
+                                {item.subtitle}
+                              </p>
+                            )}
                           </Link>
                         ))}
                       </div>
                     </div>
 
                     {/* Body & Other - Spans 4 columns */}
-                    <div className="col-span-4 space-y-6">
+                    <div className="col-span-4 space-y-10">
                       {/* Body Shape */}
-                      <div className="space-y-3">
-                        <h3 className="font-serif text-maroon font-semibold text-base border-b border-maroon/10 pb-2 uppercase tracking-wider">
+                      <div>
+                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                           <StylizedText text={navigationData.conditions[2].group} />
                         </h3>
-                        <div className="space-y-1">
+                        <div className="space-y-5">
                           {navigationData.conditions[2].items.map((item) => (
                             <Link 
                               key={item.name} 
                               href={item.href}
-                              className="group/item flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-maroon/5 border border-transparent hover:border-maroon/10 transition-all duration-200"
+                              className="group/item block p-3 -mx-3 rounded-xl hover:bg-maroon/5 transition-all duration-300 cursor-pointer"
                             >
-                              <div className="flex-1">
-                                <span className={`font-medium text-sm ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors`}>
-                                  {item.name}
-                                </span>
-                                {item.subtitle && (
-                                  <p className="text-xs text-charcoal/40 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/60">
-                                    {item.subtitle}
-                                  </p>
-                                )}
-                              </div>
-                              <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all duration-200" />
+                              <span className={`text-lg font-display ${item.isTopConcern ? 'text-maroon font-medium' : 'text-charcoal'} group-hover/item:text-maroon group-hover/item:font-medium transition-all duration-300 block mb-1`}>
+                                {item.name}
+                              </span>
+                              {item.subtitle && (
+                                <p className="text-sm text-charcoal/50 font-light leading-relaxed">
+                                  {item.subtitle}
+                                </p>
+                              )}
                             </Link>
                           ))}
                         </div>
                       </div>
                       
                       {/* Other Concerns */}
-                      <div className="space-y-3">
-                        <h3 className="font-serif text-maroon font-semibold text-base border-b border-maroon/10 pb-2 uppercase tracking-wider">
+                      <div>
+                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                           {navigationData.conditions[3].group}
                         </h3>
-                        <div className="space-y-1">
+                        <div className="space-y-5">
                           {navigationData.conditions[3].items.map((item) => (
                             <Link 
                               key={item.name} 
                               href={item.href}
-                              className="group/item flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-maroon/5 border border-transparent hover:border-maroon/10 transition-all duration-200"
+                              className="group/item block p-3 -mx-3 rounded-xl hover:bg-maroon/5 transition-all duration-300 cursor-pointer"
                             >
-                              <div className="flex-1">
-                                <span className={`font-medium text-sm ${item.isTopConcern ? 'text-maroon font-semibold' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors`}>
-                                  {item.name}
-                                </span>
-                                {item.subtitle && (
-                                  <p className="text-xs text-charcoal/40 mt-0.5 font-light leading-tight group-hover/item:text-charcoal/60">
-                                    {item.subtitle}
-                                  </p>
-                                )}
-                              </div>
-                              <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all duration-200" />
+                              <span className={`text-lg font-display ${item.isTopConcern ? 'text-maroon font-medium' : 'text-charcoal'} group-hover/item:text-maroon group-hover/item:font-medium transition-all duration-300 block mb-1`}>
+                                {item.name}
+                              </span>
+                              {item.subtitle && (
+                                <p className="text-sm text-charcoal/50 font-light leading-relaxed">
+                                  {item.subtitle}
+                                </p>
+                              )}
                             </Link>
                           ))}
                         </div>
@@ -380,7 +390,14 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link href="/#contact" className="btn-primary text-sm px-6 py-3">
+            <Link 
+              href="/#contact" 
+              className={`text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                useTransparentStyle 
+                  ? 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/30' 
+                  : 'bg-maroon text-cream hover:bg-maroon-dark'
+              }`}
+            >
               Book Appointment
             </Link>
           </div>
@@ -388,7 +405,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-charcoal z-50 relative"
+            className={`lg:hidden p-2 z-50 relative ${useTransparentStyle ? 'text-white' : 'text-charcoal'}`}
             aria-label="Toggle menu"
           >
             <svg

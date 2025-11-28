@@ -38,7 +38,6 @@ export default function Home() {
     <main className="overflow-x-hidden">
       <Navbar />
       <Hero />
-      <TrustStrip />
       <WhyPragna />
       <TreatmentPillars />
       <SignaturePrograms />

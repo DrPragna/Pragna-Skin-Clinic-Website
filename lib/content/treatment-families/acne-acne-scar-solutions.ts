@@ -3,54 +3,66 @@ import { TreatmentFamilyContent } from "@/lib/navigationData";
 export const acneAcneScarSolutionsContent: TreatmentFamilyContent = {
   hero: {
     title: "Acne & Acne Scar Solutions",
-    subtitle: "Clear skin, lasting confidence",
-    intro: "From active breakouts to stubborn scars and marks, acne can affect your confidence at any age. At Pragna Skin Clinic, we create dermatologist-led, customised plans to calm active acne, fade marks, and smooth scars gently and safely for Indian skin.",
-    image: "" // TODO: Add actual image to /public/images/treatments/acne-acne-scar-solutions.jpg
+    subtitle: "From breakouts to clear skin",
+    intro:
+      "Whiteheads, painful cysts, marks and scars - acne rarely comes alone. This treatment family is built to handle all stages of the journey, from calming active breakouts to fading leftover marks and resurfacing scars, so your skin slowly returns to a calmer, smoother, more confident baseline.",
+    image: "/images/treatments/acne-acne-scar-solutions.jpg",
   },
+  trustIndicators: [
+    { value: "All stages", label: "Active acne to scars" },
+    { value: "Face & body", label: "Acne protocols" },
+    { value: "Evidence-led", label: "Combines meds & procedures" },
+  ],
   howItWorks: {
-    description: "We start by understanding your skin, lifestyle, hormones, and previous treatments. Based on the severity and type of acne and scars, we combine prescription medicines, in-clinic procedures, and a simple home-care routine to control breakouts, prevent new marks, and gradually improve scars.",
+    description:
+      "Acne has multiple layers - oil, bacteria, hormones, inflammation and healing. We address each one with the right mix of prescription medicines, medical facials, peels, light/laser therapies and scar procedures like MNRF, subcision, PRP and fractional lasers, instead of relying on only creams or only procedures.",
     steps: [
       {
-        title: "Dermatologist Consultation & Skin Mapping",
-        text: "Your dermatologist examines your skin, identifies acne type, scars, and triggers, and may suggest basic blood or hormone tests if needed. Together, we decide on a realistic plan that fits your routine.",
-        icon: "consultation"
+        title: "Map your acne pattern",
+        text:
+          "We identify whether your acne is mostly whiteheads, blackheads, red bumps, nodules or cysts, and whether it affects the face, back, chest or all. Hormonal triggers, diet, stress and skincare habits are reviewed so we're not just treating spots but also the reasons they keep returning.",
+        icon: "consultation",
       },
       {
-        title: "Active Acne Control",
-        text: "We calm active pimples using prescription creams, oral medicines when required, and gentle in-clinic treatments such as peels or clean-ups. The goal is to reduce inflammation, oiliness, and new breakouts.",
-        icon: "acne-control"
+        title: "Control breakouts, then fix the surface",
+        text:
+          "The first goal is to calm new pimples with the right combination of oral and topical medicines, specialised acne clean-ups, salicylic or azelaic peels and lifestyle tweaks. Once breakouts are under control, we shift focus to marks and scars with peels, Q-switch toning, MNRF, subcision, PRP and fractional lasers.",
+        icon: "treatment",
       },
       {
-        title: "Scars, Marks & Maintenance",
-        text: "Once breakouts are under control, we focus on scars and marks using targeted procedures like microneedling-based treatments, lasers, or specialised peels, along with long-term skincare to maintain results.",
-        icon: "repair"
-      }
-    ]
+        title: "Maintain clarity & prevent new scars",
+        text:
+          "We teach you a sustainable routine - non-comedogenic products, realistic makeup hygiene, flare management and maintenance treatments spaced through the year. This helps you stay ahead of long-term scarring instead of yo-yoing between good and bad phases.",
+        icon: "results",
+      },
+    ],
   },
   whoIsThisFor: {
-    headline: "This family is ideal if...",
+    headline: "Ideal for you if...",
     list: [
-      "You get frequent pimples that leave dark marks or pits behind",
-      "You've tried over-the-counter products but still keep breaking out",
-      "Old acne scars or dents make you feel conscious in photos or at work",
-      "You had teenage acne that has left marks well into adulthood",
-      "You want a medical, dermatologist-led solution instead of home remedies"
-    ]
+      "You keep getting new breakouts even after multiple creams, facials or home remedies",
+      "Red, painful pimples or cysts leave dents or dark marks that don't fade",
+      "You have old acne scars - ice pick, boxcar or rolling - that show up in every selfie",
+      "Back or chest acne makes you avoid certain clothes or feel conscious at the gym",
+      "You want a structured plan instead of jumping between random 'acne solutions'",
+    ],
   },
   whyPragna: [
     {
-      title: "Dermatologist-Led, Not One-Size-Fits-All",
-      description: "Every acne case is different. We customise medicines and procedures based on your skin type, acne type, age, and lifestyle instead of following a generic template."
+      title: "Acne to scars, under one plan",
+      description:
+        "We don't treat active acne and scars as separate stories. Your protocol is planned so that as breakouts calm down, we already know how and when to move into mark and scar correction.",
     },
     {
-      title: "Focus on Indian Skin & Pigmentation",
-      description: "Indian skin is prone to dark marks and post-inflammatory pigmentation. Our plans are designed to control breakouts while minimising the risk of new marks."
+      title: "Medicines plus in-clinic treatments",
+      description:
+        "Tablets and creams alone often aren't enough, and procedures without medical control just inflame the skin. We deliberately combine both so you get faster, safer and more stable results.",
     },
     {
-      title: "Stepwise, Sustainable Plans",
-      description: "We don't rush you into aggressive procedures. We first stabilise acne, then treat scars and marks, and finally guide you on maintenance so results are easier to sustain."
-    }
+      title: "Scar-type specific approach",
+      description:
+        "Not all scars are the same. Ice pick, boxcar, rolling and hypertrophic scars each respond to different tools. We use the appropriate mix of subcision, TCA CROSS, MNRF, PRP and fractional lasers instead of a single 'one-size' machine.",
+    },
   ],
-  relatedConditionSlugs: ["acne-breakouts", "acne-scars"]
+  relatedConditionSlugs: ["acne-breakouts", "acne-scars"],
 };
-

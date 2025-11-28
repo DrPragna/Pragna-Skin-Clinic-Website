@@ -3,67 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const activeAcneTreatmentContent: SubTreatmentContent = {
   hero: {
     title: "Active Acne Treatment",
-    tagline: "Calm stubborn breakouts",
-    intro: "Active acne treatment at Pragna Skin Clinic focuses on reducing new pimples, calming inflammation, and preventing long-term marks. We combine prescription medicines, gentle in-clinic procedures, and a simple skincare routine tailored to your skin and lifestyle."
+    tagline: "Calm the breakouts fast",
+    intro:
+      "Painful pimples, oiliness and new bumps every week can be exhausting. Active acne treatment focuses on bringing breakouts under control with the right mix of medical therapy, acne-focused clean-ups, peels and light-based treatments - so the cycle of 'new pimple, new mark' finally starts to slow down.",
   },
   quickStats: {
-    sessions: "Multiple visits over 3-6 months (customised)",
-    duration: "20-40 mins per visit",
-    downtime: "Minimal, mild redness or flaking",
-    painLevel: "Mild stinging or warmth during procedures"
+    sessions: "4-6 clinic visits over 3-4 months",
+    duration: "20-45 mins per session",
+    downtime: "Usually none; occasional 1-2 days flaking",
+    painLevel: "Mild stinging or warmth",
   },
-  overview: "Instead of only drying out pimples on the surface, we address the deeper causes of acne like oil production, clogged pores, bacteria, and inflammation. Depending on severity, your plan may include prescription creams, oral medication, medical facials, and chemical peels chosen specifically for your skin type.",
+  overview:
+    "We combine prescription medicines (like adapalene, benzoyl peroxide, antibiotics or isotretinoin when needed) with in-clinic support - salicylic/azelaic peels, comedone extraction, blue/red light or laser-based acne therapies. This approach targets oil, bacteria, clogged pores and inflammation together, not one at a time.",
   isThisForYou: [
-    "You keep getting new pimples every few days or weeks",
-    "Your acne flares up around periods, stress, or certain foods",
-    "Over-the-counter spot treatments and home remedies have not helped enough",
-    "Your pimples are starting to leave dark marks or small dents",
-    "You want a guided plan instead of trying random products"
+    "New pimples pop up every week, especially around your period or with stress",
+    "Your forehead, cheeks or jawline feel bumpy even when you don't see big zits",
+    "Back or shoulder acne leaves you avoiding sleeveless or backless outfits",
+    "Over-the-counter face washes and creams haven't made a real difference",
+    "You're worried that every new pimple is another future scar or mark",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Consultation & Skin Assessment",
-        description: "We begin with a detailed history of your breakouts, skincare, lifestyle, and medications. Your dermatologist examines your skin to understand acne type and severity. You may be advised to stop certain harsh products, and we will keep your routine simple and easy to follow."
+        title: "Acne typing & treatment planning",
+        description:
+          "We grade your acne, look at oiliness, sensitivity and scarring, and go through your past treatments in detail. Lifestyle, PCOS or other hormonal issues and current skincare are discussed. A clear plan is created combining medicines, clinic sessions and small habit changes like makeup hygiene and hair product use.",
       },
       {
         phase: "during",
-        title: "Customised Medical & In-Clinic Care",
-        description: "Based on your assessment, we prescribe suitable creams or tablets and, where needed, add gentle in-clinic treatments such as acne facials, comedone extraction, or mild chemical peels. Procedures are done with proper hygiene and comfort measures, usually within 20-40 minutes."
+        title: "Clearing pores, calming inflammation",
+        description:
+          "Clinic visits may include gentle acne facials with steam-free comedone extraction, salicylic or azelaic peels, and light or laser-based acne therapies. You'll feel brief stinging or warmth with peels and a warm, prickly or snapping sensation with devices. Medicines and skincare are tweaked based on how your skin responds between visits.",
       },
       {
         phase: "after",
-        title: "Home Care & Follow-Up",
-        description: "You'll leave with a clear routine of what to use in the morning and at night, along with simple lifestyle advice. Mild dryness or flaking can occur initially, which we manage with moisturisers. Follow-up visits every few weeks help us track your progress and adjust treatment safely."
-      }
-    ]
+        title: "Stabilising skin & avoiding rebound",
+        description:
+          "As breakouts come under control, we slowly simplify your regimen to what you can realistically maintain. We'll show you how to handle the occasional breakout without panicking, when to come in for top-up peels and how to avoid harsh home treatments that undo progress.",
+      },
+    ],
   },
   results: {
-    timeline: "Most people notice fewer new pimples and calmer skin within 4-6 weeks, especially when medicines and procedures are used regularly. Deeper acne and hormonal patterns may take a few months to stabilise, and marks or scars are addressed in later phases.",
-    recovery: "Recovery is usually smooth, with only short-term redness, dryness, or mild peeling after some procedures. You can continue routine activities with good sun protection."
+    timeline:
+      "Most people notice fewer painful new pimples within 4-6 weeks of sticking to the plan. Oiliness and bumpiness usually improve over 2-3 months. Old marks and scars are addressed in the next phase once the skin is calmer and new breakouts are rare.",
+    recovery:
+      "You may see short phases of purging, dryness or mild flaking as actives start working. These are usually manageable with moisturisers and dosage adjustments and rarely need you to stop regular work or college.",
   },
   faqs: [
     {
-      question: "How many sessions will I need for active acne?",
-      answer: "Active acne is usually treated over 3-6 months, with review visits every 4-6 weeks. The exact number of visits depends on how severe your acne is, how your skin responds, and whether we need to adjust medicines over time."
+      question: "Will my acne get worse before it gets better?",
+      answer:
+        "Sometimes, yes. When we start active treatments and retinoids, clogged pores that were already forming can surface together. This 'purging' phase is temporary and usually settles within a few weeks. We'll tell you what's normal and when to check in sooner.",
     },
     {
-      question: "Will I have to take oral medicines?",
-      answer: "Not everyone needs tablets. Mild acne may respond well to creams and in-clinic procedures alone. For moderate to severe or hormonal acne, your dermatologist may suggest oral medicines and will explain the benefits, side effects, and monitoring clearly before starting."
+      question: "Do I have to take isotretinoin (Accutane) for severe acne?",
+      answer:
+        "Not always. Isotretinoin is one option for stubborn, cystic acne but not the only one. We'll discuss benefits, side effects, blood tests and safer alternatives. If we do use it, it's with close monitoring and clear do's and don'ts.",
     },
     {
-      question: "Are the procedures painful?",
-      answer: "Most acne procedures such as gentle peels and clean-ups cause only mild stinging, tingling, or warmth, which settles quickly. Where required, we use soothing products or cooling to keep you comfortable throughout."
+      question: "Can I continue makeup during acne treatment?",
+      answer:
+        "Yes, but products need to be non-comedogenic and removed thoroughly. We'll help you pick safer formulas and teach you a quick routine so you're not sleeping with residue on your skin.",
     },
     {
-      question: "Can acne be cured permanently?",
-      answer: "Acne is influenced by hormones, skin type, and lifestyle, so it can flare again at times. However, with the right treatment and maintenance routine, breakouts can be reduced significantly and controlled long term, and the risk of scars and marks can be minimised."
+      question: "Will squeezing or popping pimples really cause scars?",
+      answer:
+        "Unfortunately, yes. Picking increases inflammation and infection risk and often leads to deeper scars or darker marks. Part of treatment is giving you better ways to manage painful pimples so you don't feel tempted to pick.",
     },
     {
-      question: "Do I need to change my diet completely?",
-      answer: "You usually don't need extreme diet changes. We may recommend simple tweaks like moderating high-sugar foods, dairy in some cases, and oily junk foods, along with managing stress and sleep. Your treatment plan will always be realistic and sustainable."
-    }
-  ]
+      question: "How long do I need to stay on acne medicines?",
+      answer:
+        "Active treatment typically runs for a few months. After that, we shift to a lighter maintenance phase with lower-strength medicines and clinic visits spaced further apart, so control is maintained without you feeling 'always on treatment'.",
+    },
+  ],
 };
-

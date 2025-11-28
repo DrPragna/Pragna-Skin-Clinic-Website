@@ -14,7 +14,6 @@ const pillars = [
     href: '/treatments/skin', 
     image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop',
     color: '#E8D4D0', // Soft Rose
-    hoverColor: '#D4A59A',
   },
   {
     id: 'hair',
@@ -24,7 +23,6 @@ const pillars = [
     href: '/treatments/hair',
     image: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop',
     color: '#F2EBE6', // Warm Cream
-    hoverColor: '#E6D5CD',
   },
   {
     id: 'body',
@@ -34,46 +32,41 @@ const pillars = [
     href: '/treatments/body',
     image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2020&auto=format&fit=crop',
     color: '#EAE4DD', // Beige
-    hoverColor: '#DBCAC0',
   },
 ];
 
 export default function TreatmentPillars() {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null); // Initial state: none selected
 
   return (
-    <section className="relative py-12 lg:py-24 bg-cream overflow-hidden">
-      <div className="section-container">
-        {/* Section Header - Minimal */}
-        <div className="mb-12 lg:mb-16 flex items-end justify-between">
-          <div>
-            <span className="text-xs tracking-[0.25em] text-maroon/60 uppercase block mb-4">
+    <section className="relative py-12 lg:py-16 bg-cream overflow-hidden">
+      <div className="section-container-wide"> {/* WIDER CONTAINER */}
+        
+        {/* Section Header - Center Aligned */}
+        <div className="text-center mb-12 lg:mb-16">
+          <span className="text-maroon font-medium tracking-[0.2em] uppercase text-xs block mb-4">
               Our Expertise
             </span>
-            <h2 className="text-4xl lg:text-5xl font-display text-maroon">
-              Areas of Focus
+          <h2 className="text-4xl lg:text-5xl font-display text-charcoal">
+            Areas of <span className="italic text-maroon">Focus</span>
             </h2>
-          </div>
-          <div className="hidden lg:block max-w-xs text-right text-maroon/60 text-sm">
-            <p>Holistic care tailored to your unique needs.</p>
-          </div>
         </div>
 
         {/* Desktop: Cinematic Accordion */}
-        <div className="hidden lg:flex h-[600px] gap-4">
-          {pillars.map((pillar) => (
+        <div className="hidden lg:flex h-[700px] gap-2">
+          {pillars.map((pillar, index) => (
             <Link 
               key={pillar.id} 
               href={pillar.href}
-              className="relative flex-1 min-w-[120px] overflow-hidden rounded-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group"
+              className="relative min-w-[140px] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group"
               style={{ 
-                flexGrow: activeId === pillar.id ? 3.5 : 1,
-                backgroundColor: pillar.color
+                flexGrow: activeId === pillar.id ? 4 : 1,
+                flexBasis: '0%'
               }}
               onMouseEnter={() => setActiveId(pillar.id)}
               onMouseLeave={() => setActiveId(null)}
             >
-              {/* Background Image - Ghost (Resting) -> Full (Hover) */}
+              {/* Background Image */}
               <div className="absolute inset-0">
                 <Image 
                   src={pillar.image} 
@@ -82,76 +75,60 @@ export default function TreatmentPillars() {
                   className={`object-cover transition-all duration-1000 ease-out
                     ${activeId === pillar.id 
                       ? 'scale-100 grayscale-0 opacity-100' 
-                      : 'scale-110 grayscale opacity-20 mix-blend-multiply'
+                      : 'scale-110 grayscale opacity-60'
                     }
                   `}
-                  sizes="(max-width: 1200px) 33vw, 50vw"
+                  sizes="(max-width: 1600px) 33vw, 60vw"
                 />
                 
-                {/* Active Overlay - Darkens bottom for text readability when expanded */}
-                <div 
-                  className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-700 ${
-                    activeId === pillar.id ? 'opacity-100' : 'opacity-0'
-                  }`} 
-                />
+                {/* Overlays */}
+                <div className={`absolute inset-0 transition-colors duration-700 ${
+                  activeId === pillar.id ? 'bg-black/10' : 'bg-black/20'
+                }`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
               </div>
 
-              <div className="absolute inset-0 flex flex-col justify-between p-10 z-10">
-                {/* Number/Index */}
-                <div className="flex justify-between items-start">
-                  <span className={`text-lg font-mono transition-colors duration-300 ${activeId === pillar.id ? 'text-white/90' : 'text-maroon/40'}`}>
-                    0{pillars.indexOf(pillar) + 1}
+              {/* Content Wrapper */}
+              <div className="absolute inset-0 z-10">
+                
+                {/* Top: Number & Icon */}
+                <div className="absolute top-8 left-8 right-8 flex justify-between items-start">
+                  <span className="text-xl font-display text-white/90">
+                    0{index + 1}
                   </span>
-                  
-                  {/* Arrow Icon */}
-                  <motion.div 
-                    className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                      activeId === pillar.id ? 'border-white/40 text-white' : 'border-maroon/10 text-maroon/40'
-                    }`}
-                    animate={{ 
-                      rotate: activeId === pillar.id ? 0 : -45,
-                      scale: activeId === pillar.id ? 1 : 0.9
-                    }}
-                  >
-                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className={`w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white transition-all duration-500 ${
+                    activeId === pillar.id ? 'rotate-0 bg-white/10 backdrop-blur-md' : '-rotate-45'
+                  }`}>
+                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                      </svg>
-                  </motion.div>
+                  </div>
                 </div>
 
-                {/* Content */}
-                <div className="relative h-full flex flex-col justify-end">
-                  <div className="relative">
-                    {/* Vertical Text Title */}
-                    <h3 className={`text-5xl font-display transition-all duration-500 whitespace-nowrap origin-bottom-left ${
-                      activeId === pillar.id 
-                        ? 'text-white translate-y-0 rotate-0' 
-                        : 'text-maroon/80 -rotate-90 absolute bottom-0 left-2 translate-x-0'
-                    }`}>
+                {/* Vertical Title - CENTERED for visibility */}
+                <div className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-500 ${
+                  activeId === pillar.id ? 'opacity-0' : 'opacity-100'
+                }`}>
+                  <h3 className="text-6xl xl:text-7xl font-display text-white/90 whitespace-nowrap -rotate-90 tracking-wide">
                       {pillar.title}
                     </h3>
+                </div>
                     
-                    {/* Description - Reveals on Expand */}
-                    <AnimatePresence>
-                      {activeId === pillar.id && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20, height: 0 }}
-                          animate={{ opacity: 1, y: 0, height: 'auto' }}
-                          exit={{ opacity: 0, y: 10, height: 0 }}
-                          transition={{ duration: 0.4, delay: 0.1 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="pt-4">
-                            <p className="text-white/90 font-medium text-xl mb-2">
+                {/* Expanded Content */}
+                <div className={`absolute bottom-0 left-0 w-full p-12 flex flex-col justify-end transition-all duration-700 delay-100 ${
+                  activeId === pillar.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                }`}>
+                  <h3 className="text-7xl xl:text-8xl font-display text-white mb-4">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-white/90 font-medium text-2xl mb-4">
                               {pillar.subtitle}
                             </p>
-                            <p className="text-white/70 text-sm max-w-sm leading-relaxed">
+                  <p className="text-white/70 text-lg max-w-md leading-relaxed font-light">
                               {pillar.description}
                             </p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                  <div className="mt-8 inline-block px-6 py-3 border border-white/30 rounded-full text-white text-sm uppercase tracking-widest hover:bg-white hover:text-maroon transition-colors duration-300">
+                    Explore Treatments
                   </div>
                 </div>
               </div>
@@ -159,38 +136,30 @@ export default function TreatmentPillars() {
           ))}
         </div>
 
-        {/* Mobile: Card Stack with Images */}
-        <div className="lg:hidden space-y-4">
+        {/* Mobile: Stacked Cards */}
+        <div className="lg:hidden space-y-4 px-4">
           {pillars.map((pillar, index) => (
             <Link
               key={pillar.id}
               href={pillar.href}
-              className="block relative overflow-hidden rounded-2xl aspect-[4/3] group"
+              className="block relative h-[400px] overflow-hidden rounded-xl group"
             >
-              {/* Background Image */}
               <Image 
                 src={pillar.image} 
                 alt={pillar.title}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
               />
-              <div className="absolute inset-0 bg-maroon/20 mix-blend-multiply" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               
-              <div className="absolute inset-0 p-8 flex flex-col justify-between z-10">
-                <div className="flex justify-between items-start">
-                  <span className="text-white/60 font-mono">0{index + 1}</span>
-                  <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">
-                    <svg className="w-3 h-3 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
+                <h3 className="text-5xl font-display text-white mb-2">{pillar.title}</h3>
+                <p className="text-white/90 text-lg mb-4">{pillar.subtitle}</p>
+                <div className="flex items-center gap-2 text-white/80 text-sm uppercase tracking-widest">
+                  <span>Explore</span>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </div>
-                </div>
-                
-                <div>
-                  <h3 className="text-3xl font-display text-white mb-2">{pillar.title}</h3>
-                  <p className="text-white/90 font-medium mb-1">{pillar.subtitle}</p>
                 </div>
               </div>
             </Link>

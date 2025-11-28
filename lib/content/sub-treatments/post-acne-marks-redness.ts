@@ -3,67 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const postAcneMarksRednessContent: SubTreatmentContent = {
   hero: {
     title: "Post-Acne Marks & Redness",
-    tagline: "Fade spots, calm redness",
-    intro: "Even after pimples settle, dark spots and redness can linger for months and make skin look uneven. At Pragna Skin Clinic, we use dermatologist-planned treatments to gently fade post-acne pigmentation and calm redness while protecting your skin barrier."
+    tagline: "Clear the story they left",
+    intro:
+      "Even when acne stops, the reminders stay - brown spots, red patches, uneven tone. Post-acne mark treatment focuses on fading these signs with pigment-targeting peels, laser toning, redness-focused lasers and topical care so your skin tone looks quieter and more even over time.",
   },
   quickStats: {
     sessions: "3-6 sessions, 3-4 weeks apart",
-    duration: "30-45 mins per session",
-    downtime: "Minimal, mild redness or flaking",
-    painLevel: "Mild tingling or warmth"
+    duration: "20-40 mins",
+    downtime: "0-3 days of mild redness/flaking",
+    painLevel: "Tingling or light warmth",
   },
-  overview: "Post-acne marks can be brown, purple, or red, and often show up more on Indian skin. We address them using a mix of prescription creams, medical-grade sunscreens, chemical peels, and light or laser-based treatments where needed. The aim is to even out skin tone gradually without over-stripping your skin.",
+  overview:
+    "Brown marks are usually post-inflammatory hyperpigmentation, while red marks often indicate healing vessels. We use different tools for each: salicylic, glycolic, lactic or azelaic peels and Q-switched laser toning for brown spots, and vascular lasers or IPL-like technologies and soothing routines for redness.",
   isThisForYou: [
-    "Your pimples have healed but brown or red marks are not fading",
-    "You feel the spots are more visible in photos or natural light",
-    "You're worried about using strong products that may irritate your skin",
-    "You want safer alternatives to DIY hacks like lemon juice or harsh scrubs",
-    "Your makeup does not sit well because of patchy pigmentation"
+    "Every breakout leaves a brown or reddish spot long after the bump is gone",
+    "Your skin looks patchy even though you hardly have active acne",
+    "Concealer helps for a few hours but marks show through by midday",
+    "You have sensitive skin and are scared of very strong peels",
+    "You want marks to fade faster than just waiting months on their own",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Pigmentation Assessment & Planning",
-        description: "We examine your marks to distinguish between brown pigmentation and red or pink post-acne redness. Your dermatologist reviews your current products and may advise stopping harsh scrubs or actives. Pre-treatment prep usually includes consistent sunscreen and gentle skincare for a few days."
+        title: "Colour & sensitivity assessment",
+        description:
+          "We separate true scars from marks, and brown marks from red ones. Your natural skin tone, sensitivity, past reactions and current acne status are checked. A gentle home routine with sunscreen, pigment-regulating and barrier-repair ingredients is started or optimised before heavier in-clinic work.",
       },
       {
         phase: "during",
-        title: "Targeted Peels & Brightening Protocols",
-        description: "Depending on your skin type and sensitivity, we may perform mild to moderate chemical peels, toning-based procedures, or brightening facials designed for post-acne marks. You may feel a tingling or warm sensation that is closely monitored for comfort during the 30-45 minute session."
+        title: "Targeting brown and red separately",
+        description:
+          "For brown spots, we use mild to moderate peels and low-fluence Q-switched toning sessions. For redness, we focus on calming and vascular-targeted devices when needed, along with anti-inflammatory topicals. Expect short episodes of tingling, warmth and temporary pinkness, followed by cooling and soothing products.",
       },
       {
         phase: "after",
-        title: "Protection, Hydration & Maintenance",
-        description: "After treatment, your skin may look slightly pink or feel tight for a short period. We guide you on gentle cleansers, moisturisers, and strict sun protection to support fading of marks. Mild flaking can occur for a few days, and we schedule follow-ups to space sessions safely."
-      }
-    ]
+        title: "Gentle fading, not harsh stripping",
+        description:
+          "We avoid aggressive, repeated strong peels that could create new marks. Instead, we build in steady but skin-friendly cycles. You'll get clear instructions on moisturiser and sun protection, what products to pause, and why not scratching, scrubbing or doing random facials in between matters.",
+      },
+    ],
   },
   results: {
-    timeline: "Most patients notice a subtle glow and slightly fresher look within a couple of sessions, with visible lightening of marks over 3-6 sessions when combined with home care. Older, deeper marks may take longer, and we always set realistic expectations upfront.",
-    recovery: "Recovery is usually smooth with day-to-day activities unaffected. Redness, mild sensitivity, or flaking can appear for a short time and is managed with moisturisers and sunscreen."
+    timeline:
+      "Depending on your skin and how old the marks are, many people notice a fresher, less blotchy look after 2-3 sessions. Brown spots usually lighten over several weeks, while redness often calms faster once the right soothing and vascular-focused measures are in place.",
+    recovery:
+      "Most sessions have minimal downtime - mild redness, flaking or a slightly tanned look to marks for a couple of days before they fade. You can generally continue work or college with sunscreen and light, non-comedogenic makeup if desired.",
   },
   faqs: [
     {
-      question: "Will my marks go away completely?",
-      answer: "Many recent post-acne marks can fade very well with a combination of treatments and sun protection, but some deeper or long-standing pigmentation may not disappear 100%. Our aim is to make marks far less noticeable and your overall skin tone more even."
+      question: "Are these marks the same as scars?",
+      answer:
+        "No. Marks are about colour - brown or red patches - while scars change the texture of the skin. Marks often respond well to peels, lasers and creams, whereas scars need deeper treatments like subcision, MNRF or fractional lasers. Many people have both, and we plan for each separately.",
     },
     {
-      question: "How soon after acne treatment can I treat marks?",
-      answer: "We usually start focusing on marks once your active acne is reasonably under control. In mild cases, certain mark-focused treatments can be started earlier, but your dermatologist will time them so as not to irritate already inflamed skin."
+      question: "Can I just use vitamin C or niacinamide at home instead?",
+      answer:
+        "Good homecare is important and we do use these ingredients, but for stubborn marks, in-clinic treatments speed up fading and help maintain results. We'll help you pair the right clinic plan with a realistic, affordable home routine.",
     },
     {
-      question: "Are chemical peels safe for Indian skin?",
-      answer: "When chosen and performed correctly by a dermatologist, chemical peels can be very safe and effective for Indian skin. We select peel strength, type, and contact time carefully and always pair it with strong sun protection and barrier repair."
+      question: "Why are my marks darker than my original skin tone?",
+      answer:
+        "After inflammation, pigment cells in Indian skin often overreact and release extra melanin in that spot. Without sun protection or proper treatment, this extra pigment can linger for months, making marks appear darker than the surrounding skin.",
     },
     {
-      question: "Can I use home remedies instead?",
-      answer: "Many DIY remedies like lemon, toothpaste, or undiluted essential oils can irritate skin and worsen pigmentation. It is safer to use evidence-based treatments and dermatologist-recommended products, especially on already sensitive, post-acne skin."
+      question: "Will stronger peels remove marks faster?",
+      answer:
+        "Not always - and on Indian skin, very strong or frequent peels can actually cause more pigmentation. We prefer controlled, repeated mild-to-moderate treatments that gently lift pigment without injuring the skin barrier.",
     },
     {
-      question: "Will I need maintenance sessions?",
-      answer: "Some patients maintain results with occasional touch-up sessions or continued topical creams, especially if their skin is prone to pigmentation. We personalise maintenance advice based on how your skin responds and your lifestyle."
-    }
-  ]
+      question: "Can I treat marks while I still get a few pimples?",
+      answer:
+        "Yes, but active acne also needs attention so we're not constantly chasing new marks. Often we combine acne control with mark-fading in the same phase, adjusting intensity depending on how calm or active your skin is.",
+    },
+  ],
 };
-

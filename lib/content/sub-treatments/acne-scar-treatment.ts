@@ -3,67 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const acneScarTreatmentContent: SubTreatmentContent = {
   hero: {
     title: "Acne Scar Treatment",
-    tagline: "Smoothen uneven texture",
-    intro: "Acne scars can remain long after pimples have settled and may make the skin look uneven in certain light. At Pragna Skin Clinic, we use a combination of advanced dermatology treatments to gradually soften scars, improve texture, and make skin look smoother and more even."
+    tagline: "Smooth the dents, softly",
+    intro:
+      "Even after acne is gone, scars can keep the story alive - small pits, craters, uneven texture that shows in every sidelight. Acne scar treatment uses a customised mix of subcision, TCA CROSS, MNRF, PRP and fractional lasers to gradually smooth the surface and soften the way scars catch the light.",
   },
   quickStats: {
-    sessions: "3-6 sessions, 4-6 weeks apart",
-    duration: "45-60 mins per session",
-    downtime: "1-3 days of redness or sensitivity",
-    painLevel: "Mild to moderate with numbing cream"
+    sessions: "3-6 sessions, 4-8 weeks apart",
+    duration: "45-75 mins (depending on combo)",
+    downtime: "3-7 days of visible redness/marks",
+    painLevel: "Numbing + prickling/pressure",
   },
-  overview: "Different scars need different approaches. We assess whether your scars are rolling, boxcar, or ice-pick type, and then use suitable treatments like microneedling-based procedures, fractional lasers, subcision, specialised peels, or PRP-based therapies. The goal is to stimulate collagen, release tethered scars, and improve overall skin texture over time.",
+  overview:
+    "We first classify your scars - ice pick, rolling, boxcar, mixed or hypertrophic - because each type needs a different tool. Subcision releases tethered scars, TCA CROSS targets deep ice picks, MNRF and fractional CO2/Erbium resurface texture, and PRP or GFC supports healing and collagen from within.",
   isThisForYou: [
-    "You see dents or pits on your cheeks, forehead, or jawline from old acne",
-    "Your scars look more obvious in bright light or photos",
-    "Makeup tends to settle into uneven areas and highlight texture",
-    "Your acne is mostly under control but scars remain",
-    "You are willing to commit to multiple sessions for gradual improvement"
+    "You see tiny holes or dents on your cheeks or temples where acne once was",
+    "Makeup sits unevenly on pitted areas and looks patchy in photos",
+    "Old scars make you feel you still have 'bad skin' even with no active acne",
+    "You've tried creams and home treatments with little change in scars",
+    "You're okay with gradual improvement over months, not an overnight erase",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Detailed Scar Assessment & Planning",
-        description: "Your dermatologist studies your scars closely, sometimes using different lighting angles or photographs. We discuss your medical history, past treatments, and downtime expectations. You may be asked to use certain creams, sunscreen, or stop actives for a few days before procedures to prepare the skin."
+        title: "Scar mapping & staging",
+        description:
+          "We examine your scars in different lighting and angles, often clicking close-up photos. Scar types are mapped - ice pick, rolling, boxcar, raised or pigmented. We also check your current acne status; if new pimples are still appearing, we may first work on controlling them before aggressive scar work.",
       },
       {
         phase: "during",
-        title: "Targeted Scar Procedures",
-        description: "Numbing cream is applied to keep you comfortable. Depending on your scar type, we may perform microneedling-based treatments, laser sessions, subcision, or a combination. You may feel pressure, mild pricking, or warmth during the procedure, which usually takes 45-60 minutes."
+        title: "Layered scar procedures",
+        description:
+          "After numbing, subcision is done with a special needle or cannula to break the fibrous bands pulling scars down, which may feel like pressure and mild tugging. TCA CROSS is applied with a fine tip into deep, narrow scars. MNRF or fractional lasers then resurface broader areas with a warm, prickly sensation. PRP or GFC may be injected or used with microneedling to enhance healing.",
       },
       {
         phase: "after",
-        title: "Healing Support & Follow-Up",
-        description: "Expect some redness, mild swelling, or tiny marks for a few days, depending on the treatment depth. You will be given clear instructions on cleansing, moisturising, and sun protection. Follow-up visits allow us to monitor healing, space sessions correctly, and adjust the plan if needed."
-      }
-    ]
+        title: "Healing, redness and collagen time",
+        description:
+          "You can expect redness, swelling, tiny scabs or grid marks for a few days. Bruising is possible where subcision is done. We give a strict routine with gentle cleanser, moisturiser and sunscreen and clear guidance on what to avoid - no picking, scrubs or salon facials until fully healed.",
+      },
+    ],
   },
   results: {
-    timeline: "Most people notice smoother texture and softer scars gradually over 3-6 sessions, with improvements continuing for several months as collagen remodelling takes place. Results are progressive rather than overnight, and realistic goals are discussed before starting.",
-    recovery: "You may need a short social downtime of 1-3 days after deeper sessions, with redness and sensitivity. With proper aftercare and sun protection, the skin usually settles well and looks healthier over the long term."
+    timeline:
+      "Most people notice early changes - smoother makeup application, softer edges to scars - after 1-2 sessions. Collagen remodelling continues for months, and best results are usually seen after 3-6 sessions spaced out over 6-12 months, depending on severity and skin type.",
+    recovery:
+      "Plan for 3-7 days where your skin may look clearly 'treated' - red, spotty or slightly swollen. Many patients schedule sessions so that the most visible phase falls on weekends or lighter work periods.",
   },
   faqs: [
     {
-      question: "Are acne scar treatments permanent?",
-      answer: "Once new collagen is formed and scars are improved, results are generally long lasting. However, no treatment can promise to erase scars completely. Our goal is to make scars far less noticeable and your overall skin texture smoother and more even."
+      question: "Can old acne scars from many years ago still improve?",
+      answer:
+        "Yes. Even scars from 5-10 years ago can respond to subcision, MNRF and fractional lasers because these treatments stimulate new collagen. Older scars may need more sessions, but improvement is still possible.",
     },
     {
-      question: "Will my scars look worse after treatment?",
-      answer: "Scars may look temporarily redder or more obvious for a few days while the skin is healing, but this settles. With properly planned treatments and aftercare, the long-term direction is improvement, not worsening, and all procedures are chosen to suit your skin type."
+      question: "Will scar treatments make my skin darker?",
+      answer:
+        "Any strong treatment carries a risk of temporary pigmentation, especially in Indian skin. We minimise this by careful parameter selection, pre- and post-procedure creams and strict sun protection. If you're prone to dark marks, we build in extra pigment control and gentler settings.",
     },
     {
-      question: "Is it safe for darker Indian skin?",
-      answer: "Yes. We choose technologies, depths, and energy levels carefully to suit Indian skin and reduce the risk of pigmentation. Pre- and post-procedure care with sunscreen and soothing products further help protect your skin during healing."
+      question: "Can scars disappear 100%?",
+      answer:
+        "Completely erasing all scars is rarely realistic, especially for very deep or widespread scarring. Our goal is to reduce depth, soften edges and improve overall texture so scars are much less noticeable in everyday light and photos.",
     },
     {
-      question: "How many sessions will I need?",
-      answer: "Most people need between 3 and 6 sessions, spaced 4-6 weeks apart, depending on scar depth, type, and your skin's healing response. Very deep or long-standing scars may need a longer course or combination approaches, which we discuss clearly at the start."
+      question: "How do you decide between MNRF and fractional lasers?",
+      answer:
+        "MNRF delivers energy through microneedles, which can be safer for certain darker skin tones and for scars needing deeper tightening. Fractional CO2/Erbium works more on the surface texture. We often combine or alternate them based on your scar pattern and healing response.",
     },
     {
-      question: "Can I combine scar treatment with active acne care?",
-      answer: "Active acne must be brought under reasonable control before we aggressively treat scars. In some cases, mild scar-focused procedures can be started while acne treatment is ongoing, but your dermatologist will prioritise controlling new breakouts first."
-    }
-  ]
+      question: "Will I need time off work or college?",
+      answer:
+        "Many people manage with a few days of working from home or using minimal makeup once the top layer has settled. If your work is very appearance-focused, we'll help you plan sessions around lighter weeks or holidays.",
+    },
+  ],
 };
-

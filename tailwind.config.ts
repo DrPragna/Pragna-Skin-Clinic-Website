@@ -158,8 +158,8 @@ const config: Config = {
         'shimmer': 'shimmer 2s linear infinite',
         'magnetic': 'magnetic 0.3s ease-out',
         'grain': 'grain 8s steps(10) infinite',
-        'marquee': 'marquee 30s linear infinite',
-        'marquee-reverse': 'marquee-reverse 30s linear infinite',
+        'marquee': 'marquee 60s linear infinite',
+        'marquee-reverse': 'marquee-reverse 60s linear infinite',
         'spin-slow': 'spin 20s linear infinite',
         'bounce-subtle': 'bounceSubtle 2s ease-in-out infinite',
       },
@@ -246,12 +246,12 @@ const config: Config = {
           '90%': { transform: 'translate(-10%, 10%)' },
         },
         marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
         },
         'marquee-reverse': {
-          '0%': { transform: 'translateX(-50%)' },
-          '100%': { transform: 'translateX(0%)' },
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
         },
         bounceSubtle: {
           '0%, 100%': { transform: 'translateY(0)' },

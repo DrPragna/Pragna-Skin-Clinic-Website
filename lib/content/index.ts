@@ -17,6 +17,7 @@ import { TreatmentFamilyContent, SubTreatmentContent } from '@/lib/navigationDat
 // ============================================
 import { laserHairReductionContent } from './treatment-families/laser-hair-reduction';
 import { acneAcneScarSolutionsContent } from './treatment-families/acne-acne-scar-solutions';
+import { antiAgeingTighteningContouringContent } from './treatment-families/anti-ageing-tightening-contouring';
 
 // ============================================
 // SUB-TREATMENT CONTENT IMPORTS
@@ -36,6 +37,14 @@ import { acneScarTreatmentContent } from './sub-treatments/acne-scar-treatment';
 import { postAcneMarksRednessContent } from './sub-treatments/post-acne-marks-redness';
 import { teenAcneTreatmentContent } from './sub-treatments/teen-acne-treatment';
 
+// Anti-Ageing, Tightening & Contouring family
+import { fineLinesWrinklesTreatmentContent } from './sub-treatments/fine-lines-wrinkles-treatment';
+import { faceNeckSkinTighteningContent } from './sub-treatments/face-neck-skin-tightening';
+import { jawlineChinContouringContent } from './sub-treatments/jawline-chin-contouring';
+import { neckLinesTreatmentContent } from './sub-treatments/neck-lines-treatment';
+import { underEyeRejuvenationContent } from './sub-treatments/under-eye-rejuvenation';
+import { handDecolleteRejuvenationContent } from './sub-treatments/hand-decollete-rejuvenation';
+
 // ============================================
 // CONTENT MAPS
 // ============================================
@@ -47,9 +56,9 @@ import { teenAcneTreatmentContent } from './sub-treatments/teen-acne-treatment';
 export const treatmentFamilyContentMap: Record<string, TreatmentFamilyContent> = {
   'laser-hair-reduction': laserHairReductionContent,
   'acne-acne-scar-solutions': acneAcneScarSolutionsContent,
+  'anti-ageing-tightening-contouring': antiAgeingTighteningContouringContent,
   // Add more as content files are created:
   // 'pigmentation-tanning-glow': pigmentationTanningGlowContent,
-  // 'anti-ageing-tightening-contouring': antiAgeingTighteningContouringContent,
   // 'advanced-facials-boosters': advancedFacialsBoostersContent,
   // 'hair-growth-scalp-treatments': hairGrowthScalpTreatmentsContent,
   // 'body-contouring-fat-reduction': bodyContouringFatReductionContent,
@@ -76,6 +85,14 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
   'acne-scar-treatment': acneScarTreatmentContent,
   'post-acne-marks-redness': postAcneMarksRednessContent,
   'teen-acne-treatment': teenAcneTreatmentContent,
+  
+  // Anti-Ageing, Tightening & Contouring
+  'fine-lines-wrinkles-treatment': fineLinesWrinklesTreatmentContent,
+  'face-neck-skin-tightening': faceNeckSkinTighteningContent,
+  'jawline-chin-contouring': jawlineChinContouringContent,
+  'neck-lines-treatment': neckLinesTreatmentContent,
+  'under-eye-rejuvenation': underEyeRejuvenationContent,
+  'hand-decollete-rejuvenation': handDecolleteRejuvenationContent,
   
   // Add more as content files are created...
 };
@@ -113,4 +130,3 @@ export function hasTreatmentFamilyContent(slug: string): boolean {
 export function hasSubTreatmentContent(slug: string): boolean {
   return slug in subTreatmentContentMap;
 }
-

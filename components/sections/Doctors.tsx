@@ -2,135 +2,156 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 
 /**
- * DOCTORS SECTION - Compact Professional Layout
+ * DOCTORS SECTION - Editorial Profiles Side-by-Side
  * 
  * Design Philosophy:
- * - Smaller, elegant portraits
- * - Focus on credentials
- * - Clean, professional feel
+ * - Large, magazine-style portraits
+ * - Side-by-side comparison of expertise
+ * - Narrative focus on expertise
  */
 
 const doctors = [
   {
+    id: 'padmavathi',
     name: 'Dr. Padmavathi Surapaneni',
-    title: 'Senior Dermatologist & Founder',
+    role: 'Senior Dermatologist & Founder',
     credentials: 'MBBS, DVD, DNB',
-    experience: '25+ years',
-    description: 'With decades of experience and an international reputation as a speaker and researcher, Dr. Padmavathi leads Pragna\'s clinical vision with a focus on safe, effective treatments.',
+    experience: '25+ Years of Excellence',
+    bio: 'A pioneer in clinical dermatology, Dr. Padmavathi has spent over two decades refining the art of skin care. Known for her diagnostic precision and ethical approach, she combines deep medical knowledge with an eye for aesthetic harmony.',
+    image: '/doctors/padmavathi-portrait.jpg', // Placeholder path
+    signature: 'Expertise & Ethics',
+    badge: '25+ Years Experience',
   },
   {
+    id: 'pragna',
     name: 'Dr. Pragna Surapaneni',
-    title: 'Dermatologist',
+    role: 'Consultant Dermatologist',
     credentials: 'MBBS, MD (Dermatology)',
+    experience: 'Advanced Laser Specialist',
+    bio: 'Representing the next generation of dermatology, Dr. Pragna specializes in advanced laser technologies and cosmetic procedures. Her approach is holistic, ensuring every treatment is tailored to the patient’s unique lifestyle and goals.',
+    image: '/doctors/pragna-portrait.jpg', // Placeholder path
+    signature: 'Innovation & Care',
     badge: 'Gold Medalist',
-    description: 'Dr. Pragna specializes in advanced skin, hair, and laser procedures, blending cutting-edge technology with a personalized, empathetic approach.',
   },
 ];
 
 export default function Doctors() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: '-100px' });
+  const isInView = useInView(containerRef, { once: true, margin: '-50px' });
 
   return (
     <section 
       id="about"
       ref={containerRef}
-      className="relative py-14 lg:py-20 bg-cream overflow-hidden"
+      className="py-12 lg:py-16 bg-cream relative overflow-hidden"
     >
-      {/* Background Elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-terracotta/10 rounded-full blur-3xl" />
-
-      <div className="section-container relative">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
+      <div className="section-container max-w-6xl mx-auto">
+        {/* Section Header - Center Aligned */}
+        <div className="text-center mb-12 lg:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-3 mb-6"
+            className="text-maroon font-medium tracking-[0.2em] uppercase text-xs block mb-4"
           >
-            <span className="w-8 h-px bg-maroon/40" />
-            <span className="text-maroon font-medium tracking-[0.2em] uppercase text-xs">
               Our Experts
-            </span>
-            <span className="w-8 h-px bg-maroon/40" />
           </motion.span>
-          
-          <div className="overflow-hidden">
             <motion.h2
-              initial={{ y: 80 }}
-              animate={isInView ? { y: 0 } : {}}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl lg:text-5xl font-display text-charcoal"
             >
-              Meet your{' '}
-              <span className="italic text-maroon">dermatologists</span>
+            Meet the <span className="italic text-maroon">Dermatologists</span>
             </motion.h2>
-          </div>
         </div>
 
-        {/* Doctors Grid */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
+        {/* Doctor Profiles - Side by Side Grid - More Compact */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {doctors.map((doctor, index) => (
             <motion.div
-              key={doctor.name}
-              initial={{ opacity: 0, y: 50 }}
+              key={doctor.id}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ 
-                duration: 0.7, 
-                delay: index * 0.15,
+                duration: 0.8, 
+                delay: index * 0.2,
                 ease: [0.16, 1, 0.3, 1]
               }}
-              className="group cursor-pointer"
+              className="flex flex-col items-center text-center bg-white p-8 rounded-[2.5rem] shadow-sm border border-maroon/5 hover:shadow-md transition-all duration-500 group"
             >
-              {/* Card Container with hover effects */}
-              <div className="h-full bg-beige rounded-3xl overflow-hidden border-2 border-transparent hover:border-maroon/10 shadow-soft hover:shadow-soft-xl transition-all duration-500 hover:-translate-y-2 p-6 lg:p-8">
-                {/* Portrait Container - Smaller */}
-                <div className="relative mb-6">
-                  {/* Image */}
-                  <div className="relative aspect-[4/5] max-w-[200px] mx-auto overflow-hidden rounded-2xl bg-gradient-to-br from-terracotta/30 via-rose-gold/20 to-beige-warm transition-transform duration-500 group-hover:scale-[1.02]">
-                    {/* Placeholder */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <span className="text-maroon/20 font-display text-lg italic block">Add portrait</span>
-                      </div>
+              {/* Image Section - Even Smaller */}
+              <div className="w-full max-w-[260px] relative mb-8 group-hover:scale-105 transition-transform duration-700">
+                <div className="relative aspect-[4/5] overflow-visible rounded-[2rem] shadow-xl shadow-maroon/5">
+                  <div className="absolute inset-0 rounded-[2rem] overflow-hidden">
+                    {/* Portrait Placeholder / Image */}
+                    <div className="absolute inset-0 bg-beige-warm flex items-center justify-center">
+                      {/* Actual Image would go here */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
+                      <span className="text-maroon/20 font-display text-xl italic">
+                        Portrait
+                      </span>
                     </div>
-                    
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-maroon/0 group-hover:bg-maroon/5 transition-colors duration-500" />
                   </div>
 
-                  {/* Badge - Experience or Gold Medalist */}
-                  {doctor.badge ? (
-                    <div 
-                      className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-maroon text-cream px-4 py-2 rounded-full shadow-soft text-center transition-transform duration-300 group-hover:scale-110"
+                  {/* Floating Badge - Creative Positioning */}
+                  <div className="absolute -bottom-6 -right-6 z-20">
+                    <motion.div 
+                      whileHover={{ scale: 1.05, rotate: 2 }}
+                      className="bg-cream border border-maroon/10 px-5 py-2.5 rounded-xl shadow-lg shadow-maroon/10 flex items-center gap-3"
                     >
-                      <span className="text-sm font-medium">{doctor.badge}</span>
+                      <div className="w-8 h-8 rounded-full bg-rose-gold/20 flex items-center justify-center text-maroon">
+                        {index === 0 ? (
+                          <span className="text-xs font-bold">25+</span>
+                        ) : (
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
+                          </svg>
+                        )}
                     </div>
-                  ) : doctor.experience && (
-                    <div 
-                      className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-maroon text-cream px-4 py-2 rounded-full shadow-soft text-center transition-transform duration-300 group-hover:scale-110"
-                    >
-                      <span className="text-sm font-medium">{doctor.experience}</span>
+                      <span className="text-maroon font-display text-sm font-medium whitespace-nowrap">{doctor.badge}</span>
+                    </motion.div>
                     </div>
-                  )}
+
+                  {/* Subtle Frame Border */}
+                  <div className="absolute inset-0 border border-white/20 rounded-[2rem] z-10 pointer-events-none" />
+                </div>
                 </div>
 
-                {/* Info */}
-                <div className="text-center space-y-3 pt-4">
+              {/* Text Content - Improved Contrast */}
+              <div className="w-full max-w-md space-y-4">
                   <div>
-                    <h3 className="text-xl lg:text-2xl font-display text-charcoal transition-colors duration-300 group-hover:text-maroon">
+                  <h3 className="text-2xl lg:text-3xl font-display text-charcoal font-medium mb-1">
                       {doctor.name}
                     </h3>
-                    <p className="text-maroon font-medium text-sm mt-1">{doctor.title}</p>
-                    <p className="text-charcoal/50 text-xs mt-0.5">{doctor.credentials}</p>
+                  <p className="text-base text-maroon/80 font-medium italic">
+                    {doctor.role}
+                  </p>
                   </div>
                   
-                  <p className="text-charcoal/70 text-sm leading-relaxed max-w-sm mx-auto">
-                    {doctor.description}
+                <div className="w-12 h-px bg-maroon/30 mx-auto" />
+
+                <div className="space-y-3">
+                  <p className="text-charcoal/90 text-sm lg:text-base leading-relaxed font-normal line-clamp-4 lg:line-clamp-none">
+                    {doctor.bio}
                   </p>
+                  
+                  <div className="pt-1">
+                    <p className="text-[10px] text-maroon/60 uppercase tracking-widest mb-1 font-bold">Credentials</p>
+                    <p className="text-charcoal font-medium font-sans text-sm">{doctor.credentials}</p>
+                  </div>
+                </div>
+
+                <div className="pt-3">
+                  <a href="#contact" className="inline-flex items-center gap-2 text-maroon text-xs uppercase tracking-widest hover:opacity-70 transition-opacity group">
+                    <span>Book Consultation</span>
+                    <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </motion.div>
