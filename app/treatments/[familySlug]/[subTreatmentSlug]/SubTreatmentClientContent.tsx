@@ -22,13 +22,13 @@ export default function SubTreatmentClientContent({
 }: SubTreatmentClientContentProps) {
   const [activeSection, setActiveSection] = useState('overview');
 
-  // Helper for Abstract Gradient Fallback
+  // Helper for Abstract Gradient Fallback - Sophisticated, muted tones
   const getGradientClass = (pillar: string) => {
     switch (pillar) {
-        case 'Skin': return 'from-rose-400 via-rose-900 to-rose-950';
-        case 'Hair': return 'from-amber-600 via-stone-800 to-stone-900';
-        case 'Body': return 'from-orange-400 via-orange-900 to-orange-950';
-        default: return 'from-teal-400 via-teal-900 to-teal-950';
+        case 'Skin': return 'from-[#C9A9A6] via-[#8B6F6B] to-[#5C4A47]'; // Dusty rose to warm taupe
+        case 'Hair': return 'from-[#B8A99A] via-[#7D6E5D] to-[#4A4039]'; // Warm beige to soft brown
+        case 'Body': return 'from-[#C4A98C] via-[#8B7355] to-[#5A4A3A]'; // Muted clay to warm umber
+        default: return 'from-[#A3B5A6] via-[#6B7D6E] to-[#3D4A3F]'; // Sage to forest
     }
   };
 

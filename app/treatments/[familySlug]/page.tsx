@@ -332,13 +332,14 @@ export default async function TreatmentFamilyPage({
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {family.subTreatments.map((treatment, i) => {
               const treatmentImage = (treatment as any).image;
+              // Sophisticated, muted gradient tones
               const gradientClass = family.pillar === 'Skin' 
-                ? 'from-rose-400 via-rose-900 to-rose-950'
+                ? 'from-[#C9A9A6] via-[#8B6F6B] to-[#5C4A47]' // Dusty rose to warm taupe
                 : family.pillar === 'Hair'
-                ? 'from-amber-600 via-stone-800 to-stone-900'
+                ? 'from-[#B8A99A] via-[#7D6E5D] to-[#4A4039]' // Warm beige to soft brown
                 : family.pillar === 'Body'
-                ? 'from-orange-400 via-orange-900 to-orange-950'
-                : 'from-teal-400 via-teal-900 to-teal-950';
+                ? 'from-[#C4A98C] via-[#8B7355] to-[#5A4A3A]' // Muted clay to warm umber
+                : 'from-[#A3B5A6] via-[#6B7D6E] to-[#3D4A3F]'; // Sage to forest
               
               return (
                 <Reveal key={treatment.slug} delay={i * 0.1} className="h-full">
