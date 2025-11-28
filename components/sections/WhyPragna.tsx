@@ -15,18 +15,18 @@ import { motion, useInView } from 'framer-motion';
 const pillars = [
   {
     number: '01',
-    title: 'Deep Experience,\nReal Results',
-    description: 'For over 25 years, our dermatologists have treated everything from everyday concerns to complex cases. Our approach is rooted in science, backed by research, and refined by thousands of patient journeys.',
+    title: 'Legacy of\nMastery',
+    description: 'Founded by Dr. N.K. Pragna, with over 25 years of clinical excellence. We don’t just treat skin; we understand its story.',
   },
   {
     number: '02',
-    title: 'Technology\nThat Leads',
-    description: 'Pragna has consistently been ahead of the curve – introducing advanced devices and procedures before they became mainstream. Our clinics house cutting-edge lasers and protocols chosen for safety and effectiveness.',
+    title: 'Curated\nInnovation',
+    description: 'We don’t chase trends. We invest in gold-standard technologies proven to deliver safe, transformative results.',
   },
   {
     number: '03',
-    title: 'Ethical,\nTransparent Care',
-    description: 'We believe excellent dermatology should be accessible and honest. Every recommendation is medically justified, every plan explained, and our pricing transparent.',
+    title: 'Integrity\nby Design',
+    description: 'No hidden costs, no unnecessary procedures. Just honest, evidence-based dermatology centered on your well-being.',
   },
 ];
 
@@ -37,32 +37,32 @@ export default function WhyPragna() {
   return (
     <section 
       ref={containerRef}
-      className="py-12 lg:py-16 bg-beige-warm relative overflow-hidden"
+      className="py-12 lg:py-20 bg-[#FDFCFB] relative overflow-hidden"
     >
-      <div className="section-container">
-        {/* Section Header - Center Aligned */}
+      <div className="section-container max-w-7xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-12 lg:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-maroon font-medium tracking-[0.2em] uppercase text-xs block mb-4"
+            className="text-maroon/80 font-medium tracking-[0.2em] uppercase text-xs block mb-4"
           >
-            The Pragna Difference
+            The Pragna Promise
           </motion.span>
           
-            <motion.h2
+          <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl lg:text-5xl font-display text-charcoal"
-            >
-            Why patients <span className="italic text-maroon">trust us</span>
-            </motion.h2>
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-5xl lg:text-7xl font-display text-charcoal tracking-tight"
+          >
+            Why patients <span className="italic text-maroon font-serif">trust us</span>
+          </motion.h2>
         </div>
 
-        {/* Pillars Grid - Clean Typographic Layout */}
-        <div className="grid lg:grid-cols-3 gap-0 border-t border-maroon/10">
+        {/* Editorial Cards Grid */}
+        <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
           {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.number}
@@ -71,31 +71,35 @@ export default function WhyPragna() {
               transition={{ 
                 duration: 0.8, 
                 delay: 0.2 + (index * 0.15),
-                ease: [0.16, 1, 0.3, 1]
+                ease: [0.22, 1, 0.36, 1]
               }}
-              className={`
-                relative group p-8 lg:p-12 border-b border-maroon/10
-                ${index !== pillars.length - 1 ? 'lg:border-r' : ''}
-                hover:bg-white/40 transition-colors duration-500
-              `}
+              className="group relative"
             >
-              {/* Large Number */}
-              <span className="block text-6xl lg:text-7xl font-display text-maroon/10 mb-8 transition-colors duration-500 group-hover:text-maroon/20">
-                {pillar.number}
-              </span>
+              <div className="relative h-full p-10 bg-white rounded-[2rem] border border-stone-100 shadow-[0_2px_20px_-10px_rgba(0,0,0,0.05)] transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] overflow-hidden">
+                {/* Hover Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-stone-50/50 to-maroon/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                
+                {/* Content */}
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Number */}
+                  <div className="mb-10 flex items-center justify-between">
+                     <span className="text-5xl font-display text-stone-200 group-hover:text-maroon/20 transition-colors duration-500">
+                      {pillar.number}
+                    </span>
+                    <div className="w-12 h-[1px] bg-stone-200 group-hover:bg-maroon/30 transition-colors duration-500" />
+                  </div>
 
-              {/* Title */}
-              <h3 className="text-2xl lg:text-3xl font-display text-charcoal mb-6 whitespace-pre-line leading-tight">
+                  {/* Title */}
+                  <h3 className="text-3xl font-display text-charcoal mb-6 leading-[1.15] group-hover:text-maroon transition-colors duration-500">
                     {pillar.title}
                   </h3>
 
-              {/* Description */}
-              <p className="text-charcoal/70 leading-relaxed text-base lg:text-lg font-light">
+                  {/* Description */}
+                  <p className="text-charcoal/60 leading-relaxed text-[15px] font-light tracking-wide mt-auto">
                     {pillar.description}
                   </p>
-                  
-              {/* Decorative Corner Line */}
-              <div className="absolute top-0 left-0 w-0 h-[1px] bg-maroon group-hover:w-full transition-all duration-700 ease-out" />
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

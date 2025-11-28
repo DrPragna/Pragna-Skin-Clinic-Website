@@ -70,17 +70,15 @@ export default function Doctors() {
         </div>
 
         {/* Doctor Profiles - Side by Side Grid - More Compact */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <motion.div 
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
           {doctors.map((doctor, index) => (
-            <motion.div
+            <div
               key={doctor.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ 
-                duration: 0.8, 
-                delay: index * 0.2,
-                ease: [0.16, 1, 0.3, 1]
-              }}
               className="flex flex-col items-center text-center bg-white p-8 rounded-[2.5rem] shadow-sm border border-maroon/5 hover:shadow-md transition-all duration-500 group"
             >
               {/* Image Section - Even Smaller */}
@@ -154,9 +152,9 @@ export default function Doctors() {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

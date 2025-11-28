@@ -392,10 +392,10 @@ export default function Navbar() {
           <div className="hidden lg:block">
             <Link 
               href="/#contact" 
-              className={`text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${
                 useTransparentStyle 
-                  ? 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/30' 
-                  : 'bg-maroon text-cream hover:bg-maroon-dark'
+                  ? 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/40 hover:border-white/80 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]' 
+                  : 'bg-maroon text-cream hover:bg-maroon-light hover:shadow-soft-lg'
               }`}
             >
               Book Appointment

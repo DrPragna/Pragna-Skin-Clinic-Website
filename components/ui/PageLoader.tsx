@@ -97,7 +97,7 @@ export default function PageLoader() {
                 delay: isExiting ? 0 : 0.5
               }}
             >
-              The Art of Radiance
+              World Class Aesthetic Care
             </motion.p>
             
             {/* Loading indicator line */}
