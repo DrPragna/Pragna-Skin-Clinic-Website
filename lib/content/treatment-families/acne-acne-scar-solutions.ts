@@ -2,6 +2,7 @@ import { TreatmentFamilyContent } from "@/lib/navigationData";
 
 export const acneAcneScarSolutionsContent: TreatmentFamilyContent = {
   hero: {
+    eyebrow: "SKIN • RESTORE • CONFIDENCE",
     title: "Acne & Acne Scar Solutions",
     subtitle: "From breakouts to clear skin",
     intro:

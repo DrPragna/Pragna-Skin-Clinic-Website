@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigationData } from '@/lib/navigationData';
@@ -77,6 +77,33 @@ export default function Navbar() {
   
   const treatmentsRef = useRef<HTMLDivElement>(null);
   const conditionsRef = useRef<HTMLDivElement>(null);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Handle dropdown with delay for better UX (allows diagonal mouse movement)
+  const openDropdown = useCallback((name: string) => {
+    // Clear any pending close timeout
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+      dropdownTimeoutRef.current = null;
+    }
+    setActiveDropdown(name);
+  }, []);
+
+  const closeDropdown = useCallback(() => {
+    // Delay closing to allow mouse to travel to megamenu
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150); // 150ms delay gives time to reach the megamenu
+  }, []);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -138,28 +165,24 @@ export default function Navbar() {
             {/* Treatments Dropdown (Mega Menu) */}
             <div 
               className="relative py-4"
-              onMouseEnter={() => setActiveDropdown('treatments')}
-              onMouseLeave={() => setActiveDropdown(null)}
+              onMouseEnter={() => openDropdown('treatments')}
+              onMouseLeave={closeDropdown}
             >
               <Link href="/treatments" className={`${linkClasses} ${activeDropdown === 'treatments' ? 'text-maroon' : ''}`}>
                 Treatments
                 <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'treatments' ? 'rotate-180' : ''}`} />
               </Link>
-              {/* Bridge element to connect trigger with dropdown */}
-              {activeDropdown === 'treatments' && (
-                <div className="absolute left-0 right-0 h-8 top-full" />
-              )}
             </div>
             
             {/* Mega Menu Dropdown - Positioned outside trigger for proper hover handling */}
             <div 
-              className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-[1400px] bg-white/95 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-white/40 transition-all duration-500 z-50 overflow-hidden ${
+              className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-[1400px] bg-white shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-gray-100 transition-all duration-500 z-50 overflow-hidden ${
                 activeDropdown === 'treatments' 
                   ? 'opacity-100 visible translate-y-0 pointer-events-auto' 
                   : 'opacity-0 invisible translate-y-4 pointer-events-none'
               }`}
-              onMouseEnter={() => setActiveDropdown('treatments')}
-              onMouseLeave={() => setActiveDropdown(null)}
+              onMouseEnter={() => openDropdown('treatments')}
+              onMouseLeave={closeDropdown}
             >
               {/* Scrollable Content */}
               <div 
@@ -227,28 +250,24 @@ export default function Navbar() {
             {/* Conditions Dropdown Trigger */}
             <div 
               className="relative py-4"
-              onMouseEnter={() => setActiveDropdown('conditions')}
-              onMouseLeave={() => setActiveDropdown(null)}
+              onMouseEnter={() => openDropdown('conditions')}
+              onMouseLeave={closeDropdown}
             >
               <Link href="/conditions" className={`${linkClasses} ${activeDropdown === 'conditions' ? 'text-maroon' : ''}`}>
                 Conditions
                 <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'conditions' ? 'rotate-180' : ''}`} />
               </Link>
-              {/* Bridge element to connect trigger with dropdown */}
-              {activeDropdown === 'conditions' && (
-                <div className="absolute left-0 right-0 h-8 top-full" />
-              )}
             </div>
             
             {/* Conditions Mega Menu - Positioned outside trigger for proper hover handling */}
             <div 
-              className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-[1200px] bg-white/95 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-white/40 transition-all duration-500 z-50 overflow-hidden ${
+              className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-[1200px] bg-white shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-gray-100 transition-all duration-500 z-50 overflow-hidden ${
                 activeDropdown === 'conditions' 
                   ? 'opacity-100 visible translate-y-0 pointer-events-auto' 
                   : 'opacity-0 invisible translate-y-4 pointer-events-none'
               }`}
-              onMouseEnter={() => setActiveDropdown('conditions')}
-              onMouseLeave={() => setActiveDropdown(null)}
+              onMouseEnter={() => openDropdown('conditions')}
+              onMouseLeave={closeDropdown}
             >
               {/* Scrollable Content */}
               <div 

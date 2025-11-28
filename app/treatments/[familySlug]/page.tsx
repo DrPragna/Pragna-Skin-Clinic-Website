@@ -5,6 +5,7 @@ import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getTreatmentFamily, getConditionsForFamily } from '@/lib/navigationData';
 import { getTreatmentFamilyContent } from '@/lib/content';
+import { Reveal, StaggerContainer, StaggerItem } from '@/components/ui/Reveal';
 
 export function generateStaticParams() {
   return treatmentFamilies.map((family) => ({
@@ -12,7 +13,6 @@ export function generateStaticParams() {
   }));
 }
 
-// Generate metadata for SEO
 export async function generateMetadata({ 
   params 
 }: { 
@@ -61,8 +61,8 @@ export default async function TreatmentFamilyPage({
   const relatedConditions = getConditionsForFamily(familySlug);
   const content = getTreatmentFamilyContent(familySlug);
 
-  // Fallback content if no content file exists
   const heroTitle = content?.hero.title || family.name;
+  const heroEyebrow = content?.hero.eyebrow || `${family.pillar} • TREATMENTS`;
   const heroSubtitle = content?.hero.subtitle || 'Expert dermatologist care';
   const heroIntro = content?.hero.intro || family.summary;
   
@@ -93,7 +93,6 @@ export default async function TreatmentFamilyPage({
     },
   ];
   
-  const whoIsThisForHeadline = content?.whoIsThisFor.headline || 'Ideal for you if...';
   const whoIsThisForList = content?.whoIsThisFor.list || [
     'You want long-lasting results, not temporary fixes',
     'You prefer medically supervised care over salon treatments',
@@ -116,32 +115,16 @@ export default async function TreatmentFamilyPage({
     },
   ];
 
-  // Breadcrumb Schema for SEO
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Treatments',
-        item: 'https://pragnaskinclinic.com/treatments',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: family.pillar,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: family.name,
-        item: `https://pragnaskinclinic.com/treatments/${family.slug}`,
-      },
+      { '@type': 'ListItem', position: 1, name: 'Treatments', item: 'https://pragnaskinclinic.com/treatments' },
+      { '@type': 'ListItem', position: 2, name: family.pillar },
+      { '@type': 'ListItem', position: 3, name: family.name, item: `https://pragnaskinclinic.com/treatments/${family.slug}` },
     ],
   };
 
-  // Service Schema for SEO
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'MedicalProcedure',
@@ -153,400 +136,305 @@ export default async function TreatmentFamilyPage({
     followup: 'Regular monitoring and aftercare support',
   };
 
-  // Icon components for how it works
-  const getStepIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'consultation':
-        return (
-          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="16" cy="16" r="12" />
-            <path d="M16 10v6l4 2" strokeLinecap="round" />
-          </svg>
-        );
-      case 'treatment':
-        return (
-          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M16 4v24M4 16h24" strokeLinecap="round" />
-            <circle cx="16" cy="16" r="6" />
-          </svg>
-        );
-      case 'results':
-        return (
-          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M6 16l6 6L26 8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        );
-      default:
-        return (
-          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="16" cy="16" r="12" />
-          </svg>
-        );
-    }
-  };
-
   return (
     <>
-      {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       
     <main className="overflow-x-hidden bg-beige-warm">
       <Navbar />
       
       {/* ============================================
-          HERO - Editorial Split Layout
+          HERO
           ============================================ */}
-      <section className="pt-28 pb-12 md:pt-36 md:pb-16 relative overflow-hidden">
-        <div className="section-container relative z-10">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm mb-10">
-            <Link href="/treatments" className="text-charcoal/40 hover:text-maroon transition-colors">
-              Treatments
-            </Link>
-            <span className="text-charcoal/20">/</span>
-            <span className="text-charcoal/40">{family.pillar}</span>
-            <span className="text-charcoal/20">/</span>
-            <span className="text-maroon">{family.name}</span>
-          </nav>
-          
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left: Content */}
-            <div className="order-2 lg:order-1">
-              {/* Tiny label */}
-              <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-6 block">
-                Treatment Family
-              </span>
-              
-              {/* Title */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display text-charcoal leading-[1.05] mb-4">
-                {heroTitle}
-              </h1>
-              
-              {/* Subtitle */}
-              <p className="text-xl md:text-2xl text-maroon/60 font-light italic mb-6">
-                {heroSubtitle}
-              </p>
-              
-              {/* Intro */}
-              <p className="text-lg text-charcoal/60 leading-relaxed mb-8">
-                {heroIntro}
-              </p>
-              
-              {/* CTA */}
-              <a 
-                href="#treatments" 
-                className="inline-flex items-center gap-3 bg-charcoal text-beige-warm px-8 py-4 rounded-full font-medium hover:bg-maroon transition-colors duration-300 group"
-              >
-                Explore Treatments
-                <svg 
-                  className="w-4 h-4 transform group-hover:translate-y-0.5 transition-transform" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </a>
-            </div>
+      <section className="relative min-h-[65vh] flex items-center justify-center overflow-hidden bg-charcoal text-white pt-20">
+        <div className="absolute inset-0 z-0">
+            {content?.hero.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={content.hero.image} alt={heroTitle} className="w-full h-full object-cover opacity-50" />
+            ) : (
+                 <div className="w-full h-full bg-gradient-to-br from-charcoal to-black" />
+            )}
             
-            {/* Right: Hero Image */}
-            <div className="order-1 lg:order-2">
-              <div className="aspect-[4/5] bg-gradient-to-br from-maroon/5 via-beige-warm to-terracotta/10 rounded-[2rem] overflow-hidden relative">
-                {content?.hero.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img 
-                    src={content.hero.image} 
-                    alt={heroTitle}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <>
-                    {/* Decorative elements */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-32 h-32 border border-maroon/10 rounded-full" />
-                      <div className="absolute w-48 h-48 border border-terracotta/10 rounded-full" />
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <p className="text-maroon/30 text-sm italic">
-                        Need: Editorial hero image for {family.name}
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
-          TRUST STRIP - The Badge
-          ============================================ */}
-      <section className="py-8 border-y border-charcoal/5 bg-white/50">
-        <div className="section-container">
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {trustIndicators.map((stat, i) => (
-              <div key={i} className="flex items-center gap-3 text-charcoal/60">
-                <span className="text-2xl md:text-3xl font-display text-maroon">{stat.value}</span>
-                <span className="text-xs uppercase tracking-wider">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
-          HOW IT WORKS - The Science (Simplified)
-          ============================================ */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="section-container">
-          <div className="max-w-4xl mx-auto">
-            {/* Section header */}
-            <div className="text-center mb-10">
-              <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
-                The Approach
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-6">
-                How it works
-              </h2>
-              <p className="text-lg text-charcoal/50 max-w-2xl mx-auto">
-                {howItWorksDescription}
-              </p>
-            </div>
-            
-            {/* 3-Step Process */}
-            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-              {howItWorksSteps.map((item, i) => (
-                <div key={i} className="text-center">
-                  {/* Icon */}
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-beige-warm text-maroon mb-6">
-                    {getStepIcon(item.icon || 'default')}
-                  </div>
-                  
-                  {/* Step number */}
-                  <p className="text-[10px] font-mono text-charcoal/30 uppercase tracking-wider mb-2">
-                    Step {String(i + 1).padStart(2, '0')}
+            {(!content?.hero.image || content.hero.image.includes('placeholder') || content.hero.image.startsWith('/images/treatments/')) && (
+               <div className="absolute top-24 right-4 z-20 bg-red-500/20 border border-red-400/50 backdrop-blur-md px-4 py-3 rounded-lg">
+                  <p className="text-red-200 text-xs font-mono flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+                    Missing Hero Image
                   </p>
-                  
-                  {/* Title */}
-                  <h3 className="text-xl font-display text-charcoal mb-3">
-                    {item.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-charcoal/50 text-sm leading-relaxed">
-                    {item.text}
-                  </p>
+                  <p className="text-red-300/60 text-[10px] font-mono mt-1">{family.name}</p>
+               </div>
+            )}
+
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
+        </div>
+
+        <div className="section-container relative z-10 text-center pt-10 pb-16">
+            <Reveal>
+                <span className="inline-block text-white/60 font-sans text-[10px] md:text-xs tracking-[0.4em] uppercase mb-5 border border-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
+                    {heroEyebrow}
+                </span>
+
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-display leading-[1.1] mb-5 text-white">
+                    {heroTitle}
+                </h1>
+
+                <p className="text-xl md:text-2xl text-white/80 font-light italic mb-6 max-w-2xl mx-auto">
+                    {heroSubtitle}
+                </p>
+                
+                <p className="text-base text-white/60 leading-relaxed mb-8 max-w-3xl mx-auto">
+                    {heroIntro}
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a 
+                        href="#treatments" 
+                        className="px-8 py-4 bg-white text-charcoal rounded-full font-medium hover:bg-beige-warm hover:scale-[1.02] transition-all duration-300 min-w-[180px]"
+                    >
+                        Explore Treatments
+                    </a>
                 </div>
-              ))}
+            </Reveal>
+        </div>
+
+         <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/20 backdrop-blur-md py-3">
+            <div className="section-container">
+                 <StaggerContainer className="flex flex-wrap justify-center md:justify-between items-center gap-6 text-white/70 text-xs tracking-widest uppercase">
+                    {trustIndicators.map((stat, i) => (
+                         <StaggerItem key={i} className="flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-maroon" />
+                            {stat.value} {stat.label}
+                         </StaggerItem>
+                    ))}
+                 </StaggerContainer>
             </div>
-          </div>
         </div>
       </section>
 
       {/* ============================================
-          WHO IS THIS FOR - Checklist Card
+          WHY PRAGNA
           ============================================ */}
-      <section className="py-14 md:py-20 bg-beige-warm">
+      <section className="py-16 bg-beige-warm">
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left: Image */}
-            <div>
-              <div className="aspect-square bg-gradient-to-br from-terracotta/10 via-white to-maroon/5 rounded-[2rem] relative overflow-hidden group">
-                {content?.whoIsThisFor.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={content.whoIsThisFor.image}
-                    alt="Is this for you?"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-40 h-40 border border-maroon/10 rounded-full animate-pulse" />
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <p className="text-maroon/30 text-sm italic">
-                        Need: Lifestyle image for {family.name}
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-            
-            {/* Right: Content */}
-            <div>
-              <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
-                Is This For You?
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-6">
-                {whoIsThisForHeadline}
-              </h2>
-              
-              {/* Checklist */}
-              <ul className="space-y-4">
-                {whoIsThisForList.map((item, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span className="text-charcoal/70">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
-          TREATMENT OPTIONS - The Menu
-          ============================================ */}
-      <section id="treatments" className="py-14 md:py-20 bg-white">
-        <div className="section-container">
-          {/* Section header */}
-          <div className="text-center mb-10">
-            <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
-              Your Options
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-4">
-              Treatments in this family
-            </h2>
-            <p className="text-lg text-charcoal/50 max-w-2xl mx-auto">
-              Choose the specific treatment that matches your goals. Each is customised to your needs.
-            </p>
-          </div>
-          
-          {/* Treatment cards - Magazine style list */}
-          <div className="space-y-4">
-            {family.subTreatments.map((treatment, index) => (
-              <Link
-                key={treatment.slug}
-                href={`/treatments/${family.slug}/${treatment.slug}`}
-                className="group block bg-beige-warm/30 hover:bg-beige-warm rounded-2xl p-6 md:p-8 border border-transparent hover:border-charcoal/5 transition-all duration-300"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  {/* Left: Number + Content */}
-                  <div className="flex items-start gap-6">
-                    {/* Number */}
-                    <span className="text-4xl md:text-5xl font-display text-charcoal/10 group-hover:text-maroon/20 transition-colors">
-                      {String(index + 1).padStart(2, '0')}
+            <Reveal>
+                <div className="text-center mb-12">
+                    <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
+                        The Pragna Standard
                     </span>
-                    
-                    {/* Content */}
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-display text-charcoal group-hover:text-maroon transition-colors mb-2">
-                        {treatment.name}
-                      </h3>
-                      <p className="text-charcoal/50 text-sm md:text-base">
-                        {treatment.description}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Right: Arrow */}
-                  <div className="flex-shrink-0 self-end md:self-center">
-                    <div className="w-12 h-12 rounded-full bg-white group-hover:bg-maroon flex items-center justify-center transition-all duration-300 shadow-soft">
-                      <svg 
-                        className="w-5 h-5 text-charcoal/30 group-hover:text-beige-warm transition-colors" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </div>
-                  </div>
+                    <h2 className="text-3xl md:text-4xl font-display text-charcoal">
+                        Why trust us with your skin?
+                    </h2>
                 </div>
-              </Link>
-            ))}
-          </div>
+            </Reveal>
+
+            <StaggerContainer className="grid lg:grid-cols-3 gap-6">
+                 {whyPragnaItems.map((item, i) => (
+                    <StaggerItem key={i} className="group relative bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-lg transition-all duration-400 hover:-translate-y-1 overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white to-maroon/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                        
+                        <div className="relative z-10">
+                             <span className="text-4xl font-display text-charcoal/10 group-hover:text-maroon/15 transition-colors duration-400 block mb-4">
+                                0{i + 1}
+                             </span>
+                             <h3 className="text-lg font-display text-charcoal mb-3 group-hover:text-maroon transition-colors duration-300">
+                                {item.title}
+                             </h3>
+                             <p className="text-charcoal/60 text-sm leading-relaxed">
+                                {item.description}
+                             </p>
+                        </div>
+                    </StaggerItem>
+                 ))}
+            </StaggerContainer>
         </div>
       </section>
 
       {/* ============================================
-          WHY PRAGNA - The Differentiators
+          HOW IT WORKS
           ============================================ */}
-      <section className="py-14 md:py-20 bg-charcoal text-beige-warm relative overflow-hidden">
-        {/* Background texture */}
-        <div className="absolute inset-0 opacity-5">
-          <div 
-            className="absolute inset-0" 
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
-        
-        <div className="section-container relative z-10">
-          <div className="text-center mb-10">
-            <span className="text-terracotta-light font-medium uppercase tracking-[0.3em] text-[10px] mb-4 block">
-              The Pragna Difference
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display mb-4">
-              Why choose Pragna?
-            </h2>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {whyPragnaItems.map((item, i) => (
-              <div key={i} className="text-center">
-                <div className="w-16 h-16 mx-auto rounded-full bg-beige-warm/10 flex items-center justify-center mb-6">
-                  <span className="text-2xl font-display text-terracotta-light">{i + 1}</span>
+      <section className="py-16 bg-white">
+        <div className="section-container">
+             <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <Reveal>
+                    <div>
+                        <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
+                            The Process
+                        </span>
+                        <h2 className="text-3xl lg:text-4xl font-display text-charcoal mb-5">
+                            Your journey to <span className="italic text-maroon">results</span>
+                        </h2>
+                        <p className="text-base text-charcoal/60 mb-8 leading-relaxed">
+                            {howItWorksDescription}
+                        </p>
+                        
+                        <div className="space-y-6">
+                            {howItWorksSteps.map((step, i) => (
+                                <div key={i} className="flex gap-5 group">
+                                    <div className="flex-shrink-0 w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center text-charcoal/40 group-hover:border-maroon/30 group-hover:text-maroon group-hover:bg-maroon/5 transition-all duration-300">
+                                        <span className="font-display text-base">{i + 1}</span>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-display text-charcoal mb-1 group-hover:text-maroon transition-colors duration-300">
+                                            {step.title}
+                                        </h3>
+                                        <p className="text-charcoal/60 text-sm leading-relaxed">
+                                            {step.text}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </Reveal>
+
+                <div className="relative h-[500px] rounded-[2rem] overflow-hidden bg-beige-warm hidden lg:block">
+                     <div className="absolute inset-0 bg-charcoal/5">
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-maroon/5 rounded-full blur-3xl" />
+                     </div>
+                     <div className="absolute inset-0 flex items-center justify-center text-center p-10">
+                        <Reveal>
+                            <div>
+                                <p className="text-3xl font-display text-charcoal/20 mb-3">Clinical Precision</p>
+                                <p className="text-maroon/40 italic text-lg">Meets human care</p>
+                            </div>
+                        </Reveal>
+                     </div>
                 </div>
-                <h3 className="text-xl font-display mb-3">{item.title}</h3>
-                <p className="text-beige-warm/60 text-sm leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
+             </div>
+        </div>
+      </section>
+
+
+      {/* ============================================
+          TREATMENT OPTIONS
+          ============================================ */}
+      <section id="treatments" className="py-16 bg-beige-warm">
+        <div className="section-container">
+          <Reveal>
+            <div className="text-center mb-12">
+                <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
+                    Treatment Menu
+                </span>
+                <h2 className="text-3xl lg:text-4xl font-display text-charcoal mb-5">
+                    Curated Solutions
+                </h2>
+                <p className="text-base text-charcoal/60 max-w-2xl mx-auto">
+                    Select a treatment to learn more about the procedure, downtime, and expected results.
+                </p>
+            </div>
+          </Reveal>
           
-          {/* CTA */}
-          <div className="text-center mt-10">
-            <a 
-              href="#contact" 
-              className="inline-flex items-center gap-2 bg-terracotta-light text-charcoal px-8 py-4 rounded-full font-medium hover:bg-beige-warm transition-colors"
-            >
-              Book a Consultation
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {family.subTreatments.map((treatment) => (
+              <StaggerItem key={treatment.slug}>
+                <Link
+                    href={`/treatments/${family.slug}/${treatment.slug}`}
+                    className="group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-charcoal"
+                >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                        src={(treatment as any).image || '/images/placeholder-treatment.jpg'}
+                        alt={treatment.name}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    />
+                    
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-400" />
+
+                    <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                        <h3 className="text-xl font-display text-white mb-2 group-hover:text-white/90 transition-colors">
+                            {treatment.name}
+                        </h3>
+                        <p className="text-white/70 text-sm mb-4 line-clamp-2 group-hover:text-white/80 transition-colors">
+                            {treatment.description}
+                        </p>
+                        
+                        <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
+                            <span>View Treatment</span>
+                            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+      
+      {/* ============================================
+          WHO IS THIS FOR
+          ============================================ */}
+       <section className="py-16 bg-white text-charcoal border-t border-charcoal/5">
+        <div className="section-container">
+            <div className="grid lg:grid-cols-12 gap-10 items-start">
+                <div className="lg:col-span-4 lg:sticky lg:top-28">
+                    <Reveal>
+                        <div>
+                            <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
+                                Suitability
+                            </span>
+                            <h2 className="text-3xl font-display text-charcoal mb-5">
+                                The Ideal Candidate
+                            </h2>
+                            <p className="text-charcoal/60 text-base leading-relaxed">
+                                This treatment family is specifically curated to address these common skin concerns with clinical precision.
+                            </p>
+                        </div>
+                    </Reveal>
+                </div>
+                
+                <div className="lg:col-span-8">
+                     <StaggerContainer className="grid md:grid-cols-2 gap-x-10 gap-y-6">
+                        {whoIsThisForList.map((item, i) => (
+                            <StaggerItem key={i} className="group flex items-start gap-4">
+                                <span className="flex-shrink-0 w-7 h-7 rounded-full border border-maroon/20 flex items-center justify-center text-maroon font-display text-sm group-hover:bg-maroon group-hover:text-white transition-all duration-300 mt-0.5">
+                                    {i + 1}
+                                </span>
+                                <p className="text-base text-charcoal/75 leading-relaxed group-hover:text-charcoal transition-colors">
+                                    {item}
+                                </p>
+                            </StaggerItem>
+                        ))}
+                     </StaggerContainer>
+                </div>
+            </div>
         </div>
       </section>
 
       {/* ============================================
-          RELATED CONDITIONS - The Bridge
+          RELATED CONDITIONS
           ============================================ */}
       {relatedConditions.length > 0 && (
-        <section className="py-12 bg-beige-warm border-t border-charcoal/5">
-          <div className="section-container">
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
-              <span className="text-charcoal/40 text-sm flex-shrink-0">
-                This treatment helps with:
-              </span>
-              <div className="flex flex-wrap gap-2">
+        <section className="py-10 bg-beige-warm border-t border-charcoal/5">
+          <div className="section-container text-center">
+            <Reveal>
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-maroon mb-5 block flex items-center justify-center gap-3">
+                    <span className="w-6 h-px bg-maroon/30" />
+                    Treats Conditions
+                    <span className="w-6 h-px bg-maroon/30" />
+                </span>
+            </Reveal>
+            <StaggerContainer className="flex flex-wrap items-center justify-center gap-3">
                 {relatedConditions.map((condition) => (
-                  <Link
-                    key={condition.slug}
-                    href={`/conditions/${condition.slug}`}
-                    className="text-sm text-maroon hover:text-maroon/70 bg-white px-4 py-2 rounded-full border border-maroon/10 hover:border-maroon/30 transition-colors"
-                  >
-                    {condition.name}
-                  </Link>
+                <StaggerItem key={condition.slug}>
+                    <Link
+                        href={`/conditions/${condition.slug}`}
+                        className="group flex items-center gap-2 pl-4 pr-3 py-2 rounded-full border border-charcoal/10 hover:border-maroon/30 hover:bg-maroon/5 transition-all duration-300"
+                    >
+                        <span className="text-sm text-charcoal/70 group-hover:text-maroon transition-colors">
+                            {condition.name}
+                        </span>
+                        <span className="w-5 h-5 rounded-full bg-charcoal/5 group-hover:bg-maroon/10 flex items-center justify-center text-charcoal/40 group-hover:text-maroon transition-colors">
+                            <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </Link>
+                </StaggerItem>
                 ))}
-              </div>
-            </div>
+            </StaggerContainer>
           </div>
         </section>
       )}
