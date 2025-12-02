@@ -20,7 +20,7 @@ const branches = [
     label: 'Flagship Clinic',
     address: '3rd Floor, Above Reliance Trends,\nPunjagutta, Hyderabad - 500082',
     phone: '+91 98765 43210',
-    mapUrl: 'https://maps.google.com',
+    mapUrl: 'https://maps.app.goo.gl/GHW2EhGtHpeUrU228',
     image: '/clinics/punjagutta.jpg', // Placeholder
   },
   {
@@ -29,7 +29,7 @@ const branches = [
     label: 'Advanced Center',
     address: 'Ground Floor, My Home Avatar,\nKokapet, Hyderabad - 500075',
     phone: '+91 98765 43211',
-    mapUrl: 'https://maps.google.com',
+    mapUrl: 'https://maps.app.goo.gl/RZjN7F1WbhMAo5eL9',
     image: '/clinics/kokapet.jpg', // Placeholder
   },
 ];

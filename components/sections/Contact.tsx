@@ -10,19 +10,80 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
  * - Light, airy aesthetic (Cream/Beige)
  * - Compact "Card" layout
  * - Minimalist form fields
+ * - Integrates with booking API for Google Sheets + Email + WhatsApp
  */
 
+interface FormData {
+  name: string;
+  email: string;
+  countryCode: string;
+  phone: string;
+  concerns: string;
+}
+
 export default function Contact() {
-  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    countryCode: '+91',
+    phone: '',
+    concerns: '',
+  });
+  const [whatsappLink, setWhatsappLink] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState('submitting');
-    // Simulate
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setFormState('success');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/book-appointment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          source: 'contact-form',
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setFormState('success');
+        setWhatsappLink(result.whatsappLink);
+        // Reset form data
+        setFormData({
+          name: '',
+          email: '',
+          countryCode: '+91',
+          phone: '',
+          concerns: '',
+        });
+      } else {
+        throw new Error(result.error || 'Something went wrong');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setFormState('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to submit. Please try again.');
+    }
+  };
+
+  const resetForm = () => {
+    setFormState('idle');
+    setWhatsappLink('');
+    setErrorMessage('');
   };
 
   return (
@@ -70,8 +131,8 @@ export default function Contact() {
               <div className="flex items-center gap-6">
                  <div className="group cursor-pointer">
                     <p className="text-[9px] uppercase tracking-[0.2em] text-charcoal/40 mb-1">Direct Line</p>
-                    <a href="tel:+919876543210" className="text-lg font-display text-charcoal group-hover:text-maroon transition-colors duration-300 flex items-center gap-2">
-                      +91 98765 43210
+                    <a href="tel:+919380551547" className="text-lg font-display text-charcoal group-hover:text-maroon transition-colors duration-300 flex items-center gap-2">
+                      +91 93805 51547
                     </a>
                  </div>
               </div>
@@ -108,31 +169,104 @@ export default function Contact() {
               <AnimatePresence mode="wait">
                 {formState === 'success' ? (
                   <motion.div
+                    key="success"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-12"
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="text-center py-8"
                   >
-                    <div className="w-16 h-16 bg-rose-gold/10 rounded-full flex items-center justify-center mx-auto text-maroon mb-4">
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M5 13l4 4L19 7" />
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600 mb-4">
+                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="text-2xl font-display text-charcoal mb-2 italic">Request Received</h3>
-                    <p className="text-charcoal/50 text-xs font-light">We will be in touch shortly.</p>
+                    <h3 className="text-2xl font-display text-charcoal mb-2">Request Received!</h3>
+                    <p className="text-charcoal/60 text-sm font-light mb-6">
+                      Your details have been saved. Send us a WhatsApp message for instant confirmation.
+                    </p>
+                    
+                    {/* WhatsApp CTA Button */}
+                    <a 
+                      href={whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-xl font-medium hover:bg-[#20BD5A] transition-all duration-300 shadow-lg shadow-green-500/20 hover:shadow-green-500/30 hover:scale-[1.02]"
+                    >
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                      </svg>
+                      Send WhatsApp Message
+                    </a>
+
+                    <p className="text-charcoal/40 text-xs mt-4">
+                      We&apos;ll also reach out to you via email/phone shortly.
+                    </p>
+                    
                     <button 
-                      onClick={() => setFormState('idle')}
+                      onClick={resetForm}
                       className="text-maroon text-[10px] uppercase tracking-widest mt-6 hover:opacity-70 transition-opacity underline underline-offset-4"
                     >
-                      Send another
+                      Submit another request
                     </button>
                   </motion.div>
+                ) : formState === 'error' ? (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="text-center py-8"
+                  >
+                    <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 mb-4">
+                      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-display text-charcoal mb-2">Oops! Something went wrong</h3>
+                    <p className="text-charcoal/60 text-sm font-light mb-4">
+                      {errorMessage}
+                    </p>
+                    <p className="text-charcoal/50 text-xs mb-6">
+                      You can also reach us directly on WhatsApp or call us.
+                    </p>
+                    
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <a 
+                        href="https://wa.me/919380551547?text=Hi%2C%20I%20would%20like%20to%20book%20a%20consultation%20at%20Pragna%20Skin%20Clinic."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-xl font-medium hover:bg-[#20BD5A] transition-all duration-300"
+                      >
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        WhatsApp Us
+                      </a>
+                      <button 
+                        onClick={resetForm}
+                        className="px-6 py-3 border border-charcoal/20 text-charcoal rounded-xl font-medium hover:bg-charcoal/5 transition-all duration-300"
+                      >
+                        Try Again
+                      </button>
+                    </div>
+                  </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <motion.form 
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onSubmit={handleSubmit} 
+                    className="space-y-4"
+                  >
                     <div className="space-y-3">
                       {/* Name Field */}
                       <div className="group">
                         <input
                           type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
                           required
                           className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
                           placeholder="Your Name" 
@@ -143,6 +277,9 @@ export default function Contact() {
                       <div className="group">
                         <input
                           type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
                           required
                           className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
                           placeholder="Email Address" 
@@ -153,7 +290,9 @@ export default function Contact() {
                       <div className="flex gap-2">
                         <div className="relative w-28 shrink-0">
                           <select 
-                            defaultValue="+91" 
+                            name="countryCode"
+                            value={formData.countryCode}
+                            onChange={handleInputChange}
                             className="w-full bg-white border border-charcoal/15 rounded-xl px-3 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm"
                           >
                             <option value="+91">🇮🇳 +91</option>
@@ -175,6 +314,9 @@ export default function Contact() {
                         </div>
                         <input
                           type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
                           required
                           className="flex-1 bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
                           placeholder="Phone Number" 
@@ -184,6 +326,9 @@ export default function Contact() {
 
                     <div className="group">
                        <textarea
+                          name="concerns"
+                          value={formData.concerns}
+                          onChange={handleInputChange}
                           rows={2}
                           className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light resize-none shadow-sm"
                           placeholder="Any specific concerns? (Optional)" 
@@ -194,17 +339,31 @@ export default function Contact() {
                       <button
                         type="submit"
                         disabled={formState === 'submitting'}
-                        className="w-full bg-maroon text-cream py-4 rounded-xl text-[10px] uppercase tracking-[0.2em] hover:bg-maroon-dark transition-all duration-500 shadow-lg shadow-maroon/20 disabled:opacity-70 group relative overflow-hidden"
+                        className="w-full bg-maroon text-cream py-4 rounded-xl text-[10px] font-sans font-medium uppercase tracking-[0.2em] hover:bg-maroon-dark transition-all duration-500 shadow-lg shadow-maroon/20 disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
                       >
                         <span className="relative z-10 flex items-center justify-center gap-2">
-                          {formState === 'submitting' ? 'Sending Request...' : 'Book Appointment'}
-                          {!formState && (
-                             <span className="w-3 h-[1px] bg-cream/50 group-hover:w-5 transition-all duration-300" />
+                          {formState === 'submitting' ? (
+                            <>
+                              <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                              Sending Request...
+                            </>
+                          ) : (
+                            <>
+                              Book Appointment
+                              <span className="w-3 h-[1px] bg-cream/50 group-hover:w-5 transition-all duration-300" />
+                            </>
                           )}
                         </span>
                       </button>
                     </div>
-                  </form>
+
+                    <p className="text-center text-charcoal/40 text-[10px] pt-2">
+                      By submitting, you agree to receive communication from Pragna Skin Clinic
+                    </p>
+                  </motion.form>
                 )}
               </AnimatePresence>
             </motion.div>

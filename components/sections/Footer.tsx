@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 
 /**
@@ -97,8 +98,20 @@ export default function Footer() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              <Link href="/" className="inline-block mb-3">
-                <span className="text-2xl font-display text-cream">Pragna</span>
+              <Link href="/" className="inline-flex flex-col items-center mb-6">
+                <Image 
+                  src="/Icon_Master.png" 
+                  alt="Pragna Skin Clinic" 
+                  width={80} 
+                  height={80}
+                  className="h-16 w-auto brightness-0 invert"
+                />
+                <span className="font-display font-normal text-2xl tracking-[0.02em] uppercase leading-none -mt-3">
+                  Pragna
+                </span>
+                <span className="font-sans text-[0.55rem] tracking-[0.2em] uppercase text-cream/50 mt-1">
+                  Skin • Hair • Body • Wellness
+                </span>
               </Link>
               
               <p className="text-cream/50 text-sm leading-relaxed max-w-sm mb-4">

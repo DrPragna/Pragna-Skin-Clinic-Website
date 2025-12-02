@@ -1,273 +1,341 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
-import { getConditionsByGroup, Condition } from '@/lib/navigationData';
+import { getConditionsByGroup } from '@/lib/navigationData';
+import { Reveal } from '@/components/ui/Reveal';
 
-// Note: Metadata is in layout or handled via head for client components
-// SEO will be handled at the layout level for this page
+// ============================================
+// THEME CONFIGURATION
+// ============================================
 
-const groups = ['Face & Skin', 'Hair & Scalp', 'Body Shape & Texture', 'Other Concerns'] as const;
-type Group = typeof groups[number];
+type ThemeKey = 'All' | 'Skin' | 'Hair' | 'Body' | 'Others';
 
-// Group icons (elegant silhouettes)
-const groupIcons: Record<Group, React.ReactNode> = {
-  'Face & Skin': (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-      <ellipse cx="12" cy="11" rx="8" ry="10" />
-      <circle cx="9" cy="9" r="1" fill="currentColor" />
-      <circle cx="15" cy="9" r="1" fill="currentColor" />
-      <path d="M9 14c1.5 1.5 4.5 1.5 6 0" strokeLinecap="round" />
-    </svg>
-  ),
-  'Hair & Scalp': (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-      <path d="M12 2C8 2 5 5 5 9c0 3 2 5 3 7v6h8v-6c1-2 3-4 3-7 0-4-3-7-7-7z" />
-      <path d="M9 22h6M8 9c0-2 2-4 4-4" strokeLinecap="round" />
-    </svg>
-  ),
-  'Body Shape & Texture': (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-      <circle cx="12" cy="5" r="3" />
-      <path d="M12 8v4M7 22l2-8h6l2 8M7 12h10" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-  'Other Concerns': (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 6v6l4 2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
+const THEMES: Record<ThemeKey, {
+  heroBg: string;
+  heroText: string;
+  heroSub: string;
+  cardBg: string;
+  cardHover: string;
+  accent: string;
+  title: string;
+  description: string;
+  gradient: string; // For the abstract card background
+}> = {
+  'All': {
+    heroBg: 'bg-beige-warm',
+    heroText: 'text-charcoal',
+    heroSub: 'text-charcoal/60',
+    cardBg: 'bg-white',
+    cardHover: 'group-hover:bg-white',
+    accent: 'text-maroon',
+    title: 'What concerns you?',
+    description: 'Select a category to find your concern. We\'ll guide you to the right solution.',
+    gradient: 'from-transparent to-transparent'
+  },
+  'Skin': {
+    heroBg: 'bg-[#5C2E26]', // Deep Copper/Terracotta
+    heroText: 'text-[#F2E8E6]', 
+    heroSub: 'text-[#D6B4AA]', 
+    cardBg: 'bg-[#FFF8F5]', // Very Light Peach
+    cardHover: 'group-hover:bg-[#FFEFE8]',
+    accent: 'text-[#A66249]', // Terracotta accent
+    title: 'Skin Concerns',
+    description: 'From acne to ageing, restore your skin\'s natural health and radiance.',
+    gradient: 'from-[#C28E79]/10 to-[#A66249]/5'
+  },
+  'Hair': {
+    heroBg: 'bg-[#4A3B2A]', // Deep Bronze
+    heroText: 'text-[#F5F2EB]',
+    heroSub: 'text-[#CDBFA8]',
+    cardBg: 'bg-[#FCFBF7]', 
+    cardHover: 'group-hover:bg-[#F5F2E8]',
+    accent: 'text-[#8F7348]', // Bronze accent
+    title: 'Hair & Scalp',
+    description: 'Science-backed solutions for restoration, growth, and scalp health.',
+    gradient: 'from-[#BFA57D]/10 to-[#8F7348]/5'
+  },
+  'Body': {
+    heroBg: 'bg-[#423D33]', // Deep Olive/Clay
+    heroText: 'text-[#F2F2EE]', 
+    heroSub: 'text-[#BFB9A3]', 
+    cardBg: 'bg-[#F9F9F6]', 
+    cardHover: 'group-hover:bg-[#F0F0EB]',
+    accent: 'text-[#736243]', // Olive accent
+    title: 'Body & Shape',
+    description: 'Sculpt, tone, and refine your silhouette with advanced non-surgical care.',
+    gradient: 'from-[#9E8C6B]/10 to-[#736243]/5'
+  },
+  'Others': {
+    heroBg: 'bg-[#2A3B33]', // Deep Forest
+    heroText: 'text-[#ECF2EE]',
+    heroSub: 'text-[#A3C2B0]', 
+    cardBg: 'bg-[#F5F9F7]', 
+    cardHover: 'group-hover:bg-[#E8F2EC]',
+    accent: 'text-[#527862]', // Forest accent
+    title: 'Wellness & Others',
+    description: 'Holistic treatments for overall wellbeing and specific corrective needs.',
+    gradient: 'from-[#87A896]/10 to-[#527862]/5'
+  }
 };
 
-export default function ConditionsPage() {
-  const [activeGroup, setActiveGroup] = useState<Group>('Face & Skin');
+const filters = ['All', 'Skin', 'Hair', 'Body', 'Others'];
+
+// Separate component for SearchParams logic to wrap in Suspense
+function ConditionsContent() {
+  const searchParams = useSearchParams();
+  const [activeFilter, setActiveFilter] = useState<ThemeKey>('All');
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const conditionsByGroup = getConditionsByGroup();
-  
-  // Get conditions for active group
-  const activeConditions = conditionsByGroup.find(g => g.group === activeGroup)?.items || [];
+
+  // Handle URL query params on mount
+  useEffect(() => {
+    const categoryParam = searchParams.get('filter');
+    if (categoryParam && filters.includes(categoryParam)) {
+      setActiveFilter(categoryParam as ThemeKey);
+      
+      // Scroll to content after a brief delay to allow layout to settle
+      if (isInitialLoad) {
+        setTimeout(() => {
+          const contentSection = document.getElementById('conditions-grid');
+          if (contentSection) {
+            const yOffset = -180; // Offset for sticky header
+            const y = contentSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 500);
+        setIsInitialLoad(false);
+      }
+    }
+  }, [searchParams, isInitialLoad]);
+
+  // Update logic to handle manual filter clicks
+  const handleFilterClick = (filter: string) => {
+    setActiveFilter(filter as ThemeKey);
+    
+    // Update URL without scroll
+    const url = new URL(window.location.href);
+    if (filter === 'All') {
+        url.searchParams.delete('filter');
+    } else {
+        url.searchParams.set('filter', filter);
+    }
+    window.history.pushState({}, '', url);
+  };
+
+  // Flatten and prepare data
+  const allConditions = conditionsByGroup.flatMap(group => 
+    group.items.map(item => ({ 
+      ...item, 
+      // Map 'Wellness' data group to 'Others' display group if needed, or keep as is if data is updated
+      group: group.group === 'Wellness' ? 'Others' : group.group 
+    }))
+  );
+
+  const filteredConditions = activeFilter === 'All'
+    ? allConditions
+    : allConditions.filter(c => c.group === activeFilter);
+
+  // Get current theme
+  const theme = THEMES[activeFilter];
 
   return (
-    <main className="overflow-x-hidden bg-beige-warm min-h-screen">
+    <main className={`min-h-screen transition-colors duration-700 ease-in-out ${activeFilter === 'All' ? 'bg-beige-warm' : 'bg-white'}`}>
       <Navbar />
       
       {/* ============================================
-          HERO - The Question
+          SMART HERO - Dynamic based on Filter
           ============================================ */}
-      <section className="pt-32 pb-12 md:pt-44 md:pb-16 relative overflow-hidden">
-        {/* Subtle grain texture */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div 
-            className="absolute inset-0" 
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
-        
+      <section className={`
+        relative pt-40 pb-20 md:pt-48 md:pb-32 transition-colors duration-700 ease-in-out overflow-hidden
+        ${theme.heroBg}
+      `}>
+         {/* Abstract Background Elements for Mood */}
+         <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[100px] mix-blend-overlay transition-colors duration-700 ${activeFilter === 'Skin' ? 'bg-red-400' : activeFilter === 'Hair' ? 'bg-orange-300' : activeFilter === 'Body' ? 'bg-yellow-200' : 'bg-white'}`} />
+            <div className={`absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full blur-[120px] mix-blend-overlay transition-colors duration-700 ${activeFilter === 'Skin' ? 'bg-pink-500' : activeFilter === 'Hair' ? 'bg-amber-800' : activeFilter === 'Body' ? 'bg-orange-900' : 'bg-slate-200'}`} />
+         </div>
+
         <div className="section-container relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Tiny label */}
-            <span className="text-maroon/60 font-medium uppercase tracking-[0.3em] text-[10px] mb-6 block">
-              Conditions We Treat
-            </span>
+          <div className="max-w-4xl">
+            <Reveal>
+                <span className={`
+                    font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-6 block transition-colors duration-500
+                    ${activeFilter === 'All' ? 'text-maroon/60' : 'text-white/60'}
+                `}>
+                    {activeFilter === 'All' ? 'Our Expertise' : 'Specialized Care'}
+                </span>
+            </Reveal>
             
-            {/* The Question - Typography as art */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-charcoal leading-[1.05] mb-6">
-              What brings you<br />
-              <span className="text-maroon/70">in today?</span>
-            </h1>
+            <Reveal delay={0.1}>
+                <h1 className={`
+                    text-5xl md:text-7xl lg:text-8xl font-display leading-[0.9] mb-8 transition-colors duration-500
+                    ${theme.heroText}
+                `}>
+                    {theme.title}
+                </h1>
+            </Reveal>
             
-            {/* Subtitle */}
-            <p className="text-lg text-charcoal/50 font-light max-w-lg mx-auto">
-              Select a category to find your concern. We&apos;ll guide you to the right solution.
-            </p>
+            <Reveal delay={0.2}>
+                <p className={`
+                    text-lg md:text-xl font-light max-w-2xl leading-relaxed transition-colors duration-500
+                    ${theme.heroSub}
+                `}>
+                    {theme.description}
+                </p>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ============================================
-          CATEGORY TABS - Large Clickable Zones
+          STICKY FILTERS
           ============================================ */}
-      <section className="py-8 md:py-12">
+      <div className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-charcoal/5 shadow-sm">
         <div className="section-container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {groups.map((group) => (
-              <button
-                key={group}
-                onClick={() => setActiveGroup(group)}
-                className={`
-                  relative p-6 md:p-8 rounded-2xl text-left
-                  transition-all duration-300
-                  ${activeGroup === group 
-                    ? 'bg-charcoal text-beige-warm' 
-                    : 'bg-white text-charcoal hover:bg-charcoal/5 border border-charcoal/5'
-                  }
-                `}
-              >
-                {/* Icon */}
-                <div className={`
-                  mb-4 transition-colors
-                  ${activeGroup === group ? 'text-terracotta-light' : 'text-charcoal/30'}
-                `}>
-                  {groupIcons[group]}
+            <div className="flex overflow-x-auto no-scrollbar py-4 gap-8 md:justify-center">
+                {filters.map((filter) => (
+                    <button
+                        key={filter}
+                        onClick={() => handleFilterClick(filter)}
+                        className="group relative flex-shrink-0 py-2"
+                    >
+                        <span className={`
+                            text-sm tracking-widest uppercase transition-colors duration-300
+                            ${activeFilter === filter 
+                                ? 'text-charcoal font-bold' 
+                                : 'text-charcoal/40 font-medium hover:text-maroon'
+                            }
+                        `}>
+                            {filter}
+                        </span>
+                        
+                        {activeFilter === filter && (
+                            <motion.div 
+                                layoutId="activeTab"
+                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-maroon"
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            />
+                        )}
+                    </button>
+                ))}
+            </div>
+        </div>
+      </div>
+
+      {/* ============================================
+          ATMOSPHERIC GRID
+          ============================================ */}
+      <section id="conditions-grid" className="py-20 min-h-screen">
+        <div className="section-container">
+          <AnimatePresence mode="wait">
+            <motion.div 
+                key={activeFilter}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            >
+              {filteredConditions.map((condition, index) => {
+                // Determine card theme based on condition group
+                // If we are in 'All' view, each card gets its own group theme
+                // If we are in a filtered view, all cards share the active theme (which matches the group)
+                const cardGroupKey = (condition.group === 'Others' || condition.group === 'Wellness') ? 'Others' : condition.group as ThemeKey;
+                const cardTheme = THEMES[cardGroupKey];
+                
+                return (
+                <Link 
+                    key={condition.slug} 
+                    href={`/conditions/${condition.slug}`}
+                    className={`
+                        group relative block p-8 md:p-10 rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-1
+                        ${activeFilter === 'All' ? 'bg-white border border-charcoal/5 hover:shadow-lg' : cardTheme.cardBg}
+                    `}
+                >
+                    {/* Abstract Gradient Background on Hover */}
+                    <div className={`
+                        absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br
+                        ${cardTheme.gradient}
+                    `} />
+
+                    <div className="relative z-10 flex flex-col h-full justify-between min-h-[180px]">
+                        <div>
+                            <div className="flex justify-between items-start mb-6">
+                                <span className={`
+                                    text-[10px] uppercase tracking-[0.2em] font-bold
+                                    ${cardTheme.accent}
+                                `}>
+                                    {condition.group}
+                                </span>
+                                <span className={`
+                                    font-display text-4xl opacity-10 transition-opacity duration-300 group-hover:opacity-20
+                                    ${cardTheme.accent}
+                                `}>
+                                    {index < 9 ? `0${index + 1}` : index + 1}
+                                </span>
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl font-display text-charcoal mb-3 group-hover:translate-x-1 transition-transform duration-300">
+                                {condition.name}
+                            </h3>
+                            
+                            <p className="text-charcoal/60 text-sm leading-relaxed line-clamp-2">
+                                {condition.subtitle}
+                            </p>
+                        </div>
+                        
+                        <div className="pt-8 flex items-center text-xs uppercase tracking-widest font-medium text-charcoal/40 group-hover:text-charcoal transition-colors">
+                            <span>View Solution</span>
+                            <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </div>
+                    </div>
+                </Link>
+              )})}
+            </motion.div>
+          </AnimatePresence>
+          
+          {filteredConditions.length === 0 && (
+             <div className="py-24 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-charcoal/5 flex items-center justify-center text-charcoal/20">
+                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
                 </div>
-                
-                {/* Label */}
-                <span className={`
-                  text-sm md:text-base font-medium block leading-tight
-                  ${activeGroup === group ? 'text-beige-warm' : 'text-charcoal'}
-                `}>
-                  {group}
-                </span>
-                
-                {/* Count badge */}
-                <span className={`
-                  absolute top-4 right-4 text-[10px] font-mono
-                  ${activeGroup === group ? 'text-beige-warm/50' : 'text-charcoal/30'}
-                `}>
-                  {conditionsByGroup.find(g => g.group === group)?.items.length || 0}
-                </span>
-              </button>
-            ))}
-          </div>
+                <h3 className="text-xl font-display text-charcoal/60 mb-2">No conditions found</h3>
+                <p className="text-charcoal/40 font-light italic mb-6">
+                    We couldn't find any conditions in the "{activeFilter}" category.
+                </p>
+                <button 
+                    onClick={() => handleFilterClick('All')}
+                    className="text-sm uppercase tracking-widest text-maroon hover:text-charcoal transition-colors underline underline-offset-4"
+                >
+                    View All Conditions
+                </button>
+             </div>
+          )}
         </div>
       </section>
-
-      {/* ============================================
-          CONDITIONS LIST - Apple Specs Style
-          ============================================ */}
-      <section className="py-8 md:py-12">
-        <div className="section-container">
-          <div className="bg-white rounded-3xl overflow-hidden border border-charcoal/5">
-            {/* List header */}
-            <div className="px-6 md:px-10 py-4 border-b border-charcoal/5 bg-charcoal/[0.02]">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-charcoal/40">
-                {activeGroup}
-              </p>
-            </div>
-            
-            {/* Conditions list */}
-            <div className="divide-y divide-charcoal/5">
-              {activeConditions.map((condition, index) => (
-                <ConditionRow 
-                  key={condition.slug} 
-                  condition={condition} 
-                  index={index}
-                />
-              ))}
-            </div>
-            
-            {/* Empty state */}
-            {activeConditions.length === 0 && (
-              <div className="px-6 md:px-10 py-16 text-center">
-                <p className="text-charcoal/40">No conditions found in this category.</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
-          CAN'T FIND YOUR CONCERN?
-          ============================================ */}
-      <section className="py-16 md:py-24">
-        <div className="section-container">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-display text-charcoal mb-4">
-              Can&apos;t find your concern?
-            </h2>
-            <p className="text-charcoal/50 mb-8">
-              We treat many conditions not listed here. Book a consultation and 
-              our dermatologists will assess your specific situation.
-            </p>
-            <a 
-              href="#contact" 
-              className="inline-flex items-center gap-2 bg-charcoal text-beige-warm px-8 py-4 rounded-full font-medium hover:bg-maroon transition-colors duration-300"
-            >
-              Book a Consultation
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
-          CROSS-LINK TO TREATMENTS
-          ============================================ */}
-      <section className="py-12 border-t border-charcoal/5">
-        <div className="section-container">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <p className="text-charcoal/40 text-sm">
-                Already know what treatment you want?
-              </p>
-            </div>
-            <Link 
-              href="/treatments"
-              className="inline-flex items-center gap-2 text-maroon hover:text-maroon/70 font-medium transition-colors"
-            >
-              Browse All Treatments
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
+      
       <Footer />
     </main>
   );
 }
 
-// ============================================
-// CONDITION ROW COMPONENT - Specs List Style
-// ============================================
-function ConditionRow({ 
-  condition,
-  index 
-}: { 
-  condition: Condition;
-  index: number;
-}) {
+export default function ConditionsPage() {
   return (
-    <Link
-      href={`/conditions/${condition.slug}`}
-      className="group flex items-center justify-between px-6 md:px-10 py-6 hover:bg-charcoal/[0.02] transition-colors duration-200"
-    >
-      {/* Left: Name and description */}
-      <div className="flex-1 min-w-0 pr-6">
-        <div className="flex items-center gap-3 mb-1">
-          <h3 className="text-lg md:text-xl font-display text-charcoal group-hover:text-maroon transition-colors truncate">
-            {condition.name}
-          </h3>
-          {condition.isTopConcern && (
-            <span className="hidden md:inline-flex text-[9px] uppercase tracking-wider bg-terracotta/10 text-maroon px-2 py-0.5 rounded-full">
-              Common
-            </span>
-          )}
-        </div>
-        <p className="text-sm text-charcoal/50 truncate">
-          {condition.subtitle}
-        </p>
+    <Suspense fallback={
+      <div className="min-h-screen bg-beige-warm flex items-center justify-center">
+        <div className="w-2 h-2 bg-maroon rounded-full animate-ping" />
       </div>
-      
-      {/* Right: Arrow */}
-      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-beige-warm group-hover:bg-maroon flex items-center justify-center transition-all duration-300">
-        <svg 
-          className="w-4 h-4 text-charcoal/30 group-hover:text-beige-warm transition-colors" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </div>
-    </Link>
+    }>
+      <ConditionsContent />
+    </Suspense>
   );
 }

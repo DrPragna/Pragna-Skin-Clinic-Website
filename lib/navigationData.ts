@@ -183,18 +183,18 @@ export interface Condition {
   slug: string;
   name: string;
   subtitle: string;
-  group: 'Face & Skin' | 'Hair & Scalp' | 'Body Shape & Texture' | 'Other Concerns';
+  group: 'Skin' | 'Hair' | 'Body' | 'Wellness';
   isTopConcern?: boolean;
   relatedTreatmentFamilies: string[]; // family slugs
 }
 
 export const conditions: Condition[] = [
-  // Face & Skin
+  // Skin (formerly Face & Skin)
   { 
     slug: 'acne-breakouts',
     name: 'Acne & Breakouts', 
     subtitle: 'Pimples, whiteheads or cystic acne that keep coming back',
-    group: 'Face & Skin',
+    group: 'Skin',
     isTopConcern: true,
     relatedTreatmentFamilies: ['acne-acne-scar-solutions', 'advanced-facials-boosters']
   },
@@ -202,7 +202,7 @@ export const conditions: Condition[] = [
     slug: 'acne-scars',
     name: 'Acne Scars', 
     subtitle: 'Marks, dents or uneven skin left behind after acne',
-    group: 'Face & Skin',
+    group: 'Skin',
     isTopConcern: true,
     relatedTreatmentFamilies: ['acne-acne-scar-solutions']
   },
@@ -210,7 +210,7 @@ export const conditions: Condition[] = [
     slug: 'dark-spots-tan-pigmentation',
     name: 'Dark Spots, Tan & Pigmentation', 
     subtitle: 'Brown patches, tanning or uneven dark areas on the skin',
-    group: 'Face & Skin',
+    group: 'Skin',
     isTopConcern: true,
     relatedTreatmentFamilies: ['pigmentation-tanning-glow', 'advanced-facials-boosters']
   },
@@ -218,51 +218,51 @@ export const conditions: Condition[] = [
     slug: 'uneven-skin-tone-texture',
     name: 'Uneven Skin Tone & Texture', 
     subtitle: 'Skin that looks patchy, rough or has visible pores',
-    group: 'Face & Skin',
+    group: 'Skin',
     relatedTreatmentFamilies: ['pigmentation-tanning-glow', 'advanced-facials-boosters']
   },
   { 
     slug: 'ageing-skin-lines-wrinkles',
     name: 'Ageing Skin, Lines & Wrinkles', 
     subtitle: 'Fine lines, wrinkles and loss of firmness over time',
-    group: 'Face & Skin',
+    group: 'Skin',
     relatedTreatmentFamilies: ['anti-ageing-tightening-contouring', 'advanced-facials-boosters']
   },
   { 
     slug: 'dark-circles-under-eye',
     name: 'Dark Circles & Under-Eye Concerns', 
     subtitle: 'Tired, hollow or dark-looking under-eye area',
-    group: 'Face & Skin',
+    group: 'Skin',
     relatedTreatmentFamilies: ['anti-ageing-tightening-contouring']
   },
   { 
     slug: 'rosacea-facial-redness',
     name: 'Rosacea & Facial Redness', 
     subtitle: 'Constant redness, flushing or visible vessels on the face',
-    group: 'Face & Skin',
+    group: 'Skin',
     relatedTreatmentFamilies: ['advanced-facials-boosters']
   },
   { 
     slug: 'moles-warts-skin-tags',
     name: 'Moles, Warts & Skin Tags', 
     subtitle: 'Raised skin growths you want evaluated or removed',
-    group: 'Face & Skin',
+    group: 'Skin',
     relatedTreatmentFamilies: ['wellness-iv-drips-corrective']
   },
   { 
     slug: 'tattoo-ink-pigment-removal',
     name: 'Tattoo & Ink Pigment Removal', 
     subtitle: 'Clearing unwanted tattoo or residual ink from the skin',
-    group: 'Face & Skin',
+    group: 'Skin',
     relatedTreatmentFamilies: ['wellness-iv-drips-corrective']
   },
   
-  // Hair & Scalp
+  // Hair (formerly Hair & Scalp)
   { 
     slug: 'hair-fall-thinning-hair',
     name: 'Hair Fall & Thinning Hair', 
     subtitle: 'Increased hair shedding or visibly reduced hair volume',
-    group: 'Hair & Scalp',
+    group: 'Hair',
     isTopConcern: true,
     relatedTreatmentFamilies: ['hair-growth-scalp-treatments']
   },
@@ -270,46 +270,46 @@ export const conditions: Condition[] = [
     slug: 'unwanted-facial-body-hair',
     name: 'Unwanted Facial & Body Hair', 
     subtitle: 'Hair growth in areas you prefer to keep smooth',
-    group: 'Hair & Scalp',
+    group: 'Hair',
     relatedTreatmentFamilies: ['laser-hair-reduction']
   },
   
-  // Body Shape & Texture
+  // Body (formerly Body Shape & Texture)
   { 
     slug: 'double-chin-jawline-fullness',
     name: 'Double Chin & Jawline Fullness', 
     subtitle: 'Fullness under the chin or a softer, less-defined jawline',
-    group: 'Body Shape & Texture',
+    group: 'Body',
     relatedTreatmentFamilies: ['anti-ageing-tightening-contouring', 'body-contouring-fat-reduction']
   },
   { 
     slug: 'neck-lines-sagging-neck',
     name: 'Neck Lines & Sagging Neck', 
     subtitle: 'Horizontal lines or loosening skin around the neck',
-    group: 'Body Shape & Texture',
+    group: 'Body',
     relatedTreatmentFamilies: ['anti-ageing-tightening-contouring']
   },
   { 
     slug: 'stretch-marks',
     name: 'Stretch Marks', 
     subtitle: 'Thin lines on the skin after growth, weight change or pregnancy',
-    group: 'Body Shape & Texture',
+    group: 'Body',
     relatedTreatmentFamilies: ['stretch-mark-body-scar-revision']
   },
   { 
     slug: 'stubborn-fat-body-shaping',
     name: 'Stubborn Fat & Body Shaping', 
     subtitle: 'Bulges that don\'t reduce easily despite diet and exercise',
-    group: 'Body Shape & Texture',
+    group: 'Body',
     relatedTreatmentFamilies: ['body-contouring-fat-reduction']
   },
   
-  // Other Concerns
+  // Wellness (formerly Other Concerns)
   { 
     slug: 'excessive-sweating',
     name: 'Excessive Sweating (Hyperhidrosis)', 
     subtitle: 'Sweating more than normal on palms, underarms or other areas',
-    group: 'Other Concerns',
+    group: 'Wellness',
     relatedTreatmentFamilies: ['wellness-iv-drips-corrective']
   },
 ];
@@ -474,7 +474,7 @@ export function getConditionsForFamily(familySlug: string): Condition[] {
 
 // Get conditions grouped by group name
 export function getConditionsByGroup(): { group: string; items: Condition[] }[] {
-  const groups = ['Face & Skin', 'Hair & Scalp', 'Body Shape & Texture', 'Other Concerns'];
+  const groups = ['Skin', 'Hair', 'Body', 'Wellness'];
   return groups.map(group => ({
     group,
     items: conditions.filter(c => c.group === group)

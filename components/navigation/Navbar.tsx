@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { navigationData } from '@/lib/navigationData';
 
@@ -148,13 +149,34 @@ export default function Navbar() {
       <div className="section-container">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group z-50 relative">
-            <div className={`text-2xl font-serif font-bold transition-colors ${
+          <Link href="/" className="flex items-center group z-50 relative">
+            <Image 
+              src="/Icon_Master.png" 
+              alt="Pragna Skin Clinic" 
+              width={72} 
+              height={72}
+              className={`h-[3.9rem] w-auto transition-all duration-300 ${
+                useTransparentStyle 
+                  ? 'brightness-0 invert' 
+                  : ''
+              }`}
+              priority
+            />
+            <div className={`flex flex-col -ml-4 transition-colors duration-300 ${
               useTransparentStyle 
-                ? 'text-white group-hover:text-cream' 
-                : 'text-maroon group-hover:text-maroon-light'
+                ? 'text-white' 
+                : 'text-charcoal'
             }`}>
-              Pragna
+              <span className="font-display font-normal text-[1.25rem] tracking-[0.02em] uppercase leading-none">
+                Pragna
+              </span>
+              <span className={`font-sans text-[0.45rem] tracking-[0.15em] uppercase leading-tight mt-0.5 ${
+                useTransparentStyle 
+                  ? 'text-white/70' 
+                  : 'text-charcoal/60'
+              }`}>
+                Advanced Skin Clinic
+              </span>
             </div>
           </Link>
 
@@ -276,11 +298,15 @@ export default function Navbar() {
                 data-lenis-prevent
               >
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-10">
-                    {/* Face & Skin - Spans 5 columns on lg */}
+                    {/* Skin - Spans 5 columns on lg */}
                     <div className="lg:col-span-5 space-y-6 md:space-y-8 lg:border-r border-maroon/5 lg:pr-8">
-                      <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
-                        <StylizedText text={navigationData.conditions[0].group} />
-                      </h3>
+                      <div className="relative">
+                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
+                          {navigationData.conditions[0].group}
+                        </h3>
+                        {/* Decorative Line */}
+                        <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
+                      </div>
                       <div className="space-y-6">
                         {navigationData.conditions[0].items.map((item) => (
                           <Link 
@@ -304,11 +330,15 @@ export default function Navbar() {
                       </div>
                     </div>
 
-                    {/* Hair & Scalp - Spans 3 columns on lg */}
+                    {/* Hair - Spans 3 columns on lg */}
                     <div className="lg:col-span-3 space-y-6 md:space-y-8 lg:border-r border-maroon/5 lg:pr-8">
-                      <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
-                        <StylizedText text={navigationData.conditions[1].group} />
-                      </h3>
+                      <div className="relative">
+                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
+                          {navigationData.conditions[1].group}
+                        </h3>
+                        {/* Decorative Line */}
+                        <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
+                      </div>
                       <div className="space-y-6">
                         {navigationData.conditions[1].items.map((item) => (
                           <Link 
@@ -334,11 +364,15 @@ export default function Navbar() {
 
                     {/* Body & Other - Spans 4 columns on lg, full width on md */}
                     <div className="md:col-span-2 lg:col-span-4 space-y-8 md:space-y-10">
-                      {/* Body Shape */}
+                      {/* Body */}
                       <div>
-                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
-                          <StylizedText text={navigationData.conditions[2].group} />
-                        </h3>
+                        <div className="relative">
+                          <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
+                            {navigationData.conditions[2].group}
+                          </h3>
+                          {/* Decorative Line */}
+                          <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
+                        </div>
                         <div className="space-y-5">
                           {navigationData.conditions[2].items.map((item) => (
                             <Link 
@@ -359,11 +393,15 @@ export default function Navbar() {
                         </div>
                       </div>
                       
-                      {/* Other Concerns */}
+                      {/* Others */}
                       <div>
-                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
-                          {navigationData.conditions[3].group}
-                        </h3>
+                        <div className="relative">
+                          <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
+                            Others
+                          </h3>
+                          {/* Decorative Line */}
+                          <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
+                        </div>
                         <div className="space-y-5">
                           {navigationData.conditions[3].items.map((item) => (
                             <Link 

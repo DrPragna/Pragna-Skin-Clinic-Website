@@ -11,7 +11,7 @@ const pillars = [
     title: 'Skin',
     subtitle: 'Rejuvenate & Restore',
     description: 'Advanced dermatological solutions for glowing, healthy skin.',
-    href: '/treatments/skin', 
+    href: '/conditions?filter=Skin', 
     image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop',
     color: '#E8D4D0', // Soft Rose
   },
@@ -20,7 +20,7 @@ const pillars = [
     title: 'Hair',
     subtitle: 'Growth & Vitality',
     description: 'Comprehensive care for restoration and scalp health.',
-    href: '/treatments/hair',
+    href: '/conditions?filter=Hair',
     image: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop',
     color: '#F2EBE6', // Warm Cream
   },
@@ -29,7 +29,7 @@ const pillars = [
     title: 'Body',
     subtitle: 'Sculpt & Define',
     description: 'Non-invasive contouring and wellness treatments.',
-    href: '/treatments/body',
+    href: '/conditions?filter=Body',
     image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2020&auto=format&fit=crop',
     color: '#EAE4DD', // Beige
   },
@@ -40,7 +40,7 @@ export default function TreatmentPillars() {
 
   return (
     <section className="relative py-12 lg:py-16 bg-cream overflow-hidden">
-      <div className="section-container-wide"> {/* WIDER CONTAINER */}
+      <div className="max-w-[1440px] mx-auto px-4 lg:px-6">
         
         {/* Section Header - Center Aligned */}
         <div className="text-center mb-12 lg:mb-16">
@@ -53,12 +53,12 @@ export default function TreatmentPillars() {
         </div>
 
         {/* Desktop: Cinematic Accordion */}
-        <div className="hidden lg:flex h-[700px] gap-2">
+        <div className="hidden lg:flex h-[520px] gap-3">
           {pillars.map((pillar, index) => (
             <Link 
               key={pillar.id} 
               href={pillar.href}
-              className="relative min-w-[140px] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group"
+              className="relative min-w-[120px] overflow-hidden rounded-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group"
               style={{ 
                 flexGrow: activeId === pillar.id ? 4 : 1,
                 flexBasis: '0%'
