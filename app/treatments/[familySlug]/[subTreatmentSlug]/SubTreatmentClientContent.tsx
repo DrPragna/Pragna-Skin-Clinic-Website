@@ -208,7 +208,7 @@ export default function SubTreatmentClientContent({
                     {/* Checklist Card */}
                     <div className="bg-beige-warm border border-charcoal/5 rounded-[2rem] p-8 md:p-10 text-left">
                         <h3 className="text-xl font-display text-charcoal mb-6 text-center">
-                            Ideal Candidate Profile
+                            Is This For You
                         </h3>
                         <div className="grid md:grid-cols-2 gap-x-10 gap-y-4">
                             {isThisForYou.map((item, i) => (
@@ -239,7 +239,7 @@ export default function SubTreatmentClientContent({
                     The Journey
                 </span>
                 <h2 className="text-3xl md:text-4xl font-display text-charcoal">
-                    Procedure Timeline
+                    Process
                 </h2>
             </div>
           </Reveal>
@@ -278,10 +278,10 @@ export default function SubTreatmentClientContent({
             <Reveal>
                 <div className="text-center mb-12">
                     <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
-                        Aftercare
+                        What To Expect
                     </span>
                     <h2 className="text-3xl md:text-4xl font-display text-charcoal">
-                        Results & Recovery
+                        Results
                     </h2>
                 </div>
             </Reveal>
@@ -323,7 +323,7 @@ export default function SubTreatmentClientContent({
                         Common Questions
                     </span>
                     <h2 className="text-3xl md:text-4xl font-display text-charcoal">
-                        Expert Answers
+                        FAQs
                     </h2>
                 </div>
             </Reveal>

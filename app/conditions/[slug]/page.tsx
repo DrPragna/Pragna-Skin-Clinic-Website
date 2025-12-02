@@ -249,7 +249,7 @@ export default async function ConditionPage({
             {relatedFamilies.length > 0 ? (
                 <div className={`grid gap-5 max-w-3xl mx-auto ${relatedFamilies.length === 1 ? 'md:grid-cols-1 max-w-md' : 'md:grid-cols-2'}`}>
                     {relatedFamilies.map((family, index) => (
-                        <Reveal key={family.slug} delay={index * 0.1}>
+                        <Reveal key={family.slug} delay={index * 0.1} className="h-full">
                             <Link
                                 href={`/treatments/${family.slug}`}
                                 className="group flex flex-col bg-white p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-charcoal/5 hover:border-maroon/20 h-full"
@@ -262,11 +262,11 @@ export default async function ConditionPage({
                                     {family.name}
                                 </h3>
                                 
-                                <p className="text-charcoal/70 text-base leading-relaxed mb-5 line-clamp-2 flex-grow">
+                                <p className="text-charcoal/70 text-base leading-relaxed mb-5 flex-grow">
                                     {family.summary}
                                 </p>
                                 
-                                <div className="flex items-center text-sm uppercase tracking-widest font-medium text-maroon mt-auto">
+                                <div className="flex items-center text-sm uppercase tracking-widest font-medium text-maroon mt-auto pt-2">
                                     <span>Explore</span>
                                     <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />

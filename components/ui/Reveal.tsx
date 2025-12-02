@@ -50,9 +50,13 @@ export const Reveal = ({
 }: RevealProps) => {
   const { ref, hasTriggered } = useOnceInView(0.2);
 
+  // Check if h-full is in className to propagate to inner div
+  const hasHeightFull = className.includes('h-full');
+
   return (
     <div ref={ref} style={{ width }} className={className}>
       <motion.div
+        className={hasHeightFull ? 'h-full' : ''}
         initial={{ opacity: 0, y: 30 }}
         animate={hasTriggered ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ 

@@ -222,10 +222,10 @@ export default async function TreatmentFamilyPage({
             <Reveal>
                 <div className="text-center mb-12">
                     <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
-                        The Pragna Standard
+                        The Pragna Difference
                     </span>
                     <h2 className="text-3xl md:text-4xl font-display text-charcoal">
-                        Why trust us with your skin?
+                        Why Pragna
                     </h2>
                 </div>
             </Reveal>
@@ -233,17 +233,17 @@ export default async function TreatmentFamilyPage({
             <div className="grid lg:grid-cols-3 gap-6">
                  {whyPragnaItems.map((item, i) => (
                     <Reveal key={i} delay={i * 0.1} className="h-full">
-                        <div className="group relative bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-lg transition-all duration-400 hover:-translate-y-1 overflow-hidden h-full">
+                        <div className="group relative bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-lg transition-all duration-400 hover:-translate-y-1 overflow-hidden h-full flex flex-col">
                             <div className="absolute inset-0 bg-gradient-to-br from-white to-maroon/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
                             
-                            <div className="relative z-10">
+                            <div className="relative z-10 flex flex-col h-full">
                                 <span className="text-4xl font-display text-charcoal/10 group-hover:text-maroon/15 transition-colors duration-400 block mb-4">
                                     0{i + 1}
                                 </span>
                                 <h3 className="text-lg font-display text-charcoal mb-3 group-hover:text-maroon transition-colors duration-300">
                                     {item.title}
                                 </h3>
-                                <p className="text-charcoal/60 text-sm leading-relaxed">
+                                <p className="text-charcoal/60 text-sm leading-relaxed flex-grow">
                                     {item.description}
                                 </p>
                             </div>
@@ -266,7 +266,7 @@ export default async function TreatmentFamilyPage({
                             The Process
                         </span>
                         <h2 className="text-3xl lg:text-4xl font-display text-charcoal mb-5">
-                            Your journey to <span className="italic text-maroon">results</span>
+                            How It <span className="italic text-maroon">Works</span>
                         </h2>
                         <p className="text-base text-charcoal/60 mb-8 leading-relaxed">
                             {howItWorksDescription}
@@ -318,10 +318,10 @@ export default async function TreatmentFamilyPage({
           <Reveal>
             <div className="text-center mb-12">
                 <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
-                    Treatment Menu
+                    Available Options
                 </span>
                 <h2 className="text-3xl lg:text-4xl font-display text-charcoal mb-5">
-                    Curated Solutions
+                    Sub-Treatments
                 </h2>
                 <p className="text-base text-charcoal/60 max-w-2xl mx-auto">
                     Select a treatment to learn more about the procedure, downtime, and expected results.
@@ -400,10 +400,10 @@ export default async function TreatmentFamilyPage({
                                 Suitability
                             </span>
                             <h2 className="text-3xl font-display text-charcoal mb-5">
-                                The Ideal Candidate
+                                Who Is This For
                             </h2>
                             <p className="text-charcoal/60 text-base leading-relaxed">
-                                This treatment family is specifically curated to address these common skin concerns with clinical precision.
+                                This treatment family is specifically curated to address these common concerns with clinical precision.
                             </p>
                         </div>
                     </Reveal>
