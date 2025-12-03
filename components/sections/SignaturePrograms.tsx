@@ -14,14 +14,8 @@ import { signaturePrograms } from '@/lib/content/signature-programs';
  * - Minimalist typography
  */
 
-// Sophisticated gradient palettes for each program
-const gradientPalettes = [
-  'from-[#2C2C2C] via-[#1F1F1F] to-[#141414]', // Charcoal
-  'from-[#3D2F2F] via-[#2A2020] to-[#1A1515]', // Warm Dark
-  'from-[#2F3D3D] via-[#202A2A] to-[#151A1A]', // Cool Dark
-  'from-[#3D3D2F] via-[#2A2A20] to-[#1A1A15]', // Olive Dark
-  'from-[#2F2F3D] via-[#20202A] to-[#15151A]', // Purple Dark
-];
+// Fallback gradient if none specified in data
+const defaultGradient = 'from-[#5A524A] via-[#45403A] to-[#302C28]';
 
 export default function SignaturePrograms() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,7 +55,6 @@ export default function SignaturePrograms() {
               program={program}
               index={index}
               isInView={isInView}
-              gradient={gradientPalettes[index % gradientPalettes.length]}
             />
           ))}
         </div>
@@ -73,28 +66,27 @@ export default function SignaturePrograms() {
 function ProgramCard({ 
   program, 
   index, 
-  isInView,
-  gradient
+  isInView
 }: { 
   program: any; 
   index: number; 
   isInView: boolean;
-  gradient: string;
 }) {
   const [imageError, setImageError] = useState(false);
   const showGradient = imageError || !program.image;
+  const gradient = program.gradient || defaultGradient;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ 
-        duration: 0.8, 
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1]
-      }}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.1,
+                ease: [0.16, 1, 0.3, 1]
+              }}
       className="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer"
-    >
+            >
       <Link href={`/signature-programs/${program.slug}`} className="block h-full w-full">
         {/* Background: Image or Gradient */}
         <div className="absolute inset-0 overflow-hidden">
@@ -119,8 +111,8 @@ function ProgramCard({
             </div>
           )}
           
-          {/* Overlay - Adjusted for better visibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-700" />
+          {/* Overlay - Warm tinted for brand consistency */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2A2118]/95 via-[#2A2118]/30 to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-700" />
           
           {/* Sophisticated Hover Glow */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-1000 bg-gradient-to-tr from-maroon/20 via-transparent to-transparent pointer-events-none" />
@@ -138,21 +130,21 @@ function ProgramCard({
               </span>
             </div>
             <span className="text-white/70 font-display text-xl group-hover:text-white transition-colors duration-500">
-              0{index + 1}
-            </span>
+                      0{index + 1}
+                    </span>
           </div>
 
           {/* Bottom - Animated Slide Up */}
           <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-out">
             <span className="text-[#D4A5A5] text-[11px] tracking-[0.25em] uppercase font-medium mb-3 block group-hover:text-[#E8C4C4] transition-colors duration-500">
-              {program.subtitle}
-            </span>
+                      {program.subtitle}
+                    </span>
             <h3 className="text-3xl lg:text-4xl font-display text-white mb-4 group-hover:text-white transition-colors leading-tight drop-shadow-sm">
-              {program.title}
-            </h3>
+                    {program.title}
+                  </h3>
             <p className="text-white/80 font-light text-sm leading-relaxed line-clamp-3 mb-6 border-l border-white/20 pl-4 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-              {program.description}
-            </p>
+                    {program.description}
+                  </p>
             
             <div className="flex items-center gap-3 text-white/70 group-hover:text-white transition-colors text-[10px] tracking-widest uppercase font-medium">
               <span className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-500 group-hover:after:w-full">
@@ -160,10 +152,10 @@ function ProgramCard({
               </span>
               <div className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-charcoal transition-all duration-500">
                 <svg className="w-3 h-3 transform -rotate-45 group-hover:rotate-0 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </div>
-            </div>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </div>
           </div>
         </div>
       </Link>

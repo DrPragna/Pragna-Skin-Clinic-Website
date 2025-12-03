@@ -22,6 +22,9 @@ import { unevenSkinToneTextureContent } from './conditions/uneven-skin-tone-text
 import { ageingSkinLinesWrinklesContent } from './conditions/ageing-skin-lines-wrinkles';
 import { darkCirclesUnderEyeContent } from './conditions/dark-circles-under-eye';
 import { rosaceaFacialRednessContent } from './conditions/rosacea-facial-redness';
+import { molesWartsSkinTagsContent } from './conditions/moles-warts-skin-tags';
+import { tattooInkPigmentRemovalContent } from './conditions/tattoo-ink-pigment-removal';
+import { hairFallThinningHairContent } from './conditions/hair-fall-thinning-hair';
 
 // ============================================
 // TREATMENT FAMILY CONTENT IMPORTS
@@ -203,6 +206,9 @@ export const conditionContentMap: Record<string, ConditionContent> = {
   'ageing-skin-lines-wrinkles': ageingSkinLinesWrinklesContent,
   'dark-circles-under-eye': darkCirclesUnderEyeContent,
   'rosacea-facial-redness': rosaceaFacialRednessContent,
+  'moles-warts-skin-tags': molesWartsSkinTagsContent,
+  'tattoo-ink-pigment-removal': tattooInkPigmentRemovalContent,
+  'hair-fall-thinning-hair': hairFallThinningHairContent,
 };
 
 // ============================================
