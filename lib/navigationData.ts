@@ -246,14 +246,14 @@ export const conditions: Condition[] = [
     slug: 'moles-warts-skin-tags',
     name: 'Moles, Warts & Skin Tags', 
     subtitle: 'Raised skin growths you want evaluated or removed',
-    group: 'Skin',
+    group: 'Wellness',
     relatedTreatmentFamilies: ['wellness-iv-drips-corrective']
   },
   { 
     slug: 'tattoo-ink-pigment-removal',
     name: 'Tattoo & Ink Pigment Removal', 
-    subtitle: 'Clearing unwanted tattoo or residual ink from the skin',
-    group: 'Skin',
+    subtitle: 'Fading or removing tattoo ink you no longer want',
+    group: 'Wellness',
     relatedTreatmentFamilies: ['wellness-iv-drips-corrective']
   },
   
@@ -299,7 +299,7 @@ export const conditions: Condition[] = [
   { 
     slug: 'stubborn-fat-body-shaping',
     name: 'Stubborn Fat & Body Shaping', 
-    subtitle: 'Bulges that don\'t reduce easily despite diet and exercise',
+    subtitle: 'Pockets of fat that stay despite healthy habits',
     group: 'Body',
     relatedTreatmentFamilies: ['body-contouring-fat-reduction']
   },

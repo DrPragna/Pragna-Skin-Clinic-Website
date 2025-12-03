@@ -36,7 +36,7 @@ const THEMES: Record<ThemeKey, {
     cardHover: 'group-hover:bg-white',
     accent: 'text-maroon',
     title: 'What Concerns You?',
-    description: "Select a category to find your concern. We will guide you to the right solution.",
+    description: "Every concern deserves attention. Find yours below.",
     gradient: 'from-transparent to-transparent',
     heroImage: '/clinic-interior.png',
     hex: '#3D2E2E'
@@ -87,8 +87,8 @@ const THEMES: Record<ThemeKey, {
     cardBg: 'bg-[#F5F9F7]', 
     cardHover: 'group-hover:bg-[#E8F2EC]',
     accent: 'text-[#527862]', // Forest accent
-    title: 'Wellness & Others',
-    description: 'Holistic treatments for overall wellbeing and specific corrective needs.',
+    title: 'Wellness & Corrective',
+    description: 'Targeted treatments for sweating, skin growths, tattoo removal and overall wellbeing.',
     gradient: 'from-[#87A896]/10 to-[#527862]/5'
   }
 };
@@ -152,7 +152,7 @@ function ConditionsContent() {
           SMART HERO - Dynamic based on Filter
           ============================================ */}
       <section className={`
-        relative md:h-[85vh] transition-colors duration-700 ease-in-out overflow-hidden
+        relative min-h-[75vh] md:min-h-[85vh] transition-colors duration-700 ease-in-out overflow-hidden
         ${theme.heroBg}
       `}>
          {/* Mobile: Background Image */}
@@ -221,9 +221,9 @@ function ConditionsContent() {
          )}
 
         {/* Centering Wrapper - Handles vertical centering */}
-        <div className="absolute inset-0 flex items-center pt-32 md:pt-0">
-          <div className="section-container relative z-10 w-full">
-            <div className="flex flex-col md:flex-row w-full">
+        <div className="absolute inset-0">
+          <div className="section-container relative z-10 w-full h-full flex items-center justify-center md:justify-start">
+            <div className="flex flex-col md:flex-row w-full md:items-center">
             <AnimatePresence mode="wait">
               <motion.div 
                 key={activeFilter}
@@ -231,7 +231,7 @@ function ConditionsContent() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="max-w-3xl md:w-1/2"
+                className="max-w-3xl md:w-1/2 text-center md:text-left mx-auto md:mx-0"
               >
                 <motion.span 
                   initial={{ opacity: 0, y: 20 }}
@@ -247,7 +247,7 @@ function ConditionsContent() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.15 }}
                   className={`
-                    text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display leading-[0.9] mb-8 -ml-1
+                    text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display leading-[0.9] mb-8
                     ${activeFilter === 'All' ? 'xl:max-w-[14ch]' : ''}
                     ${theme.heroText}
                   `}
@@ -260,7 +260,7 @@ function ConditionsContent() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.25 }}
                   className={`
-                    text-lg md:text-xl font-light max-w-lg leading-relaxed opacity-90
+                    text-lg md:text-xl font-light max-w-lg leading-relaxed opacity-90 mx-auto md:mx-0
                     ${theme.heroSub}
                   `}
                 >
