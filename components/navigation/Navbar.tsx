@@ -301,9 +301,9 @@ export default function Navbar() {
                     {/* Skin - Spans 5 columns on lg */}
                     <div className="lg:col-span-5 space-y-6 md:space-y-8 lg:border-r border-maroon/5 lg:pr-8">
                       <div className="relative">
-                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
+                      <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                           {navigationData.conditions[0].group}
-                        </h3>
+                      </h3>
                         {/* Decorative Line */}
                         <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
                       </div>
@@ -333,9 +333,9 @@ export default function Navbar() {
                     {/* Hair - Spans 3 columns on lg */}
                     <div className="lg:col-span-3 space-y-6 md:space-y-8 lg:border-r border-maroon/5 lg:pr-8">
                       <div className="relative">
-                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
+                      <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                           {navigationData.conditions[1].group}
-                        </h3>
+                      </h3>
                         {/* Decorative Line */}
                         <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
                       </div>
@@ -367,9 +367,9 @@ export default function Navbar() {
                       {/* Body */}
                       <div>
                         <div className="relative">
-                          <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
+                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                             {navigationData.conditions[2].group}
-                          </h3>
+                        </h3>
                           {/* Decorative Line */}
                           <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
                         </div>
@@ -396,9 +396,9 @@ export default function Navbar() {
                       {/* Others */}
                       <div>
                         <div className="relative">
-                          <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
+                        <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em] mb-6">
                             Others
-                          </h3>
+                        </h3>
                           {/* Decorative Line */}
                           <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
                         </div>

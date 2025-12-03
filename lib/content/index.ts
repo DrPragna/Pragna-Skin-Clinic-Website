@@ -19,6 +19,9 @@ import { acneBreakoutsContent } from './conditions/acne-breakouts';
 import { acneScarsContent } from './conditions/acne-scars';
 import { darkSpotsTanPigmentationContent } from './conditions/dark-spots-tan-pigmentation';
 import { unevenSkinToneTextureContent } from './conditions/uneven-skin-tone-texture';
+import { ageingSkinLinesWrinklesContent } from './conditions/ageing-skin-lines-wrinkles';
+import { darkCirclesUnderEyeContent } from './conditions/dark-circles-under-eye';
+import { rosaceaFacialRednessContent } from './conditions/rosacea-facial-redness';
 
 // ============================================
 // TREATMENT FAMILY CONTENT IMPORTS
@@ -197,6 +200,9 @@ export const conditionContentMap: Record<string, ConditionContent> = {
   'acne-scars': acneScarsContent,
   'dark-spots-tan-pigmentation': darkSpotsTanPigmentationContent,
   'uneven-skin-tone-texture': unevenSkinToneTextureContent,
+  'ageing-skin-lines-wrinkles': ageingSkinLinesWrinklesContent,
+  'dark-circles-under-eye': darkCirclesUnderEyeContent,
+  'rosacea-facial-redness': rosaceaFacialRednessContent,
 };
 
 // ============================================

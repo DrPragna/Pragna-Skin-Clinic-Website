@@ -29,9 +29,9 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Radiance Revival',
     description: 'Customized treatment plans that brighten, smooth, and refresh tired skin.',
     duration: '4-6 sessions',
-    image: '/images/signature/glow-getters-card.jpg',
-    heroImage: '/images/signature/glow-getters-hero.jpg',
-    longDescription: 'A curated journey designed to restore your skin’s natural luminosity. Combining gentle exfoliation with deep hydration and collagen stimulation, this program targets dullness and uneven texture to reveal a radiant, camera-ready complexion.',
+    image: '', // Add image path when available
+    heroImage: '',
+    longDescription: "A curated journey designed to restore your skin's natural luminosity. Combining gentle exfoliation with deep hydration and collagen stimulation, this program targets dullness and uneven texture to reveal a radiant, camera-ready complexion.",
     benefits: [
       'Instant radiance and brightness',
       'Smoother skin texture',
@@ -68,8 +68,8 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Post-Pregnancy Care',
     description: 'Gentle treatments to reclaim confidence in skin, body, and hair.',
     duration: '6-8 sessions',
-    image: '/images/signature/mommy-makeover-card.jpg',
-    heroImage: '/images/signature/mommy-makeover-hero.jpg',
+    image: '', // Add image path when available
+    heroImage: '',
     longDescription: 'Motherhood is a beautiful journey, but it changes your body. Our Mommy Makeover is a compassionate, comprehensive program addressing post-partum concerns like stretch marks, skin laxity, hair thinning, and pigmentation, helping you feel like yourself again.',
     benefits: [
       'Stretch mark reduction',
@@ -107,8 +107,8 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Pre-Wedding Glow',
     description: 'Step-by-step care for clear, even, and luminous skin on your big day.',
     duration: '3-6 months',
-    image: '/images/signature/bridal-beauty-card.jpg',
-    heroImage: '/images/signature/bridal-beauty-hero.jpg',
+    image: '', // Add image path when available
+    heroImage: '',
     longDescription: 'Your wedding day deserves your best skin. We create a timeline-based roadmap starting 3-6 months before the big day, addressing everything from acne to body polishing, ensuring you walk down the aisle with flawless confidence.',
     benefits: [
       'Flawless complexion',
@@ -146,9 +146,9 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Anti-Aging',
     description: 'Target lines and loss of firmness with advanced anti-aging solutions.',
     duration: '4-8 sessions',
-    image: '/images/signature/rewind-card.jpg',
-    heroImage: '/images/signature/rewind-hero.jpg',
-    longDescription: 'Age is just a number, but looking tired doesn’t have to be. The Rewind program combines non-surgical lifting, volume restoration, and skin resurfacing to subtly turn back the clock, giving you a refreshed, rested appearance without surgery.',
+    image: '', // Add image path when available
+    heroImage: '',
+    longDescription: "Age is just a number, but looking tired doesn't have to be. The Rewind program combines non-surgical lifting, volume restoration, and skin resurfacing to subtly turn back the clock, giving you a refreshed, rested appearance without surgery.",
     benefits: [
       'Lifted facial contours',
       'Reduced fine lines',
@@ -185,9 +185,9 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Complete Revival',
     description: 'Clinic-exclusive protocol for instant luminosity and lasting results.',
     duration: '3-5 sessions',
-    image: '/images/signature/reset-card.jpg',
-    heroImage: '/images/signature/reset-hero.jpg',
-    longDescription: 'Our namesake program for when you need a complete overhaul. Whether it’s from stress, travel, or neglect, the Signature Reset detoxifies, nourishes, and re-energizes your skin using our proprietary blend of therapies.',
+    image: '', // Add image path when available
+    heroImage: '',
+    longDescription: "Our namesake program for when you need a complete overhaul. Whether it's from stress, travel, or neglect, the Signature Reset detoxifies, nourishes, and re-energizes your skin using our proprietary blend of therapies.",
     benefits: [
       'Deep detoxification',
       'Stress relief for skin',

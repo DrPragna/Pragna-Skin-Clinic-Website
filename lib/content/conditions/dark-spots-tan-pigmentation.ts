@@ -32,7 +32,7 @@ export const darkSpotsTanPigmentationContent: ConditionContent = {
   },
   pragnaApproach: {
     description:
-      'We separate melasma, tan and post-inflammatory marks, then design a slow, gentle plan using prescription creams, peels and lasers that respects Indian skin's tendency to darken and relapse.',
+      "We separate melasma, tan and post-inflammatory marks, then design a slow, gentle plan using prescription creams, peels and lasers that respects Indian skin's tendency to darken and relapse.",
   },
   recommendedTreatments: [
     {
