@@ -28,6 +28,9 @@ import { hairFallThinningHairContent } from './conditions/hair-fall-thinning-hai
 import { unwantedFacialBodyHairContent } from './conditions/unwanted-facial-body-hair';
 import { doubleChinJawlineFullnessContent } from './conditions/double-chin-jawline-fullness';
 import { neckLinesSaggingNeckContent } from './conditions/neck-lines-sagging-neck';
+import { stretchMarksContent } from './conditions/stretch-marks';
+import { stubbornFatBodyShapingContent } from './conditions/stubborn-fat-body-shaping';
+import { excessiveSweatingContent } from './conditions/excessive-sweating';
 
 // ============================================
 // TREATMENT FAMILY CONTENT IMPORTS
@@ -215,6 +218,9 @@ export const conditionContentMap: Record<string, ConditionContent> = {
   'unwanted-facial-body-hair': unwantedFacialBodyHairContent,
   'double-chin-jawline-fullness': doubleChinJawlineFullnessContent,
   'neck-lines-sagging-neck': neckLinesSaggingNeckContent,
+  'stretch-marks': stretchMarksContent,
+  'stubborn-fat-body-shaping': stubbornFatBodyShapingContent,
+  'excessive-sweating': excessiveSweatingContent,
 };
 
 // ============================================
