@@ -16,6 +16,9 @@ import { TreatmentFamilyContent, SubTreatmentContent, ConditionContent } from '@
 // CONDITION CONTENT IMPORTS
 // ============================================
 import { acneBreakoutsContent } from './conditions/acne-breakouts';
+import { acneScarsContent } from './conditions/acne-scars';
+import { darkSpotsTanPigmentationContent } from './conditions/dark-spots-tan-pigmentation';
+import { unevenSkinToneTextureContent } from './conditions/uneven-skin-tone-texture';
 
 // ============================================
 // TREATMENT FAMILY CONTENT IMPORTS
@@ -191,7 +194,9 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
  */
 export const conditionContentMap: Record<string, ConditionContent> = {
   'acne-breakouts': acneBreakoutsContent,
-  // Add more as content files are created...
+  'acne-scars': acneScarsContent,
+  'dark-spots-tan-pigmentation': darkSpotsTanPigmentationContent,
+  'uneven-skin-tone-texture': unevenSkinToneTextureContent,
 };
 
 // ============================================
