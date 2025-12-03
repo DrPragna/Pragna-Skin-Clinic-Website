@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const pillars = [
@@ -68,17 +67,16 @@ export default function TreatmentPillars() {
             >
               {/* Background Image */}
               <div className="absolute inset-0">
-                <Image 
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
                   src={pillar.image} 
                   alt={pillar.title}
-                  fill
-                  className={`object-cover transition-all duration-1000 ease-out
+                  className={`w-full h-full object-cover transition-all duration-1000 ease-out
                     ${activeId === pillar.id 
                       ? 'scale-100 grayscale-0 opacity-100' 
                       : 'scale-110 grayscale opacity-60'
                     }
                   `}
-                  sizes="(max-width: 1600px) 33vw, 60vw"
                 />
                 
                 {/* Overlays */}
@@ -151,11 +149,11 @@ export default function TreatmentPillars() {
               href={pillar.href}
               className="block relative h-[400px] overflow-hidden rounded-xl group"
             >
-              <Image 
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
                 src={pillar.image} 
                 alt={pillar.title}
-                fill
-                className="object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               

@@ -149,36 +149,36 @@ function HeroSection({
         >
           <motion.span
             variants={fadeInUp}
-            className="hidden lg:block text-maroon text-xs tracking-[0.25em] uppercase font-medium mb-3"
+            className="hidden lg:block text-maroon/80 text-[10px] md:text-xs tracking-[0.25em] uppercase font-medium mb-4"
           >
             {program.subtitle}
           </motion.span>
 
           <motion.h1
             variants={fadeInUp}
-            className="hidden lg:block text-4xl md:text-5xl xl:text-6xl font-display text-charcoal mb-4 leading-[0.95]"
+            className="hidden lg:block text-4xl md:text-5xl xl:text-6xl font-display text-charcoal mb-5 leading-[0.95]"
           >
             {program.title}
           </motion.h1>
 
           <motion.div
             variants={fadeInUp}
-            className="flex items-center gap-3 mb-6 text-[11px] text-charcoal/50 font-mono uppercase tracking-widest"
+            className="flex items-center gap-3 mb-8 text-[10px] md:text-xs text-maroon/60 font-medium uppercase tracking-[0.2em]"
           >
             <span>{program.duration}</span>
-            <span className="w-px h-3 bg-charcoal/20" />
+            <span className="w-px h-3 bg-maroon/20" />
             <span>Signature Series</span>
           </motion.div>
 
           {/* Benefits - List Style */}
-          <motion.div variants={fadeInUp} className="mb-6">
-            <h3 className="text-[11px] font-medium text-charcoal/70 mb-4 uppercase tracking-[0.2em]">
+          <motion.div variants={fadeInUp} className="mb-8">
+            <h3 className="text-[10px] md:text-xs font-medium text-maroon/70 mb-4 uppercase tracking-[0.25em]">
               At a Glance
             </h3>
             <ul className="space-y-3">
               {program.benefits.slice(0, 4).map((benefit, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="mt-2 w-1.5 h-1.5 bg-maroon rounded-full flex-shrink-0" />
+                  <span className="mt-2.5 w-1.5 h-1.5 bg-maroon rounded-full flex-shrink-0" />
                   <span className="text-base text-charcoal/80 leading-relaxed">
                     {benefit}
                   </span>
@@ -188,12 +188,15 @@ function HeroSection({
           </motion.div>
 
           {/* Ideal For */}
-          <motion.div variants={fadeInUp} className="mb-8">
+          <motion.div variants={fadeInUp} className="mb-10">
+            <h3 className="text-[10px] md:text-xs font-medium text-maroon/70 mb-4 uppercase tracking-[0.25em]">
+              Ideal For
+            </h3>
             <div className="flex flex-wrap gap-2">
               {program.idealFor.map((item, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1.5 bg-white/80 border border-charcoal/5 rounded-full text-sm text-charcoal/60"
+                  className="px-4 py-2 bg-white border border-maroon/10 rounded-full text-xs uppercase tracking-wider text-charcoal/70 font-medium"
                 >
                   {item}
                 </span>
@@ -240,22 +243,25 @@ function PhilosophySection({ program }: { program: SignatureProgram }) {
       ref={ref}
       className="py-12 md:py-16 bg-white scroll-mt-20"
     >
-      <div className="max-w-3xl mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: smoothEase }}
-        >
-          <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
-            About the Programme
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-5">
-            What is {program.title}?
-          </h2>
-          <p className="text-base md:text-lg text-charcoal/70 leading-relaxed">
-            {program.longDescription}
-          </p>
-        </motion.div>
+      <div className="section-container">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: smoothEase }}
+            className="text-center"
+          >
+            <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
+              About the Programme
+            </span>
+            <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-4">
+              What is {program.title}?
+            </h2>
+            <p className="text-base md:text-lg text-charcoal/70 leading-relaxed">
+              {program.longDescription}
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -270,13 +276,13 @@ function ProtocolSection({ process }: { process: SignatureProgram["process"] }) 
 
   return (
     <section ref={ref} className="py-12 md:py-16 bg-beige-warm">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-container">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: smoothEase }}
-          className="text-center mb-10"
+          className="text-center mb-8"
         >
           <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
             Treatment Timeline
@@ -287,12 +293,13 @@ function ProtocolSection({ process }: { process: SignatureProgram["process"] }) 
         </motion.div>
 
         {/* Timeline - Simple Grid Layout */}
-        <div className="relative">
-          {/* Central Line (Desktop) */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-maroon/20 -translate-x-1/2" />
+        <div className="max-w-3xl mx-auto">
+          <div className="relative">
+            {/* Central Line (Desktop) */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-maroon/20 -translate-x-1/2" />
 
-          {/* Steps */}
-          <div className="space-y-6">
+            {/* Steps */}
+            <div className="space-y-6">
             {process.map((step, i) => (
               <motion.div
                 key={i}
@@ -309,19 +316,19 @@ function ProtocolSection({ process }: { process: SignatureProgram["process"] }) 
                 <div className="md:hidden">
                   <div className="flex gap-4">
                     <div className="flex flex-col items-center">
-                      <div className="w-4 h-4 bg-maroon rounded-full ring-4 ring-beige-warm flex-shrink-0" />
+                      <div className="w-3 h-3 bg-maroon rounded-full ring-4 ring-beige-warm flex-shrink-0 mt-1" />
                       {i < process.length - 1 && (
                         <div className="w-px flex-1 bg-maroon/20 mt-2" />
                       )}
                     </div>
                     <div className="pb-6 flex-1">
-                      <span className="text-maroon font-mono text-[11px] uppercase tracking-widest mb-2 block">
-                        {step.duration}
-                      </span>
-                      <h3 className="text-lg font-display text-charcoal mb-2">
+                      <h3 className="text-lg font-display text-maroon mb-1">
                         {step.title}
                       </h3>
-                      <p className="text-charcoal/70 leading-relaxed text-base">
+                      <span className="text-maroon/60 text-xs font-medium uppercase tracking-[0.15em] mb-2 block">
+                        {step.duration}
+                      </span>
+                      <p className="text-charcoal/70 text-base leading-relaxed">
                         {step.description}
                       </p>
                     </div>
@@ -333,14 +340,14 @@ function ProtocolSection({ process }: { process: SignatureProgram["process"] }) 
                   {/* Left Column */}
                   <div className={`${i % 2 === 0 ? "text-right" : ""}`}>
                     {i % 2 === 0 && (
-                      <div className="bg-white p-6 rounded-xl border border-charcoal/5 shadow-sm">
-                        <span className="text-maroon font-mono text-[11px] uppercase tracking-widest mb-2 block">
-                          {step.duration}
-                        </span>
-                        <h3 className="text-lg font-display text-charcoal mb-2">
+                      <div className="bg-white p-5 rounded-xl border border-charcoal/5">
+                        <h3 className="text-lg font-display text-maroon mb-1">
                           {step.title}
                         </h3>
-                        <p className="text-charcoal/70 leading-relaxed text-base">
+                        <span className="text-maroon/60 text-xs font-medium uppercase tracking-[0.15em] mb-2 block">
+                          {step.duration}
+                        </span>
+                        <p className="text-charcoal/70 text-base leading-relaxed">
                           {step.description}
                         </p>
                       </div>
@@ -355,14 +362,14 @@ function ProtocolSection({ process }: { process: SignatureProgram["process"] }) 
                   {/* Right Column */}
                   <div className={`${i % 2 === 1 ? "" : ""}`}>
                     {i % 2 === 1 && (
-                      <div className="bg-white p-6 rounded-xl border border-charcoal/5 shadow-sm">
-                        <span className="text-maroon font-mono text-[11px] uppercase tracking-widest mb-2 block">
-                          {step.duration}
-                        </span>
-                        <h3 className="text-lg font-display text-charcoal mb-2">
+                      <div className="bg-white p-5 rounded-xl border border-charcoal/5">
+                        <h3 className="text-lg font-display text-maroon mb-1">
                           {step.title}
                         </h3>
-                        <p className="text-charcoal/70 leading-relaxed text-base">
+                        <span className="text-maroon/60 text-xs font-medium uppercase tracking-[0.15em] mb-2 block">
+                          {step.duration}
+                        </span>
+                        <p className="text-charcoal/70 text-base leading-relaxed">
                           {step.description}
                         </p>
                       </div>
@@ -371,6 +378,7 @@ function ProtocolSection({ process }: { process: SignatureProgram["process"] }) 
                 </div>
               </motion.div>
             ))}
+            </div>
           </div>
         </div>
       </div>
@@ -386,23 +394,24 @@ function FAQSection({ faqs }: { faqs: SignatureProgram["faqs"] }) {
 
   return (
     <section className="py-12 md:py-16 bg-white">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
-            Common Questions
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display text-charcoal">
-            FAQs
-          </h2>
-        </div>
+      <div className="section-container">
+        <div className="max-w-3xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
+              Common Questions
+            </span>
+            <h2 className="text-3xl md:text-4xl font-display text-charcoal">
+              FAQs
+            </h2>
+          </div>
 
-        {/* FAQ Items - Card Style */}
-        <div className="space-y-4">
+          {/* FAQ Items - Card Style */}
+          <div className="space-y-4">
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className={`rounded-xl border transition-all duration-300 ${
+              className={`rounded-xl border transition-all duration-300 overflow-hidden ${
                 openIndex === i
                   ? "bg-beige-warm border-maroon/20 shadow-sm"
                   : "bg-beige-warm/50 border-charcoal/5 hover:border-maroon/20 hover:bg-beige-warm"
@@ -410,11 +419,11 @@ function FAQSection({ faqs }: { faqs: SignatureProgram["faqs"] }) {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full px-5 py-5 flex items-center justify-between text-left cursor-pointer"
+                className="w-full p-5 flex items-center justify-between text-left cursor-pointer"
               >
-                <span className="text-base md:text-lg font-display text-charcoal pr-4">
+                <h3 className="text-base md:text-lg font-display text-charcoal pr-4">
                   {faq.question}
-                </span>
+                </h3>
                 <motion.span
                   animate={{ rotate: openIndex === i ? 45 : 0 }}
                   transition={{ duration: 0.3, ease: smoothEase }}
@@ -448,12 +457,15 @@ function FAQSection({ faqs }: { faqs: SignatureProgram["faqs"] }) {
                 transition={{ duration: 0.4, ease: smoothEase }}
                 className="overflow-hidden"
               >
-                <p className="px-5 pb-5 text-charcoal/70 leading-relaxed text-base">
-                  {faq.answer}
-                </p>
+                <div className="px-5 pb-5 pt-0">
+                  <p className="text-charcoal/70 text-base leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
               </motion.div>
             </div>
           ))}
+          </div>
         </div>
       </div>
     </section>
@@ -474,16 +486,16 @@ function CTASection({
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="py-12 md:py-16 bg-maroon text-white relative overflow-hidden">
+    <section ref={ref} className="py-12 md:py-16 bg-maroon relative overflow-hidden">
       <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay" />
       
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div className="section-container relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: smoothEase }}
         >
-          <h2 className="text-3xl md:text-4xl font-display mb-3">
+          <h2 className="text-3xl md:text-4xl font-display text-white mb-3">
             Ready to begin?
           </h2>
           <p className="text-white/80 text-base mb-6 max-w-md mx-auto">

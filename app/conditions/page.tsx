@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/navigation/Navbar';
@@ -27,29 +26,33 @@ const THEMES: Record<ThemeKey, {
   description: string;
   gradient: string; // For the abstract card background
   heroImage?: string; // Optional hero background image
+  hex?: string; // Hex code for dynamic gradients
 }> = {
   'All': {
-    heroBg: 'bg-beige-warm',
-    heroText: 'text-charcoal',
-    heroSub: 'text-charcoal/60',
+    heroBg: 'bg-[#3D2E2E]', // Deep Warm Brown
+    heroText: 'text-white',
+    heroSub: 'text-white/80',
     cardBg: 'bg-white',
     cardHover: 'group-hover:bg-white',
     accent: 'text-maroon',
-    title: 'What concerns you?',
-    description: "Select a category to find your concern. We'll guide you to the right solution.",
-    gradient: 'from-transparent to-transparent'
+    title: 'What Concerns You?',
+    description: "Select a category to find your concern. We will guide you to the right solution.",
+    gradient: 'from-transparent to-transparent',
+    heroImage: '/clinic-interior.png',
+    hex: '#3D2E2E'
   },
   'Skin': {
     heroBg: 'bg-[#5C2E26]', // Deep Copper/Terracotta
     heroText: 'text-white', 
     heroSub: 'text-white/80', 
-    cardBg: 'bg-[#FFF8F5]', // Very Light Peach
-    cardHover: 'group-hover:bg-[#FFEFE8]',
+    cardBg: 'bg-[#FDFBF7]', // Warm Off-White/Cream
+    cardHover: 'group-hover:bg-[#F7F5F0]',
     accent: 'text-[#A66249]', // Terracotta accent
-    title: 'Skin Concerns',
+    title: 'Face & Skin',
     description: "From acne to ageing, restore your skin's natural health and radiance.",
     gradient: 'from-[#C28E79]/10 to-[#A66249]/5',
-    heroImage: '/images/areas-of-focus/Skin.jpg'
+    heroImage: '/images/areas-of-focus/Skin.jpg',
+    hex: '#5C2E26'
   },
   'Hair': {
     heroBg: 'bg-[#4A3B2A]', // Deep Bronze
@@ -61,7 +64,8 @@ const THEMES: Record<ThemeKey, {
     title: 'Hair & Scalp',
     description: 'Science-backed solutions for restoration, growth, and scalp health.',
     gradient: 'from-[#BFA57D]/10 to-[#8F7348]/5',
-    heroImage: '/images/areas-of-focus/Hair.jpg'
+    heroImage: '/images/areas-of-focus/Hair.jpg',
+    hex: '#4A3B2A'
   },
   'Body': {
     heroBg: 'bg-[#423D33]', // Deep Olive/Clay
@@ -73,7 +77,8 @@ const THEMES: Record<ThemeKey, {
     title: 'Body & Shape',
     description: 'Sculpt, tone, and refine your silhouette with advanced non-surgical care.',
     gradient: 'from-[#9E8C6B]/10 to-[#736243]/5',
-    heroImage: '/images/areas-of-focus/Body.jpg'
+    heroImage: '/images/areas-of-focus/Body.jpg',
+    hex: '#423D33'
   },
   'Others': {
     heroBg: 'bg-[#2A3B33]', // Deep Forest
@@ -140,43 +145,69 @@ function ConditionsContent() {
   const theme = THEMES[activeFilter];
 
   return (
-    <main className={`min-h-screen transition-colors duration-700 ease-in-out ${activeFilter === 'All' ? 'bg-beige-warm' : 'bg-white'}`}>
+    <main className="min-h-screen transition-colors duration-700 ease-in-out bg-white">
       <Navbar />
       
       {/* ============================================
           SMART HERO - Dynamic based on Filter
           ============================================ */}
       <section className={`
-        relative pt-32 pb-20 md:pt-40 md:pb-28 transition-colors duration-700 ease-in-out overflow-hidden
+        relative md:h-[85vh] transition-colors duration-700 ease-in-out overflow-hidden
         ${theme.heroBg}
       `}>
-         {/* Hero Background Image (for Skin, Hair, Body) - with smooth crossfade */}
+         {/* Mobile: Background Image */}
          <AnimatePresence mode="sync">
            {theme.heroImage && (
              <motion.div 
-               key={theme.heroImage}
-               initial={{ opacity: 0, scale: 1.1 }}
-               animate={{ opacity: 1, scale: 1 }}
+               key={theme.heroImage + '-mobile'}
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
                exit={{ opacity: 0 }}
-               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-               className="absolute inset-0"
+               transition={{ duration: 0.8 }}
+               className="absolute inset-0 md:hidden"
              >
-               <Image
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
                  src={theme.heroImage}
                  alt={theme.title}
-                 fill
-                 className="object-cover"
-                 priority
+                 className="absolute inset-0 w-full h-full object-cover object-center"
                />
-               {/* Dark overlay for text readability */}
                <div className="absolute inset-0 bg-black/40" />
-               {/* Gradient overlay for bottom fade */}
-               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
              </motion.div>
            )}
          </AnimatePresence>
 
-         {/* Abstract Background Elements for Mood (only for non-image themes) */}
+         {/* Desktop: Cinematic Side Bleed Image */}
+         <AnimatePresence mode="sync">
+           {theme.heroImage && theme.hex && (
+             <motion.div 
+               key={theme.heroImage + '-desktop'}
+               initial={{ opacity: 0, x: 100 }}
+               animate={{ opacity: 1, x: 0 }}
+               exit={{ opacity: 0, x: 100 }}
+               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+               className="hidden md:block absolute top-0 right-0 bottom-0 w-[60%] h-full"
+             >
+               {/* Main Image */}
+               {/* eslint-disable-next-line @next/next/no-img-element */}
+               <img
+                 src={theme.heroImage}
+                 alt={theme.title}
+                 className="absolute inset-0 w-full h-full object-cover object-center"
+               />
+               
+               {/* Gradient Mask - Blends image into background color */}
+               <div 
+                 className="absolute inset-0" 
+                 style={{
+                   background: `linear-gradient(to right, ${theme.hex} 5%, ${theme.hex}E6 20%, ${theme.hex}00 100%)`
+                 }}
+               />
+             </motion.div>
+           )}
+         </AnimatePresence>
+
+         {/* Abstract Background Elements (for non-image themes) */}
          {!theme.heroImage && (
            <motion.div 
              initial={{ opacity: 0 }}
@@ -189,53 +220,56 @@ function ConditionsContent() {
            </motion.div>
          )}
 
-        <div className="section-container relative z-10">
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={activeFilter}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-4xl"
-            >
-              <motion.span 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className={`
-                  font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-6 block
-                  ${activeFilter === 'All' ? 'text-maroon/60' : 'text-white/60'}
-                `}
-              >
-                {activeFilter === 'All' ? 'Our Expertise' : 'Specialized Care'}
-              </motion.span>
-              
-              <motion.h1 
+        {/* Centering Wrapper - Handles vertical centering */}
+        <div className="absolute inset-0 flex items-center pt-32 md:pt-0">
+          <div className="section-container relative z-10 w-full">
+            <div className="flex flex-col md:flex-row w-full">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeFilter}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                className={`
-                  text-5xl md:text-7xl lg:text-8xl font-display leading-[0.9] mb-8
-                  ${theme.heroText}
-                `}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="max-w-3xl md:w-1/2"
               >
-                {theme.title}
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className={`
-                  text-lg md:text-xl font-light max-w-2xl leading-relaxed
-                  ${theme.heroSub}
-                `}
-              >
-                {theme.description}
-              </motion.p>
-            </motion.div>
-          </AnimatePresence>
+                <motion.span 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="font-medium uppercase tracking-[0.25em] text-xs mb-8 block text-white/70"
+                >
+                  {activeFilter === 'All' ? 'Our Expertise' : 'Specialized Care'}
+                </motion.span>
+                
+                <motion.h1 
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.15 }}
+                  className={`
+                    text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display leading-[0.9] mb-8 -ml-1
+                    ${activeFilter === 'All' ? 'xl:max-w-[14ch]' : ''}
+                    ${theme.heroText}
+                  `}
+                >
+                  {theme.title}
+                </motion.h1>
+                
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.25 }}
+                  className={`
+                    text-lg md:text-xl font-light max-w-lg leading-relaxed opacity-90
+                    ${theme.heroSub}
+                  `}
+                >
+                  {theme.description}
+                </motion.p>
+              </motion.div>
+            </AnimatePresence>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -305,12 +339,14 @@ function ConditionsContent() {
                       delay: index * 0.08, // Stagger effect
                       ease: [0.22, 1, 0.36, 1] 
                     }}
+                    className="h-full"
                 >
                   <Link 
                       href={`/conditions/${condition.slug}`}
                       className={`
-                          group relative block p-8 md:p-10 rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl
-                          ${activeFilter === 'All' ? 'bg-white border border-charcoal/5 hover:shadow-lg' : cardTheme.cardBg}
+                          group relative block p-8 md:p-10 rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl h-full
+                          ${cardTheme.cardBg}
+                          ${activeFilter === 'All' ? 'hover:shadow-lg' : ''}
                       `}
                   >
                     {/* Abstract Gradient Background on Hover */}
@@ -319,7 +355,7 @@ function ConditionsContent() {
                         ${cardTheme.gradient}
                     `} />
 
-                    <div className="relative z-10 flex flex-col h-full justify-between min-h-[180px]">
+                    <div className="relative z-10 flex flex-col h-full justify-between min-h-[220px]">
                         <div>
                             <div className="flex justify-between items-start mb-6">
                                 <span className={`

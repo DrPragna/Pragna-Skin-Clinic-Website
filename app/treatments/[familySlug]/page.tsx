@@ -233,14 +233,14 @@ export default async function TreatmentFamilyPage({
             <div className="grid lg:grid-cols-3 gap-6">
                  {whyPragnaItems.map((item, i) => (
                     <Reveal key={i} delay={i * 0.1} className="h-full">
-                        <div className="group relative bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-lg transition-all duration-400 hover:-translate-y-1 overflow-hidden h-full flex flex-col">
+                        <div className="group relative bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-lg border border-maroon/5 transition-all duration-400 hover:-translate-y-1 overflow-hidden h-full flex flex-col">
                             <div className="absolute inset-0 bg-gradient-to-br from-white to-maroon/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
                             
                             <div className="relative z-10 flex flex-col h-full">
                                 <span className="text-4xl font-display text-charcoal/10 group-hover:text-maroon/15 transition-colors duration-400 block mb-4">
                                     0{i + 1}
                                 </span>
-                                <h3 className="text-lg font-display text-charcoal mb-3 group-hover:text-maroon transition-colors duration-300">
+                                <h3 className="text-lg font-display text-maroon mb-3">
                                     {item.title}
                                 </h3>
                                 <p className="text-charcoal/60 text-sm leading-relaxed flex-grow">
@@ -257,54 +257,45 @@ export default async function TreatmentFamilyPage({
       {/* ============================================
           HOW IT WORKS
           ============================================ */}
-      <section className="py-16 bg-white">
-        <div className="section-container">
-             <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="py-12 bg-white relative overflow-hidden">
+        <div className="section-container relative z-10">
+             <div className="max-w-3xl mx-auto text-center mb-10">
                 <Reveal>
-                    <div>
-                        <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
-                            The Process
-                        </span>
-                        <h2 className="text-3xl lg:text-4xl font-display text-charcoal mb-5">
-                            How It <span className="italic text-maroon">Works</span>
-                        </h2>
-                        <p className="text-base text-charcoal/60 mb-8 leading-relaxed">
-                            {howItWorksDescription}
-                        </p>
-                        
-                        <div className="space-y-6">
-                            {howItWorksSteps.map((step, i) => (
-                                <div key={i} className="flex gap-5 group">
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-full border border-charcoal/10 flex items-center justify-center text-charcoal/40 group-hover:border-maroon/30 group-hover:text-maroon group-hover:bg-maroon/5 transition-all duration-300">
-                                        <span className="font-display text-base">{i + 1}</span>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-lg font-display text-charcoal mb-1 group-hover:text-maroon transition-colors duration-300">
-                                            {step.title}
-                                        </h3>
-                                        <p className="text-charcoal/60 text-sm leading-relaxed">
-                                            {step.text}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    <span className="text-maroon/60 font-medium uppercase tracking-[0.25em] text-[10px] mb-4 block">
+                        The Process
+                    </span>
+                    <h2 className="text-3xl lg:text-4xl font-display text-charcoal mb-6">
+                        How It <span className="italic text-maroon">Works</span>
+                    </h2>
+                    <p className="text-base text-charcoal/60 leading-relaxed max-w-2xl mx-auto">
+                        {howItWorksDescription}
+                    </p>
                 </Reveal>
+             </div>
 
-                <div className="relative h-[500px] rounded-[2rem] overflow-hidden bg-beige-warm hidden lg:block">
-                     <div className="absolute inset-0 bg-charcoal/5">
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-maroon/5 rounded-full blur-3xl" />
-                     </div>
-                     <div className="absolute inset-0 flex items-center justify-center text-center p-10">
-                        <Reveal>
-                            <div>
-                                <p className="text-3xl font-display text-charcoal/20 mb-3">Clinical Precision</p>
-                                <p className="text-maroon/40 italic text-lg">Meets human care</p>
+             <div className="grid md:grid-cols-3 gap-8 relative">
+                {howItWorksSteps.map((step, i) => (
+                    <Reveal key={i} delay={i * 0.15} className="h-full">
+                        <div className="group relative bg-beige-warm p-8 rounded-[2rem] h-full border border-maroon/5 hover:border-maroon/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col items-center text-center">
+                            
+                            {/* Number Circle */}
+                            <div className="w-16 h-16 mb-6 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300 border border-maroon/10">
+                                <span className="font-display text-xl text-maroon">
+                                    0{i + 1}
+                                </span>
                             </div>
-                        </Reveal>
-                     </div>
-                </div>
+
+                            <div>
+                                <h3 className="text-xl font-display text-maroon mb-3">
+                                    {step.title}
+                                </h3>
+                                <p className="text-charcoal/60 text-sm font-sans leading-relaxed">
+                                    {step.text}
+                                </p>
+                            </div>
+                        </div>
+                    </Reveal>
+                ))}
              </div>
         </div>
       </section>
