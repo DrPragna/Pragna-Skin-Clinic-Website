@@ -154,175 +154,187 @@ export const signaturePrograms: SignatureProgram[] = [
     slug: 'bridal-beauty',
     title: 'Bridal Beauty',
     subtitle: 'Pre-Wedding Glow',
-    description: 'Step-by-step care for clear, even, and luminous skin on your big day.',
+    description: 'A layered pre-wedding journey that clears, brightens and refines skin, hair and body gently.',
     duration: '3-6 months',
     image: '/images/signature/bridal-beauty.jpg',
     heroImage: '/images/signature/bridal-beauty.jpg',
-    gradient: 'from-[#635850] via-[#4D453E] to-[#36302B]', // Taupe
-    longDescription: 'Your wedding day deserves your best skin. We create a timeline-based roadmap starting 3-6 months before the big day, addressing everything from acne to body polishing, ensuring you walk down the aisle with flawless confidence.',
+    gradient: 'from-[#7A5A4A] via-[#5E4639] to-[#3B2C24]',
+    longDescription: "Bridal Beauty is designed to take you from tired and tanned to calm, polished and photo-ready without crash treatments. Over a few months, we combine acne or pigmentation care, glow facials, skin boosters, hair support and body shaping in a sequence that respects your calendar, outfits and rituals.",
     benefits: [
-      'Flawless complexion',
-      'Back & body polishing',
-      'Acne control',
-      'Lasting glow'
+      'Clear, even tone',
+      'Lasting bridal glow',
+      'Smoother skin texture',
+      'Calmer, brighter photographs',
     ],
     process: [
       {
-        title: 'Timeline Planning',
-        description: 'Reverse-engineering your plan from the wedding date.',
-        duration: 'Month 1'
+        title: 'Clarify & Calm',
+        description: 'We first settle breakouts, tan and sensitivity with gentle treatments and a simplified home routine.',
+        duration: 'Month 1-2',
       },
       {
-        title: 'Correction Phase',
-        description: 'Treating acne, marks, or pigmentation aggressively.',
-        duration: 'Month 2-3'
+        title: 'Glow & Enhance',
+        description: 'Next, medifacials, glow facials and peels brighten tone and refine texture without last-minute surprises.',
+        duration: 'Month 2-4',
       },
       {
-        title: 'Maintenance & Glow',
-        description: 'Hydration and polishing for the final look.',
-        duration: 'Month 4-6'
-      }
+        title: 'Polish & Protect',
+        description: 'Closer to events, we add boosters, under-eye care and body polish while planning safe cut-offs.',
+        duration: 'Month 4-6',
+      },
     ],
     inclusions: [
-      { item: 'Full Body', detail: 'Face, neck, back, hands' },
-      { item: 'Diet Plan', detail: 'Nutrition for skin health' },
-      { item: 'Emergency Support', detail: 'For last-minute breakouts' }
+      { item: 'Skin plan', detail: 'Face and neck care' },
+      { item: 'Hair support', detail: 'Basic bridal hair protocol' },
+      { item: 'Body focus', detail: 'Targeted shaping or polish' },
     ],
-    idealFor: ['Brides', 'Grooms', 'Wedding parties'],
+    idealFor: [
+      'Brides and grooms',
+      'Engagement and reception',
+      'Destination weddings timeline',
+    ],
     faqs: [
       {
-        question: "How far in advance should I start?",
-        answer: "Ideally, start 3-6 months before your wedding. This gives us time to address any active skin issues first and then focus on achieving that perfect glow without rushing."
+        question: 'When should I start the Bridal Beauty program?',
+        answer: 'Ideally, begin three to six months before your wedding. This allows time to treat deeper concerns like acne or pigmentation calmly, then layer glow sessions closer to events without stressing your skin or schedule.',
       },
       {
-        question: "What if I have a breakout close to my wedding?",
-        answer: "We include emergency support as part of the program. If you experience a last-minute breakout, contact us immediately and we will provide same-day or next-day solutions."
+        question: 'Can I join if my wedding is next month?',
+        answer: 'We can still help, but the focus shifts to safe, quick wins like medifacials and gentle peels. Deeper concerns may need a longer plan that continues even after the main events finish.',
       },
       {
-        question: "Does the program include body treatments?",
-        answer: "Yes! The Bridal Beauty program covers face, neck, back, and hands. We can also add specific treatments for areas that will be visible in your wedding outfit."
+        question: 'Is this program only for brides, not grooms?',
+        answer: 'No. Skin, hair and body concerns affect everyone. We customise timelines, intensity and focus areas differently for brides, grooms and families so everyone feels comfortable and confident in shared photographs and functions.',
       },
       {
-        question: "Can my partner also do this program?",
-        answer: "Of course! We offer Bridal Beauty for grooms too. Many couples do the program together, which can be a lovely pre-wedding bonding experience."
-      }
-    ]
+        question: 'Can I continue parlour facials during the program?',
+        answer: "We prefer you pause unplanned parlour facials, steaming and extractions. Instead, we schedule medical facials and peels that match your skin's needs so nothing clashes or overloads your barrier close to important events.",
+      },
+    ],
   },
   {
     slug: 'rewind',
     title: 'Rewind',
     subtitle: 'Anti-Aging',
-    description: 'Target lines and loss of firmness with advanced anti-aging solutions.',
+    description: 'A focused anti-aging journey to soften lines, firm contours and refresh tired, overworked skin gently.',
     duration: '4-8 sessions',
     image: '/images/signature/rewind.jpg',
     heroImage: '/images/signature/rewind.jpg',
-    gradient: 'from-[#574F48] via-[#443D38] to-[#2E2926]', // Espresso
-    longDescription: "Age is just a number, but looking tired doesn't have to be. The Rewind program combines non-surgical lifting, volume restoration, and skin resurfacing to subtly turn back the clock, giving you a refreshed, rested appearance without surgery.",
+    gradient: 'from-[#6C5A55] via-[#51403B] to-[#362827]',
+    longDescription: 'Rewind is for when your face looks more tired than you feel. We combine skin-tightening devices, injectables where appropriate, medifacials, boosters and home routines to address lines, laxity and dullness together. The goal is subtle, believable change that makes colleagues ask if you rested, not what procedure you did.',
     benefits: [
-      'Lifted facial contours',
-      'Reduced fine lines',
-      'Volume restoration',
-      'Improved skin elasticity'
+      'Softer facial lines',
+      'Firmer face contours',
+      'Brighter, smoother skin',
+      'Ageing with confidence',
     ],
     process: [
       {
-        title: 'Structural Lift',
-        description: 'HIFU or RF treatments to tighten the foundation.',
-        duration: 'Session 1'
+        title: 'Assess & Prioritise',
+        description: 'We map lines, volume loss and lifestyle, then agree on priorities and comfortable starting points.',
+        duration: 'Week 1-2',
       },
       {
-        title: 'Volume & Balance',
-        description: 'Fillers or Bio-remodeling to restore youthful curves.',
-        duration: 'Session 2'
+        title: 'Treat & Support',
+        description: 'Skin-tightening, injectables, peels and facials are layered gradually while we stabilise barrier and routines.',
+        duration: 'Week 3-8',
       },
       {
-        title: 'Surface Refinement',
-        description: 'Botox or skin boosters for a smooth finish.',
-        duration: 'Session 3'
-      }
+        title: 'Refine & Maintain',
+        description: 'We slow treatment pace, shift to maintenance sessions and adjust actives around seasons, travel and big events.',
+        duration: 'Month 3-6',
+      },
     ],
     inclusions: [
-      { item: 'Combo Therapy', detail: 'Layered modalities' },
-      { item: 'Maintenance', detail: 'Yearly plan included' },
-      { item: 'Skincare', detail: 'Anti-aging regimen' }
+      { item: '8 sessions', detail: 'Face and neck' },
+      { item: 'Booster plan', detail: 'Optional injectables support' },
+      { item: 'Home routine', detail: 'Curated anti-ageing kit' },
     ],
-    idealFor: ['Signs of aging', 'Sagging skin', 'Deep lines'],
+    idealFor: [
+      'Fine lines and laxity',
+      'Post-40 skin reset',
+      'Photo-conscious professionals',
+    ],
     faqs: [
       {
-        question: "Will I look natural or overdone?",
-        answer: "Our philosophy is subtle enhancement, not dramatic change. The goal is to look like a refreshed, well-rested version of yourself - not a different person."
+        question: 'Will anti-aging treatments make my face look unnatural?',
+        answer: 'Our approach is conservative and layered. We start with structure and skin quality, use small doses and review photos together so changes feel like a fresher version of you, not a different person.',
       },
       {
-        question: "How long do results last?",
-        answer: "Results vary by treatment. Skin tightening effects can last 1-2 years, while fillers typically last 6-18 months. We include a maintenance plan to help you preserve results."
+        question: 'What age is right to start the Rewind program?',
+        answer: 'There is no fixed age. We recommend Rewind when you begin noticing lines, laxity or tiredness that bother you in daily life, not just in close-up photographs or under harsh lighting.',
       },
       {
-        question: "Is there significant downtime?",
-        answer: "Most treatments have minimal downtime. You may have slight swelling or redness for 1-2 days after certain procedures, but nothing that prevents normal activities."
+        question: 'How long will the results of Rewind last?',
+        answer: 'Longevity depends on lifestyle, sun exposure and chosen treatments. Many injectable and tightening results hold several months or longer, after which spaced maintenance keeps improvements steady instead of dropping suddenly.',
       },
       {
-        question: "At what age should I start anti-aging treatments?",
-        answer: "Prevention is easier than correction. Many people start in their late 20s to early 30s with preventive treatments. However, the Rewind program benefits anyone noticing signs of aging."
-      }
-    ]
+        question: 'Can I do this program if I am new to treatments?',
+        answer: 'Yes. We explain options slowly, start with low-intensity procedures and pause whenever you need. You always control the pace, and every step is discussed before we move forward.',
+      },
+    ],
   },
   {
     slug: 'signature-reset',
     title: 'Signature Reset',
     subtitle: 'Complete Revival',
-    description: 'Clinic-exclusive protocol for instant luminosity and lasting results.',
+    description: 'A complete inside-out reset combining wellness drips, skin, hair and body care for recovery seasons.',
     duration: '3-5 sessions',
     image: '/images/signature/signature-reset.jpg',
     heroImage: '/images/signature/signature-reset.jpg',
-    gradient: 'from-[#5A524A] via-[#45403A] to-[#302C28]', // Warm Charcoal
-    longDescription: "Our namesake program for when you need a complete overhaul. Whether it's from stress, travel, or neglect, the Signature Reset detoxifies, nourishes, and re-energizes your skin using our proprietary blend of therapies.",
+    gradient: 'from-[#5F554F] via-[#463A34] to-[#2F2521]',
+    longDescription: 'Signature Reset is for phases when life has felt heavy—long work stretches, illness, stress or big changes. We blend IV drips, medifacials, body contouring, hair support and simple nutrition guidance to gently recharge you. The focus is sustainable recovery, not dramatic overnight transformation or impossible, short-term goals.',
     benefits: [
-      'Deep detoxification',
-      'Stress relief for skin',
-      'Oxygenation',
-      'Immediate vitality'
+      'Renewed overall energy',
+      'Fresher face and eyes',
+      'Supported hair and body',
+      'Structured self-care rhythm',
     ],
     process: [
       {
-        title: 'Detox',
-        description: 'Lymphatic drainage and deep pore cleansing.',
-        duration: 'Step 1'
+        title: 'Review & Reset',
+        description: 'We map stress, sleep, skin, hair and weight, then outline realistic goals and priorities.',
+        duration: 'Week 1',
       },
       {
-        title: 'Nourish',
-        description: 'IV Drip therapy coupled with facial infusion.',
-        duration: 'Step 2'
+        title: 'Treat & Restore',
+        description: 'IV drips, facials, hair sessions and body treatments are spaced to suit work and family life.',
+        duration: 'Weeks 2-6',
       },
       {
-        title: 'Protect',
-        description: 'Barrier repair treatment to lock in results.',
-        duration: 'Step 3'
-      }
+        title: 'Rebuild & Sustain',
+        description: 'We gradually reduce clinic frequency, refine home routines and teach simple habits to protect your progress.',
+        duration: 'Weeks 7-10',
+      },
     ],
     inclusions: [
-      { item: 'Inside-Out', detail: 'IV Therapy included' },
-      { item: 'Exclusive', detail: 'Pragna proprietary method' },
-      { item: 'Express', detail: 'Fast results' }
+      { item: 'Wellness drips', detail: 'Curated IV therapy' },
+      { item: 'Skin plan', detail: 'Face and body focus' },
+      { item: 'Hair and body', detail: 'Supportive add-on sessions' },
     ],
-    idealFor: ['Burnout recovery', 'Frequent travelers', 'Special occasions'],
+    idealFor: [
+      'Burnout and long stress',
+      'Post-illness recovery',
+      'Life-change transitions',
+    ],
     faqs: [
       {
-        question: "What makes this different from a regular facial?",
-        answer: "The Signature Reset is a medical-grade, multi-modality treatment that works both inside and out. It includes IV therapy for internal nourishment, lymphatic drainage, and advanced skin treatments - far beyond what a spa facial offers."
+        question: 'Is Signature Reset a detox or crash program?',
+        answer: 'No. We do not believe in extreme detoxes. Signature Reset focuses on realistic improvements in energy, appearance and routines using medically guided drips and treatments paced around your actual responsibilities and health status.',
       },
       {
-        question: "How quickly will I see results?",
-        answer: "You will notice immediate improvements in skin vitality and energy levels. This is our express program, designed for those who need visible results quickly for a special occasion or recovery."
+        question: 'Can I do this while on regular medicines?',
+        answer: 'In most cases yes, but we always review your prescriptions and speak with your physician when needed. Certain drips or treatments may be modified or avoided depending on your medical history and current stability.',
       },
       {
-        question: "Is IV therapy safe?",
-        answer: "Yes, our IV drips are administered by trained medical professionals using sterile techniques. We customize the nutrient blend based on your specific needs and health profile."
+        question: 'How is Signature Reset different from Glow Getters?',
+        answer: 'Glow Getters mainly targets facial radiance over a short window. Signature Reset looks at the bigger picture—energy, hair, body comfort and routines—making it better suited for recovery phases after demanding periods.',
       },
       {
-        question: "Can I do this as a one-time treatment?",
-        answer: "Absolutely! While the full program is 3-5 sessions, many clients do a single session before important events. We can also create a regular maintenance schedule if you enjoy the results."
-      }
-    ]
+        question: 'Do I need to change my entire lifestyle immediately?',
+        answer: 'We prefer small, sustainable changes over strict rules. Together, we pick two or three habits to start with, then build from there as your energy, mood and confidence improve gradually.',
+      },
+    ],
   }
 ];
 
