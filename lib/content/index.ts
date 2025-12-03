@@ -25,6 +25,9 @@ import { rosaceaFacialRednessContent } from './conditions/rosacea-facial-redness
 import { molesWartsSkinTagsContent } from './conditions/moles-warts-skin-tags';
 import { tattooInkPigmentRemovalContent } from './conditions/tattoo-ink-pigment-removal';
 import { hairFallThinningHairContent } from './conditions/hair-fall-thinning-hair';
+import { unwantedFacialBodyHairContent } from './conditions/unwanted-facial-body-hair';
+import { doubleChinJawlineFullnessContent } from './conditions/double-chin-jawline-fullness';
+import { neckLinesSaggingNeckContent } from './conditions/neck-lines-sagging-neck';
 
 // ============================================
 // TREATMENT FAMILY CONTENT IMPORTS
@@ -209,6 +212,9 @@ export const conditionContentMap: Record<string, ConditionContent> = {
   'moles-warts-skin-tags': molesWartsSkinTagsContent,
   'tattoo-ink-pigment-removal': tattooInkPigmentRemovalContent,
   'hair-fall-thinning-hair': hairFallThinningHairContent,
+  'unwanted-facial-body-hair': unwantedFacialBodyHairContent,
+  'double-chin-jawline-fullness': doubleChinJawlineFullnessContent,
+  'neck-lines-sagging-neck': neckLinesSaggingNeckContent,
 };
 
 // ============================================
