@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { SubTreatment, TreatmentFamily, Condition, SubTreatmentContent } from '@/lib/navigationData';
 import { Reveal } from '@/components/ui/Reveal';
+import { useBookingModal } from '@/components/ui/BookingModal';
 
 interface SubTreatmentClientContentProps {
   subTreatment: SubTreatment;
@@ -21,6 +22,7 @@ export default function SubTreatmentClientContent({
   content,
 }: SubTreatmentClientContentProps) {
   const [activeSection, setActiveSection] = useState('overview');
+  const { openBookingModal } = useBookingModal();
 
   // Helper for Abstract Gradient Fallback - Sophisticated, muted tones
   const getGradientClass = (pillar: string) => {
@@ -151,12 +153,17 @@ export default function SubTreatmentClientContent({
                     </p>
 
                     <div className="flex flex-wrap gap-4">
-                        <a 
-                            href="#book" 
-                            className="px-8 py-4 bg-white text-charcoal rounded-full font-medium hover:bg-beige-warm hover:scale-[1.02] transition-all duration-300 min-w-[180px] text-center"
+                        <button 
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              openBookingModal(heroTitle);
+                            }}
+                            className="px-8 py-4 bg-white text-charcoal rounded-full font-medium hover:bg-beige-warm hover:scale-[1.02] transition-all duration-300 min-w-[180px] text-center cursor-pointer"
                         >
                             Book Appointment
-                        </a>
+                        </button>
                         <a 
                             href="#overview" 
                             className="px-8 py-4 border border-white/20 text-white rounded-full font-medium hover:bg-white/10 transition-all duration-300 min-w-[180px] text-center backdrop-blur-sm"
@@ -365,18 +372,40 @@ export default function SubTreatmentClientContent({
                     Book a consultation with our dermatologists to discuss if {heroTitle} is right for you.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a 
-                        href="#contact" 
-                        className="px-10 py-4 bg-white text-maroon rounded-full font-medium hover:bg-beige-warm hover:scale-[1.02] transition-all duration-300 min-w-[200px]"
+                    <button 
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          openBookingModal(heroTitle);
+                        }}
+                        className="px-10 py-4 bg-white text-maroon rounded-full font-medium hover:bg-beige-warm hover:scale-[1.02] transition-all duration-300 min-w-[200px] cursor-pointer shadow-lg shadow-black/10"
                     >
                         Book Consultation
-                    </a>
-                    <a 
-                        href="tel:+919876543210" 
-                        className="px-10 py-4 border border-white/20 text-white rounded-full font-medium hover:bg-white/10 transition-all duration-300 min-w-[200px]"
-                    >
-                        Call Clinic
-                    </a>
+                    </button>
+                </div>
+                
+                {/* Clinic Numbers */}
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-white/90 font-light">
+                    <div className="flex flex-col items-center sm:items-end">
+                        <span className="text-[10px] uppercase tracking-widest opacity-60 mb-1">Punjagutta</span>
+                        <a href="tel:09848367000" className="hover:text-white transition-colors flex items-center gap-2">
+                            <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            098483 67000
+                        </a>
+                    </div>
+                    <div className="hidden sm:block w-px h-8 bg-white/20"></div>
+                    <div className="flex flex-col items-center sm:items-start">
+                        <span className="text-[10px] uppercase tracking-widest opacity-60 mb-1">Kokapet</span>
+                        <a href="tel:08886421111" className="hover:text-white transition-colors flex items-center gap-2">
+                            <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            088864 21111
+                        </a>
+                    </div>
                 </div>
             </div>
           </Reveal>

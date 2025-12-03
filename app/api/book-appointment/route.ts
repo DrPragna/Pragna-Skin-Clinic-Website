@@ -6,10 +6,17 @@ interface BookingData {
   email: string;
   countryCode: string;
   phone: string;
+  branch: string;
   concerns?: string;
   timestamp: string;
   source?: string;
 }
+
+// Branch display names
+const BRANCH_NAMES: Record<string, string> = {
+  punjagutta: "Punjagutta",
+  kokapet: "Kokapet",
+};
 
 // Google Sheets Integration
 async function appendToGoogleSheet(data: BookingData): Promise<boolean> {
@@ -57,11 +64,12 @@ async function sendEmailNotification(data: BookingData): Promise<boolean> {
         body: JSON.stringify({
           from: 'Pragna Skin Clinic <bookings@pragnaskinclinic.com>',
           to: [NOTIFICATION_EMAIL],
-          subject: `🗓️ New Appointment Request - ${data.name}`,
+          subject: `🗓️ New Appointment Request - ${data.name} (${BRANCH_NAMES[data.branch] || data.branch || 'No Branch'})`,
           html: `
             <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <div style="background: linear-gradient(135deg, #722B2B 0%, #8B3A3A 100%); padding: 30px; border-radius: 12px 12px 0 0;">
                 <h1 style="color: #FFF8F0; margin: 0; font-size: 24px;">New Appointment Request</h1>
+                <p style="color: #FFF8F0; margin: 8px 0 0 0; font-size: 14px; opacity: 0.9;">Branch: ${BRANCH_NAMES[data.branch] || data.branch || 'Not specified'}</p>
               </div>
               <div style="background: #FFF8F0; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #E8DDD5;">
                 <table style="width: 100%; border-collapse: collapse;">
@@ -71,11 +79,15 @@ async function sendEmailNotification(data: BookingData): Promise<boolean> {
                   </tr>
                   <tr>
                     <td style="padding: 12px 0; border-bottom: 1px solid #E8DDD5; color: #666;">Email</td>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #E8DDD5; color: #1a1a1a;">${data.email}</td>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #E8DDD5; color: #1a1a1a;">${data.email || 'Not provided'}</td>
                   </tr>
                   <tr>
                     <td style="padding: 12px 0; border-bottom: 1px solid #E8DDD5; color: #666;">Phone</td>
                     <td style="padding: 12px 0; border-bottom: 1px solid #E8DDD5; color: #1a1a1a;">${data.countryCode} ${data.phone}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #E8DDD5; color: #666;">Branch</td>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #E8DDD5; color: #1a1a1a; font-weight: 500;">${BRANCH_NAMES[data.branch] || data.branch || 'Not specified'}</td>
                   </tr>
                   <tr>
                     <td style="padding: 12px 0; color: #666; vertical-align: top;">Concerns</td>
@@ -123,9 +135,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     
     // Validate required fields
-    const { name, email, countryCode, phone, concerns, source } = body;
+    const { name, email, countryCode, phone, branch, concerns, source } = body;
     
-    if (!name || !email || !phone) {
+    if (!name || !phone) {
       return NextResponse.json(
         { success: false, error: 'Missing required fields' },
         { status: 400 }
@@ -135,9 +147,10 @@ export async function POST(request: NextRequest) {
     // Prepare booking data
     const bookingData: BookingData = {
       name: name.trim(),
-      email: email.trim(),
+      email: email?.trim() || '',
       countryCode: countryCode || '+91',
       phone: phone.trim(),
+      branch: branch || '',
       concerns: concerns?.trim() || '',
       timestamp: new Date().toISOString(),
       source: source || 'website',
@@ -151,11 +164,13 @@ export async function POST(request: NextRequest) {
 
     // Generate WhatsApp link for client-side redirect
     const whatsappNumber = process.env.WHATSAPP_NUMBER || '919380551547';
+    const branchDisplay = bookingData.branch ? BRANCH_NAMES[bookingData.branch] || bookingData.branch : 'Not specified';
     const whatsappMessage = encodeURIComponent(
       `🗓️ *New Appointment Request*\n\n` +
       `*Name:* ${bookingData.name}\n` +
       `*Phone:* ${bookingData.countryCode} ${bookingData.phone}\n` +
-      `*Email:* ${bookingData.email}\n` +
+      `*Email:* ${bookingData.email || 'Not provided'}\n` +
+      `*Branch:* ${branchDisplay}\n` +
       `*Concerns:* ${bookingData.concerns || 'Not specified'}\n\n` +
       `_Sent from Pragna Skin Clinic website_`
     );

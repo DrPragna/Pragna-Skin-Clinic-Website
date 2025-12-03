@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { navigationData } from '@/lib/navigationData';
+import { useBookingModal } from '@/components/ui/BookingModal';
 
 // Simple ChevronDown Icon
 const ChevronDown = ({ className }: { className?: string }) => (
@@ -71,13 +72,16 @@ const StylizedText = ({ text, className = '', ampersandClassName = 'text-maroon'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+  const { openBookingModal } = useBookingModal();
   
   const treatmentsRef = useRef<HTMLDivElement>(null);
   const conditionsRef = useRef<HTMLDivElement>(null);
+  const signatureProgramsRef = useRef<HTMLDivElement>(null);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Handle dropdown with delay for better UX (allows diagonal mouse movement)
@@ -106,6 +110,12 @@ export default function Navbar() {
     };
   }, []);
 
+  // Mark as mounted and set initial scroll state
+  useEffect(() => {
+    setHasMounted(true);
+    setIsScrolled(window.scrollY > 20);
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -129,7 +139,8 @@ export default function Navbar() {
   const isHomepage = pathname === '/';
   
   // Only use transparent styling on homepage when not scrolled
-  const useTransparentStyle = isHomepage && !isScrolled;
+  // Wait for mount to avoid hydration mismatch
+  const useTransparentStyle = hasMounted && isHomepage && !isScrolled;
 
   // Determine navbar styles based on scroll state and page
   const navbarClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -426,22 +437,126 @@ export default function Navbar() {
                 </div>
               </div>
 
+            {/* Signature Programs Dropdown Trigger */}
+            <div 
+              className="relative py-4"
+              onMouseEnter={() => openDropdown('signature-programs')}
+              onMouseLeave={closeDropdown}
+            >
+              <span className={`${linkClasses} ${activeDropdown === 'signature-programs' ? 'text-maroon' : ''}`}>
+                Signature Programs
+                <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'signature-programs' ? 'rotate-180' : ''}`} />
+              </span>
+            </div>
+            
+            {/* Signature Programs Mega Menu */}
+            <div 
+              className={`fixed top-[80px] left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-[1100px] bg-white shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)] rounded-[2rem] border border-gray-100 transition-all duration-500 z-50 overflow-hidden ${
+                activeDropdown === 'signature-programs' 
+                  ? 'opacity-100 visible translate-y-0 pointer-events-auto' 
+                  : 'opacity-0 invisible translate-y-4 pointer-events-none'
+              }`}
+              onMouseEnter={() => openDropdown('signature-programs')}
+              onMouseLeave={closeDropdown}
+            >
+              {/* Scrollable Content */}
+              <div 
+                ref={signatureProgramsRef}
+                className="p-6 md:p-8 lg:p-10 max-h-[80vh] overflow-y-auto overflow-x-hidden custom-scrollbar"
+                data-lenis-prevent
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between mb-8">
+                  <div className="relative">
+                    <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em]">
+                      Curated Experiences
+                    </h3>
+                    <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
+                  </div>
+                  <Link 
+                    href="/signature-programs"
+                    className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors"
+                  >
+                    View All Programs
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+                
+                {/* Programs Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {navigationData.signaturePrograms.map((program) => (
+                    <Link 
+                      key={program.name}
+                      href={program.href}
+                      className="group/card relative p-5 rounded-2xl border border-maroon/5 hover:border-maroon/20 hover:bg-maroon/[0.02] transition-all duration-300"
+                    >
+                      {/* Content */}
+                      <div className="relative">
+                        <div className="flex items-start justify-between gap-3 mb-2">
+                          <h4 className="font-display text-xl text-maroon group-hover/card:text-maroon-light transition-colors duration-300">
+                            {program.name}
+                          </h4>
+                          <ArrowRight className="w-4 h-4 text-maroon opacity-0 -translate-x-2 group-hover/card:opacity-100 group-hover/card:translate-x-0 transition-all duration-300 shrink-0 mt-1" />
+                        </div>
+                        <p className="text-sm text-charcoal/60 font-medium mb-2">
+                          {program.subtitle}
+                        </p>
+                        <p className="text-sm text-charcoal/50 font-light leading-relaxed mb-3 line-clamp-2">
+                          {program.description}
+                        </p>
+                        <div className="flex items-center gap-2 text-xs text-charcoal/40">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span>{program.duration}</span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <Link href="/#about" className={linkClasses}>About</Link>
             <Link href="/#contact" className={linkClasses}>Contact</Link>
           </div>
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link 
-              href="/#contact" 
-              className={`text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${
-                useTransparentStyle 
-                  ? 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/40 hover:border-white/80 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]' 
-                  : 'bg-maroon text-cream hover:bg-maroon-light hover:shadow-soft-lg'
-              }`}
-            >
-              Book Appointment
-            </Link>
+            {isHomepage ? (
+              <button 
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    const offset = 100;
+                    const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+                  }
+                }}
+                className={`text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 cursor-pointer ${
+                  useTransparentStyle 
+                    ? 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/40 hover:border-white/80 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]' 
+                    : 'bg-maroon text-cream hover:bg-maroon-light hover:shadow-soft-lg'
+                }`}
+              >
+                Book Appointment
+              </button>
+            ) : (
+              <button 
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  openBookingModal();
+                }}
+                className="text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 bg-maroon text-cream hover:bg-maroon-light hover:shadow-soft-lg cursor-pointer"
+              >
+                Book Appointment
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -560,6 +675,41 @@ export default function Navbar() {
               </div>
             </div>
 
+            {/* Mobile Signature Programs */}
+            <div>
+              <button 
+                onClick={() => toggleMobileDropdown('signature-programs')}
+                className="flex items-center justify-between w-full text-xl font-medium text-charcoal hover:text-maroon"
+              >
+                Signature Programs
+                <ChevronDown className={`w-5 h-5 transition-transform ${activeMobileDropdown === 'signature-programs' ? 'rotate-180' : ''}`} />
+              </button>
+              <div className={`mt-4 space-y-4 pl-4 border-l-2 border-maroon/10 overflow-hidden transition-all duration-300 ${
+                activeMobileDropdown === 'signature-programs' ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+              }`}>
+                {navigationData.signaturePrograms.map((program) => (
+                  <Link 
+                    key={program.name} 
+                    href={program.href} 
+                    className="block p-3 rounded-xl bg-maroon/5 hover:bg-maroon/10 transition-colors"
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-serif text-maroon font-medium text-lg">{program.name}</span>
+                      <ArrowRight className="w-4 h-4 text-maroon/40" />
+                    </div>
+                    <p className="text-sm text-maroon/60 mb-1">{program.subtitle}</p>
+                    <p className="text-xs text-charcoal/50 leading-tight line-clamp-2">{program.description}</p>
+                    <div className="flex items-center gap-1.5 text-xs text-charcoal/40 mt-2">
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>{program.duration}</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             <Link href="/#about" className="block text-xl font-medium text-charcoal hover:text-maroon">
               About
             </Link>
@@ -568,9 +718,38 @@ export default function Navbar() {
             </Link>
 
             <div className="pt-6">
-              <Link href="/#contact" className="btn-primary block text-center w-full">
-                Book Appointment
-              </Link>
+              {isHomepage ? (
+                <button 
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsMobileMenuOpen(false);
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      const offset = 100;
+                      const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
+                      window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+                    }
+                  }}
+                  className="btn-primary block text-center w-full cursor-pointer"
+                >
+                  Book Appointment
+                </button>
+              ) : (
+                <button 
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsMobileMenuOpen(false);
+                    openBookingModal();
+                  }}
+                  className="btn-primary block text-center w-full cursor-pointer"
+                >
+                  Book Appointment
+                </button>
+              )}
             </div>
           </div>
         </div>

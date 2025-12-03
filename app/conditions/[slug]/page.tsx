@@ -6,6 +6,7 @@ import Footer from '@/components/sections/Footer';
 import { conditions, getCondition, getTreatmentFamiliesForCondition } from '@/lib/navigationData';
 import { getConditionContent } from '@/lib/content';
 import { Reveal } from '@/components/ui/Reveal';
+import BookingButton from '@/components/ui/BookingButton';
 
 // ============================================
 // PILLAR THEMES (Consistent with Menu)
@@ -479,19 +480,36 @@ export default async function ConditionPage({
                 Our dermatologists are here to guide you back to confidence.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a 
-                    href="#contact" 
-                    className="px-7 py-3 rounded-full font-medium text-sm transition-all duration-300 hover:scale-105 bg-white text-maroon"
+            <div className="flex flex-col items-center justify-center gap-3">
+                <BookingButton 
+                    className="px-10 py-4 rounded-full font-medium text-sm transition-all duration-300 hover:scale-105 bg-white text-maroon shadow-lg shadow-black/10 min-w-[200px]"
+                    programName={condition.name}
                 >
                     Book Consultation
-                </a>
-                <a 
-                    href="tel:+919876543210" 
-                    className="px-7 py-3 rounded-full font-medium text-sm transition-all duration-300 border border-white/40 text-white hover:bg-white/10"
-                >
-                    Call Clinic
-                </a>
+                </BookingButton>
+                
+                {/* Clinic Numbers */}
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-white/90 font-light">
+                    <div className="flex flex-col items-center sm:items-end">
+                        <span className="text-[10px] uppercase tracking-widest opacity-60 mb-1">Punjagutta</span>
+                        <a href="tel:09848367000" className="hover:text-white transition-colors flex items-center gap-2">
+                            <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            098483 67000
+                        </a>
+                    </div>
+                    <div className="hidden sm:block w-px h-8 bg-white/20"></div>
+                    <div className="flex flex-col items-center sm:items-start">
+                        <span className="text-[10px] uppercase tracking-widest opacity-60 mb-1">Kokapet</span>
+                        <a href="tel:08886421111" className="hover:text-white transition-colors flex items-center gap-2">
+                            <svg className="w-4 h-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            088864 21111
+                        </a>
+                    </div>
+                </div>
             </div>
          </div>
       </section>

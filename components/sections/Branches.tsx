@@ -15,22 +15,22 @@ import Image from 'next/image';
 
 const branches = [
   {
-    id: 'punjagutta',
-    name: 'Punjagutta',
-    label: 'Flagship Clinic',
-    address: '3rd Floor, Above Reliance Trends,\nPunjagutta, Hyderabad - 500082',
-    phone: '+91 98765 43210',
-    mapUrl: 'https://maps.app.goo.gl/GHW2EhGtHpeUrU228',
-    image: '/clinics/punjagutta.jpg', // Placeholder
-  },
-  {
     id: 'kokapet',
     name: 'Kokapet',
     label: 'Advanced Center',
-    address: 'Ground Floor, My Home Avatar,\nKokapet, Hyderabad - 500075',
-    phone: '+91 98765 43211',
+    address: '3rd Floor, Above Vijetha Supermarket,\nGandipet Main Rd, Opp. Rajapushpa Regalia,\nNarsingi, Hyderabad - 500075',
+    phone: '088864 21111',
     mapUrl: 'https://maps.app.goo.gl/RZjN7F1WbhMAo5eL9',
     image: '/clinics/kokapet.jpg', // Placeholder
+  },
+  {
+    id: 'punjagutta',
+    name: 'Punjagutta',
+    label: 'Flagship Clinic',
+    address: '22B, 6-3-347, 1/1,\nSai Baba Temple Rd,\nPunjagutta, Hyderabad - 500082',
+    phone: '098483 67000',
+    mapUrl: 'https://maps.app.goo.gl/GHW2EhGtHpeUrU228',
+    image: '/clinics/punjagutta.jpg', // Placeholder
   },
 ];
 
@@ -111,12 +111,15 @@ export default function Branches() {
                 </div>
               </div>
 
-                  <div className="pt-8 border-t border-maroon/10 flex gap-4">
+                  <div className="pt-8 border-t border-maroon/10 flex flex-col sm:flex-row gap-4">
                 <a
-                  href={`tel:${branch.phone}`}
-                      className="flex-1 py-3 flex items-center justify-center gap-2 border border-charcoal/10 rounded-full text-sm uppercase tracking-widest hover:bg-charcoal hover:text-white hover:border-charcoal transition-colors duration-300"
+                  href={`tel:${branch.phone.replace(/\s/g, '')}`}
+                      className="flex-1 py-3 flex items-center justify-center gap-2 border border-charcoal/10 rounded-full text-sm hover:bg-charcoal hover:text-white hover:border-charcoal transition-colors duration-300"
                 >
-                  Call Now
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span className="font-medium">{branch.phone}</span>
                 </a>
                     <a 
                       href={branch.mapUrl}

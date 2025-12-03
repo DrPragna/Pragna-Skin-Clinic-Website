@@ -5,6 +5,7 @@ import FloatingActions from "@/components/ui/FloatingActions";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import CustomCursor from "@/components/ui/CustomCursor";
 import PageLoader from "@/components/ui/PageLoader";
+import { BookingModalProvider } from "@/components/ui/BookingModal";
 
 export const metadata: Metadata = {
   title: "Pragna Advanced Skin Clinic | Advanced Dermatology in Hyderabad",
@@ -29,14 +30,17 @@ export default function RootLayout({
         {/* Page Loader - Premium first impression */}
         <PageLoader />
         
-        {/* Smooth Scroll Provider */}
-        <SmoothScroll>
-          {children}
-          
-          {/* Global UI Elements */}
-          <GrainOverlay />
-          <FloatingActions />
-        </SmoothScroll>
+        {/* Booking Modal Provider - Global */}
+        <BookingModalProvider>
+          {/* Smooth Scroll Provider */}
+          <SmoothScroll>
+            {children}
+            
+            {/* Global UI Elements */}
+            <GrainOverlay />
+            <FloatingActions />
+          </SmoothScroll>
+        </BookingModalProvider>
         
         {/* Custom Cursor - Desktop only */}
         <CustomCursor />

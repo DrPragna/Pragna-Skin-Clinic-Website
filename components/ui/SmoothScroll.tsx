@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 
 /**
@@ -16,7 +17,9 @@ interface SmoothScrollProps {
 
 export default function SmoothScroll({ children }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
 
+  // Initialize Lenis once
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis({
@@ -42,14 +45,15 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
     requestAnimationFrame(raf);
 
-    // Handle anchor links smoothly
+    // Handle anchor links smoothly (only for same-page anchors)
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a[href^="#"]');
       
       if (anchor) {
         const href = anchor.getAttribute('href');
-        if (href && href !== '#') {
+        // Only handle pure anchor links (not /#something which is cross-page)
+        if (href && href.startsWith('#') && !href.includes('/')) {
           e.preventDefault();
           const targetElement = document.querySelector(href);
           if (targetElement) {
@@ -70,6 +74,16 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       document.removeEventListener('click', handleAnchorClick);
     };
   }, []);
+
+  // Reset scroll position on route change
+  useEffect(() => {
+    // Force scroll to top on route change
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    // Also set native scroll as fallback
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return <>{children}</>;
 }

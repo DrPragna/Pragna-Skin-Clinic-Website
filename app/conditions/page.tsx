@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/navigation/Navbar';
@@ -25,6 +26,7 @@ const THEMES: Record<ThemeKey, {
   title: string;
   description: string;
   gradient: string; // For the abstract card background
+  heroImage?: string; // Optional hero background image
 }> = {
   'All': {
     heroBg: 'bg-beige-warm',
@@ -34,41 +36,44 @@ const THEMES: Record<ThemeKey, {
     cardHover: 'group-hover:bg-white',
     accent: 'text-maroon',
     title: 'What concerns you?',
-    description: 'Select a category to find your concern. We\'ll guide you to the right solution.',
+    description: "Select a category to find your concern. We'll guide you to the right solution.",
     gradient: 'from-transparent to-transparent'
   },
   'Skin': {
     heroBg: 'bg-[#5C2E26]', // Deep Copper/Terracotta
-    heroText: 'text-[#F2E8E6]', 
-    heroSub: 'text-[#D6B4AA]', 
+    heroText: 'text-white', 
+    heroSub: 'text-white/80', 
     cardBg: 'bg-[#FFF8F5]', // Very Light Peach
     cardHover: 'group-hover:bg-[#FFEFE8]',
     accent: 'text-[#A66249]', // Terracotta accent
     title: 'Skin Concerns',
-    description: 'From acne to ageing, restore your skin\'s natural health and radiance.',
-    gradient: 'from-[#C28E79]/10 to-[#A66249]/5'
+    description: "From acne to ageing, restore your skin's natural health and radiance.",
+    gradient: 'from-[#C28E79]/10 to-[#A66249]/5',
+    heroImage: '/images/Areas _of_Focus/Skin.jpg'
   },
   'Hair': {
     heroBg: 'bg-[#4A3B2A]', // Deep Bronze
-    heroText: 'text-[#F5F2EB]',
-    heroSub: 'text-[#CDBFA8]',
+    heroText: 'text-white',
+    heroSub: 'text-white/80',
     cardBg: 'bg-[#FCFBF7]', 
     cardHover: 'group-hover:bg-[#F5F2E8]',
     accent: 'text-[#8F7348]', // Bronze accent
     title: 'Hair & Scalp',
     description: 'Science-backed solutions for restoration, growth, and scalp health.',
-    gradient: 'from-[#BFA57D]/10 to-[#8F7348]/5'
+    gradient: 'from-[#BFA57D]/10 to-[#8F7348]/5',
+    heroImage: '/images/Areas _of_Focus/Hair.jpg'
   },
   'Body': {
     heroBg: 'bg-[#423D33]', // Deep Olive/Clay
-    heroText: 'text-[#F2F2EE]', 
-    heroSub: 'text-[#BFB9A3]', 
+    heroText: 'text-white', 
+    heroSub: 'text-white/80', 
     cardBg: 'bg-[#F9F9F6]', 
     cardHover: 'group-hover:bg-[#F0F0EB]',
     accent: 'text-[#736243]', // Olive accent
     title: 'Body & Shape',
     description: 'Sculpt, tone, and refine your silhouette with advanced non-surgical care.',
-    gradient: 'from-[#9E8C6B]/10 to-[#736243]/5'
+    gradient: 'from-[#9E8C6B]/10 to-[#736243]/5',
+    heroImage: '/images/Areas _of_Focus/Body.jpg'
   },
   'Others': {
     heroBg: 'bg-[#2A3B33]', // Deep Forest
@@ -89,29 +94,20 @@ const filters = ['All', 'Skin', 'Hair', 'Body', 'Others'];
 function ConditionsContent() {
   const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState<ThemeKey>('All');
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const conditionsByGroup = getConditionsByGroup();
 
-  // Handle URL query params on mount
+  // Scroll to top on initial page load
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Handle URL query params
   useEffect(() => {
     const categoryParam = searchParams.get('filter');
     if (categoryParam && filters.includes(categoryParam)) {
       setActiveFilter(categoryParam as ThemeKey);
-      
-      // Scroll to content after a brief delay to allow layout to settle
-      if (isInitialLoad) {
-        setTimeout(() => {
-          const contentSection = document.getElementById('conditions-grid');
-          if (contentSection) {
-            const yOffset = -180; // Offset for sticky header
-            const y = contentSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-          }
-        }, 500);
-        setIsInitialLoad(false);
-      }
     }
-  }, [searchParams, isInitialLoad]);
+  }, [searchParams]);
 
   // Update logic to handle manual filter clicks
   const handleFilterClick = (filter: string) => {
@@ -151,44 +147,95 @@ function ConditionsContent() {
           SMART HERO - Dynamic based on Filter
           ============================================ */}
       <section className={`
-        relative pt-40 pb-20 md:pt-48 md:pb-32 transition-colors duration-700 ease-in-out overflow-hidden
+        relative pt-32 pb-20 md:pt-40 md:pb-28 transition-colors duration-700 ease-in-out overflow-hidden
         ${theme.heroBg}
       `}>
-         {/* Abstract Background Elements for Mood */}
-         <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[100px] mix-blend-overlay transition-colors duration-700 ${activeFilter === 'Skin' ? 'bg-red-400' : activeFilter === 'Hair' ? 'bg-orange-300' : activeFilter === 'Body' ? 'bg-yellow-200' : 'bg-white'}`} />
-            <div className={`absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full blur-[120px] mix-blend-overlay transition-colors duration-700 ${activeFilter === 'Skin' ? 'bg-pink-500' : activeFilter === 'Hair' ? 'bg-amber-800' : activeFilter === 'Body' ? 'bg-orange-900' : 'bg-slate-200'}`} />
-         </div>
+         {/* Hero Background Image (for Skin, Hair, Body) - with smooth crossfade */}
+         <AnimatePresence mode="sync">
+           {theme.heroImage && (
+             <motion.div 
+               key={theme.heroImage}
+               initial={{ opacity: 0, scale: 1.1 }}
+               animate={{ opacity: 1, scale: 1 }}
+               exit={{ opacity: 0 }}
+               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+               className="absolute inset-0"
+             >
+               <Image
+                 src={theme.heroImage}
+                 alt={theme.title}
+                 fill
+                 className="object-cover"
+                 priority
+               />
+               {/* Dark overlay for text readability */}
+               <div className="absolute inset-0 bg-black/40" />
+               {/* Gradient overlay for bottom fade */}
+               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+             </motion.div>
+           )}
+         </AnimatePresence>
+
+         {/* Abstract Background Elements for Mood (only for non-image themes) */}
+         {!theme.heroImage && (
+           <motion.div 
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 0.2 }}
+             transition={{ duration: 0.8 }}
+             className="absolute inset-0 pointer-events-none"
+           >
+              <div className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[100px] mix-blend-overlay transition-colors duration-700 ${activeFilter === 'Skin' ? 'bg-red-400' : activeFilter === 'Hair' ? 'bg-orange-300' : activeFilter === 'Body' ? 'bg-yellow-200' : 'bg-white'}`} />
+              <div className={`absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full blur-[120px] mix-blend-overlay transition-colors duration-700 ${activeFilter === 'Skin' ? 'bg-pink-500' : activeFilter === 'Hair' ? 'bg-amber-800' : activeFilter === 'Body' ? 'bg-orange-900' : 'bg-slate-200'}`} />
+           </motion.div>
+         )}
 
         <div className="section-container relative z-10">
-          <div className="max-w-4xl">
-            <Reveal>
-                <span className={`
-                    font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-6 block transition-colors duration-500
-                    ${activeFilter === 'All' ? 'text-maroon/60' : 'text-white/60'}
-                `}>
-                    {activeFilter === 'All' ? 'Our Expertise' : 'Specialized Care'}
-                </span>
-            </Reveal>
-            
-            <Reveal delay={0.1}>
-                <h1 className={`
-                    text-5xl md:text-7xl lg:text-8xl font-display leading-[0.9] mb-8 transition-colors duration-500
-                    ${theme.heroText}
-                `}>
-                    {theme.title}
-                </h1>
-            </Reveal>
-            
-            <Reveal delay={0.2}>
-                <p className={`
-                    text-lg md:text-xl font-light max-w-2xl leading-relaxed transition-colors duration-500
-                    ${theme.heroSub}
-                `}>
-                    {theme.description}
-                </p>
-            </Reveal>
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={activeFilter}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-4xl"
+            >
+              <motion.span 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className={`
+                  font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-6 block
+                  ${activeFilter === 'All' ? 'text-maroon/60' : 'text-white/60'}
+                `}
+              >
+                {activeFilter === 'All' ? 'Our Expertise' : 'Specialized Care'}
+              </motion.span>
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                className={`
+                  text-5xl md:text-7xl lg:text-8xl font-display leading-[0.9] mb-8
+                  ${theme.heroText}
+                `}
+              >
+                {theme.title}
+              </motion.h1>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className={`
+                  text-lg md:text-xl font-light max-w-2xl leading-relaxed
+                  ${theme.heroSub}
+                `}
+              >
+                {theme.description}
+              </motion.p>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 
@@ -235,10 +282,10 @@ function ConditionsContent() {
           <AnimatePresence mode="wait">
             <motion.div 
                 key={activeFilter}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
             >
               {filteredConditions.map((condition, index) => {
@@ -249,14 +296,23 @@ function ConditionsContent() {
                 const cardTheme = THEMES[cardGroupKey];
                 
                 return (
-                <Link 
-                    key={condition.slug} 
-                    href={`/conditions/${condition.slug}`}
-                    className={`
-                        group relative block p-8 md:p-10 rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-1
-                        ${activeFilter === 'All' ? 'bg-white border border-charcoal/5 hover:shadow-lg' : cardTheme.cardBg}
-                    `}
+                <motion.div
+                    key={condition.slug}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: index * 0.08, // Stagger effect
+                      ease: [0.22, 1, 0.36, 1] 
+                    }}
                 >
+                  <Link 
+                      href={`/conditions/${condition.slug}`}
+                      className={`
+                          group relative block p-8 md:p-10 rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl
+                          ${activeFilter === 'All' ? 'bg-white border border-charcoal/5 hover:shadow-lg' : cardTheme.cardBg}
+                      `}
+                  >
                     {/* Abstract Gradient Background on Hover */}
                     <div className={`
                         absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br
@@ -296,7 +352,8 @@ function ConditionsContent() {
                             </svg>
                         </div>
                     </div>
-                </Link>
+                  </Link>
+                </motion.div>
               )})}
             </motion.div>
           </AnimatePresence>

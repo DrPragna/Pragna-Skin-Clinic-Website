@@ -38,37 +38,11 @@ export default function WhyPragna() {
   return (
     <section 
       ref={containerRef}
-      className="py-16 lg:py-24 bg-[#FDFCFB] relative overflow-hidden"
+      className="py-12 lg:py-16 bg-white relative overflow-hidden"
     >
-      {/* Atmospheric Background - VISIBLE Color Washes - BREATHING ANIMATION */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FDF8F6] via-[#FDFCFB] to-[#FAF5F2]" />
-      <NoiseTexture opacity={0.04} />
-
-      {/* Large Rose/Maroon Wash (Top Right) */}
-      <motion.div 
-        className="absolute -top-[20%] -right-[15%] w-[1000px] h-[1000px] rounded-full blur-[80px] pointer-events-none"
-        style={{ background: '#E8D5D0', opacity: 0.7 }}
-        animate={{ scale: [1, 1.1, 1], opacity: [0.7, 0.6, 0.7] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Terracotta Wash (Bottom Left) */}
-      <motion.div 
-        className="absolute -bottom-[15%] -left-[15%] w-[900px] h-[900px] rounded-full blur-[80px] pointer-events-none"
-        style={{ background: '#F0DDD6', opacity: 0.6 }}
-        animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0.5, 0.6] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
-
-      {/* Center Maroon Accent */}
-      <motion.div 
-        className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[100px] pointer-events-none"
-        style={{ background: '#D4B0B0', opacity: 0.4 }}
-        animate={{ scale: [1, 0.9, 1], opacity: [0.4, 0.5, 0.4] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-      />
-      
-      {/* Floating Golden Dust Particles - REMOVED */}
+      {/* Pure White Background */}
+      <div className="absolute inset-0 bg-white" />
+      <NoiseTexture opacity={0.03} />
       
       {/* Elegant Static Line with Traveling Dot */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none z-[1] overflow-visible">
@@ -148,10 +122,10 @@ export default function WhyPragna() {
               }}
               className="group relative"
             >
-              <div className="relative h-full p-8 lg:p-10 bg-white/40 backdrop-blur-xl rounded-[2rem] border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-500 hover:-translate-y-2 hover:bg-white/70 hover:shadow-[0_0_40px_rgba(183,110,121,0.15)] hover:border-rose-gold/30 overflow-hidden group-hover:after:opacity-100 after:opacity-0 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none">
+              <div className="relative h-full p-10 lg:p-14 bg-white/40 backdrop-blur-xl rounded-[2rem] border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-500 hover:-translate-y-2 hover:bg-white/70 hover:shadow-[0_0_40px_rgba(183,110,121,0.15)] hover:border-rose-gold/30 overflow-hidden group-hover:after:opacity-100 after:opacity-0 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none">
                 
-                {/* Decorative Number Layered Behind */}
-                <span className="absolute -top-6 -right-4 text-[10rem] leading-none font-display text-maroon/[0.03] select-none pointer-events-none transition-colors duration-500 group-hover:text-maroon/[0.06]">
+                {/* Decorative Number Layered Behind - Larger & More Editorial */}
+                <span className="absolute top-6 left-8 text-[8rem] lg:text-[10rem] leading-none font-display text-stone-100 select-none pointer-events-none transition-colors duration-500 group-hover:text-maroon/[0.08]">
                   {pillar.number}
                 </span>
 
@@ -159,17 +133,17 @@ export default function WhyPragna() {
                 <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 
                 {/* Content */}
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Icon/Accent Line */}
-                  <div className="mb-8 w-12 h-[2px] bg-gradient-to-r from-maroon/40 to-transparent group-hover:from-maroon group-hover:w-20 transition-all duration-500" />
+                <div className="relative z-10 flex flex-col h-full min-h-[280px]">
+                  {/* Icon/Accent Line - Extending on Hover */}
+                  <div className="mb-auto w-12 h-[2px] bg-gradient-to-r from-maroon/40 to-transparent group-hover:from-maroon group-hover:w-24 transition-all duration-500" />
 
                   {/* Title */}
-                  <h3 className="text-3xl xl:text-4xl font-display text-charcoal mb-6 leading-[1.1] group-hover:text-maroon transition-colors duration-500">
+                  <h3 className="text-3xl xl:text-4xl font-display text-charcoal mb-6 leading-[1.1] group-hover:text-maroon transition-colors duration-500 mt-auto">
                     {pillar.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-charcoal/70 leading-relaxed text-[15px] lg:text-base font-light tracking-wide mt-auto">
+                  <p className="text-charcoal/70 leading-relaxed text-[15px] lg:text-base font-light tracking-wide">
                     {pillar.description}
                   </p>
                 </div>

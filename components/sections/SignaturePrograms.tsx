@@ -87,7 +87,7 @@ function ProgramCard({
               }}
       className="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer"
             >
-      <Link href={`/signature-programs/${program.slug}`} className="block h-full w-full">
+      <Link href={`/signature-programs/${program.slug}`} scroll={true} className="block h-full w-full">
         {/* Background: Image or Gradient */}
         <div className="absolute inset-0 overflow-hidden">
           {!showGradient ? (

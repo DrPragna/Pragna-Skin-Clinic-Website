@@ -491,6 +491,20 @@ export function getFamiliesByPillar(): { pillar: string; families: TreatmentFami
 }
 
 // ============================================
+// SIGNATURE PROGRAMS NAVIGATION DATA
+// ============================================
+import { signaturePrograms } from './content/signature-programs';
+
+export const signatureProgramsNav = signaturePrograms.map(program => ({
+  name: program.title,
+  subtitle: program.subtitle,
+  description: program.description,
+  duration: program.duration,
+  href: `/signature-programs/${program.slug}`,
+  image: program.image
+}));
+
+// ============================================
 // LEGACY SUPPORT (for existing navbar)
 // ============================================
 export const navigationData = {
@@ -514,6 +528,7 @@ export const navigationData = {
         href: `/treatments/${f.slug}/${st.slug}`
       }))
     }))
-  }))
+  })),
+  signaturePrograms: signatureProgramsNav
 };
 

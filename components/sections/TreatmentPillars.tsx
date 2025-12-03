@@ -93,7 +93,11 @@ export default function TreatmentPillars() {
                 
                 {/* Top: Number & Icon */}
                 <div className="absolute top-8 left-8 right-8 flex justify-between items-start">
-                  <span className="text-xl font-display text-white/90">
+                  <span className={`text-xl font-display transition-all duration-500 ${
+                    activeId === pillar.id 
+                      ? 'text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] scale-110' 
+                      : 'text-white'
+                  }`}>
                     0{index + 1}
                   </span>
                   <div className={`w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white transition-all duration-500 ${
@@ -127,8 +131,11 @@ export default function TreatmentPillars() {
                   <p className="text-white/70 text-lg max-w-md leading-relaxed font-light">
                               {pillar.description}
                             </p>
-                  <div className="mt-8 inline-block px-6 py-3 border border-white/30 rounded-full text-white text-sm uppercase tracking-widest hover:bg-white hover:text-maroon transition-colors duration-300">
-                    Explore Treatments
+                  <div className="mt-8 flex items-center gap-3 text-white/90 text-sm uppercase tracking-widest group/btn">
+                    <span>Explore Treatments</span>
+                    <svg className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </div>
                 </div>
               </div>

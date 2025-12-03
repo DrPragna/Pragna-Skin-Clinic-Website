@@ -93,7 +93,7 @@ export const stretchMarksContent: ConditionContent = {
     {
       question: 'Is it safe to treat stretch marks while breastfeeding?',
       answer:
-        'Many external treatments are possible, but we avoid certain medicines and aggressive procedures. Plans are customised with your gynaecologist's guidance and your comfort.',
+        "Many external treatments are possible, but we avoid certain medicines and aggressive procedures. Plans are customised with your gynaecologist's guidance and your comfort.",
     },
     {
       question: 'Will gaining or losing weight again create new marks?',

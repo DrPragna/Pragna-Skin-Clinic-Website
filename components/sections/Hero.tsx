@@ -92,18 +92,38 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <a 
-              href="#contact" 
-              className="px-8 py-4 bg-cream text-maroon rounded-full font-medium hover:bg-white hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300 min-w-[180px]"
+            <button 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  const offset = 100;
+                  const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
+                  window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+                }
+              }}
+              className="px-8 py-4 bg-cream text-maroon rounded-full font-medium hover:bg-white hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300 min-w-[180px] cursor-pointer"
             >
               Book Consultation
-            </a>
-            <a 
-              href="#treatments" 
-              className="px-8 py-4 border border-cream/30 text-cream rounded-full font-medium hover:bg-cream/20 hover:border-cream/80 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,248,240,0.2)] transition-all duration-300 backdrop-blur-sm min-w-[180px]"
+            </button>
+            <button 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const treatmentsSection = document.getElementById('treatments');
+                if (treatmentsSection) {
+                  const offset = 100;
+                  const elementPosition = treatmentsSection.getBoundingClientRect().top + window.scrollY;
+                  window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+                }
+              }}
+              className="px-8 py-4 border border-cream/30 text-cream rounded-full font-medium hover:bg-cream/20 hover:border-cream/80 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,248,240,0.2)] transition-all duration-300 backdrop-blur-sm min-w-[180px] cursor-pointer"
             >
               View Treatments
-            </a>
+            </button>
           </motion.div>
         </div>
       </div>

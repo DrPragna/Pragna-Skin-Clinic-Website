@@ -18,8 +18,24 @@ interface FormData {
   email: string;
   countryCode: string;
   phone: string;
+  branch: string;
   concerns: string;
 }
+
+// Country codes - Limited to India, UK, Australia, USA
+const COUNTRY_CODES = [
+  { code: "+91", flag: "🇮🇳", country: "India" },
+  { code: "+44", flag: "🇬🇧", country: "UK" },
+  { code: "+61", flag: "🇦🇺", country: "Australia" },
+  { code: "+1", flag: "🇺🇸", country: "USA" },
+];
+
+// Branch options
+const BRANCHES = [
+  { value: "", label: "Select Branch" },
+  { value: "punjagutta", label: "Punjagutta" },
+  { value: "kokapet", label: "Kokapet" },
+];
 
 export default function Contact() {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -28,6 +44,7 @@ export default function Contact() {
     email: '',
     countryCode: '+91',
     phone: '',
+    branch: '',
     concerns: '',
   });
   const [whatsappLink, setWhatsappLink] = useState<string>('');
@@ -68,6 +85,7 @@ export default function Contact() {
           email: '',
           countryCode: '+91',
           phone: '',
+          branch: '',
           concerns: '',
         });
       } else {
@@ -124,18 +142,9 @@ export default function Contact() {
                 </span>
               </h2>
 
-              <p className="text-charcoal/60 font-sans font-light leading-relaxed text-sm max-w-xs mb-8">
+              <p className="text-charcoal/60 font-sans font-light leading-relaxed text-sm max-w-xs">
                 Where expert dermatology meets the art of aesthetic refinement. Let us craft a journey unique to your skin.
               </p>
-
-              <div className="flex items-center gap-6">
-                 <div className="group cursor-pointer">
-                    <p className="text-[9px] uppercase tracking-[0.2em] text-charcoal/40 mb-1">Direct Line</p>
-                    <a href="tel:+919380551547" className="text-lg font-display text-charcoal group-hover:text-maroon transition-colors duration-300 flex items-center gap-2">
-                      +91 93805 51547
-                    </a>
-                 </div>
-              </div>
             </motion.div>
           </div>
             
@@ -295,16 +304,11 @@ export default function Contact() {
                             onChange={handleInputChange}
                             className="w-full bg-white border border-charcoal/15 rounded-xl px-3 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm"
                           >
-                            <option value="+91">🇮🇳 +91</option>
-                            <option value="+1">🇺🇸 +1</option>
-                            <option value="+44">🇬🇧 +44</option>
-                            <option value="+971">🇦🇪 +971</option>
-                            <option value="+65">🇸🇬 +65</option>
-                            <option value="+61">🇦🇺 +61</option>
-                            <option value="+49">🇩🇪 +49</option>
-                            <option value="+33">🇫🇷 +33</option>
-                            <option value="+81">🇯🇵 +81</option>
-                            <option value="+86">🇨🇳 +86</option>
+                            {COUNTRY_CODES.map((country) => (
+                              <option key={country.code} value={country.code}>
+                                {country.flag} {country.code}
+                              </option>
+                            ))}
                           </select>
                           <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-charcoal/40">
                             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -321,6 +325,30 @@ export default function Contact() {
                           className="flex-1 bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
                           placeholder="Phone Number" 
                         />
+                      </div>
+
+                      {/* Branch Selection */}
+                      <div className="relative">
+                        <select
+                          name="branch"
+                          value={formData.branch}
+                          onChange={handleInputChange}
+                          required
+                          className={`w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm ${
+                            formData.branch ? "text-charcoal" : "text-charcoal/40"
+                          }`}
+                        >
+                          {BRANCHES.map((branch) => (
+                            <option key={branch.value} value={branch.value} className="text-charcoal">
+                              {branch.label}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-charcoal/40">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
 

@@ -19,6 +19,10 @@ export interface SignatureProgram {
     detail: string;
   }[];
   idealFor: string[];
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export const signaturePrograms: SignatureProgram[] = [
@@ -26,81 +30,125 @@ export const signaturePrograms: SignatureProgram[] = [
     slug: 'glow-getters',
     title: 'Glow Getters',
     subtitle: 'Radiance Revival',
-    description: 'Customized treatment plans that brighten, smooth, and refresh tired skin.',
+    description: 'A personalised glow journey combining facials, peels and boosters to revive tired, uneven, event-ready skin.',
     duration: '4-6 sessions',
     image: '/images/signature/glow-getters.jpg',
     heroImage: '/images/signature/glow-getters.jpg',
-    gradient: 'from-[#6B5B4F] via-[#524539] to-[#3A302A]', // Warm Stone
-    longDescription: "A curated journey designed to restore your skin's natural luminosity. Combining gentle exfoliation with deep hydration and collagen stimulation, this program targets dullness and uneven texture to reveal a radiant, camera-ready complexion.",
+    gradient: 'from-[#6B5B4F] via-[#524539] to-[#3A302A]',
+    longDescription: 'Glow Getters is your structured radiance reset when everyday skincare is no longer enough. Across a few focused sessions, we combine deep cleansing, gentle exfoliation, hydrating medifacials, laser toning and skin boosters to smooth texture, brighten tone and leave your face naturally lit-from-within, not overdone.',
     benefits: [
-      'Instant radiance and brightness',
-      'Smoother skin texture',
-      'Deep hydration',
-      'Reduced pore visibility'
+      'Brighter, even complexion',
+      'Refined skin texture',
+      'Deep, lasting hydration',
+      'Camera-ready natural glow',
     ],
     process: [
       {
-        title: 'The Prep',
-        description: 'Deep cleansing and gentle chemical exfoliation to remove dead skin cells.',
-        duration: 'Week 1'
+        title: 'Prep & Polish',
+        description: 'We start with cleansing, gentle exfoliation and basic barrier repair to prepare your skin.',
+        duration: 'Week 1',
       },
       {
-        title: 'The Infusion',
-        description: 'Mesotherapy or skin boosters to deliver hydration deep into the dermis.',
-        duration: 'Week 2-3'
+        title: 'Infuse & Treat',
+        description: 'Hydrating medifacials, glow facials and targeted peels address dullness, tan, roughness and congestion.',
+        duration: 'Week 2-3',
       },
       {
-        title: 'The Polish',
-        description: 'Laser toning or advanced peel for final texture refinement and glow.',
-        duration: 'Week 4'
-      }
+        title: 'Finish & Maintain',
+        description: 'Laser toning or skin boosters enhance radiance while we set a simple, sustainable home routine.',
+        duration: 'Week 4-5',
+      },
     ],
     inclusions: [
-      { item: '6 Sessions', detail: 'In-clinic treatments' },
-      { item: 'Home Care', detail: 'Curated skincare kit' },
-      { item: 'Consultations', detail: '2 Doctor reviews' }
+      { item: '6 sessions', detail: 'Clinic-based treatments' },
+      { item: 'Home care', detail: 'Curated skincare kit' },
+      { item: 'Doctor reviews', detail: 'Two progress checks' },
     ],
-    idealFor: ['Brides-to-be', 'Event preparation', 'Dull or tired skin']
+    idealFor: [
+      'Brides and event days',
+      'Busy professionals on camera',
+      'Dull, uneven complexions',
+    ],
+    faqs: [
+      {
+        question: 'How far before an event should I start?',
+        answer: 'Ideally, start four to six weeks before an important event. This gives enough time for multiple sessions, mild peeling to settle and your natural glow to peak without rushing or overloading your skin.',
+      },
+      {
+        question: 'Will I peel or need to hide at home?',
+        answer: 'Most treatments have little visible peeling. If we use stronger peels, flaking is usually mild and planned around your calendar so you can manage social events comfortably with basic makeup, if desired.',
+      },
+      {
+        question: 'Can this program help with pigmentation and tan?',
+        answer: 'Yes, we often combine gentle peels, laser toning and glow facials to address tan and mild pigmentation, while still keeping the overall focus on radiance, hydration and healthy, even-looking skin tone.',
+      },
+      {
+        question: 'Is Glow Getters suitable for very sensitive skin?',
+        answer: 'We modify products, peel strengths and device settings for sensitive skin. During consultation, we patch test where needed and build your plan gradually, so your barrier strengthens instead of feeling stripped or irritated.',
+      },
+    ],
   },
   {
     slug: 'mommy-makeover',
     title: 'Mommy Makeover',
     subtitle: 'Post-Pregnancy Care',
-    description: 'Gentle treatments to reclaim confidence in skin, body, and hair.',
+    description: 'A gentle, structured reset for post-pregnancy body, skin and hair, paced kindly around real motherhood.',
     duration: '6-8 sessions',
     image: '/images/signature/mommy-makeover.jpg',
     heroImage: '/images/signature/mommy-makeover.jpg',
-    gradient: 'from-[#5F5550] via-[#4A4340] to-[#332E2C]', // Muted Umber
-    longDescription: 'Motherhood is a beautiful journey, but it changes your body. Our Mommy Makeover is a compassionate, comprehensive program addressing post-partum concerns like stretch marks, skin laxity, hair thinning, and pigmentation, helping you feel like yourself again.',
+    gradient: 'from-[#7A5850] via-[#62413C] to-[#3E2B29]',
+    longDescription: 'Motherhood changes your body, skin and energy in ways that diet or facials alone cannot address. The Mommy Makeover brings together body contouring, stretch mark care, C-section scar support, hair recovery and glow facials, sequenced thoughtfully so you feel looked after, not rushed.',
     benefits: [
-      'Stretch mark reduction',
-      'Skin tightening',
-      'Hair regrowth support',
-      'Pigmentation correction'
+      'Flatter, supported tummy',
+      'Softer stretch marks',
+      'Healthier, fuller hair',
+      'Rested, glowing skin',
     ],
     process: [
       {
-        title: 'Consultation & Comfort',
-        description: 'A relaxed assessment of your concerns and timeline.',
-        duration: 'Day 1'
+        title: 'Stabilise & Plan',
+        description: 'We review delivery history, scars, hair fall, energy levels and schedule, then map realistic priorities together.',
+        duration: 'Weeks 1-2',
       },
       {
-        title: 'Body Restoration',
-        description: 'Targeted treatments for stretch marks and skin tightening.',
-        duration: 'Month 1-2'
+        title: 'Shape & Repair',
+        description: 'Body contouring, stretch mark sessions and scar care start slowly, matched to your healing, feeding and childcare routines.',
+        duration: 'Weeks 3-6',
       },
       {
-        title: 'Hair & Skin Health',
-        description: 'Nutrient infusion for hair and gentle facials for glow.',
-        duration: 'Month 2-3'
-      }
+        title: 'Glow & Maintain',
+        description: 'Hair growth sessions and glow facials are added, plus home routines, to keep results gentle and sustainable.',
+        duration: 'Weeks 7-10',
+      },
     ],
     inclusions: [
-      { item: 'Custom Plan', detail: 'Tailored to your recovery' },
-      { item: 'Safety First', detail: 'Nursing-safe protocols' },
-      { item: 'Relaxation', detail: 'Spa-like environment' }
+      { item: '8 sessions', detail: 'Body and skin' },
+      { item: 'Home kit', detail: 'Postpartum skincare support' },
+      { item: 'Doctor reviews', detail: 'Regular progress check-ins' },
     ],
-    idealFor: ['Post-partum mothers', 'Stretch marks', 'Hair loss']
+    idealFor: [
+      'New mothers post-delivery',
+      'Second or third pregnancies',
+      'Body and hair reset',
+    ],
+    faqs: [
+      {
+        question: 'When is the right time to start after delivery?',
+        answer: 'We usually wait until your gynaecologist clears you for routine activity. Certain treatments start earlier; others, like stronger contouring or peels, are timed carefully around breastfeeding, recovery and your energy levels.',
+      },
+      {
+        question: 'Is the program safe while I am breastfeeding?',
+        answer: 'We avoid certain medicines and aggressive fat treatments while you breastfeed. Instead, we focus on gentle contouring, skin health, stretch mark care and nutrition guidance, always coordinated with your obstetrician when needed.',
+      },
+      {
+        question: 'Will I get my pre-pregnancy body back completely?',
+        answer: 'Every body responds differently. Our aim is to improve comfort, shape and confidence rather than chase old photos. We celebrate strength, support healing and focus on realistic, healthy, sustainable change.',
+      },
+      {
+        question: 'Can I bring my baby along for sessions?',
+        answer: 'Many new mothers do. We try to schedule convenient slots and keep visits efficient. However, for longer procedures, having a caregiver accompany you often makes the experience calmer and easier.',
+      },
+    ],
   },
   {
     slug: 'bridal-beauty',
@@ -140,7 +188,25 @@ export const signaturePrograms: SignatureProgram[] = [
       { item: 'Diet Plan', detail: 'Nutrition for skin health' },
       { item: 'Emergency Support', detail: 'For last-minute breakouts' }
     ],
-    idealFor: ['Brides', 'Grooms', 'Wedding parties']
+    idealFor: ['Brides', 'Grooms', 'Wedding parties'],
+    faqs: [
+      {
+        question: "How far in advance should I start?",
+        answer: "Ideally, start 3-6 months before your wedding. This gives us time to address any active skin issues first and then focus on achieving that perfect glow without rushing."
+      },
+      {
+        question: "What if I have a breakout close to my wedding?",
+        answer: "We include emergency support as part of the program. If you experience a last-minute breakout, contact us immediately and we will provide same-day or next-day solutions."
+      },
+      {
+        question: "Does the program include body treatments?",
+        answer: "Yes! The Bridal Beauty program covers face, neck, back, and hands. We can also add specific treatments for areas that will be visible in your wedding outfit."
+      },
+      {
+        question: "Can my partner also do this program?",
+        answer: "Of course! We offer Bridal Beauty for grooms too. Many couples do the program together, which can be a lovely pre-wedding bonding experience."
+      }
+    ]
   },
   {
     slug: 'rewind',
@@ -180,7 +246,25 @@ export const signaturePrograms: SignatureProgram[] = [
       { item: 'Maintenance', detail: 'Yearly plan included' },
       { item: 'Skincare', detail: 'Anti-aging regimen' }
     ],
-    idealFor: ['Signs of aging', 'Sagging skin', 'Deep lines']
+    idealFor: ['Signs of aging', 'Sagging skin', 'Deep lines'],
+    faqs: [
+      {
+        question: "Will I look natural or overdone?",
+        answer: "Our philosophy is subtle enhancement, not dramatic change. The goal is to look like a refreshed, well-rested version of yourself - not a different person."
+      },
+      {
+        question: "How long do results last?",
+        answer: "Results vary by treatment. Skin tightening effects can last 1-2 years, while fillers typically last 6-18 months. We include a maintenance plan to help you preserve results."
+      },
+      {
+        question: "Is there significant downtime?",
+        answer: "Most treatments have minimal downtime. You may have slight swelling or redness for 1-2 days after certain procedures, but nothing that prevents normal activities."
+      },
+      {
+        question: "At what age should I start anti-aging treatments?",
+        answer: "Prevention is easier than correction. Many people start in their late 20s to early 30s with preventive treatments. However, the Rewind program benefits anyone noticing signs of aging."
+      }
+    ]
   },
   {
     slug: 'signature-reset',
@@ -220,7 +304,25 @@ export const signaturePrograms: SignatureProgram[] = [
       { item: 'Exclusive', detail: 'Pragna proprietary method' },
       { item: 'Express', detail: 'Fast results' }
     ],
-    idealFor: ['Burnout recovery', 'Frequent travelers', 'Special occasions']
+    idealFor: ['Burnout recovery', 'Frequent travelers', 'Special occasions'],
+    faqs: [
+      {
+        question: "What makes this different from a regular facial?",
+        answer: "The Signature Reset is a medical-grade, multi-modality treatment that works both inside and out. It includes IV therapy for internal nourishment, lymphatic drainage, and advanced skin treatments - far beyond what a spa facial offers."
+      },
+      {
+        question: "How quickly will I see results?",
+        answer: "You will notice immediate improvements in skin vitality and energy levels. This is our express program, designed for those who need visible results quickly for a special occasion or recovery."
+      },
+      {
+        question: "Is IV therapy safe?",
+        answer: "Yes, our IV drips are administered by trained medical professionals using sterile techniques. We customize the nutrient blend based on your specific needs and health profile."
+      },
+      {
+        question: "Can I do this as a one-time treatment?",
+        answer: "Absolutely! While the full program is 3-5 sessions, many clients do a single session before important events. We can also create a regular maintenance schedule if you enjoy the results."
+      }
+    ]
   }
 ];
 
