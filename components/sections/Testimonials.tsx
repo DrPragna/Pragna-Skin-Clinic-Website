@@ -229,7 +229,7 @@ export default function Testimonials() {
           className="mt-10 text-center"
         >
           <a 
-            href="https://www.google.com/maps" 
+            href="https://www.google.com/maps/place/Pragna+Skin+Clinic%7CBest+Skin+%26+Hair+clinic+In+Kokapet/@17.387853,78.342563,17z/data=!4m8!3m7!1s0x3bcb951e16e74899:0xe00057759cb62037!8m2!3d17.387853!4d78.342563!9m1!1b1!16s%2Fg%2F11y310_wqr?entry=ttu&g_ep=EgoyMDI1MTEzMC4wIKXMDSoASAFQAw%3D%3D" 
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-4 py-3 px-6 rounded-full bg-white border border-maroon/10 shadow-soft hover:shadow-md transition-all duration-300 group"

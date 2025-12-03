@@ -15,15 +15,6 @@ import Image from 'next/image';
 
 const branches = [
   {
-    id: 'kokapet',
-    name: 'Kokapet',
-    label: 'Advanced Center',
-    address: '3rd Floor, Above Vijetha Supermarket,\nGandipet Main Rd, Opp. Rajapushpa Regalia,\nNarsingi, Hyderabad - 500075',
-    phone: '088864 21111',
-    mapUrl: 'https://maps.app.goo.gl/RZjN7F1WbhMAo5eL9',
-    image: '/clinics/kokapet.jpg', // Placeholder
-  },
-  {
     id: 'punjagutta',
     name: 'Punjagutta',
     label: 'Flagship Clinic',
@@ -31,6 +22,15 @@ const branches = [
     phone: '098483 67000',
     mapUrl: 'https://maps.app.goo.gl/GHW2EhGtHpeUrU228',
     image: '/clinics/punjagutta.jpg', // Placeholder
+  },
+  {
+    id: 'kokapet',
+    name: 'Kokapet',
+    label: 'Advanced Center',
+    address: '3rd Floor, Above Vijetha Supermarket,\nGandipet Main Rd, Opp. Rajapushpa Regalia,\nNarsingi, Hyderabad - 500075',
+    phone: '088864 21111',
+    mapUrl: 'https://maps.app.goo.gl/RZjN7F1WbhMAo5eL9',
+    image: '/clinics/kokapet.jpg', // Placeholder
   },
 ];
 

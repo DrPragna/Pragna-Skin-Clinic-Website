@@ -518,7 +518,6 @@ export default function Navbar() {
             </div>
 
             <Link href="/#about" className={linkClasses}>About</Link>
-            <Link href="/#contact" className={linkClasses}>Contact</Link>
           </div>
 
           {/* CTA Button */}
@@ -712,9 +711,6 @@ export default function Navbar() {
 
             <Link href="/#about" className="block text-xl font-medium text-charcoal hover:text-maroon">
               About
-            </Link>
-            <Link href="/#contact" className="block text-xl font-medium text-charcoal hover:text-maroon">
-              Contact
             </Link>
 
             <div className="pt-6">
