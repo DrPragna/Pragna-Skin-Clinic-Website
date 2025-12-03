@@ -1,4 +1,4 @@
-import { SubTreatmentContent } from '../index';
+import { SubTreatmentContent } from '@/lib/navigationData';
 
 export const tattooRemovalContent: SubTreatmentContent = {
   hero: {
