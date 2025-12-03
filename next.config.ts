@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
         hostname: 'images.unsplash.com',
       },
     ],
+    // Disable caching for development - images update immediately
+    minimumCacheTTL: 0,
   },
 };
 

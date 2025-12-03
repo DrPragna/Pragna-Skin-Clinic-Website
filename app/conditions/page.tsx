@@ -49,7 +49,7 @@ const THEMES: Record<ThemeKey, {
     title: 'Skin Concerns',
     description: "From acne to ageing, restore your skin's natural health and radiance.",
     gradient: 'from-[#C28E79]/10 to-[#A66249]/5',
-    heroImage: '/images/Areas _of_Focus/Skin.jpg'
+    heroImage: '/images/areas-of-focus/Skin.jpg'
   },
   'Hair': {
     heroBg: 'bg-[#4A3B2A]', // Deep Bronze
@@ -61,7 +61,7 @@ const THEMES: Record<ThemeKey, {
     title: 'Hair & Scalp',
     description: 'Science-backed solutions for restoration, growth, and scalp health.',
     gradient: 'from-[#BFA57D]/10 to-[#8F7348]/5',
-    heroImage: '/images/Areas _of_Focus/Hair.jpg'
+    heroImage: '/images/areas-of-focus/Hair.jpg'
   },
   'Body': {
     heroBg: 'bg-[#423D33]', // Deep Olive/Clay
@@ -73,7 +73,7 @@ const THEMES: Record<ThemeKey, {
     title: 'Body & Shape',
     description: 'Sculpt, tone, and refine your silhouette with advanced non-surgical care.',
     gradient: 'from-[#9E8C6B]/10 to-[#736243]/5',
-    heroImage: '/images/Areas _of_Focus/Body.jpg'
+    heroImage: '/images/areas-of-focus/Body.jpg'
   },
   'Others': {
     heroBg: 'bg-[#2A3B33]', // Deep Forest
