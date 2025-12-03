@@ -10,7 +10,7 @@ interface Props {
 }
 
 // Smooth easing for all animations
-const smoothEase = [0.22, 1, 0.36, 1];
+const smoothEase = [0.22, 1, 0.36, 1] as const;
 
 // Stagger container for children
 const staggerContainer = {
