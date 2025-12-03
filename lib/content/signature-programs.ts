@@ -1,5 +1,3 @@
-import { NavItem } from '../navigationData';
-
 export interface SignatureProgram {
   slug: string;
   title: string;
