@@ -111,8 +111,8 @@ function ProgramCard({
             </div>
           )}
           
-          {/* Overlay - Warm tinted for brand consistency */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#2A2118]/95 via-[#2A2118]/30 to-transparent opacity-90 group-hover:opacity-75 transition-opacity duration-700" />
+          {/* Overlay - Balanced gradient for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1510] via-[#1A1510]/[0.48] to-[#1A1510]/10 opacity-95 group-hover:opacity-85 transition-opacity duration-700" />
           
           {/* Sophisticated Hover Glow */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-1000 bg-gradient-to-tr from-maroon/20 via-transparent to-transparent pointer-events-none" />

@@ -12,7 +12,7 @@ const pillars = [
     subtitle: 'Rejuvenate & Restore',
     description: 'Advanced dermatological solutions for glowing, healthy skin.',
     href: '/conditions?filter=Skin', 
-    image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop',
+    image: '/images/Areas _of_Focus/Skin.jpg',
     color: '#E8D4D0', // Soft Rose
   },
   {
@@ -21,7 +21,7 @@ const pillars = [
     subtitle: 'Growth & Vitality',
     description: 'Comprehensive care for restoration and scalp health.',
     href: '/conditions?filter=Hair',
-    image: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop',
+    image: '/images/Areas _of_Focus/Hair.jpg',
     color: '#F2EBE6', // Warm Cream
   },
   {
@@ -30,7 +30,7 @@ const pillars = [
     subtitle: 'Sculpt & Define',
     description: 'Non-invasive contouring and wellness treatments.',
     href: '/conditions?filter=Body',
-    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2020&auto=format&fit=crop',
+    image: '/images/Areas _of_Focus/Body.jpg',
     color: '#EAE4DD', // Beige
   },
 ];
