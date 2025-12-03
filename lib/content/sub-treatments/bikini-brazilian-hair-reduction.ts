@@ -3,74 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const bikiniBrazilianHairReductionContent: SubTreatmentContent = {
   hero: {
     title: "Bikini & Brazilian Hair Reduction",
-    tagline: "Comfort in swimwear and gymwear",
+    tagline: "Comfortable, discreet intimate care",
     intro:
-      "Bikini line bumps, ingrown hairs, and waxing pain can make beaches, pools, and even everyday gymwear feel uncomfortable. Bikini and Brazilian laser hair reduction offers a more long-term, skin-friendly way to manage hair in intimate areas.",
+      "Bikini & Brazilian Hair Reduction focuses on the intimate area, reducing repeated waxing pain, ingrowns and razor burn while respecting comfort, privacy and cultural sensitivity.",
   },
   quickStats: {
-    sessions: "6-8 sessions, 4-8 weeks apart",
-    duration: "20-40 mins per session",
-    downtime: "Tenderness for up to 24 hours",
-    painLevel: "Warm snaps in sensitive area",
+    sessions: "Usually 6–8 core sessions",
+    duration: "Each visit 20–30 minutes",
+    downtime: "Redness, tenderness for hours",
+    painLevel: "Snaps and heat, manageable",
   },
   overview:
-    "We treat either just the bikini line or a more extensive Brazilian pattern based on your comfort. Settings are gentler and passes are slower because the skin is more sensitive here, but the goal remains the same: fewer ingrowns, slower regrowth, and easier hygiene.",
+    "We use specially adjusted laser settings and careful positioning to treat bikini line or full Brazilian zones. Over time, hair reduces, ingrowns settle and the area feels easier to maintain between sessions.",
   isThisForYou: [
-    "Waxing the bikini area feels extremely painful or leaves bruises",
-    "Shaving causes razor burn, itching, or ingrown hair along the bikini line",
-    "You feel conscious in swimwear, dancewear, or tight leggings",
-    "You want a private, medical setting instead of crowded salons",
-    "You'd like a more permanent solution without repeated trauma to the skin",
+    "Bikini waxing is extremely painful and leaves you sore for days.",
+    "Ingrown hairs, boils or dark spots appear often in your bikini area.",
+    "Shaving causes razor burn, itching or small cuts in sensitive skin.",
+    "You want cleaner lines for swimwear or intimate comfort without parlour stress.",
+    "You prefer discreet, doctor-led intimate area care over quick salon visits.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Discreet Consultation & Shaving Guidelines",
+        title: "Explain options and boundaries",
         description:
-          "We explain exactly which pattern (bikini or Brazilian) is included and how much hair you'd like to keep, if any. You'll be advised to shave the area as directed before the appointment and to avoid waxing or hair removal creams for several weeks beforehand.",
+          "We discuss bikini versus Brazilian coverage, comfort levels, clothing, modesty draping and shaving guidance. All questions are answered clearly so you know exactly what to expect on treatment day.",
       },
       {
         phase: "during",
-        title: "Privacy-Focused Laser Session",
+        title: "Treat with privacy and care",
         description:
-          "You are draped appropriately, and only the area being treated is exposed at a time. After cleansing, the laser handpiece is applied in sections. You'll feel sharp, warm snaps that last a second each. Breaks are offered whenever needed, and the whole session typically finishes within 20-40 minutes.",
+          "The area is shaved as discussed, cleaned and covered with gel. With proper draping, we perform laser passes, frequently checking comfort and adjusting energy, angles and pace for sensitive spots.",
       },
       {
         phase: "after",
-        title: "Soothing, Hygiene & Clothing Tips",
+        title: "Support healing and hygiene",
         description:
-          "Post-treatment, the skin can feel tender or slightly swollen, similar to a strong waxing session but without sticky residue. We recommend breathable cotton underwear, avoiding tight leggings and intense workouts for 24 hours, and washing with lukewarm water and gentle cleansers.",
+          "We advise breathable clothing, gentle cleansing, avoiding hot baths, friction and strong products for a short period. Follow-ups track regrowth, bumps and pigment so we can tweak the plan.",
       },
     ],
   },
   results: {
     timeline:
-      "By the third or fourth session, many patients report far fewer ingrowns and much slower regrowth. After 6-8 sessions, maintenance is usually minimal, and the skin tends to feel calmer and less irritated overall.",
+      "Many notice fewer ingrowns and slower regrowth after a few sessions. Significant reduction in coarse hair usually appears towards the later part of the planned treatment course.",
     recovery:
-      "Most tenderness resolves within a day. Redness and slight swelling are common but temporary. Good hygiene and avoiding friction help the area settle comfortably.",
+      "Redness, warmth and tenderness are common for some hours. Cool compresses, loose cotton clothing and simple moisturiser generally keep you comfortable.",
   },
   faqs: [
     {
-      question: "How do you maintain privacy during bikini or Brazilian laser?",
+      question: "Is bikini laser embarrassing or awkward?",
       answer:
-        "Sessions are done in a closed room by trained female staff (where requested), with draping to expose only the area being treated. We explain each step before doing it so you never feel rushed or surprised.",
+        "We prioritise privacy, clear communication and professional draping. Once you see the process and pace, most initial awkwardness fades and sessions feel like any other medical treatment.",
     },
     {
-      question: "Is Brazilian laser safe for the intimate area?",
+      question: "Can I do laser during my periods?",
       answer:
-        "We avoid treating internal mucosal surfaces and focus on the external bikini region and surrounding hair. Settings are carefully chosen to respect the sensitivity of the area.",
+        "We usually avoid sessions during heavy flow for comfort and hygiene. If scheduling is tight, we can sometimes treat carefully with a tampon or cup, but we plan this together.",
     },
     {
-      question: "Can I do laser if I have active infection or rash?",
+      question: "Does bikini laser affect fertility or internal organs?",
       answer:
-        "If there is any active infection, rash, or broken skin, we will first treat that and postpone laser. It's important the skin is intact for safe treatment.",
+        "No. The laser targets superficial hair follicles only and does not penetrate to reproductive organs. Safety checks focus on skin, pigment and hair, not internal structures.",
     },
     {
-      question: "Do I need to stop sexual activity after the session?",
+      question: "Should I wax or shave before bikini laser?",
       answer:
-        "We usually advise avoiding sexual activity for 24 hours after treatment to minimise friction and irritation on freshly treated skin.",
+        "Shaving is preferred. Waxing removes the hair root, reducing laser targets. We give clear shaving instructions so stubble length is ideal for each appointment.",
+    },
+    {
+      question: "Will I still need any hair removal later?",
+      answer:
+        "Some fine or light strands may remain, but overall density usually drops a lot. Many people only need occasional trimming or infrequent touch-ups instead of frequent waxing.",
     },
   ],
 };
-

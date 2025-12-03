@@ -3,69 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const backChestHairReductionContent: SubTreatmentContent = {
   hero: {
     title: "Back & Chest Hair Reduction",
-    tagline: "Confident in open collars",
+    tagline: "Cleaner torso, easier grooming",
     intro:
-      "Shirts that never unbutton fully, avoiding swimming pools, or feeling awkward in fitted T-shirts often has a simple reason: dense hair on the chest or back. Laser hair reduction here helps you feel more at ease in your own skin.",
+      "Back & Chest Hair Reduction is popular among men and some women who struggle with dense torso hair, ingrowns, sweat trapping and difficulty reaching these areas for regular grooming.",
   },
   quickStats: {
-    sessions: "6-8 sessions, 6-8 weeks apart",
-    duration: "30-60 mins per session",
-    downtime: "Warmth and redness for a few hours",
-    painLevel: "Firm snaps over wide areas",
+    sessions: "Commonly 6–8 sessions",
+    duration: "Each visit 30–60 minutes",
+    downtime: "Redness, warmth for hours",
+    painLevel: "Snapping heat, manageable",
   },
   overview:
-    "These areas often have thicker, darker hair and larger surface area, especially in men. Using powerful yet controlled settings, we gradually thin out density so hair becomes lighter, more spaced out, and easier to manage - or barely noticeable at all.",
+    "We treat upper and lower back, shoulders and chest using appropriate laser settings for thicker hair. Over sessions, hair density decreases, making hygiene, sports and aesthetics easier to manage.",
   isThisForYou: [
-    "You feel conscious taking off your shirt at the beach, gym, or spa",
-    "Back hair traps sweat and causes discomfort or body acne",
-    "Shaving the back is impractical and waxing is painful",
-    "You want a long-term way to reduce chest or back hair density",
-    "Your partner or you prefer a less hairy look without daily effort",
+    "Back or chest hair makes you conscious at pools, gyms or beach trips.",
+    "Ingrowns, boils or folliculitis flare on sweaty back or chest skin.",
+    "Shaving these areas is difficult and often leads to missed patches.",
+    "Waxing is painful and hard to maintain because of regrowth speed.",
+    "You want tidier torso hair for comfort rather than total smoothness.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Trimming & Skin Check",
+        title: "Examine density and skin",
         description:
-          "The back and chest are examined for moles, acne, or previous scars so we can work around sensitive spots. Hair is clipped or shaved short before the session. You'll be advised to avoid strong actives or sunburn on these areas beforehand.",
+          "We assess hair thickness, density, ingrowns and any active infections. Your occupation, sports, sweating patterns and shirt habits inform how we plan energy, spacing and aftercare.",
       },
       {
         phase: "during",
-        title: "Systematic Grid-Like Coverage",
+        title: "Treat torso in sections",
         description:
-          "You lie comfortably while the therapist moves the handpiece in a grid pattern across the chest or back. The sensation is of repeated hot snaps with a firm pressure from the applicator. Short breaks are offered as needed while we ensure no strip is missed.",
+          "Back and chest are shaved, cleaned and divided into zones. The laser passes systematically over each area with cooling, and we check sensation frequently because some sections are more sensitive than others.",
       },
       {
         phase: "after",
-        title: "Sweat, Shower & Gym Guidelines",
+        title: "Support healing and hygiene",
         description:
-          "We suggest skipping heavy workouts, very hot showers, and tight, synthetic fabrics for 24 hours to prevent irritation. A light, fragrance-free moisturiser and loose cotton clothing keep the skin calm while any redness settles.",
+          "We advise breathable fabrics, regular but gentle cleansing, skipping heavy oils and avoiding gym or swimming for a short period. Follow-ups track reduction and any folliculitis change.",
       },
     ],
   },
   results: {
     timeline:
-      "For many, hair becomes noticeably thinner and less dense after 3-4 sessions. By the end of a 6-8 session course, chest and back hair typically reduce to a much lighter, more manageable level, with occasional maintenance only if desired.",
+      "Most people notice less dense regrowth and easier hygiene after several sessions. Over a full course, hair usually becomes patchier and finer, with maintenance as needed for long-term comfort.",
     recovery:
-      "The area can feel warm or mildly sunburn-like for a few hours. Most people return to desk work the same day, avoiding only sweat-heavy activities and very hot water briefly.",
+      "Temporary redness, heat or mild soreness can last for several hours. Simple care, breathable clothing and avoiding heavy sweating soon after treatment help skin settle quickly.",
   },
   faqs: [
     {
-      question: "Can laser help with back acne linked to hair and sweat?",
+      question: "Is back and chest laser only for men?",
       answer:
-        "Reducing hair can reduce friction and sweat trapping, which may indirectly help body acne. If you have active acne, we can combine laser with targeted acne treatments for best results.",
+        "No. While many men seek torso laser, some women with hormonal or genetic chest or back hair also benefit. Plans are fully customised irrespective of gender.",
     },
     {
-      question: "Do I need someone to help me shave my back before sessions?",
+      question: "Can laser help with recurrent back acne?",
       answer:
-        "If shaving the back is difficult at home, we can trim or shave the area at the clinic before lasering. Just let us know when booking so we can allow enough time.",
+        "By reducing dense hair and friction, laser can indirectly help bacne in some people. We may still add separate acne treatments if active lesions or marks persist.",
     },
     {
-      question: "Will chest hair look patchy if I stop midway?",
+      question: "Do I need someone to help shave my back?",
       answer:
-        "If you discontinue early, there can be differences in density between treated and untreated areas. We therefore advise completing the planned course for a more even, natural-looking reduction.",
+        "Back shaving is tricky alone. You can get help at home or request in-clinic shaving before sessions. We only proceed once skin is clean and safely prepped.",
+    },
+    {
+      question: "Will torso laser affect my muscles or organs?",
+      answer:
+        "No. The laser energy stays superficial, targeting hair follicles in the skin only. It does not reach muscles, lungs or other internal organs beneath the treated area.",
+    },
+    {
+      question: "How long before beach holidays should I start?",
+      answer:
+        "Ideally a few months in advance so several sessions are completed and skin is stable. We also guide sun care so you can enjoy holidays without compromising results.",
     },
   ],
 };
-

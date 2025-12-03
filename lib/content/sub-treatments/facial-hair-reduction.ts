@@ -3,79 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const facialHairReductionContent: SubTreatmentContent = {
   hero: {
     title: "Facial Hair Reduction",
-    tagline: "Camera-ready, up close",
+    tagline: "Gentle control of facial growth",
     intro:
-      "Fine hair on the cheeks, darker growth on the jawline, or a faint beard-like shadow can make you reach for filters in every selfie. Facial laser hair reduction targets these areas so skin looks smoother in real life, not just on screen.",
+      "Facial Hair Reduction targets upper lip, chin, side-locks and jawline hair safely, especially for Indian skin prone to darkening with repeated threading, waxing or harsh hair-removal creams.",
   },
   quickStats: {
-    sessions: "6-8 sessions, 4-6 weeks apart",
-    duration: "20-40 mins per session",
-    downtime: "Mild redness for 1-4 hours",
-    painLevel: "Snaps + cool air sensation",
+    sessions: "Usually 6–8 primary sessions",
+    duration: "Each visit 15–30 minutes",
+    downtime: "Redness, mild bumps briefly",
+    painLevel: "Snaps and warmth, tolerable",
   },
   overview:
-    "Using diode and Alexandrite settings tuned to facial skin, we focus on the upper lip, chin, jawline, side-locks, or full lower face depending on your pattern. The aim is to gradually replace thick, coarse hair with minimal, lighter growth that doesn't catch the light or show in close-ups.",
+    "Using triple-wavelength diode settings suited for the face, we gradually thin facial hair while protecting surrounding skin. Sessions are short, spaced a few weeks apart and planned around work or social commitments.",
   isThisForYou: [
-    "You notice facial hair more in photos and harsh lighting",
-    "Threading or waxing leaves bumps or small cuts on your face",
-    "Makeup cakes over stubble or grows patchy quickly",
-    "Hormonal changes have increased hair along the jawline or chin",
-    "You want smoother skin without weekly parlour visits",
+    "You regularly thread or wax your upper lip, chin or side-locks.",
+    "Repeated parlour work has caused darkness or tiny bumps on your face.",
+    "Hormonal issues like PCOS have increased beard-like facial growth.",
+    "Hair shadow shows even after very close shaving or threading sessions.",
+    "You want smoother makeup application without constant regrowth.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Face Mapping & Shaving Instructions",
+        title: "Assess pattern and hormones",
         description:
-          "We decide exactly which facial zones to treat and which to leave natural, especially around the hairline and brows. You'll be advised whether to come shaved or if the team will clip hair at the clinic. Active acne or broken skin is noted so we can work around it safely.",
+          "We examine facial hair pattern, check for PCOS clues, ask about cycles, medicines and past parlour methods, then plan realistic reduction goals and shave or trim guidance specific to each zone.",
       },
       {
         phase: "during",
-        title: "Precision Facial Laser Session",
+        title: "Perform focused facial passes",
         description:
-          "After cleansing, protective eyewear is placed. Short laser pulses are delivered in rows along the treatment zones. You'll feel quick hot snaps with a blast of cold air or chilled tip immediately after each pulse. Smaller areas like upper lip are done in minutes; full lower face takes longer.",
+          "After shaving and gel application, the laser handpiece delivers controlled pulses across marked areas. We use conservative energies initially, especially around lip corners, jawline and sideburn junctions.",
       },
       {
         phase: "after",
-        title: "Redness, Cooling & Makeup Timing",
+        title: "Care for pigment-prone skin",
         description:
-          "A soothing gel or cream is applied. Most redness fades within a few hours, but we recommend waiting till the next morning before applying makeup on the treated areas. Gentle face wash and sunscreen are continued; harsh scrubs are avoided for a few days.",
+          "We apply soothing products, reinforce sunscreen and advise avoiding threading or waxing between sessions. Follow-ups track both hair reduction and any pigment changes so we can adjust settings early.",
       },
     ],
   },
   results: {
     timeline:
-      "Many people notice makeup gliding on more smoothly and less 'shadow' within 2-3 sessions. Over 6-8 sessions, coarse strands reduce significantly, and regrowth tends to be finer, slower, and less obvious on camera.",
+      "You may notice slower regrowth and softer stubble within a few sessions. Visible thinning and fewer coarse strands usually appear over four to eight sessions, especially when hormones are stable.",
     recovery:
-      "Apart from short-lived redness or mild swelling, there's usually nothing visible by the next day. You can work, attend classes, or step out as usual with sun protection.",
+      "Temporary redness, small bumps or mild swelling can appear for a few hours. Gentle moisturiser and strict sunscreen help them settle quickly without drawing attention.",
   },
   faqs: [
     {
-      question: "Will laser make my facial hair thicker if I stop?",
+      question: "Is laser safe for facial hair on women?",
       answer:
-        "No. Laser targets the root to weaken it; it does not stimulate new, thicker hair. If you stop midway, the hair that remains simply follows its natural pattern, usually finer than before.",
+        "Yes, when done with the right machine and settings. We take extra care with pigment-prone Indian skin and discuss hormone factors so expectations, timelines and maintenance needs stay realistic.",
     },
     {
-      question: "Can I do laser if I have PCOS or hormonal issues?",
+      question: "Will facial laser make hair thicker if I stop?",
       answer:
-        "Yes, but we'll factor hormones into your plan. Laser can still reduce visible hair, though you may need more sessions or occasional maintenance. We may also suggest seeing a gynecologist or endocrinologist for parallel hormonal management.",
+        "No. Laser targets roots; it does not stimulate new ones. If you stop midway, hair usually returns to its natural pattern over time, not thicker just because of treatment.",
     },
     {
-      question: "Is facial laser safe around the mouth and nose?",
+      question: "Can I continue threading between laser sessions?",
       answer:
-        "We protect your eyes with goggles and avoid going too close to sensitive mucosal surfaces. The upper lip, chin, and jawline can be treated safely with the right shielding and energy levels.",
+        "We prefer shaving or trimming. Threading and waxing remove roots, leaving less target for the laser. They also irritate facial skin, raising the risk of darkening, especially around the mouth.",
     },
     {
-      question: "Will there be a break-out after the session?",
+      question: "Does facial hair reduction help with ingrowns?",
       answer:
-        "Most people do not break out. If your skin is acne-prone, we'll choose soothing gels and non-comedogenic sunscreens and keep a close watch on your first few sessions.",
+        "Yes. As hair becomes finer and fewer follicles remain active, ingrowns and repeated bumps usually reduce, especially on the chin, jawline and sideburn areas that see frequent parlour work.",
     },
     {
-      question: "Can I still thread my eyebrows?",
+      question: "Can I do laser if I have active acne?",
       answer:
-        "Yes. We usually do not laser the brows, so you can continue threading or tweezing them as you prefer.",
+        "Mild acne is usually manageable with careful technique. For very inflamed acne, we may first calm breakouts or adjust areas treated to avoid unnecessary irritation on already angry spots.",
     },
   ],
 };
-

@@ -2,80 +2,79 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 
 export const handDecolleteRejuvenationContent: SubTreatmentContent = {
   hero: {
-    title: "Hand & Decollete Rejuvenation",
-    tagline: "Refresh what clothes can't hide",
+    title: "Hand & Décolleté Rejuvenation",
+    tagline: "Refresh hands, chest and glow",
     intro:
-      "Hands and the chest often reveal age before the face - sun spots, visible veins, fine lines and crepey skin. This treatment combines peels, fractional lasers, PRP/Profhilo, skin boosters and sometimes fillers to restore smoother texture, even tone and a softer, plumper look to these exposed areas.",
+      "This treatment improves thin, veiny hands and sun-damaged chest skin. We use peels, lasers, skin boosters, PRP and careful fillers where needed to restore smoother texture and healthier-looking tone in these often-neglected areas.",
   },
   quickStats: {
-    sessions: "3-4 skin sessions; 1-2 filler/booster sessions",
-    duration: "30-60 mins",
-    downtime: "Flaking/redness 3-7 days (depending on procedure)",
-    painLevel: "Tingling, heat & tiny pinpricks",
+    sessions: "Typically 3–5 treatment sessions",
+    duration: "Usually 30–60 minutes each",
+    downtime: "Redness, dots, possible bruises",
+    painLevel: "Numbing, stings, brief heat",
   },
   overview:
-    "For hands and decollete, we focus on reversing sun damage and boosting dermal support. Chemical peels and fractional lasers work on spots and texture, while PRP, Profhilo and skin boosters rehydrate and thicken the skin from within. Fillers can subtly mask prominent tendons or volume loss in very bony hands.",
+    "We treat pigment, crepe texture and volume loss using combinations of peels, laser toning, MNRF, PRP, boosters and fillers. Hands and chest then better match the fresher face you have worked on.",
   isThisForYou: [
-    "You notice sun spots and uneven tone on your hands or upper chest",
-    "Veins and tendons on the back of your hands look more pronounced than before",
-    "Necklines and the V of your chest look more wrinkled than your face",
-    "You feel self-conscious wearing sleeveless or low-neck outfits",
-    "You want your hands and decollete to match the age of your face",
+    "Your hands look older than your face because of veins and fine lines.",
+    "Sun exposure has left brown spots and roughness on chest or shoulders.",
+    "You feel conscious wearing sleeveless or low-neck outfits at events.",
+    "Your job or driving keeps these areas exposed to daily sunlight.",
+    "You want them to age more in sync with your face.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Surface vs structure mapping",
+        title: "Assess damage and priorities",
         description:
-          "We examine pigment, texture, thinning and volume loss on your hands and chest separately. Photos under normal and polarised light help map sun damage. Based on this, we plan the order of peels, lasers, PRP/Profhilo, skin boosters or fillers so that healing phases don't overlap too harshly.",
+          "We examine pigment, texture, veins and volume, ask about sun habits, driving and past treatments, then prioritise whether colour, crepe skin or hollowness bothers you most. This shapes which technologies we start with.",
       },
       {
         phase: "during",
-        title: "Peel, resurface, then replenish",
+        title: "Perform resurfacing and volumising",
         description:
-          "Mild-to-medium depth peels, fractional Erbium/CO2 or MNRF are used first to tackle spots and crepiness, creating a sensation of heat or prickling for a few minutes. PRP, Profhilo or skin boosters are injected as a grid of tiny blebs, and in selected patients, soft fillers are placed on the back of the hand to soften bony outlines and tendons.",
+          "Depending on plan, we may do peels, laser toning, MNRF, PRP or microdroplet boosters, and sometimes subtle fillers for hands. Numbing and cooling are used generously to keep these sensitive areas comfortable.",
       },
       {
         phase: "after",
-        title: "Short-term flaking, long-term gain",
+        title: "Support with ongoing protection",
         description:
-          "It's normal to see redness, dry patches and flaking or micro-crusting for a few days after peels or lasers. We give a simple routine with bland moisturisers, sun protection and clear 'do-not' rules. Hydration treatments continue to work silently over the next weeks as the skin thickens and brightens.",
+          "We emphasise daily sunscreen on hands and chest, plus simple habits like driving gloves or scarves. Maintenance sessions are planned based on how quickly pigment and crepe texture tend to return for you.",
       },
     ],
   },
   results: {
     timeline:
-      "Glow and brightness often improve after the first peel or laser session once flaking settles in 5-7 days. Texture and fine lines typically need 3-4 visits over a few months. Hydration and plumping from Profhilo, skin boosters or fillers become more obvious over 2-6 weeks and can last around a year.",
+      "Colour and glow often improve within a few weeks of starting. Texture, veins and hollowness usually need several months and multiple modalities before hands and chest look comfortably in sync with your face.",
     recovery:
-      "Hands and chest are easy to cover, but you should avoid intense sun, harsh detergents and heavy jewellery or tight straps while healing. Most daily activities can continue with some care.",
+      "Redness, dots, swelling or bruises may show for some days. Light clothing choices, moisturiser and sun protection usually hide or minimise these while deeper repair continues quietly.",
   },
   faqs: [
     {
-      question: "Will peels or lasers make my hands and chest more sensitive to sun?",
+      question: "Why do my hands age faster than my face?",
       answer:
-        "During the healing phase, the skin is more delicate, so strict sunscreen and covering up are important. Once healed, the new skin can actually handle sun better if you maintain good protection, because pigment and texture are more even.",
+        "Hands get constant sun, soap and movement, often without sunscreen or care, so veins, pigment and thinning show earlier. Treating them brings overall appearance back into balance with your facial work.",
     },
     {
-      question: "Can you treat prominent veins on the hands too?",
+      question: "Will fillers in hands feel artificial or lumpy?",
       answer:
-        "We don't directly remove veins, but by improving skin thickness and adding subtle volume with fillers or boosters, the veins can look less stark. In very prominent cases, we may recommend seeing a vascular specialist for additional options.",
+        "We use soft products, microdroplet placement and massage to spread filler evenly. Initial puffiness settles, and most people simply notice smoother backs of hands rather than any obvious implanted material.",
     },
     {
-      question: "How soon before a big event should I start?",
+      question: "Can I just do peels without injectables?",
       answer:
-        "If spots and texture are your main concern, it's best to start 2-3 months before a big event to allow for multiple sessions and full healing. For just hydration or mild plumping, a single Profhilo or booster session a few weeks before can still make a nice difference.",
+        "Yes, peels and lasers alone help colour and surface texture. However, pronounced hollowness or strong veins usually need boosters or fillers for best results; we explain pros and cons so you choose comfortably.",
     },
     {
-      question: "Will my hands look 'overdone' or swollen?",
+      question: "How soon after treatment can I drive?",
       answer:
-        "We favour subtle correction. The idea is not to make your hands look like someone else's, but to gently reduce bony prominence, soften lines and improve texture. We use light, spread-out filler and booster techniques to avoid a padded or 'pillowy' look.",
+        "You can usually drive immediately, though hands may feel tender for a day or two. We advise avoiding very heavy lifting or tight jewellery until swelling and soreness settle fully.",
     },
     {
-      question: "Do I need to change my manicure or jewellery habits?",
+      question: "Will these treatments stop new sun spots forming?",
       answer:
-        "Immediately after procedures, you'll need to avoid harsh chemicals, tight bangles and heavy rings for a few days. In the long term, using gloves for household chemicals and daily sunscreen is far more important than specific nail or jewellery choices.",
+        "No treatment can fully outrun ongoing sun exposure. Procedures clear existing damage; daily sunscreen, physical cover and occasional maintenance help slow new spots so they build more slowly over time.",
     },
   ],
 };
-

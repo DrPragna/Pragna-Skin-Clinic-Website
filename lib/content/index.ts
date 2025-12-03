@@ -18,6 +18,12 @@ import { TreatmentFamilyContent, SubTreatmentContent } from '@/lib/navigationDat
 import { laserHairReductionContent } from './treatment-families/laser-hair-reduction';
 import { acneAcneScarSolutionsContent } from './treatment-families/acne-acne-scar-solutions';
 import { antiAgeingTighteningContouringContent } from './treatment-families/anti-ageing-tightening-contouring';
+import { pigmentationTanningGlowContent } from './treatment-families/pigmentation-tanning-glow';
+import { advancedFacialsBoostersContent } from './treatment-families/advanced-facials-boosters';
+import { hairGrowthScalpTreatmentsFamilyContent } from './treatment-families/hair-growth-scalp-treatments';
+import { bodyContouringFatReductionFamilyContent } from './treatment-families/body-contouring-fat-reduction';
+import { stretchMarkBodyScarRevisionFamilyContent } from './treatment-families/stretch-mark-body-scar-revision';
+import { wellnessIvDripsCorrectiveFamilyContent } from './treatment-families/wellness-iv-drips-corrective';
 
 // ============================================
 // SUB-TREATMENT CONTENT IMPORTS
@@ -45,6 +51,44 @@ import { neckLinesTreatmentContent } from './sub-treatments/neck-lines-treatment
 import { underEyeRejuvenationContent } from './sub-treatments/under-eye-rejuvenation';
 import { handDecolleteRejuvenationContent } from './sub-treatments/hand-decollete-rejuvenation';
 
+// Pigmentation, Tanning & Glow family
+import { pigmentationDarkSpotTreatmentContent } from './sub-treatments/pigmentation-dark-spot-treatment';
+import { melasmaTreatmentContent } from './sub-treatments/melasma-treatment';
+import { tanRemovalBrighteningContent } from './sub-treatments/tan-removal-brightening';
+import { glowRadianceFacialsContent } from './sub-treatments/glow-radiance-facials';
+
+// Advanced Facials, Boosters & Skin Maintenance family
+import { signatureMedifacialsContent } from './sub-treatments/signature-medifacials';
+import { hydratingGlowFacialsContent } from './sub-treatments/hydrating-glow-facials';
+import { chemicalPeelsContent } from './sub-treatments/chemical-peels';
+import { skinBoostersProfhiloContent } from './sub-treatments/skin-boosters-profhilo';
+import { personalisedSkinCarePlanContent } from './sub-treatments/personalised-skin-care-plan';
+
+// Hair Growth & Scalp Treatments family
+import { hairFallThinningTreatmentContent } from './sub-treatments/hair-fall-thinning-treatment';
+import { prpGfcHairGrowthContent } from './sub-treatments/prp-gfc-hair-growth';
+import { mesotherapyHairContent } from './sub-treatments/mesotherapy-hair';
+import { lowLevelLightTherapyHairContent } from './sub-treatments/low-level-light-therapy-hair';
+
+// Body Contouring & Fat Reduction family
+import { tummyLoveHandlesShapingContent } from './sub-treatments/tummy-love-handles-shaping';
+import { thighHipContouringContent } from './sub-treatments/thigh-hip-contouring';
+import { armFatReductionContent } from './sub-treatments/arm-fat-reduction';
+import { doubleChinFatReductionContent } from './sub-treatments/double-chin-fat-reduction';
+import { postPregnancyBodyShapingContent } from './sub-treatments/post-pregnancy-body-shaping';
+
+// Stretch Mark & Body Scar Revision family
+import { stretchMarkReductionContent } from './sub-treatments/stretch-mark-reduction';
+import { cSectionSurgeryScarRevisionContent } from './sub-treatments/c-section-surgery-scar-revision';
+import { bodyAcneBodyScarTreatmentContent } from './sub-treatments/body-acne-body-scar-treatment';
+
+// Wellness, IV Drips & Corrective Procedures family
+import { ivDripTherapyContent } from './sub-treatments/iv-drip-therapy';
+import { mommyMakeoverProgramContent } from './sub-treatments/mommy-makeover-program';
+import { excessSweatingTreatmentContent } from './sub-treatments/excess-sweating-treatment';
+import { moleWartSkinTagRemovalContent } from './sub-treatments/mole-wart-skin-tag-removal';
+import { tattooRemovalContent } from './sub-treatments/tattoo-removal';
+
 // ============================================
 // CONTENT MAPS
 // ============================================
@@ -57,13 +101,12 @@ export const treatmentFamilyContentMap: Record<string, TreatmentFamilyContent> =
   'laser-hair-reduction': laserHairReductionContent,
   'acne-acne-scar-solutions': acneAcneScarSolutionsContent,
   'anti-ageing-tightening-contouring': antiAgeingTighteningContouringContent,
-  // Add more as content files are created:
-  // 'pigmentation-tanning-glow': pigmentationTanningGlowContent,
-  // 'advanced-facials-boosters': advancedFacialsBoostersContent,
-  // 'hair-growth-scalp-treatments': hairGrowthScalpTreatmentsContent,
-  // 'body-contouring-fat-reduction': bodyContouringFatReductionContent,
-  // 'stretch-mark-body-scar-revision': stretchMarkBodyScarRevisionContent,
-  // 'wellness-iv-drips-corrective': wellnessIvDripsCorrectiveContent,
+  'pigmentation-tanning-glow': pigmentationTanningGlowContent,
+  'advanced-facials-boosters': advancedFacialsBoostersContent,
+  'hair-growth-scalp-treatments': hairGrowthScalpTreatmentsFamilyContent,
+  'body-contouring-fat-reduction': bodyContouringFatReductionFamilyContent,
+  'stretch-mark-body-scar-revision': stretchMarkBodyScarRevisionFamilyContent,
+  'wellness-iv-drips-corrective': wellnessIvDripsCorrectiveFamilyContent,
 };
 
 /**
@@ -94,7 +137,43 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
   'under-eye-rejuvenation': underEyeRejuvenationContent,
   'hand-decollete-rejuvenation': handDecolleteRejuvenationContent,
   
-  // Add more as content files are created...
+  // Pigmentation, Tanning & Glow
+  'pigmentation-dark-spot-treatment': pigmentationDarkSpotTreatmentContent,
+  'melasma-treatment': melasmaTreatmentContent,
+  'tan-removal-brightening': tanRemovalBrighteningContent,
+  'glow-radiance-facials': glowRadianceFacialsContent,
+  
+  // Advanced Facials, Boosters & Skin Maintenance
+  'signature-medifacials': signatureMedifacialsContent,
+  'hydrating-glow-facials': hydratingGlowFacialsContent,
+  'chemical-peels': chemicalPeelsContent,
+  'skin-boosters-profhilo': skinBoostersProfhiloContent,
+  'personalised-skin-care-plan': personalisedSkinCarePlanContent,
+  
+  // Hair Growth & Scalp Treatments
+  'hair-fall-thinning-treatment': hairFallThinningTreatmentContent,
+  'prp-gfc-hair-growth': prpGfcHairGrowthContent,
+  'mesotherapy-hair': mesotherapyHairContent,
+  'low-level-light-therapy-hair': lowLevelLightTherapyHairContent,
+  
+  // Body Contouring & Fat Reduction
+  'tummy-love-handles-shaping': tummyLoveHandlesShapingContent,
+  'thigh-hip-contouring': thighHipContouringContent,
+  'arm-fat-reduction': armFatReductionContent,
+  'double-chin-fat-reduction': doubleChinFatReductionContent,
+  'post-pregnancy-body-shaping': postPregnancyBodyShapingContent,
+  
+  // Stretch Mark & Body Scar Revision
+  'stretch-mark-reduction': stretchMarkReductionContent,
+  'c-section-surgery-scar-revision': cSectionSurgeryScarRevisionContent,
+  'body-acne-body-scar-treatment': bodyAcneBodyScarTreatmentContent,
+  
+  // Wellness, IV Drips & Corrective Procedures
+  'iv-drip-therapy': ivDripTherapyContent,
+  'mommy-makeover-program': mommyMakeoverProgramContent,
+  'excess-sweating-treatment': excessSweatingTreatmentContent,
+  'mole-wart-skin-tag-removal': moleWartSkinTagRemovalContent,
+  'tattoo-removal': tattooRemovalContent,
 };
 
 // ============================================

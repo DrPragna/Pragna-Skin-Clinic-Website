@@ -3,79 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const faceNeckSkinTighteningContent: SubTreatmentContent = {
   hero: {
     title: "Face & Neck Skin Tightening",
-    tagline: "Lift without surgery",
+    tagline: "Lift laxity without surgery",
     intro:
-      "If your cheeks feel heavier, jawline less defined and neck skin looser than before, non-surgical tightening can gently 'shrink-wrap' the deeper support layers. Using HIFU, radiofrequency and MNRF, we stimulate collagen so the lower face and neck look firmer over the next few months.",
+      "This treatment uses HIFU and radiofrequency tightening to target mild to moderate sagging of cheeks, jawline and neck. It gently stimulates collagen, giving a firmer outline without cuts, stitches or time in an operating theatre.",
   },
   quickStats: {
-    sessions: "1-3 sessions, yearly touch-ups",
-    duration: "45-75 mins (area dependent)",
-    downtime: "Mild redness; usually 0-2 days",
-    painLevel: "Deep warmth & tingling",
+    sessions: "Often 1–3 sessions planned",
+    duration: "Each sitting 45–90 minutes",
+    downtime: "Warmth, tightness for days",
+    painLevel: "Heat, brief sharp zaps",
   },
   overview:
-    "HIFU (high intensity focused ultrasound) targets deeper layers close to the SMAS plane, while radiofrequency and MNRF work in the dermis. Together they trigger new collagen and elastin, tightening skin on the cheeks, jawline and neck without cuts, stitches or long recovery.",
+    "Focused ultrasound and radiofrequency deliver energy beneath the skin to tighten collagen and support structures. Suitable candidates see subtle lifting of jawline, nasolabial area and neck over time, especially when combined with skincare and lifestyle changes.",
   isThisForYou: [
-    "You notice jowls or a soft jawline when you look at side-profile photos",
-    "Your neck skin looks crinkled or loose compared to your face",
-    "You're not ready for surgery but want some lift and firmness",
-    "You're okay waiting a few months for results if it means no scars",
-    "You prefer treatments that can be spaced out rather than monthly visits",
+    "Your lower face looks softer, with jowls forming near the mouth and chin.",
+    "Neck skin feels loose or creased, especially in side-profile photos and video calls.",
+    "You want tightening but are not ready for threads or surgical lifting yet.",
+    "Weight changes or pregnancies have softened your once-sharp jawline and neck angle.",
+    "You prefer gradual improvement that colleagues notice as 'healthier', not drama.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Assessing laxity & planning depth",
+        title: "Evaluate laxity and suitability",
         description:
-          "We examine your face and neck in upright position, looking at cheek descent, jowls, double chin and neck bands. Based on skin thickness and degree of laxity, we decide whether to rely more on HIFU, radiofrequency, MNRF or a staged combination. Photos are taken so we can track progress objectively over months.",
+          "We check how much skin and deeper tissue have loosened, feel fat pads and muscles, and review medical history. This helps decide whether HIFU, radiofrequency or a combination will be worthwhile or if other options are better.",
       },
       {
         phase: "during",
-        title: "Delivering focused energy",
+        title: "Deliver focused energy lines",
         description:
-          "With HIFU, you'll feel short bursts of deep, hot pinpoints as the ultrasound focuses under the skin. Radiofrequency and MNRF feel like a series of warm pricks or a heated stamping sensation. A cooling gel, numbing cream or pain-control plan is used in sensitive areas. Sessions can take 45-75 minutes depending on zones treated.",
+          "We mark treatment zones, apply gel and deliver energy in precise lines and depths. You feel heat and zaps, more over bony areas. Settings are adjusted to balance effectiveness with comfort and safety.",
       },
       {
         phase: "after",
-        title: "Letting collagen do the work",
+        title: "Monitor lift over months",
         description:
-          "The skin may look slightly pink and feel tight or tender for a day or two. Most people resume normal work the same or next day. Over the next 8-12 weeks, new collagen fibres form and contract, leading to a gradually firmer contour. We review you periodically and plan if any second or third session is needed.",
+          "There is usually little immediate change; collagen tightening shows gradually. We review photos at three to six months, decide if a top-up pass is useful and advise on skincare and lifestyle to prolong results.",
       },
     ],
   },
   results: {
     timeline:
-      "A mild 'tight' feeling is common immediately, but the real lift develops slowly as collagen remodels, usually from week 4 onwards. Results typically continue to improve for up to 3-6 months after a HIFU or RF course and can be maintained with yearly top-up sessions.",
+      "Tightening is typically most visible between three and six months as collagen remodels. Effects can last a year or more, especially when weight and lifestyle stay stable and sun care remains consistent.",
     recovery:
-      "Apart from short-lived redness or tenderness, there's usually little to show on the surface. Occasional mild swelling or temporary numb patches can happen and generally settle within days.",
+      "You may feel deep ache or tightness for a few days. Visible redness is usually mild; occasional swelling or tenderness settles with simple measures and rarely interferes with regular routines.",
   },
   faqs: [
     {
-      question: "Will skin tightening replace a surgical facelift?",
+      question: "Am I too young for skin tightening?",
       answer:
-        "Non-surgical tightening is best for mild-to-moderate laxity. It won't replicate the effect of a surgical facelift in very advanced sagging, but it can delay or reduce the need for surgery and keep your tissues in better shape in the meantime.",
+        "Suitability depends more on laxity, genetics and weight changes than age alone. We are honest if your skin is too firm for meaningful benefit and suggest simpler prevention-focused plans instead.",
     },
     {
-      question: "How soon can I do this before a big event?",
+      question: "Can tightening replace a surgical facelift?",
       answer:
-        "Because results build slowly, it's ideal to plan your main tightening session at least 2-3 months before an important event. That gives your collagen time to respond and any transient redness or tenderness to settle fully.",
+        "Non-surgical tightening helps early to moderate laxity, not very heavy jowls or large neck folds. We explain realistic lift expectations and sometimes recommend surgical opinions for advanced cases.",
     },
     {
-      question: "Does HIFU or RF thin the face too much?",
+      question: "How many tightening sessions will I need?",
       answer:
-        "Used correctly, the goal is to tighten supporting structures without hollowing you out. We avoid over-treating already thin areas and are especially careful in patients with very low body fat so we don't create a gaunt look.",
+        "Many patients do a single comprehensive session and review at six months. Others with more laxity may benefit from another pass or combining with MNRF or fillers for better support.",
     },
     {
-      question: "Can I combine tightening with fillers or Botox?",
+      question: "Is HIFU safe for my skin tone?",
       answer:
-        "Yes, and combinations are common. Tightening gives structural support, while fillers restore lost volume and Botox relaxes overactive muscles. We usually do energy-based tightening first and then layer injectables after initial healing for best control over the final shape.",
+        "HIFU targets deeper tissue, away from pigment cells, so it suits many skin tones. We still choose parameters carefully, avoid over-treatment and provide clear aftercare instructions to minimise unnecessary risk.",
     },
     {
-      question: "Is one session enough for life?",
+      question: "Can I work the next day after treatment?",
       answer:
-        "Your skin will keep ageing. A well-done tightening session can give results for a year or more, but gravity, lifestyle and genetics continue their work. Many people repeat a light session every 12-18 months to maintain firmness.",
+        "Most people return to work the same or next day. You might feel deep ache on chewing or touching treated areas, but this usually settles without stopping regular office routines.",
     },
   ],
 };
-

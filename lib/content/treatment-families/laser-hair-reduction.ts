@@ -2,67 +2,75 @@ import { TreatmentFamilyContent } from "@/lib/navigationData";
 
 export const laserHairReductionContent: TreatmentFamilyContent = {
   hero: {
+    eyebrow: "HAIR • LASER CARE",
     title: "Laser Hair Reduction",
-    subtitle: "Less hair, less effort",
+    subtitle: "Long-term relief from constant hair removal",
     intro:
-      "Shaving every other day, painful waxing sessions, ingrown bumps under tight clothes - unwanted hair can feel like a full-time chore. Laser hair reduction uses focused light to target the root of the hair so growth becomes finer, slower, and dramatically reduced over time.",
-    image: "https://images.pexels.com/photos/4426559/pexels-photo-4426559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Clean, medical-grade aesthetic, woman with smooth skin, white background
+      "Unwanted facial and body hair can affect confidence, comfort and time. This family uses triple-wavelength diode lasers, safe settings for Indian skin and spaced sessions to thin growth, reduce ingrowns and make everyday grooming easier, smoother and more predictable long term.",
   },
   trustIndicators: [
-    { value: "Diode + Alexandrite", label: "Advanced laser platforms used" },
-    { value: "Face to Full Body", label: "Multiple areas treated in one plan" },
-    { value: "Doctor-Supervised", label: "Parameters set by dermatologist" },
+    {
+      value: "Triple wave",
+      label: "Advanced diode system",
+    },
+    {
+      value: "All tones",
+      label: "Indian-skin protocols",
+    },
+    {
+      value: "Doctor-led",
+      label: "Safety-first planning",
+    },
   ],
   howItWorks: {
     description:
-      "Laser hair reduction directs a beam of light at the pigment inside the hair follicle. This light converts to heat and weakens the follicle without damaging the surrounding skin. Because hair grows in cycles, a series of sessions is needed to catch hair in its active growth phase.",
+      "Laser light targets pigment in the hair root, heating and disabling follicles in their active growth phase. With each session, many hairs grow back finer and fewer, giving long-term reduction while your skin stays protected with cooling and carefully chosen energy levels.",
     steps: [
       {
-        title: "Skin & Hair Mapping",
+        title: "Map hair, skin and goals",
         text:
-          "First, your dermatologist looks at your skin tone, hair thickness, growth pattern, and any history of tanning or sensitivity. Based on this, they choose appropriate settings on diode and Alexandrite platforms and plan which areas to treat in each session.",
+          "We examine hair thickness, density and growth pattern across each area, note your skin tone and sensitivity, review waxing or threading history and discuss hormones or PCOS if relevant, so we know what level of reduction is realistic for your body.",
         icon: "consultation",
       },
       {
-        title: "Laser Session",
+        title: "Perform sessions with cooling",
         text:
-          "A cooling gel may be applied, then the laser handpiece is moved across the area in passes. You'll feel quick, hot 'snaps' like a rubber band on the skin, balanced by cooling from the device. Different areas take different times - from a few minutes to nearly an hour.",
+          "A patch test checks your comfort and response. During each session, the triple-wavelength diode glides over gel-coated skin, delivering controlled light pulses with in-built cooling so the sensation feels like quick snaps and heat, not burning.",
         icon: "treatment",
       },
       {
-        title: "Hair Shedding & Follow-Up",
+        title: "Space sessions for best cycles",
         text:
-          "Over the next 1-2 weeks, treated hair sheds from the follicles. Regrowth that appears is usually finer and slower. Sessions are spaced several weeks apart and parameters are adjusted as hair reduces, until you reach long-term reduction.",
+          "Sessions are usually spaced four to eight weeks apart depending on area. Over time, coarse hairs reduce, finer regrowth appears slowly and many follicles become inactive. We then move you to maintenance as results stabilise.",
         icon: "results",
       },
     ],
   },
   whoIsThisFor: {
-    headline: "Ideal for you if...",
+    headline: "Who this family helps",
     list: [
-      "You're tired of waxing appointments, threading, or daily shaving",
-      "Ingrown hairs, razor bumps, or underarm shadow make you self-conscious",
-      "You want smooth skin for the long term, not just for a few days",
-      "Different body areas have patchy or fast regrowth that's hard to manage",
-      "You'd like one plan that covers multiple areas instead of random sessions",
+      "You are tired of repeated waxing, threading or shaving and the rashes that follow every visit.",
+      "You get bumps, ingrown hairs or darkness on underarms, bikini line or beard-like facial areas.",
+      "PCOS or hormonal changes have increased facial or body hair that feels difficult to manage.",
+      "You want cleaner arms, legs or back for personal comfort, photos or sports without constant upkeep.",
+      "You prefer doctor-supervised laser over parlour experiments or unregulated home devices.",
     ],
-    image: "https://images.pexels.com/photos/3762873/pexels-photo-3762873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Confident, clean aesthetic, showing smooth skin results naturally
   },
   whyPragna: [
     {
-      title: "Lasers Chosen for Indian Skin",
+      title: "Triple-wavelength diode technology",
       description:
-        "We work with diode and Alexandrite platforms that can be tuned for higher melanin skin, helping reduce hair while respecting your skin tone and history of tanning.",
+        "We use advanced triple-wavelength diode systems that target different follicle depths effectively. Settings, passes and energy levels are customised for Indian skin tones to maximise hair reduction while prioritising comfort and safety.",
     },
     {
-      title: "Doctor-Planned, Technician-Delivered",
+      title: "Hormone-aware treatment planning",
       description:
-        "A dermatologist first assesses you and sets the protocol. Trained therapists then carry out sessions under supervision so energy levels and passes stay within safe, effective ranges.",
+        "For PCOS or other hormonal patterns, we plan realistic expectations, possible maintenance and, when needed, coordinate with gynaecologists or endocrinologists so your laser sessions work alongside proper medical management.",
     },
     {
-      title: "From Single Area to Full Body",
+      title: "Protocols for each body area",
       description:
-        "Whether you only want upper lip and chin or are ready for full-body sessions, plans are built around your comfort, budget, and schedule so you can phase treatments in a practical way.",
+        "Face, bikini, underarms, back and limbs all behave differently. We adjust energy, overlap, cooling and frequency for every zone instead of using one fixed setting head-to-toe, aiming for effective yet skin-friendly results.",
     },
   ],
   relatedConditionSlugs: ["unwanted-facial-body-hair"],

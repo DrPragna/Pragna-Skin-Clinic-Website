@@ -3,79 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const underEyeRejuvenationContent: SubTreatmentContent = {
   hero: {
     title: "Under-Eye Rejuvenation",
-    tagline: "Brighten tired eyes",
+    tagline: "Brighten tired under-eyes",
     intro:
-      "Hollows, dark circles and fine lines under the eyes can make you look exhausted even when you're not. Under-eye rejuvenation blends dermal fillers, PRP, Profhilo, chemical peels and skin boosters to improve volume, colour and texture in this delicate area with a soft, natural finish.",
+      "This treatment addresses hollows, dark circles and fine lines around the eyes. We combine skincare, peels, under-eye PRP or skin boosters and carefully placed fillers, when appropriate, to refresh without changing your natural eye shape.",
   },
   quickStats: {
-    sessions: "1-2 filler sessions; 3-4 PRP/booster sessions",
-    duration: "30-45 mins",
-    downtime: "Mild swelling/bruising 2-5 days",
-    painLevel: "Numbing cream + brief stings",
+    sessions: "Usually 3–4 treatment visits",
+    duration: "Each session 30–45 minutes",
+    downtime: "Mild swelling, possible bruises",
+    painLevel: "Numbing, tiny pricks only",
   },
   overview:
-    "Because dark circles come from multiple factors - pigment, vessels, hollows, thin skin - we rarely use just one tool. Carefully placed tear trough fillers support the under-eye, while PRP, Profhilo, skin boosters and peels work on colour and crepey texture for a more rested look.",
+    "We analyse pigment, vessels, fat pads and bone, then choose a mix of topical lightening, peels, PRP, skin boosters or tear-trough fillers. The plan aims for rested eyes, not unrealistically white under-eyes.",
   isThisForYou: [
-    "You're told you look tired even after good sleep",
-    "Concealer collects in fine lines or still doesn't hide the darkness",
-    "You see a groove between your lower eyelid and cheek (tear trough)",
-    "Under-eye photos highlight hollows, shadows or a mix of both",
-    "You want improvement without changing your eye shape",
+    "People ask if you are tired even after full nights of sleep.",
+    "Concealer either creases or turns ashy over your dark circles.",
+    "You notice hollows or tear troughs making eyes look sunken or sad.",
+    "Family history or allergies have deepened under-eye concerns over years.",
+    "You want improvement but feel nervous about injections near eyes.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Understanding your dark circles",
+        title: "Understand cause mix clearly",
         description:
-          "We check for pigment, visible vessels, hollows, allergies and lifestyle factors like sleep and screen time. Photos and tilting your head under different lights help us see where the shadow actually comes from. Based on this, we decide how much to focus on filler, PRP/Profhilo, peels or a combination.",
+          "We check skin thickness, pigment, veins, fat pads, bone support and habits like rubbing or screens at night. This helps decide whether skincare, PRP, boosters, fillers or combination will actually address your main concern.",
       },
       {
         phase: "during",
-        title: "Gentle work in a delicate area",
+        title: "Perform chosen under-eye procedures",
         description:
-          "After numbing, tear trough filler is placed with a blunt cannula or fine needle along the bone to avoid lumps. PRP or Profhilo may be injected as tiny blebs in the under-eye skin, and mild peels may be used on the surrounding area to brighten pigment. Expect a feeling of pressure, brief stinging and watery eyes during the process.",
+          "Depending on plan, we may apply peels, inject PRP or boosters in microdroplets, or place tiny amounts of filler deeply using cannula. Numbing cream and slow technique keep discomfort limited and controlled.",
       },
       {
         phase: "after",
-        title: "Swelling down, glow up",
+        title: "Review symmetry and safety",
         description:
-          "Mild puffiness, small bumps and occasionally a bruise are common and usually settle within a few days. Cold compresses and sleeping slightly elevated help. We guide you on when to restart actives like retinol and when it's safe to resume full makeup under the eyes.",
+          "We recheck contour, swelling and bruising over days to weeks, give clear red-flag instructions and adjust later sessions. Small staging often works better than aggressive filling in one sitting around the eyes.",
       },
     ],
   },
   results: {
     timeline:
-      "Fillers give an immediate lift to hollows, with the result refining over 1-2 weeks as swelling resolves. PRP and Profhilo work more slowly; most people notice better glow and smoother texture after 2-3 sessions, spaced 3-4 weeks apart, with continued improvement over several months.",
+      "Skin-quality changes from PRP and boosters appear over one to three months. Filler effects are immediate but refine as swelling settles, usually looking most natural by two to four weeks.",
     recovery:
-      "Plan for 2-5 days of 'aware but not obvious' downtime where you may prefer glasses or light makeup. Most people are comfortable returning to work the next day, but we suggest avoiding big events for a week.",
+      "Temporary swelling, bruises or lumpiness can occur, especially after fillers. We show massage, cold compress and sleeping-position tips, and advise when to seek urgent review, though serious issues are rare.",
   },
   faqs: [
     {
-      question: "Will under-eye fillers make my eyes look puffy?",
+      question: "Are my dark circles only from lack of sleep?",
       answer:
-        "When used conservatively and placed at the correct depth, fillers support the hollow rather than creating a 'pillow'. We avoid overfilling, especially if you have existing under-eye puffiness or fluid retention, and may favour PRP/Profhilo in such cases.",
+        "Sleep helps, but genetics, allergies, rubbing, eye strain, bone structure and pigment also matter. We explain which components you have so expectations and treatment choices stay grounded in reality.",
     },
     {
-      question: "Can treatment remove darkness completely?",
+      question: "Is under-eye filler very risky or scary?",
       answer:
-        "Dark circles usually have multiple causes - pigment, thin skin, vessels, hollows and lifestyle factors. We can significantly improve them, but completely erasing darkness is not always realistic. Sun protection, sleep, diet and allergy control all play a supporting role.",
+        "The area is delicate, so we use conservative product amounts, cannulas when suitable and careful technique. Complications are uncommon, and you receive clear guidance on what is normal versus when to call.",
     },
     {
-      question: "How long do under-eye fillers last?",
+      question: "Can creams alone fix under-eye hollows?",
       answer:
-        "Most under-eye fillers last 9-12 months, sometimes longer, as this area has less movement than the lips. Skin quality treatments like PRP or Profhilo may need maintenance 1-2 times a year to keep the glow and firmness.",
+        "Creams improve texture and fine lines but cannot replace missing volume or bone support. For true hollows, injectables like fillers or boosters often give more noticeable, structural change than skincare alone.",
     },
     {
-      question: "Is under-eye treatment safe for all skin tones?",
+      question: "How long does under-eye rejuvenation last?",
       answer:
-        "Yes, but product choice and peel strength are adjusted carefully for Indian and deeper skin tones to avoid post-inflammatory pigmentation. We choose gentle protocols and build up gradually instead of doing very strong peels in one shot.",
+        "PRP and boosters may need refreshers every six to twelve months. Filler support often lasts a year or more, depending on product, lifestyle and how expressive your eye area tends to be.",
     },
     {
-      question: "Will I look 'different' after treatment?",
+      question: "Can I do this before a big function?",
       answer:
-        "The intention is that you look like yourself on a good day - more rested, less hollow, with smoother skin. We respect your natural eye shape and focus on softening tiredness, not changing your features.",
+        "We like a safety window, especially for fillers. Ideally, plan several weeks before major events so any swelling or bruises settle and results look natural in photos and real life.",
     },
   ],
 };
-

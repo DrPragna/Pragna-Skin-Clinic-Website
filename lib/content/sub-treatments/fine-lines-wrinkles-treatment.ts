@@ -3,79 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const fineLinesWrinklesTreatmentContent: SubTreatmentContent = {
   hero: {
     title: "Fine Lines & Wrinkles Treatment",
-    tagline: "Soften, don't freeze",
+    tagline: "Soften lines, keep expression",
     intro:
-      "Forehead lines, frown lines and crow's feet can make you look angry or tired even on a good day. Our fine lines and wrinkle protocols use targeted Botox, PRP/GFC, fractional lasers and skin boosters to relax harsh lines, support collagen and smooth the skin surface without wiping out your expressions.",
+      "This treatment targets forehead lines, frown lines and crow's feet using Botox and skin-quality procedures, aiming for smoother skin that still moves naturally when you smile, speak or raise your eyebrows.",
   },
   quickStats: {
-    sessions: "1-3 core sessions, then maintenance",
-    duration: "30-45 mins",
-    downtime: "Minimal; 0-3 days depending on procedure",
-    painLevel: "Quick pricks & brief warmth",
+    sessions: "Every 3–6 months typically",
+    duration: "Session time about 15–30 minutes",
+    downtime: "Pinpricks, small bumps briefly",
+    painLevel: "Fine needles, tolerable sting",
   },
   overview:
-    "Rather than relying on a single tool, we combine small-dose Botox for expression lines with collagen-building options like fractional Erbium/CO2, MNRF and PRP or GFC. This softens etched-in wrinkles and improves skin quality, so your skin moves naturally but doesn't crease as deeply.",
+    "We use tiny doses of botulinum toxin to relax overactive muscles, often combined with peels, laser toning or MNRF for texture. The goal is softer lines, not a frozen look, so you still recognise your own expressions.",
   isThisForYou: [
-    "You see lines on your forehead or between your brows even when you're not frowning",
-    "Your eye makeup sits in the fine lines around your eyes",
-    "Photos highlight lines around your mouth or on your cheeks when you smile",
-    "You want smoother skin but are scared of looking 'frozen' or overdone",
-    "You're okay with subtle change over weeks, not an overnight transformation",
+    "Your forehead lines deepen even when your face is otherwise relaxed.",
+    "Crow's feet show sharply in every photograph, even with soft lighting.",
+    "Frown lines make you look upset or tired, even on good days.",
+    "You want to try Botox but are worried about looking frozen.",
+    "You prefer subtle change that friends notice as freshness, not procedure talk.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Planning subtle change",
+        title: "Map lines and movement",
         description:
-          "We map your wrinkle patterns at rest and in expression and discuss what you like and dislike about your face. Depending on depth and location, we may recommend a small-dose Botox plan, fractional resurfacing, PRP/GFC or a mix. Blood thinners and important events are considered while scheduling.",
+          "We study your face at rest and in expression, mark muscle pull patterns, review photos and discuss concerns and events. This helps decide doses, areas and whether to combine with peels or collagen treatments.",
       },
       {
         phase: "during",
-        title: "Targeting lines at different depths",
+        title: "Place precise micro-doses",
         description:
-          "Expression lines are treated with tiny Botox injections placed strategically in the forehead, frown area or crow's feet. Deeper etched lines may get fractional laser or MNRF, which feels like warm pinpricks. PRP or GFC can be injected or combined with microneedling to boost collagen in the treated zones.",
+          "Fine needles place tiny toxin doses into selected muscles. Most people feel brief pinpricks. We keep you upright afterward, check symmetry and adjust future plans based on how your expressions settle over two weeks.",
       },
       {
         phase: "after",
-        title: "Gradual smoothing & upkeep",
+        title: "Review effect and refine",
         description:
-          "Injection marks and redness from lasers or MNRF usually settle within a few hours to a couple of days. We guide you on sun protection, makeup timing and skincare actives. Botox settles over 5-7 days; collagen-building procedures show clearer improvement over 4-12 weeks.",
+          "At follow-up, we compare before–after photos, check how lines and brows look and discuss how you felt during the cycle. Future sessions can tweak strength, areas or add skin-quality work for better texture.",
       },
     ],
   },
   results: {
     timeline:
-      "Botox-like wrinkle relaxing starts showing within 3-7 days, with peak effect by 2 weeks. Collagen-driven treatments such as PRP, GFC and fractional lasers build results slowly - typically smoother texture and softer lines over 6-12 weeks, improving further with follow-up sessions.",
+      "Lines usually soften over three to seven days, with peak effect around two weeks. Results generally last three to six months, depending on dose, muscle strength, metabolism and how expressive your face normally is.",
     recovery:
-      "Most people return to regular routine the same day. Fractional or MNRF sessions may cause mild redness or tiny grid marks for 2-3 days, so it's better to avoid big events during that window.",
+      "Small bumps and redness at injection points usually settle within an hour. Bruises are uncommon but possible; simple cover-up makeup can be used after twenty-four hours if needed.",
   },
   faqs: [
     {
-      question: "Can I still move my face after treating my wrinkles?",
+      question: "Will I look fake or overdone?",
       answer:
-        "Yes. We focus on softening harsh lines, not erasing every movement. Doses and injection points are chosen so you can raise your eyebrows, smile and express yourself - just without the constant crease lines that bother you.",
+        "Our goal is 'fresh, well-rested', not reshaped. We use conservative doses initially, then adjust only if you feel comfortable. Most friends just notice that you look less tired or angry, not that something was done.",
     },
     {
-      question: "Do I have to choose between Botox and lasers, or can they be combined?",
+      question: "What age is right to start Botox?",
       answer:
-        "They can be combined and often work best together. Botox addresses muscle-related lines, while fractional lasers, MNRF, PRP or GFC improve skin texture and fine lines. We'll time them so healing and results don't clash with your work or social schedule.",
+        "There is no fixed 'correct' age. We look at line depth, family tendencies and your feelings about them. Some people start early with light doses; others begin later when lines stay even at rest.",
     },
     {
-      question: "How long do wrinkle treatments last?",
+      question: "Can I stop treatment later without issues?",
       answer:
-        "Botox-type relaxation usually lasts 3-4 months for most people. Collagen-driven improvements from lasers, MNRF and PRP/GFC can last longer but will continue to age with you. Many patients choose light maintenance a few times a year to stay ahead of deeper creasing.",
+        "Yes. If you stop, muscles slowly regain full strength and lines return to their natural pattern over months. There is no rebound worsening because of the medicine itself, only normal ageing continuing.",
     },
     {
-      question: "Will people be able to tell I did something?",
+      question: "Is Botox safe for migraines or sweating?",
       answer:
-        "Our aim is that you look well-rested and smoother, not 'done'. Changes appear over days to weeks, so people are more likely to say you look fresh or ask if you've been sleeping better, not guess the specific treatment.",
+        "Botulinum toxin is also used medically for migraine and excessive sweating, but dose, pattern and dilution differ. If you already receive it elsewhere, we coordinate plans so total units and injection sites remain safe.",
     },
     {
-      question: "Is there an ideal age to start wrinkle treatments?",
+      question: "Can I combine Botox with fillers?",
       answer:
-        "There's no fixed age. Some people in their late 20s or early 30s start when lines are just forming, while others come later when wrinkles are deeper. The earlier you treat strong expression lines, the easier it is to prevent them from etching in permanently.",
+        "Often yes, especially when lines and volume loss coexist. We might treat movement with Botox and restore lost fullness with fillers or skin boosters, sequencing them to match events, downtime and your budget.",
     },
   ],
 };
-

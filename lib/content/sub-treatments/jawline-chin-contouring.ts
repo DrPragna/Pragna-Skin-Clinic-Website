@@ -3,79 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const jawlineChinContouringContent: SubTreatmentContent = {
   hero: {
     title: "Jawline & Chin Contouring",
-    tagline: "Sharpen your profile",
+    tagline: "Sharpen lower-face definition",
     intro:
-      "A soft or receding chin, early jowls or a blurred jawline can change how your entire face reads on camera. Jawline and chin contouring uses dermal fillers, strategically placed Botox and sometimes tightening devices to sculpt a cleaner side profile without surgery or implants.",
+      "This treatment uses fillers, tightening and sometimes fat reduction injections to refine jawline and chin shape. The aim is a clearer side profile and balanced proportions, not an artificial, over-sculpted look.",
   },
   quickStats: {
-    sessions: "1 main session, review at 2-4 weeks",
-    duration: "30-60 mins",
-    downtime: "Mild swelling 2-5 days",
-    painLevel: "Numbing cream + pressure feeling",
+    sessions: "Often 1–2 core sessions",
+    duration: "Typically 30–60 minutes",
+    downtime: "Swelling, bruises possible",
+    painLevel: "Numbing, pressure, tolerable",
   },
   overview:
-    "By restoring structure along the chin and jawbone with hyaluronic acid fillers and selectively relaxing bulk-creating muscles, we redraw the lower-face contour. The aim is a crisper edge, reduced appearance of jowls and better balance between nose, lips and chin - all while keeping the result gender-appropriate and natural.",
+    "We assess bone, fat and skin, then may use fillers along jawline or chin, tightening devices, or targeted fat-reduction injections under the chin. Plans are personalised to maintain harmony with the rest of your face.",
   isThisForYou: [
-    "Your chin looks shorter or 'weak' from the side",
-    "You feel your lower face blends into your neck without a clear jawline",
-    "Photos highlight jowls or a small pocket of fullness in front of the jowl",
-    "You want more definition but prefer injectables over surgery",
-    "You're okay with a result that lasts months to a couple of years, not permanent implants",
+    "Your side profile looks weak or recessed because of a small chin or jawline.",
+    "Photos highlight jowls or heaviness near jaw despite stable weight overall.",
+    "Double chin persists even with diet, exercise and reasonable weight control.",
+    "You want structure and definition but still recognisable features from every angle.",
+    "You are curious about contouring but prefer medical guidance over trends.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Designing your new outline",
+        title: "Analyse profile and proportions",
         description:
-          "We study your face in front and side views, marking areas where structure is lost or the jaw breaks. We discuss how sharp or soft you'd like the jawline to be and consider your gender, occupation and style. Photos and sometimes simple on-skin sketching help you visualise the intended change.",
+          "We review front and side photos, assess chin projection, jaw angle, fat pads and skin quality, and discuss your goals. This shapes whether reduction, enhancement, or both are sensible and how subtle or strong to keep results.",
       },
       {
         phase: "during",
-        title: "Filling, sculpting, refining",
+        title: "Perform contouring procedures",
         description:
-          "After numbing, fillers are placed with a cannula or needle along the chin, prejowl sulcus and jawline, building structure on bone rather than puffiness in the soft tissue. In some cases, tiny doses of Botox are used along the masseter or platysma to refine the jaw angle. You may feel pressure and mild stinging as the product is shaped.",
+          "Depending on plan, we may inject fillers strategically, do tightening sessions, or small fat-reduction injections under the chin. Numbing cream, cannulas or fine needles help keep discomfort reasonable throughout the appointment.",
       },
       {
         phase: "after",
-        title: "Settling into place",
+        title: "Refine and balance later",
         description:
-          "You can expect some swelling, minor asymmetries and possible bruising for a few days. We'll show you what is normal and when to worry. A review at 2-4 weeks allows for minor top-ups or adjustments once the filler has settled and initial swelling has fully resolved.",
+          "Fillers and tightening evolve over weeks. We reassess movement, symmetry and how you feel, then decide if any small additions or adjustments are needed to keep jawline, chin and neck working harmoniously.",
       },
     ],
   },
   results: {
     timeline:
-      "A visible change is seen immediately, though it may look slightly fuller for the first few days. As swelling subsides over 1-2 weeks, the final contour becomes clearer. Depending on the filler used and your metabolism, results typically last 9-18 months before needing a refresh.",
+      "Some definition appears immediately from fillers; tightening and fat reduction show gradually over one to six months. Final results depend on anatomy, lifestyle, devices and how many sessions are completed as planned.",
     recovery:
-      "Most people return to work the next day with makeup to cover any bruises. You'll be asked to avoid heavy exercise, massages or pressure on the area for a couple of days.",
+      "Expect swelling, tenderness or bruises for some days, especially after injections. We give clear measures to reduce discomfort and usually you can continue everyday routines with minor adjustments only.",
   },
   faqs: [
     {
-      question: "Will jawline fillers make my face look bigger?",
+      question: "Will my jawline look obviously fake?",
       answer:
-        "When done correctly, we place filler close to bone to create structure, not puffiness. That usually makes the face look more defined, not larger. Overfilling in soft tissue planes is what creates a bulky look, which we actively avoid.",
+        "We prioritise proportion over sharpness for its own sake. Small, strategically placed changes often read as weight loss or better posture rather than cosmetic work, especially when chosen to suit your overall face.",
     },
     {
-      question: "Can this help my double chin?",
+      question: "Can this remove double chin completely?",
       answer:
-        "Contour work can visually sharpen the jawline and prejowl area, which can reduce the appearance of a mild double chin. For true fat under the chin, we may recommend combining with tightening or fat-reducing treatments for best results.",
+        "Fat-reduction injections help mild to moderate fullness, not very large pads or loose skin alone. We explain likely percentage improvement and sometimes advise combination with tightening or lifestyle changes for best results.",
     },
     {
-      question: "Do jawline fillers feel hard to touch?",
+      question: "How long do jawline fillers last?",
       answer:
-        "Initially, you may feel slight firmness along the contour. As swelling settles and the filler integrates with tissue over a couple of weeks, it usually feels like part of your own structure, not a separate lump.",
+        "Many hyaluronic acid fillers last nine to eighteen months in this area, depending on product, metabolism and movement. Some structure remains even after full breakdown because your tissues adapt around previous support.",
     },
     {
-      question: "What if I don't like the result?",
+      question: "Will I need to keep doing touch-ups forever?",
       answer:
-        "Most hyaluronic acid fillers can be adjusted or dissolved with an enzyme injection. We start with conservative amounts and build gradually so we stay within your comfort zone and avoid dramatic, irreversible changes.",
+        "Fillers gradually reduce; some patients like yearly maintenance, others stop after one or two rounds. Tightening and lifestyle changes may extend intervals, so you can choose how often to refresh.",
     },
     {
-      question: "Is this suitable for both men and women?",
+      question: "Are jawline fillers painful or risky?",
       answer:
-        "Yes, but the aesthetics differ. Many women prefer a slimmer, more tapered jawline, while men often want a squarer, stronger angle. We adapt the injection pattern and volume to match your desired look and facial proportions.",
+        "We use numbing, blunt cannulas where suitable, and strict protocols to reduce bruising and vascular risk. Serious complications are rare but discussed honestly, and you receive clear emergency instructions.",
     },
   ],
 };
-

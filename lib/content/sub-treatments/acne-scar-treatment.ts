@@ -3,78 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const acneScarTreatmentContent: SubTreatmentContent = {
   hero: {
     title: "Acne Scar Treatment",
-    tagline: "Smooth the dents, softly",
+    tagline: "Soften pits and dents",
     intro:
-      "Even after acne is gone, scars can keep the story alive - small pits, craters, uneven texture that shows in every sidelight. Acne scar treatment uses a customised mix of subcision, TCA CROSS, MNRF, PRP and fractional lasers to gradually smooth the surface and soften the way scars catch the light.",
+      "Old acne may have gone, but the dents, pits and shadows remain. Acne Scar Treatment combines precise procedures to release tethered scars and stimulate collagen, helping texture look smoother without over-treating your skin.",
   },
   quickStats: {
-    sessions: "3-6 sessions, 4-8 weeks apart",
-    duration: "45-75 mins (depending on combo)",
-    downtime: "3-7 days of visible redness/marks",
-    painLevel: "Numbing + prickling/pressure",
+    sessions: "Usually 4–6 procedure sessions",
+    duration: "Each visit 30–90 minutes",
+    downtime: "Redness, scabs for few days",
+    painLevel: "Numbing, prickly heat feeling",
   },
   overview:
-    "We first classify your scars - ice pick, rolling, boxcar, mixed or hypertrophic - because each type needs a different tool. Subcision releases tethered scars, TCA CROSS targets deep ice picks, MNRF and fractional CO2/Erbium resurface texture, and PRP or GFC supports healing and collagen from within.",
+    "We tailor combinations of subcision, microneedling, MNRF, fractional lasers or focal TCA based on scar type. Sessions are spaced several weeks apart so collagen can rebuild gradually and results stay safe for your skin tone.",
   isThisForYou: [
-    "You see tiny holes or dents on your cheeks or temples where acne once was",
-    "Makeup sits unevenly on pitted areas and looks patchy in photos",
-    "Old scars make you feel you still have 'bad skin' even with no active acne",
-    "You've tried creams and home treatments with little change in scars",
-    "You're okay with gradual improvement over months, not an overnight erase",
+    "You see small pits or dents that stay even after acne disappeared.",
+    "Makeup settles into holes and lines, making scars look deeper in photos.",
+    "Running fingers across cheeks, you feel uneven, tethered areas under skin.",
+    "Your acne is mostly controlled, but old scars still affect your confidence.",
+    "You worry aggressive lasers might darken your naturally brown skin.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Scar mapping & staging",
+        title: "Examine scar types closely",
         description:
-          "We examine your scars in different lighting and angles, often clicking close-up photos. Scar types are mapped - ice pick, rolling, boxcar, raised or pigmented. We also check your current acne status; if new pimples are still appearing, we may first work on controlling them before aggressive scar work.",
+          "We study scars in different light and angles, sometimes stretching skin to see rolling, boxcar and ice pick patterns. Photos and your downtime comfort help us plan which procedures to start with first.",
       },
       {
         phase: "during",
-        title: "Layered scar procedures",
+        title: "Combine targeted procedures",
         description:
-          "After numbing, subcision is done with a special needle or cannula to break the fibrous bands pulling scars down, which may feel like pressure and mild tugging. TCA CROSS is applied with a fine tip into deep, narrow scars. MNRF or fractional lasers then resurface broader areas with a warm, prickly sensation. PRP or GFC may be injected or used with microneedling to enhance healing.",
+          "We may release tethered scars with subcision, use microneedling or MNRF for collagen and fractional lasers or focal TCA for surface texture. Each session is adjusted to your healing pattern and pigmentation risk.",
       },
       {
         phase: "after",
-        title: "Healing, redness and collagen time",
+        title: "Support healing and collagen",
         description:
-          "You can expect redness, swelling, tiny scabs or grid marks for a few days. Bruising is possible where subcision is done. We give a strict routine with gentle cleanser, moisturiser and sunscreen and clear guidance on what to avoid - no picking, scrubs or salon facials until fully healed.",
+          "We guide you on soothing creams, sunscreen and when to restart actives. Redness, tiny scabs or track marks fade over days, while deeper remodelling continues quietly for months between sessions.",
       },
     ],
   },
   results: {
     timeline:
-      "Most people notice early changes - smoother makeup application, softer edges to scars - after 1-2 sessions. Collagen remodelling continues for months, and best results are usually seen after 3-6 sessions spaced out over 6-12 months, depending on severity and skin type.",
+      "Edges often look softer by the second or third session. Noticeable smoothing of texture usually builds over six to twelve months as collagen matures, especially if acne remains under good control.",
     recovery:
-      "Plan for 3-7 days where your skin may look clearly 'treated' - red, spotty or slightly swollen. Many patients schedule sessions so that the most visible phase falls on weekends or lighter work periods.",
+      "Expect redness, mild swelling and tiny scabs for a few days, sometimes longer after stronger lasers. Important events should be kept at least two weeks away from treatment dates.",
   },
   faqs: [
     {
-      question: "Can old acne scars from many years ago still improve?",
+      question: "Can very old acne scars still improve?",
       answer:
-        "Yes. Even scars from 5-10 years ago can respond to subcision, MNRF and fractional lasers because these treatments stimulate new collagen. Older scars may need more sessions, but improvement is still possible.",
+        "Yes, age of scars matters less than depth and pattern. Improvement is usually partial, not perfect, but softening edges and shadows can make skin and makeup look noticeably smoother in daily life.",
     },
     {
-      question: "Will scar treatments make my skin darker?",
+      question: "How many acne scar sessions will I need?",
       answer:
-        "Any strong treatment carries a risk of temporary pigmentation, especially in Indian skin. We minimise this by careful parameter selection, pre- and post-procedure creams and strict sun protection. If you're prone to dark marks, we build in extra pigment control and gentler settings.",
+        "Most people need four to six focused sessions, sometimes more for widespread scarring. We review progress each visit and adjust combinations so every session adds value instead of repeating the same approach blindly.",
     },
     {
-      question: "Can scars disappear 100%?",
+      question: "Will acne scar treatment darken my skin?",
       answer:
-        "Completely erasing all scars is rarely realistic, especially for very deep or widespread scarring. Our goal is to reduce depth, soften edges and improve overall texture so scars are much less noticeable in everyday light and photos.",
+        "Any strong procedure can trigger temporary darkening on brown skin if aftercare is ignored. We customise depth, protect with sunscreen and gradually increase intensity only when we see your skin tolerates it well.",
     },
     {
-      question: "How do you decide between MNRF and fractional lasers?",
+      question: "Do acne scar procedures hurt a lot?",
       answer:
-        "MNRF delivers energy through microneedles, which can be safer for certain darker skin tones and for scars needing deeper tightening. Fractional CO2/Erbium works more on the surface texture. We often combine or alternate them based on your scar pattern and healing response.",
+        "We apply thick numbing cream and allow enough time before starting. You may still feel pressure, pricking or heat, but discomfort is usually brief and settles soon after the session ends.",
     },
     {
-      question: "Will I need time off work or college?",
+      question: "Will my skin look worse between sessions?",
       answer:
-        "Many people manage with a few days of working from home or using minimal makeup once the top layer has settled. If your work is very appearance-focused, we'll help you plan sessions around lighter weeks or holidays.",
+        "Right after treatment, redness or scabs can draw attention to scars temporarily. Once healed, most people notice gradual softening rather than worsening, provided sunscreen and other aftercare instructions are followed.",
     },
   ],
 };

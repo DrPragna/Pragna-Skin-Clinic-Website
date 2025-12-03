@@ -3,78 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const teenAcneTreatmentContent: SubTreatmentContent = {
   hero: {
     title: "Teen Acne Treatment",
-    tagline: "Support for skin in puberty",
+    tagline: "Gentle, teen-friendly plans",
     intro:
-      "School, exams, sports, hormones - and on top of it, breakouts that hit photos and confidence. Teen acne treatment is designed to control pimples early, protect against long-term scarring and teach good skincare habits, using age-appropriate medicines and gentle procedures that fit into a busy teen's life.",
+      "School, friends, photos and exams already bring enough pressure. Teen Acne Treatment uses age-appropriate routines, mild medicines and simple clinic procedures to calm pimples early, protect from scars and teach healthy habits teenagers can follow.",
   },
   quickStats: {
-    sessions: "3-5 review visits over 3-6 months",
-    duration: "20-30 mins per visit",
-    downtime: "Minimal; rare 1-2 days of flaking",
-    painLevel: "Mild; teen-tolerant",
+    sessions: "Monthly reviews for few months",
+    duration: "Consults around 20–30 minutes",
+    downtime: "Usually no visible downtime",
+    painLevel: "Mostly creams, minimal discomfort",
   },
   overview:
-    "Puberty triggers oil glands into overdrive. Our teen protocols use milder strengths of retinoids, benzoyl peroxide, antibiotics when needed and acne-safe facials or peels. We work closely with parents and teens to build routines that are effective but realistic, without over-drying or overwhelming the skin.",
+    "We build simple routines teens can stick to, using gentle creams, occasional peels and clear guidance on hair, helmets, diet and makeup. Parents stay involved in decisions so expectations, safety and follow-ups are understood by everyone.",
   isThisForYou: [
-    "Pimples started around puberty and now keep coming on the forehead, cheeks or back",
-    "Blackheads and whiteheads are always present, even between big breakouts",
-    "There's worry about future scars or bullying because of acne",
-    "Random YouTube or Instagram routines have made the skin irritated or worse",
-    "Parents want a structured, medically supervised plan instead of trial-and-error",
+    "You or your teenager keep getting new pimples on face, shoulders or back.",
+    "There is frequent squeezing or picking of spots during school or screen time.",
+    "Steroid or fairness creams were tried from chemists or relatives' suggestions.",
+    "Acne is affecting confidence at college, tuition, sports or social outings.",
+    "Parents want safe, clear guidance about medicines, side effects and timelines.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Teen-friendly consultation",
+        title: "Listen to teen and parent",
         description:
-          "We talk to both teen and parent - about skin, lifestyle, sports, diet, exam stress and what's already been tried. We explain what acne is in simple language and set realistic expectations so no one feels blamed. A step-by-step home routine is written down clearly so it's easy to follow.",
+          "We speak with both teen and parent, review school, sports, periods and existing products, including home remedies. The aim is trust and a realistic start, not a long, complicated routine nobody can follow.",
       },
       {
         phase: "during",
-        title: "Gentle but effective treatment",
+        title: "Start gentle, escalate slowly",
         description:
-          "We use appropriate-strength medicines (topical retinoids, benzoyl peroxide, antibiotics or hormonal treatment when indicated) and may add gentle salicylic or azelaic peels, comedone extraction and light-based treatments. We avoid overly harsh peels or protocols that would disrupt school, sports or social life.",
+          "We begin with mild creams, spot treatments and sometimes very low-strength peels. Tablets are considered only when clearly needed, with full counselling on safety, blood tests if required and the importance of regular follow-ups.",
       },
       {
         phase: "after",
-        title: "Habits to prevent future scars",
+        title: "Review progress and habits",
         description:
-          "Follow-up visits focus on tracking progress, adjusting doses and reinforcing habits - no picking, better makeup and helmet hygiene, smart sunscreen use and how to handle exam-time flare-ups. As acne settles, we can also address any early marks before they become stubborn.",
+          "Follow-ups track new pimples, marks and routine adherence, plus confidence at school or online. We adjust plans before exams, events or trips and keep guidance kind, practical and free from blame.",
       },
     ],
   },
   results: {
     timeline:
-      "Most teens see fewer new pimples and less oiliness in 4-8 weeks if they follow the plan. Bigger changes in scars and marks take longer and may require a second phase of treatment once breakouts are calmer.",
+      "With consistent routines, many teens notice calmer skin and fewer fresh lesions within six to eight weeks. Longer-term control usually builds over several months as hormones and habits settle.",
     recovery:
-      "Side effects like dryness or mild sensitivity are common but manageable and usually improve as the skin adjusts. We design regimens so school, coaching and activities can continue without major disruption.",
+      "Most plans rely on creams and mild peels, so school, tuitions and sports continue normally. We usually schedule procedures before weekends or holidays when brief redness bothers less.",
   },
   faqs: [
     {
-      question: "Is acne in teens just a phase that will go away on its own?",
+      question: "Is teenage acne only caused by junk food?",
       answer:
-        "Hormonal acne often improves with age, but severe or persistent acne can leave permanent scars and marks if left untreated. Early, sensible treatment can prevent long-term damage even if some mild breakouts happen later.",
+        "Food can play a role, but hormones, genetics, helmets, hair oils, late nights and stress also matter. We suggest realistic changes without shaming and design treatment around each teen's actual lifestyle.",
     },
     {
-      question: "Will acne medicines thin my teen's skin?",
+      question: "Can acne medicines affect growth or puberty?",
       answer:
-        "When used correctly at the right strengths, acne medicines don't permanently thin the skin. Some initial dryness or peeling is expected but can be controlled with moisturisers and dose adjustments. We monitor closely and explain warning signs to watch for.",
+        "Topical creams do not affect growth. When tablets such as antibiotics or hormonal pills are considered, we check medical history carefully and, if useful, coordinate with paediatrician or gynaecologist for added safety.",
     },
     {
-      question: "Can diet and junk food cause teen acne?",
+      question: "Will starting treatment make skin dependent forever?",
       answer:
-        "Diet isn't the only reason, but very high sugar, certain dairy patterns and frequent junk food can worsen acne in some teens. We'll point out simple, realistic food tweaks without creating guilt or extreme restrictions.",
+        "No. We aim to control acne, prevent scars and then step down to simpler maintenance. Some teens need brief top-ups during stressful periods, but not lifelong aggressive medicines.",
     },
     {
-      question: "Is it safe for teens to do peels or laser treatments?",
+      question: "How involved should parents be in teen acne care?",
       answer:
-        "Mild, carefully chosen peels and certain light-based treatments are safe in teens when done by dermatologists. We avoid very aggressive procedures and always prioritise safety and long-term skin health over quick cosmetic results.",
+        "Parental support helps with appointments, medicines and budget, but we also respect teen privacy. We encourage open conversations so nobody feels blamed and everyone understands the plan and photos.",
     },
     {
-      question: "How involved do parents need to be?",
+      question: "Can we clear acne fully before board exams?",
       answer:
-        "Parental support makes a big difference - reminding about medicines, helping with product purchases and encouraging healthy habits. We keep parents informed about the plan and progress while also respecting the teen's privacy and emotions.",
+        "If we start early, we can often reduce angry breakouts and marks before exams. Acne is medical, not a switch, so we promise steady progress, not magically perfect skin on a fixed date.",
     },
   ],
 };

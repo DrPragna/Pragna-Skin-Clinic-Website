@@ -3,80 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const fullBodyLaserHairReductionContent: SubTreatmentContent = {
   hero: {
     title: "Full Body Laser Hair Reduction",
-    tagline: "One plan, head-to-toe",
+    tagline: "Head-to-toe smoother routine",
     intro:
-      "Always planning outfits around waxing appointments? Full body laser hair reduction lets you gradually cut down on hair growth from face to feet in a structured way, instead of chasing different parlours and packages for each body part.",
+      "Full Body Laser Hair Reduction treats major body areas in planned sessions, so you can steadily move away from constant waxing, threading or shaving and enjoy overall smoother, more manageable skin.",
   },
   quickStats: {
-    sessions: "6-8 sessions, 4-6 weeks apart",
-    duration: "60-120 mins per sitting",
-    downtime: "Mild redness for a few hours",
-    painLevel: "Quick snaps with cooling",
+    sessions: "Typically 6–8 core sessions",
+    duration: "Each visit 2–3 hours",
+    downtime: "Mild redness, short-lived warmth",
+    painLevel: "Snapping, tolerable with cooling",
   },
   overview:
-    "This treatment combines multiple areas - such as arms, legs, underarms, bikini line, back, and face where needed - into a single long-term plan. Using diode and Alexandrite laser settings adjusted per area, we aim for 80-90% long-term hair reduction over a full course.",
+    "We cover arms, legs, underarms, bikini area, back, chest and other agreed zones in one coordinated plan. Energy settings, passes and intervals are fine-tuned for each area to balance comfort, speed and effective hair reduction.",
   isThisForYou: [
-    "You're done juggling separate packages for arms, legs, underarms, and more",
-    "Hair regrows quickly after waxing and feels prickly within days",
-    "Travel, weddings, or work trips make frequent parlour visits impossible",
-    "Ingrowns or razor bumps are common on multiple body areas",
-    "You want a long-term grooming solution that actually saves time",
+    "You keep multiple waxing, threading and shaving appointments every month.",
+    "You want long-term reduction instead of repeated full body parlour visits.",
+    "Ingrowns, cuts or rashes are common after your regular hair removal methods.",
+    "You are okay committing time for longer, carefully planned laser sessions.",
+    "You prefer one structured plan instead of tackling each area randomly.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Planning Your Full-Body Map",
+        title: "Consult and patch testing",
         description:
-          "We first decide which areas to include and in what order, keeping your pain tolerance and schedule in mind. You'll be asked to shave (not wax) the included areas 24 hours before, avoid heavy tanning, and skip strong actives or scrubs for a few days.",
+          "We map all chosen areas, assess hair and skin, check medical history and medicines, then perform patch tests on key zones. Shaving guidance, sun rules and session scheduling are shared before the first full body appointment.",
       },
       {
         phase: "during",
-        title: "Area-Wise Laser Passes",
+        title: "Sequential full body sessions",
         description:
-          "A cooling gel is applied where needed. The therapist works area by area - for example legs, then arms, then underarms and bikini. You'll feel hot pinpricks or snapping sensations that last for seconds at a time, with short breaks between areas. The full session can take 1-2 hours.",
+          "On treatment day, shaved skin is cleaned and gel applied. The diode handpiece passes over each section with cooling. We monitor comfort constantly, adjusting energy and pace while ensuring consistent coverage everywhere.",
       },
       {
         phase: "after",
-        title: "Same-Day Routine, smarter aftercare",
+        title: "Soothe skin and plan cycles",
         description:
-          "Expect mild redness or warmth, especially on larger areas, for a few hours. Loose cotton clothing is best on the day of treatment. We ask you to skip hot showers, saunas, and gym for 24 hours, moisturise dry areas, and keep strict sun protection on exposed skin.",
+          "Post-care includes soothing creams, cool compresses and clear sun instructions. We schedule subsequent sessions to match hair cycles of face and body, then shift you to maintenance once reduction stabilises.",
       },
     ],
   },
   results: {
     timeline:
-      "After the first couple of sessions, you'll usually notice slower regrowth and softer hair. By session 3-4, gaps in growth appear and shaving frequency drops. Completing 6-8 well-timed sessions typically gives 80-90% long-term reduction, with occasional maintenance if needed.",
+      "Many people notice slower, finer regrowth after two to three sessions. Visible reduction usually builds over six to eight sessions, then occasional maintenance helps keep results steady.",
     recovery:
-      "Most people return to routine the same day. Any redness or warmth settles within a few hours; sensitive areas may feel sunburn-like for a short time but cool compresses and moisturisers usually help.",
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1000&auto=format&fit=crop", // Silk texture, implies smoothness, premium
+      "Redness, warmth or mild swelling can last a few hours to a day. With loose clothing, moisturiser and sunscreen, work and routine activities can generally continue as normal.",
   },
   faqs: [
     {
-      question: "Do I have to treat the entire body in every session?",
+      question: "Do I need to stop waxing before full body laser?",
       answer:
-        "Not necessarily. Many people split full body into 2-3 logical zones to match their comfort, budget, and time. We'll create a sequence so that all chosen areas complete their 6-8 sessions without overloading any single visit.",
+        "Yes. We switch you from waxing or threading to shaving before and between sessions, because waxing removes the hair root that the laser needs to target effectively in each growth cycle.",
     },
     {
-      question: "Can I still wax or thread between sessions?",
+      question: "Is full body laser hair reduction safe in one sitting?",
       answer:
-        "Waxing and threading are not recommended, as they remove the root that the laser needs to target. You can shave between sessions if you'd like - it won't affect the laser result.",
+        "When done with proper machines, patch tests and protocols, it is generally safe. We pace sessions, ensure hydration and cooling and may split very large areas over days if your skin needs gentler pacing.",
     },
     {
-      question: "Is full body laser safe if I travel to sunny places often?",
+      question: "Will all my body hair disappear permanently?",
       answer:
-        "Yes, but we'll plan around your travel. You'll need stronger sun protection, and sessions may be spaced a bit more if you've had recent intense sun exposure or tanning.",
+        "Laser gives long-term reduction, not absolute removal. Coarse hair usually becomes sparser and finer. Some regrowth is expected; maintenance sessions at longer gaps help keep results over the years.",
     },
     {
-      question: "What if I only want some areas right now and add more later?",
+      question: "Can men also opt for full body laser?",
       answer:
-        "You can absolutely start with priority areas - for example underarms and legs - and add other regions once you're comfortable. We'll time additional areas so your overall plan still makes sense.",
+        "Yes. We treat many men for chest, back, arms, legs and other areas. Settings differ because male hair is often denser and coarser, but the same safety and planning principles apply.",
     },
     {
-      question: "Will I be completely hair-free everywhere?",
+      question: "How should I prepare on treatment day?",
       answer:
-        "The realistic goal is long-term, major reduction. Most people see very fine, light hair left in some places, which is far easier to manage. We avoid promising a 'zero hair' outcome because everyone's growth pattern is different.",
+        "Arrive with skin freshly shaved, clean and free from heavy creams, oils or perfumes. Avoid strong sun, parlour treatments and active products on treated areas in the days just before your session.",
     },
   ],
 };
-

@@ -3,69 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const armsLegsHairReductionContent: SubTreatmentContent = {
   hero: {
     title: "Arms & Legs Hair Reduction",
-    tagline: "Smooth skin, fewer razor days",
+    tagline: "Confident sleeves and hemlines",
     intro:
-      "Full-sleeve tops in summer and hesitation about skirts or shorts often come down to one thing: visible hair on arms and legs. Laser hair reduction in these areas helps you move away from constant waxing and last-minute shaving.",
+      "Arms & Legs Hair Reduction targets larger areas so you can wear what you like without constantly planning around waxing appointments, razor cuts or visible stubble.",
   },
   quickStats: {
-    sessions: "6-8 sessions, 4-6 weeks apart",
-    duration: "30-90 mins depending on areas",
-    downtime: "Mild redness for a few hours",
-    painLevel: "Rhythmic snaps + cooling rolls",
+    sessions: "Typically 6–8 sessions",
+    duration: "Each visit 30–90 minutes",
+    downtime: "Redness, warmth for hours",
+    painLevel: "Snapping, usually tolerable",
   },
   overview:
-    "We treat forearms, full arms, lower legs, or full legs based on what you choose. Larger areas allow broader passes with diode or Alexandrite lasers, meaning sessions are efficient and progress is easy to notice in daily life.",
+    "We use sweeping laser passes with cooling to cover full arms, forearms, thighs or full legs. Over time, hair becomes finer and regrowth slower, making grooming simple and less frequent.",
   isThisForYou: [
-    "You plan outfits around when you last waxed or shaved your arms and legs",
-    "Razor nicks and cuts are common, especially around knees and ankles",
-    "Your hair feels coarse even a day or two after waxing",
-    "You want long-term smoothness, not just for festivals or vacations",
-    "You're okay with investing time across several months for a big payoff",
+    "You often avoid short sleeves or dresses because of arm or leg hair.",
+    "Waxing large areas feels painful and leaves leftover sticky patches.",
+    "Shaving causes nicks, dryness or rough stubble within a day or two.",
+    "Ingrowns or folliculitis appear on calves, thighs or forearms.",
+    "You want smoother limbs for comfort, sports or special occasions.",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Shaving & Sun Rules",
+        title: "Plan coverage and sessions",
         description:
-          "You'll be asked to shave the chosen areas 24-48 hours before your session. Tanning beds and intense sun should be avoided beforehand, and moisturisers or oils are skipped on the day so the laser can work evenly.",
+          "We decide which sections to treat—full arms, legs or specific parts—then assess hair thickness and density. This guides energy, number of passes and appointment durations that fit your schedule.",
       },
       {
         phase: "during",
-        title: "Longer, Rhythmic Laser Passes",
+        title: "Perform large-area passes",
         description:
-          "Working in sections, the therapist glides the handpiece over the arms and legs in overlapping strokes. You feel repeated warm snaps, like an elastic lightly flicking the skin, along with cool sensations from the device tip or gel. Time depends on how many regions you include.",
+          "After shaving and gel application, the laser head glides in overlapping lines along arms and legs. Built-in cooling helps keep warmth manageable while we ensure thorough coverage without gaps.",
       },
       {
         phase: "after",
-        title: "Post-Session Comfort & Clothing",
+        title: "Care for large treated areas",
         description:
-          "The skin may look slightly flushed, especially around bony areas like shins and knees. We suggest loose, breathable clothing and avoiding hot showers, harsh scrubs, or waxing. A bland moisturiser and sunscreen on exposed areas support recovery.",
+          "We recommend moisturiser, sunscreen and avoiding harsh scrubs or hot waxing. Follow-up timings are adjusted based on how quickly different zones show visible regrowth between sessions.",
       },
     ],
   },
   results: {
     timeline:
-      "By the second or third session, many people notice they can go longer between shaves or feel less stubble. Over the full 6-8 session plan, hair becomes patchy, finer, and significantly reduced, making arms and legs much easier to maintain.",
+      "You may see slower regrowth and softer hair after a few sessions. Noticeable reduction in density typically develops over the full course of treatments and stabilises with occasional maintenance.",
     recovery:
-      "Mild redness usually disappears within a few hours. Most people resume regular work and errands immediately, with only exercise and heat-heavy activities restricted for a day.",
+      "Mild redness or heat sensation can last for some hours. Comfortable clothing, hydration and emollients usually keep skin settled through the day.",
   },
   faqs: [
     {
-      question: "Will knees and elbows need extra attention?",
+      question: "Can I treat only forearms or lower legs?",
       answer:
-        "Yes, areas with curves and bony points are given extra passes and careful energy control to ensure full coverage without overheating. We pay special attention to these zones each time.",
+        "Yes. Arms and legs can be treated in sections if you prefer. We tailor plans based on your clothing choices, budget and which areas trouble you most.",
     },
     {
-      question: "Can I tan or go to the beach during my treatment course?",
+      question: "Will laser help with strawberry legs?",
       answer:
-        "You can, but we'll ask you to protect the treated areas carefully and may adjust or delay sessions after intense sun exposure to keep skin safe.",
+        "By reducing hair and follicle inflammation, laser often improves the dotted look called strawberry legs. Additional peels or skincare may be suggested for best texture change.",
     },
     {
-      question: "Is it better to do arms and legs together or separately?",
+      question: "Is it okay to tan during treatment?",
       answer:
-        "That depends on your time, pain tolerance, and budget. Some prefer shorter, more frequent visits treating one region at a time; others like doing both in a single sitting. We can plan either way.",
+        "Fresh tan increases risk of irritation and pigment changes. We suggest sun protection and avoiding intentional tanning so settings can remain both effective and safe.",
+    },
+    {
+      question: "Can athletes and swimmers benefit from laser?",
+      answer:
+        "Yes. Many athletes, dancers and swimmers choose laser for comfort and convenience. Smoother skin reduces chafing and frequent last-minute hair removal before events.",
+    },
+    {
+      question: "Will results differ on arms and legs?",
+      answer:
+        "Yes, because hair thickness and cycles vary. Calves may respond faster than thighs; forearms differently from upper arms. We monitor each zone and adjust expectations and sessions accordingly.",
     },
   ],
 };
-
