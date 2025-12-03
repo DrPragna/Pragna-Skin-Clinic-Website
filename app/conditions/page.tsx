@@ -152,7 +152,7 @@ function ConditionsContent() {
           SMART HERO - Dynamic based on Filter
           ============================================ */}
       <section className={`
-        relative min-h-[75vh] md:min-h-[85vh] transition-colors duration-700 ease-in-out overflow-hidden
+        relative min-h-[75vh] md:min-h-[85vh] flex items-center pt-20 transition-colors duration-700 ease-in-out overflow-hidden
         ${theme.heroBg}
       `}>
          {/* Mobile: Background Image */}
@@ -221,54 +221,52 @@ function ConditionsContent() {
          )}
 
         {/* Centering Wrapper - Handles vertical centering */}
-        <div className="absolute inset-0">
-          <div className="section-container relative z-10 w-full h-full flex items-center justify-center md:justify-start">
-            <div className="flex flex-col md:flex-row w-full md:items-center">
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={activeFilter}
+        <div className="section-container relative z-10 w-full py-20 md:py-0">
+          <div className="flex flex-col md:flex-row w-full md:items-center">
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={activeFilter}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-3xl md:w-1/2 text-center md:text-left mx-auto md:mx-0"
+            >
+              <motion.span 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="font-medium uppercase tracking-[0.25em] text-xs mb-8 block text-white/70"
+              >
+                {activeFilter === 'All' ? 'Our Expertise' : 'Specialized Care'}
+              </motion.span>
+              
+              <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="max-w-3xl md:w-1/2 text-center md:text-left mx-auto md:mx-0"
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className={`
+                  text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display leading-[0.9] mb-8
+                  ${activeFilter === 'All' ? 'xl:max-w-[14ch]' : ''}
+                  ${theme.heroText}
+                `}
               >
-                <motion.span 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="font-medium uppercase tracking-[0.25em] text-xs mb-8 block text-white/70"
-                >
-                  {activeFilter === 'All' ? 'Our Expertise' : 'Specialized Care'}
-                </motion.span>
-                
-                <motion.h1 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.15 }}
-                  className={`
-                    text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display leading-[0.9] mb-8
-                    ${activeFilter === 'All' ? 'xl:max-w-[14ch]' : ''}
-                    ${theme.heroText}
-                  `}
-                >
-                  {theme.title}
-                </motion.h1>
-                
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.25 }}
-                  className={`
-                    text-lg md:text-xl font-light max-w-lg leading-relaxed opacity-90 mx-auto md:mx-0
-                    ${theme.heroSub}
-                  `}
-                >
-                  {theme.description}
-                </motion.p>
-              </motion.div>
-            </AnimatePresence>
-            </div>
+                {theme.title}
+              </motion.h1>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+                className={`
+                  text-lg md:text-xl font-light max-w-lg leading-relaxed opacity-90 mx-auto md:mx-0
+                  ${theme.heroSub}
+                `}
+              >
+                {theme.description}
+              </motion.p>
+            </motion.div>
+          </AnimatePresence>
           </div>
         </div>
       </section>
