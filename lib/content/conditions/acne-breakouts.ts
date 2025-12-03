@@ -1,102 +1,121 @@
 import { ConditionContent } from '@/lib/navigationData';
 
-/**
- * Acne & Breakouts - Condition Content
- * 
- * This is a sample content file showing the new schema structure.
- * Create similar files for each condition with custom content.
- */
 export const acneBreakoutsContent: ConditionContent = {
   hero: {
-    title: 'Acne & Breakouts',
-    empathyStatement: 'Those stubborn pimples that keep coming back no matter what you try',
-    intro: 'Acne isn\'t just a teenage problem. It affects people of all ages and can significantly impact confidence. The good news? With the right approach, it\'s highly treatable.',
-    // image: '/images/conditions/acne-hero.jpg' // Need: Empathetic hero image
+    title: "Acne & Breakouts",
+    empathyStatement: "Those frustrating pimples that keep returning despite everything you have tried",
+    intro:
+      "Acne affects people across ages—not just teenagers. With proper dermatologist-led care, most acne responds well to treatment.",
   },
   symptoms: {
-    headline: 'Do you recognise these signs?',
+    headline: "Do you recognise these signs?",
     list: [
-      'Recurring pimples, whiteheads, or blackheads on face, chest, or back',
-      'Painful, deep cysts that take weeks to heal',
-      'Oily skin that feels greasy even after washing',
-      'Dark marks or scars left behind after breakouts clear',
-      'Breakouts that worsen around your period or during stress',
-      'Products that worked before no longer seem effective',
+      "Recurring pimples, blackheads or whiteheads",
+      "Painful bumps under the skin that take weeks to heal",
+      "Oily skin even after washing",
+      "Dark marks or scars left behind after breakouts",
+      "Flare-ups around periods, stress or travel",
+      "Products that used to work no longer help",
     ],
   },
   quickStats: [
-    { stat: '85%', text: 'of people aged 12-24 experience acne' },
-    { stat: 'Treatable', text: 'with dermatologist-led care' },
-    { stat: '4-8 weeks', text: 'to see significant improvement' },
+    { stat: "85%", text: "of 12–24 year olds affected" },
+    { stat: "Treatable", text: "with structured dermatology care" },
+    { stat: "4–8 weeks", text: "for visible improvement typically" },
   ],
   understanding: {
-    whatItIs: 'Acne occurs when hair follicles become clogged with oil and dead skin cells. This creates an environment where bacteria thrive, leading to inflammation and those frustrating breakouts. It\'s not about being "dirty" or having bad hygiene—it\'s a complex condition influenced by hormones, genetics, and other factors.',
+    whatItIs:
+      "Acne forms when oil and dead cells clog pores, letting bacteria trigger inflammation. It is not about hygiene—hormones, genetics, stress and products all play a role.",
     whyItHappens: [
-      'Hormonal fluctuations (puberty, menstrual cycle, PCOS)',
-      'Excess oil (sebum) production',
-      'Bacterial overgrowth (C. acnes)',
-      'Genetics and family history',
-      'Certain medications or supplements',
-      'Stress and lifestyle factors',
-      'Using comedogenic (pore-clogging) products',
+      "Hormonal shifts (puberty, periods, PCOS, pregnancy)",
+      "Overactive oil glands and clogged pores",
+      "Genetics and family history",
+      "Stress, sleep and lifestyle factors",
+      "Pore-clogging skincare or makeup",
     ],
   },
   pragnaApproach: {
-    description: 'We don\'t believe in one-size-fits-all acne treatment. Our dermatologists assess your specific acne type, triggers, and skin type to create a multi-pronged approach that addresses active breakouts, prevents new ones, and heals existing damage.',
+    description:
+      "We identify your acne type, triggers and sensitivity first, then build a layered plan—controlling breakouts, preventing new ones and fading marks.",
   },
   recommendedTreatments: [
     {
-      type: 'family',
-      slug: 'acne-acne-scar-solutions',
-      name: 'Acne & Acne Scar Solutions',
-      bestFor: 'Comprehensive acne management',
+      type: "family",
+      slug: "acne-acne-scar-solutions",
+      name: "Acne & Acne Scar Solutions",
+      bestFor: "Comprehensive acne and scar management",
     },
     {
-      type: 'sub-treatment',
-      slug: 'chemical-peels',
-      name: 'Chemical Peels',
-      bestFor: 'Unclogging pores and reducing oil',
+      type: "sub-treatment",
+      slug: "active-acne-treatment",
+      name: "Active Acne Treatment",
+      bestFor: "Calming current breakouts first",
     },
     {
-      type: 'family',
-      slug: 'advanced-facials-boosters',
-      name: 'Advanced Facials',
-      bestFor: 'Regular maintenance and prevention',
+      type: "sub-treatment",
+      slug: "chemical-peels",
+      name: "Chemical Peels",
+      bestFor: "Unclogging pores and oil control",
+    },
+    {
+      type: "family",
+      slug: "advanced-facials-boosters",
+      name: "Advanced Facials & Boosters",
+      bestFor: "Ongoing maintenance and skin health",
     },
   ],
   timeline: {
     steps: [
-      { title: 'Week 1-2', description: 'Initial consultation and treatment begins. Some purging may occur.' },
-      { title: 'Week 4-6', description: 'Active breakouts start reducing. Skin begins to clear.' },
-      { title: 'Week 8-12', description: 'Significant improvement visible. Focus shifts to maintenance.' },
-      { title: 'Ongoing', description: 'Maintenance routine to prevent recurrence and address scarring.' },
+      {
+        title: "Week 1–2",
+        description:
+          "Initial consultation, diagnosis and treatment start. Some temporary purging or dryness may occur as skin adjusts.",
+      },
+      {
+        title: "Week 4–6",
+        description:
+          "Active breakouts begin settling. New pimples reduce in frequency and severity. Skin starts looking calmer.",
+      },
+      {
+        title: "Week 8–12",
+        description:
+          "Noticeable clearing visible. Focus shifts to fading marks and preventing recurrence with maintenance care.",
+      },
+      {
+        title: "Ongoing",
+        description:
+          "Maintenance routine with periodic reviews. Adjustments made for seasons, stress phases or hormonal changes.",
+      },
     ],
   },
   faqs: [
     {
-      question: 'Will my acne ever go away completely?',
-      answer: 'For many people, yes. With proper treatment, acne can be controlled and often cleared. Some may need ongoing maintenance, especially if hormonal factors are involved. Our dermatologists will give you realistic expectations based on your specific situation.',
+      question: "Will my acne ever go away completely?",
+      answer:
+        "For many, yes. With structured treatment, acne can be well-controlled or cleared. Some need ongoing maintenance if hormones play a role.",
     },
     {
-      question: 'Is it okay to pop pimples?',
-      answer: 'We strongly advise against it. Popping can push bacteria deeper, cause scarring, and spread infection. If you have a particularly bothersome pimple, come see us—we can safely extract it without damage.',
+      question: "Is it okay to pop pimples at home?",
+      answer:
+        "No. Squeezing pushes bacteria deeper, worsens inflammation and can leave scars. If a pimple is troublesome, visit us for safe extraction.",
     },
     {
-      question: 'Will I have to give up makeup?',
-      answer: 'Not necessarily. We\'ll guide you on non-comedogenic products that won\'t clog pores. During certain treatments, you may need to avoid makeup briefly, but we\'ll work with your lifestyle.',
+      question: "Do I have to stop wearing makeup during treatment?",
+      answer:
+        "Not necessarily. We recommend non-comedogenic products. Brief makeup breaks may help during certain procedures.",
     },
     {
-      question: 'Why do I still get acne as an adult?',
-      answer: 'Adult acne is common, especially in women. Hormonal fluctuations, stress, and even certain skincare products can trigger breakouts. The good news is adult acne responds well to treatment.',
+      question: "Why do I still get acne as an adult?",
+      answer:
+        "Adult acne is common. Hormones, stress, diet and skincare ingredients can trigger breakouts into your thirties and beyond. It responds well to treatment.",
     },
   ],
   selfCareTips: [
-    'Cleanse twice daily with a gentle, non-foaming cleanser',
-    'Use non-comedogenic moisturisers and sunscreen',
-    'Avoid touching your face throughout the day',
-    'Change pillowcases frequently (every 2-3 days)',
-    'Don\'t over-wash or use harsh scrubs—this can worsen acne',
-    'Be patient—most treatments take 6-8 weeks to show results',
+    "Cleanse twice daily with a gentle cleanser—skip harsh scrubs",
+    "Use non-comedogenic moisturiser and sunscreen daily",
+    "Avoid touching your face with unwashed hands",
+    "Change pillowcases every 2–3 days",
+    "Don't layer too many actives—protect your skin barrier",
   ],
-  relatedConditionSlugs: ['acne-scars', 'dark-spots-tan-pigmentation'],
+  relatedConditionSlugs: ["acne-scars", "dark-spots-tan-pigmentation", "uneven-skin-tone-texture"],
 };

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { conditions, getCondition, getTreatmentFamiliesForCondition } from '@/lib/navigationData';
+import { getConditionContent } from '@/lib/content';
 import { Reveal } from '@/components/ui/Reveal';
 
 // ============================================
@@ -92,7 +93,20 @@ export default async function ConditionPage({
   }
 
   const relatedFamilies = getTreatmentFamiliesForCondition(slug);
+  const content = getConditionContent(slug);
   const theme = THEMES[condition.group as ThemeKey] || THEMES['Others'];
+
+  // Fallback symptoms if no content
+  const defaultSymptoms = [
+    'Visible symptoms that affect your confidence',
+    'The issue keeps returning despite trying products',
+    'You notice it getting worse over time',
+    'It impacts your daily life or social interactions',
+    'You want to understand what is causing it',
+    'DIY solutions haven\'t given lasting results',
+  ];
+
+  const symptoms = content?.symptoms?.list || defaultSymptoms;
 
   return (
     <main className="overflow-x-hidden bg-white">
@@ -124,52 +138,53 @@ export default async function ConditionPage({
 
             <Reveal delay={0.1}>
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-display leading-[0.95] mb-6" style={{ color: theme.textLight }}>
-                    {condition.name}
+                    {content?.hero?.title || condition.name}
                 </h1>
             </Reveal>
 
             <Reveal delay={0.2}>
-                <p className="text-lg md:text-xl font-light italic opacity-90 max-w-2xl mx-auto" style={{ color: theme.textLight }}>
-                    &ldquo;{condition.subtitle}&rdquo;
+                <p className="text-lg md:text-xl font-light italic opacity-90 max-w-2xl mx-auto mb-6" style={{ color: theme.textLight }}>
+                    &ldquo;{content?.hero?.empathyStatement || condition.subtitle}&rdquo;
                 </p>
             </Reveal>
+
+            {content?.hero?.intro && (
+                <Reveal delay={0.3}>
+                    <p className="text-base md:text-lg opacity-80 max-w-xl mx-auto" style={{ color: theme.textLight }}>
+                        {content.hero.intro}
+                    </p>
+                </Reveal>
+            )}
         </div>
       </section>
 
       {/* ============================================
-          2. DO YOU EXPERIENCE THIS? - Validation First
+          2. DO YOU EXPERIENCE THIS? - Symptoms
           ============================================ */}
-      <section className="py-16 md:py-20 bg-beige-warm">
+      <section className="py-10 md:py-12 bg-beige-warm">
         <div className="section-container">
             <Reveal>
-                <div className="text-center mb-10">
-                    <span className="text-maroon font-bold uppercase tracking-[0.25em] text-xs mb-3 block">
+                <div className="text-center mb-6">
+                    <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-2 block">
                         Recognise This?
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-3">
+                    <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-2">
                         Do you experience any of these?
                     </h2>
-                    <p className="text-charcoal/60 text-base">
+                    <p className="text-charcoal/60 text-sm md:text-base">
                         If you&apos;re nodding, you&apos;re in the right place.
                     </p>
                 </div>
             </Reveal>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-                {[
-                    'Visible symptoms that affect your confidence',
-                    'The issue keeps returning despite trying products',
-                    'You notice it getting worse over time',
-                    'It impacts your daily life or social interactions',
-                    'You want to understand what is causing it',
-                    'DIY solutions haven\'t given lasting results',
-                ].map((symptom, i) => (
-                    <Reveal key={i} delay={i * 0.05}>
-                        <div className="flex items-start gap-4 p-5 bg-white rounded-xl border border-charcoal/5 hover:border-maroon/20 hover:shadow-sm transition-all duration-300">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto auto-rows-fr">
+                {symptoms.map((symptom, i) => (
+                    <Reveal key={i} delay={i * 0.05} className="h-full">
+                        <div className="flex items-start gap-3 p-4 bg-white rounded-lg border border-charcoal/5 hover:border-maroon/20 hover:shadow-sm transition-all duration-300 h-full">
                             <div className="w-8 h-8 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0">
                                 <span className="text-maroon text-sm font-bold">{i + 1}</span>
                             </div>
-                            <p className="text-charcoal/80 text-base leading-relaxed pt-1">{symptom}</p>
+                            <p className="text-charcoal/80 text-base leading-relaxed">{symptom}</p>
                         </div>
                     </Reveal>
                 ))}
@@ -178,95 +193,140 @@ export default async function ConditionPage({
       </section>
 
       {/* ============================================
-          3. UNDERSTANDING - Center Aligned
+          3. UNDERSTANDING - What It Is & Why It Happens
           ============================================ */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="section-container">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-4xl mx-auto">
                 <Reveal>
-                    <span className="text-maroon font-bold uppercase tracking-[0.25em] text-xs mb-3 block">
-                        The Basics
-                    </span>
-                    <h2 className="text-3xl md:text-4xl font-display text-charcoal leading-tight mb-6">
-                        Understanding <span className="text-maroon italic">the cause</span>
-                    </h2>
-                </Reveal>
-                
-                <Reveal delay={0.1}>
-                    <p className="text-lg md:text-xl text-charcoal/90 leading-relaxed mb-10 max-w-2xl mx-auto">
-                        {condition.name} isn&apos;t just about surface-level symptoms. It&apos;s often a complex interplay of internal and external factors. Understanding why it happens is the first step to treating it effectively.
-                    </p>
-                    
-                    <div className="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
-                        <div className="bg-beige-warm rounded-xl p-6 border border-charcoal/5 text-left">
-                            <h3 className="text-base font-display text-charcoal mb-3 font-medium">What it is</h3>
-                            <p className="text-charcoal/70 text-base leading-relaxed">
-                                A common condition that can affect confidence and comfort. Modern dermatology offers targeted protocols to manage and resolve it significantly.
-                            </p>
-                        </div>
-                        <div className="bg-beige-warm rounded-xl p-6 border border-charcoal/5 text-left">
-                            <h3 className="text-base font-display text-charcoal mb-3 font-medium">Common Triggers</h3>
-                            <ul className="space-y-2 text-base text-charcoal/70">
-                                <li className="flex items-center gap-3">
-                                    <span className="w-2 h-2 rounded-full bg-maroon flex-shrink-0" />
-                                    Genetics & Hormonal Changes
-                                </li>
-                                <li className="flex items-center gap-3">
-                                    <span className="w-2 h-2 rounded-full bg-maroon flex-shrink-0" />
-                                    Environmental Stressors
-                                </li>
-                                <li className="flex items-center gap-3">
-                                    <span className="w-2 h-2 rounded-full bg-maroon flex-shrink-0" />
-                                    Lifestyle Factors
-                                </li>
-                            </ul>
-                        </div>
+                    <div className="text-center mb-8">
+                        <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
+                            The Basics
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-display text-charcoal leading-tight">
+                            Understanding <span className="text-maroon italic">the cause</span>
+                        </h2>
                     </div>
                 </Reveal>
+                
+                <div className="grid md:grid-cols-2 gap-6 auto-rows-fr">
+                    <Reveal delay={0.1} className="h-full">
+                        <div className="bg-beige-warm rounded-xl p-6 border border-charcoal/5 h-full">
+                            <h3 className="text-lg font-display text-charcoal mb-3">What it is</h3>
+                            <p className="text-charcoal/70 text-base leading-relaxed">
+                                {content?.understanding?.whatItIs || 
+                                    `A common condition that can affect confidence and comfort. Modern dermatology offers targeted protocols to manage and resolve it significantly.`}
+                            </p>
+                        </div>
+                    </Reveal>
+                    
+                    <Reveal delay={0.2} className="h-full">
+                        <div className="bg-beige-warm rounded-xl p-6 border border-charcoal/5 h-full">
+                            <h3 className="text-lg font-display text-charcoal mb-3">Common Triggers</h3>
+                            {content?.understanding?.whyItHappens ? (
+                                <ul className="space-y-2 text-base text-charcoal/70">
+                                    {content.understanding.whyItHappens.map((trigger, i) => (
+                                        <li key={i} className="flex items-start gap-3">
+                                            <span className="w-2 h-2 rounded-full bg-maroon flex-shrink-0 mt-2" />
+                                            <span>{trigger}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <ul className="space-y-2 text-base text-charcoal/70">
+                                    <li className="flex items-center gap-3">
+                                        <span className="w-2 h-2 rounded-full bg-maroon flex-shrink-0" />
+                                        Genetics & Hormonal Changes
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <span className="w-2 h-2 rounded-full bg-maroon flex-shrink-0" />
+                                        Environmental Stressors
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <span className="w-2 h-2 rounded-full bg-maroon flex-shrink-0" />
+                                        Lifestyle Factors
+                                    </li>
+                                </ul>
+                            )}
+                        </div>
+                    </Reveal>
+                </div>
             </div>
         </div>
       </section>
 
       {/* ============================================
-          4. SOLUTIONS - Centered Cards
+          4. SOLUTIONS - Treatment Options
           ============================================ */}
-      <section id="solutions" className="py-16 md:py-20 bg-beige-warm">
+      <section id="solutions" className="py-12 md:py-16 bg-beige-warm">
         <div className="section-container">
             <Reveal>
-                <div className="text-center mb-12">
-                    <span className="text-maroon font-bold uppercase tracking-[0.25em] text-xs mb-3 block">
+                <div className="text-center mb-8">
+                    <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
                         Clinical Solutions
                     </span>
                     <h2 className="text-3xl md:text-4xl font-display text-charcoal mb-4">
                         How we treat it
                     </h2>
-                    <p className="text-charcoal/60 max-w-lg mx-auto text-base">
-                        Our dermatologists customise a plan using one or a combination of these advanced treatments.
+                    <p className="text-charcoal/70 max-w-2xl mx-auto text-base leading-relaxed">
+                        {content?.pragnaApproach?.description || 
+                            'Our dermatologists customise a plan using one or a combination of these advanced treatments.'}
                     </p>
                 </div>
             </Reveal>
 
-            {relatedFamilies.length > 0 ? (
+            {/* Use recommended treatments from content if available, else fall back to related families */}
+            {content?.recommendedTreatments && content.recommendedTreatments.length > 0 ? (
+                <div className={`grid gap-5 max-w-4xl mx-auto ${content.recommendedTreatments.length <= 2 ? 'md:grid-cols-2 max-w-2xl' : 'md:grid-cols-2 lg:grid-cols-2'}`}>
+                    {content.recommendedTreatments.map((treatment, index) => (
+                        <Reveal key={treatment.slug} delay={index * 0.1} className="h-full">
+                            <Link
+                                href={treatment.type === 'family' ? `/treatments/${treatment.slug}` : `/treatments/${relatedFamilies[0]?.slug || 'acne-acne-scar-solutions'}/${treatment.slug}`}
+                                className="group flex flex-col bg-white p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-charcoal/5 hover:border-maroon/20 h-full"
+                            >
+                                <span className="text-xs uppercase tracking-widest text-maroon/70 block mb-2 font-medium">
+                                    {treatment.type === 'family' ? 'Treatment Family' : 'Specific Treatment'}
+                                </span>
+                                
+                                <h3 className="text-lg font-display text-charcoal mb-2 group-hover:text-maroon transition-colors">
+                                    {treatment.name}
+                                </h3>
+                                
+                                <p className="text-charcoal/60 text-base mb-4 flex-grow">
+                                    Best for: {treatment.bestFor}
+                                </p>
+                                
+                                <div className="flex items-center text-sm uppercase tracking-widest font-medium text-maroon mt-auto">
+                                    <span>Learn more</span>
+                                    <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </div>
+                            </Link>
+                        </Reveal>
+                    ))}
+                </div>
+            ) : relatedFamilies.length > 0 ? (
                 <div className={`grid gap-5 max-w-3xl mx-auto ${relatedFamilies.length === 1 ? 'md:grid-cols-1 max-w-md' : 'md:grid-cols-2'}`}>
                     {relatedFamilies.map((family, index) => (
                         <Reveal key={family.slug} delay={index * 0.1} className="h-full">
                             <Link
                                 href={`/treatments/${family.slug}`}
-                                className="group flex flex-col bg-white p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-charcoal/5 hover:border-maroon/20 h-full"
+                                className="group flex flex-col bg-white p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-charcoal/5 hover:border-maroon/20 h-full"
                             >
-                                <span className="text-xs uppercase tracking-widest text-maroon/70 block mb-3 font-medium">
+                                <span className="text-xs uppercase tracking-widest text-maroon/70 block mb-2 font-medium">
                                     {family.pillar} Treatment
                                 </span>
                                 
-                                <h3 className="text-xl font-display text-charcoal mb-3 group-hover:text-maroon transition-colors">
+                                <h3 className="text-lg font-display text-charcoal mb-2 group-hover:text-maroon transition-colors">
                                     {family.name}
                                 </h3>
                                 
-                                <p className="text-charcoal/70 text-base leading-relaxed mb-5 flex-grow">
+                                <p className="text-charcoal/60 text-base mb-4 flex-grow">
                                     {family.summary}
                                 </p>
                                 
-                                <div className="flex items-center text-sm uppercase tracking-widest font-medium text-maroon mt-auto pt-2">
+                                <div className="flex items-center text-sm uppercase tracking-widest font-medium text-maroon mt-auto">
                                     <span>Explore</span>
                                     <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -285,29 +345,150 @@ export default async function ConditionPage({
       </section>
 
       {/* ============================================
-          5. CTA - Center Aligned
+          5. TIMELINE (if available)
           ============================================ */}
-      <section className="py-16 md:py-20 bg-maroon relative overflow-hidden">
+      {content?.timeline && content.timeline.steps.length > 0 && (
+        <section className="py-12 md:py-16 bg-white">
+          <div className="section-container">
+            <Reveal>
+              <div className="text-center mb-8">
+                <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
+                  What to Expect
+                </span>
+                <h2 className="text-3xl md:text-4xl font-display text-charcoal">
+                  Your treatment journey
+                </h2>
+              </div>
+            </Reveal>
+
+            <div className="max-w-3xl mx-auto">
+              <div className="relative">
+                {/* Timeline line */}
+                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-maroon/20 transform md:-translate-x-1/2" />
+                
+                {content.timeline.steps.map((step, i) => (
+                  <Reveal key={i} delay={i * 0.1}>
+                    <div className={`relative flex items-start gap-6 mb-8 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                      {/* Timeline dot */}
+                      <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-maroon transform -translate-x-1/2 mt-2" />
+                      
+                      {/* Content */}
+                      <div className={`ml-12 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
+                        <div className="bg-beige-warm rounded-xl p-5 border border-charcoal/5">
+                          <h3 className="text-lg font-display text-maroon mb-2">{step.title}</h3>
+                          <p className="text-charcoal/70 text-base leading-relaxed">{step.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ============================================
+          6. SELF-CARE TIPS (if available)
+          ============================================ */}
+      {content?.selfCareTips && content.selfCareTips.length > 0 && (
+        <section className="py-12 md:py-16 bg-beige-warm">
+          <div className="section-container">
+            <div className="max-w-4xl mx-auto">
+              <Reveal>
+                <div className="text-center mb-8">
+                  <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
+                    At Home
+                  </span>
+                  <h2 className="text-3xl md:text-4xl font-display text-charcoal">
+                    Self-care tips
+                  </h2>
+                </div>
+              </Reveal>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                {content.selfCareTips.map((tip, i) => (
+                  <Reveal key={i} delay={i * 0.05}>
+                    <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-charcoal/5">
+                      <div className="w-6 h-6 rounded-full bg-maroon/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 h-3 text-maroon" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <p className="text-charcoal/80 text-base leading-relaxed">{tip}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ============================================
+          7. FAQs (if available)
+          ============================================ */}
+      {content?.faqs && content.faqs.length > 0 && (
+        <section className="py-12 md:py-16 bg-white">
+          <div className="section-container">
+            <div className="max-w-3xl mx-auto">
+              <Reveal>
+                <div className="text-center mb-8">
+                  <span className="text-maroon/70 font-medium uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">
+                    Common Questions
+                  </span>
+                  <h2 className="text-3xl md:text-4xl font-display text-charcoal">
+                    FAQs
+                  </h2>
+                </div>
+              </Reveal>
+
+              <div className="space-y-4">
+                {content.faqs.map((faq, i) => (
+                  <Reveal key={i} delay={i * 0.05}>
+                    <details className="group bg-beige-warm rounded-xl border border-charcoal/5 overflow-hidden">
+                      <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
+                        <h3 className="text-base md:text-lg font-display text-charcoal pr-4">{faq.question}</h3>
+                        <svg className="w-5 h-5 text-maroon transform group-open:rotate-180 transition-transform flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </summary>
+                      <div className="px-5 pb-5 pt-0">
+                        <p className="text-charcoal/70 text-base leading-relaxed">{faq.answer}</p>
+                      </div>
+                    </details>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ============================================
+          8. CTA - Center Aligned
+          ============================================ */}
+      <section className="py-12 md:py-16 bg-maroon relative overflow-hidden">
          <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay" />
          
          <div className="section-container relative z-10 text-center">
             <h2 className="text-3xl md:text-4xl font-display text-white mb-3">
                 Ready to take control?
             </h2>
-            <p className="text-white/80 text-base md:text-lg mb-8 max-w-md mx-auto">
+            <p className="text-white/80 text-base mb-6 max-w-md mx-auto">
                 Our dermatologists are here to guide you back to confidence.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a 
                     href="#contact" 
-                    className="px-8 py-3.5 rounded-full font-medium text-base transition-all duration-300 hover:scale-105 bg-white text-maroon"
+                    className="px-7 py-3 rounded-full font-medium text-sm transition-all duration-300 hover:scale-105 bg-white text-maroon"
                 >
                     Book Consultation
                 </a>
                 <a 
                     href="tel:+919876543210" 
-                    className="px-8 py-3.5 rounded-full font-medium text-base transition-all duration-300 border border-white/40 text-white hover:bg-white/10"
+                    className="px-7 py-3 rounded-full font-medium text-sm transition-all duration-300 border border-white/40 text-white hover:bg-white/10"
                 >
                     Call Clinic
                 </a>
@@ -316,10 +497,10 @@ export default async function ConditionPage({
       </section>
 
       {/* Back Link - Center Aligned */}
-      <div className="bg-beige-warm py-8 border-t border-charcoal/5">
+      <div className="bg-beige-warm py-6 border-t border-charcoal/5">
         <div className="section-container text-center">
-            <Link href="/conditions" className="inline-flex items-center gap-2 text-base text-maroon hover:text-charcoal transition-colors font-medium">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <Link href="/conditions" className="inline-flex items-center gap-2 text-sm text-maroon hover:text-charcoal transition-colors font-medium">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
                 Back to all conditions

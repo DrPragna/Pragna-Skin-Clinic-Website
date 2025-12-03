@@ -10,7 +10,12 @@
  * 3. Add it to the corresponding map with the slug as key
  */
 
-import { TreatmentFamilyContent, SubTreatmentContent } from '@/lib/navigationData';
+import { TreatmentFamilyContent, SubTreatmentContent, ConditionContent } from '@/lib/navigationData';
+
+// ============================================
+// CONDITION CONTENT IMPORTS
+// ============================================
+import { acneBreakoutsContent } from './conditions/acne-breakouts';
 
 // ============================================
 // TREATMENT FAMILY CONTENT IMPORTS
@@ -177,6 +182,19 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
 };
 
 // ============================================
+// CONDITION CONTENT MAP
+// ============================================
+
+/**
+ * Map of condition slug -> content
+ * Key must match the slug in navigationData.ts
+ */
+export const conditionContentMap: Record<string, ConditionContent> = {
+  'acne-breakouts': acneBreakoutsContent,
+  // Add more as content files are created...
+};
+
+// ============================================
 // CONTENT GETTERS
 // ============================================
 
@@ -208,4 +226,19 @@ export function hasTreatmentFamilyContent(slug: string): boolean {
  */
 export function hasSubTreatmentContent(slug: string): boolean {
   return slug in subTreatmentContentMap;
+}
+
+/**
+ * Get condition content by slug
+ * Returns null if content not found (page will use fallback)
+ */
+export function getConditionContent(slug: string): ConditionContent | null {
+  return conditionContentMap[slug] ?? null;
+}
+
+/**
+ * Check if content exists for a condition
+ */
+export function hasConditionContent(slug: string): boolean {
+  return slug in conditionContentMap;
 }
