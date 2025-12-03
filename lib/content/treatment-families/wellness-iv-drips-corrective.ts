@@ -1,4 +1,4 @@
-import { TreatmentFamilyContent } from '../index';
+import { TreatmentFamilyContent } from '@/lib/navigationData';
 
 export const wellnessIvDripsCorrectiveFamilyContent: TreatmentFamilyContent = {
   hero: {
