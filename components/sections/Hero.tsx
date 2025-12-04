@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -108,22 +109,12 @@ export default function Hero() {
             >
               Book Consultation
             </button>
-            <button 
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const treatmentsSection = document.getElementById('treatments');
-                if (treatmentsSection) {
-                  const offset = 100;
-                  const elementPosition = treatmentsSection.getBoundingClientRect().top + window.scrollY;
-                  window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-                }
-              }}
-              className="px-8 py-4 border border-cream/30 text-cream rounded-full font-medium hover:bg-cream/20 hover:border-cream/80 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,248,240,0.2)] transition-all duration-300 backdrop-blur-sm min-w-[180px] cursor-pointer"
+            <Link 
+              href="/treatments"
+              className="px-8 py-4 border border-cream/30 text-cream rounded-full font-medium hover:bg-cream/20 hover:border-cream/80 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,248,240,0.2)] transition-all duration-300 backdrop-blur-sm min-w-[180px] text-center"
             >
               View Treatments
-            </button>
+            </Link>
           </motion.div>
         </div>
       </div>

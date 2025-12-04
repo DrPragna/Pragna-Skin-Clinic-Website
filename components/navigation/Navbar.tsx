@@ -201,10 +201,10 @@ export default function Navbar() {
               onMouseEnter={() => openDropdown('treatments')}
               onMouseLeave={closeDropdown}
             >
-              <Link href="/treatments" className={`${linkClasses} ${activeDropdown === 'treatments' ? 'text-maroon' : ''}`}>
+              <span className={`${linkClasses} ${activeDropdown === 'treatments' ? 'text-maroon' : ''}`}>
                 Treatments
                 <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'treatments' ? 'rotate-180' : ''}`} />
-              </Link>
+              </span>
             </div>
             
             {/* Mega Menu Dropdown - Positioned outside trigger for proper hover handling */}
@@ -223,6 +223,17 @@ export default function Navbar() {
                 className="p-6 md:p-8 lg:p-12 max-h-[80vh] overflow-y-auto overflow-x-hidden custom-scrollbar"
                 data-lenis-prevent
               >
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-8">
+                    <Link 
+                      href="/treatments"
+                      className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors"
+                    >
+                      View All Treatments
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
                     {navigationData.treatments.map((pillar) => (
                       <div key={pillar.pillar} className="space-y-8">
@@ -286,10 +297,10 @@ export default function Navbar() {
               onMouseEnter={() => openDropdown('conditions')}
               onMouseLeave={closeDropdown}
             >
-              <Link href="/conditions" className={`${linkClasses} ${activeDropdown === 'conditions' ? 'text-maroon' : ''}`}>
+              <span className={`${linkClasses} ${activeDropdown === 'conditions' ? 'text-maroon' : ''}`}>
                 Conditions
                 <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === 'conditions' ? 'rotate-180' : ''}`} />
-              </Link>
+              </span>
             </div>
             
             {/* Conditions Mega Menu - Positioned outside trigger for proper hover handling */}
@@ -308,6 +319,17 @@ export default function Navbar() {
                 className="p-6 md:p-8 lg:p-12 max-h-[80vh] overflow-y-auto overflow-x-hidden custom-scrollbar"
                 data-lenis-prevent
               >
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-8">
+                    <Link 
+                      href="/conditions"
+                      className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors"
+                    >
+                      View All Conditions
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-10">
                     {/* Skin - Spans 5 columns on lg */}
                     <div className="lg:col-span-5 space-y-6 md:space-y-8 lg:border-r border-maroon/5 lg:pr-8">
@@ -467,17 +489,11 @@ export default function Navbar() {
               >
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
-                  <div className="relative">
-                    <h3 className="font-sans text-xs text-maroon/80 font-bold uppercase tracking-[0.25em]">
-                      Curated Experiences
-                    </h3>
-                    <div className="absolute -bottom-2 left-0 w-12 h-px bg-maroon/20" />
-                  </div>
                   <Link 
                     href="/signature-programs"
                     className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors"
                   >
-                    View All Programs
+                    View All Signature Programmes
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
@@ -579,6 +595,14 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Backdrop for mega menus */}
+      <div 
+        className={`fixed inset-0 top-[80px] bg-black/20 backdrop-blur-sm transition-all duration-500 z-40 ${
+          activeDropdown ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+        onMouseEnter={closeDropdown}
+      />
 
       {/* Mobile Menu Overlay */}
       <div 
