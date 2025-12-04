@@ -411,7 +411,7 @@ export default function BookingModal({
                       <button
                         type="submit"
                         disabled={formState === "submitting"}
-                        className="w-full bg-maroon text-cream py-4 rounded-xl text-[10px] font-sans font-medium uppercase tracking-[0.2em] hover:bg-maroon-dark transition-all duration-500 shadow-lg shadow-maroon/20 disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
+                        className="w-full bg-maroon text-cream py-4 rounded-xl text-sm font-sans font-medium uppercase tracking-[0.15em] hover:bg-maroon-dark transition-all duration-500 shadow-lg shadow-maroon/20 disabled:opacity-70 disabled:cursor-not-allowed group relative overflow-hidden"
                       >
                         <span className="relative z-10 flex items-center justify-center gap-2">
                           {formState === "submitting" ? (
