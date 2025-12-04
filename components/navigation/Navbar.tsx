@@ -124,10 +124,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
+  // Close mobile menu and desktop megamenu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setActiveMobileDropdown(null);
+    setActiveDropdown(null);
+    // Clear any pending timeout
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+      dropdownTimeoutRef.current = null;
+    }
   }, [pathname]);
 
   // Toggle body class for mega-menu blur effect
