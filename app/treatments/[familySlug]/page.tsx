@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getTreatmentFamily, getConditionsForFamily } from '@/lib/navigationData';
 import { getTreatmentFamilyContent } from '@/lib/content';
@@ -142,7 +141,6 @@ export default async function TreatmentFamilyPage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       
     <main className="overflow-x-hidden bg-beige-warm">
-      <Navbar />
       
       {/* ============================================
           HERO

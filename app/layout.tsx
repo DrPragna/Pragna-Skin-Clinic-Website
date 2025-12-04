@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/ui/SmoothScroll";
 import CustomCursor from "@/components/ui/CustomCursor";
 import PageLoader from "@/components/ui/PageLoader";
 import { BookingModalProvider } from "@/components/ui/BookingModal";
+import Navbar from "@/components/navigation/Navbar";
 
 export const metadata: Metadata = {
   title: "Pragna Advanced Skin Clinic | Advanced Dermatology in Hyderabad",
@@ -32,9 +33,15 @@ export default function RootLayout({
         
         {/* Booking Modal Provider - Global */}
         <BookingModalProvider>
+          {/* Navbar - Outside main content for blur effect */}
+          <Navbar />
+          
           {/* Smooth Scroll Provider */}
           <SmoothScroll>
-            {children}
+            {/* Main content wrapper - will be blurred when mega menu opens */}
+            <div id="main-content">
+              {children}
+            </div>
             
             {/* Global UI Elements */}
             <GrainOverlay />

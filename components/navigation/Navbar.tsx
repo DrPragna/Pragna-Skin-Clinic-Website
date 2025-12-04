@@ -130,6 +130,19 @@ export default function Navbar() {
     setActiveMobileDropdown(null);
   }, [pathname]);
 
+  // Toggle body class for mega-menu blur effect
+  useEffect(() => {
+    if (activeDropdown) {
+      document.body.classList.add('mega-menu-open');
+    } else {
+      document.body.classList.remove('mega-menu-open');
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('mega-menu-open');
+    };
+  }, [activeDropdown]);
 
   const toggleMobileDropdown = (name: string) => {
     setActiveMobileDropdown(activeMobileDropdown === name ? null : name);
@@ -596,10 +609,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Backdrop for mega menus */}
+      {/* Invisible backdrop to close mega menus on hover outside */}
       <div 
-        className={`fixed inset-0 top-[80px] bg-black/20 backdrop-blur-sm transition-all duration-500 z-40 ${
-          activeDropdown ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        className={`fixed inset-0 top-[80px] z-40 ${
+          activeDropdown ? 'visible pointer-events-auto' : 'invisible pointer-events-none'
         }`}
         onMouseEnter={closeDropdown}
       />

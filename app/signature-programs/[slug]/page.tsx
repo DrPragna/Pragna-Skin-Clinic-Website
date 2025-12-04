@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/sections/Footer";
 import {
   signaturePrograms,
@@ -46,7 +45,6 @@ export default async function SignatureProgramPage({
 
   return (
     <main className="overflow-x-hidden bg-white">
-      <Navbar />
       <SignatureProgramClientContent program={program} />
       <Footer />
     </main>

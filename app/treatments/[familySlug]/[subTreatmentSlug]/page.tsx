@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getSubTreatment, conditions } from '@/lib/navigationData';
 import { getSubTreatmentContent } from '@/lib/content';
@@ -158,7 +157,6 @@ export default async function SubTreatmentPage({
       />
       
       <main className="overflow-x-hidden bg-beige-warm">
-        <Navbar />
         
         {/* Pass data to client component for interactive features */}
         <SubTreatmentClientContent 

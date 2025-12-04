@@ -570,6 +570,20 @@ html.lenis, html.lenis body {
 }
 
 /* ===========================================
+   MEGA MENU BLUR EFFECT (Apple-style)
+   =========================================== */
+body.mega-menu-open #main-content {
+  filter: blur(8px) brightness(0.7);
+  transition: filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+body:not(.mega-menu-open) #main-content {
+  filter: blur(0) brightness(1);
+  transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===========================================
    GRAIN TEXTURE OVERLAY
    =========================================== */
 .grain-overlay {

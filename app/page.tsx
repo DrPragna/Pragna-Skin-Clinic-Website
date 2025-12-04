@@ -1,6 +1,5 @@
 'use client';
 
-import Navbar from '@/components/navigation/Navbar';
 import Hero from '@/components/sections/Hero';
 import WhyPragna from '@/components/sections/WhyPragna';
 import SignaturePrograms from '@/components/sections/SignaturePrograms';
@@ -34,7 +33,6 @@ import Footer from '@/components/sections/Footer';
 export default function Home() {
   return (
     <main className="overflow-x-hidden">
-      <Navbar />
       <Hero />
       <WhyPragna />
       <TreatmentPillars />

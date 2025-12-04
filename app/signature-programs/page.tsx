@@ -1,6 +1,5 @@
 import React from 'react';
 import { Metadata } from 'next';
-import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { signaturePrograms } from '@/lib/content/signature-programs';
 import SignatureProgramsDirectory from './SignatureProgramsDirectory';
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
 export default function SignatureProgramsPage() {
   return (
     <main className="min-h-screen bg-beige-warm">
-      <Navbar />
       <SignatureProgramsDirectory programs={signaturePrograms} />
       <Footer />
     </main>

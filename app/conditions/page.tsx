@@ -4,7 +4,6 @@ import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { getConditionsByGroup } from '@/lib/navigationData';
 import { Reveal } from '@/components/ui/Reveal';
@@ -146,7 +145,6 @@ function ConditionsContent() {
 
   return (
     <main className="min-h-screen transition-colors duration-700 ease-in-out bg-white">
-      <Navbar />
       
       {/* ============================================
           SMART HERO - Dynamic based on Filter

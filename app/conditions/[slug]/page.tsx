@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/sections/Footer';
 import { conditions, getCondition, getTreatmentFamiliesForCondition } from '@/lib/navigationData';
 import { getConditionContent } from '@/lib/content';
@@ -111,7 +110,6 @@ export default async function ConditionPage({
 
   return (
     <main className="overflow-x-hidden bg-white">
-      <Navbar />
       
       {/* ============================================
           1. HERO - Cinematic & Centered
