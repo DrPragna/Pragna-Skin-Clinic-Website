@@ -73,15 +73,15 @@ export default function TreatmentPillars() {
                   alt={pillar.title}
                   className={`w-full h-full object-cover transition-all duration-1000 ease-out
                     ${activeId === pillar.id 
-                      ? 'scale-100 grayscale-0 opacity-100' 
-                      : 'scale-110 grayscale opacity-60'
+                      ? 'scale-100 saturate-100 brightness-100 contrast-100' 
+                      : 'scale-110 saturate-[0.6] brightness-[0.8] contrast-110'
                     }
                   `}
                 />
                 
                 {/* Overlays */}
                 <div className={`absolute inset-0 transition-colors duration-700 ${
-                  activeId === pillar.id ? 'bg-black/10' : 'bg-black/20'
+                  activeId === pillar.id ? 'bg-black/0' : 'bg-black/10'
                 }`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90" />
               </div>
