@@ -148,12 +148,12 @@ export default function Doctors() {
 
                   {/* Highlights Section */}
                   {doctor.highlights && (
-                    <div className="py-3 px-4 bg-maroon/[0.03] rounded-xl border border-maroon/5">
-                      <ul className="space-y-2">
+                    <div className="py-4 flex justify-center">
+                      <ul className="space-y-3 text-left inline-block">
                         {doctor.highlights.map((item, i) => (
-                          <li key={i} className="text-xs lg:text-sm text-maroon/80 font-medium flex items-center justify-center gap-2 text-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-maroon/40 flex-shrink-0" />
-                            <span>{item}</span>
+                          <li key={i} className="flex items-start gap-3">
+                            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-rose-gold flex-shrink-0" />
+                            <span className="text-sm text-charcoal/80 font-medium leading-relaxed">{item}</span>
                           </li>
                         ))}
                       </ul>
