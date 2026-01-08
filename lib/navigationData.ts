@@ -164,6 +164,20 @@ export const treatmentFamilies: TreatmentFamily[] = [
   
   // WELLNESS PILLAR
   {
+    slug: 'medifacials',
+    name: 'Medifacials',
+    pillar: 'Wellness',
+    summary: 'Device-based facials with real skin science for deep cleansing, exfoliation and radiance.',
+    subTreatments: [
+      { slug: 'hydrafacial', name: 'Hydrafacial', description: 'Vortex cleansing and hydration for clear, glowing skin', relatedConditions: ['acne-breakouts', 'uneven-skin-tone-texture'] },
+      { slug: 'oxygeneo', name: 'Oxygeneo', description: 'Oxygen boost for tired, dull skin', relatedConditions: ['uneven-skin-tone-texture', 'ageing-skin-lines-wrinkles'] },
+      { slug: 'dermal-infusion', name: 'Dermal Infusion', description: 'Diamond-tip polish with serum infusion', relatedConditions: ['acne-scars', 'uneven-skin-tone-texture'] },
+      { slug: 'zo-red-carpet', name: 'ZO Red-Carpet Facial', description: 'ZO glow with minimal downtime', relatedConditions: ['uneven-skin-tone-texture', 'ageing-skin-lines-wrinkles'] },
+      { slug: 'fire-and-ice', name: 'Fire & Ice Facial', description: 'Warm resurface, cool calm for radiance', relatedConditions: ['uneven-skin-tone-texture', 'ageing-skin-lines-wrinkles'] },
+      { slug: 'mango-bright', name: 'Mango Bright Facial', description: 'Fruit-enzyme brightening for tan and dullness', relatedConditions: ['dark-spots-tan-pigmentation', 'uneven-skin-tone-texture'] },
+    ]
+  },
+  {
     slug: 'wellness-iv-drips-corrective',
     name: 'Wellness, IV Drips & Corrective Procedures',
     pillar: 'Wellness',

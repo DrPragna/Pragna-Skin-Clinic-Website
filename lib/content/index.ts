@@ -44,6 +44,7 @@ import { hairGrowthScalpTreatmentsFamilyContent } from './treatment-families/hai
 import { bodyContouringFatReductionFamilyContent } from './treatment-families/body-contouring-fat-reduction';
 import { stretchMarkBodyScarRevisionFamilyContent } from './treatment-families/stretch-mark-body-scar-revision';
 import { wellnessIvDripsCorrectiveFamilyContent } from './treatment-families/wellness-iv-drips-corrective';
+import { medifacialsContent } from './treatment-families/medifacials';
 
 // ============================================
 // SUB-TREATMENT CONTENT IMPORTS
@@ -104,6 +105,14 @@ import { stretchMarkReductionContent } from './sub-treatments/stretch-mark-reduc
 import { cSectionSurgeryScarRevisionContent } from './sub-treatments/c-section-surgery-scar-revision';
 import { bodyAcneBodyScarTreatmentContent } from './sub-treatments/body-acne-body-scar-treatment';
 
+// Medifacials family
+import { hydrafacialContent } from './sub-treatments/hydrafacial';
+import { oxygeneoContent } from './sub-treatments/oxygeneo';
+import { dermalInfusionContent } from './sub-treatments/dermal-infusion';
+import { zoRedCarpetContent } from './sub-treatments/zo-red-carpet';
+import { fireAndIceContent } from './sub-treatments/fire-and-ice';
+import { mangoBrightContent } from './sub-treatments/mango-bright';
+
 // Wellness, IV Drips & Corrective Procedures family
 import { ivDripTherapyContent } from './sub-treatments/iv-drip-therapy';
 import { mommyMakeoverProgramContent } from './sub-treatments/mommy-makeover-program';
@@ -128,6 +137,7 @@ export const treatmentFamilyContentMap: Record<string, TreatmentFamilyContent> =
   'hair-growth-scalp-treatments': hairGrowthScalpTreatmentsFamilyContent,
   'body-contouring-fat-reduction': bodyContouringFatReductionFamilyContent,
   'stretch-mark-body-scar-revision': stretchMarkBodyScarRevisionFamilyContent,
+  'medifacials': medifacialsContent,
   'wellness-iv-drips-corrective': wellnessIvDripsCorrectiveFamilyContent,
 };
 
@@ -191,6 +201,14 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
   'stretch-mark-reduction': stretchMarkReductionContent,
   'c-section-surgery-scar-revision': cSectionSurgeryScarRevisionContent,
   'body-acne-body-scar-treatment': bodyAcneBodyScarTreatmentContent,
+  
+  // Medifacials
+  'hydrafacial': hydrafacialContent,
+  'oxygeneo': oxygeneoContent,
+  'dermal-infusion': dermalInfusionContent,
+  'zo-red-carpet': zoRedCarpetContent,
+  'fire-and-ice': fireAndIceContent,
+  'mango-bright': mangoBrightContent,
   
   // Wellness, IV Drips & Corrective Procedures
   'iv-drip-therapy': ivDripTherapyContent,
