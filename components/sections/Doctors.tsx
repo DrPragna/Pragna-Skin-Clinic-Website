@@ -142,7 +142,7 @@ export default function Doctors() {
                 <div className="w-12 h-px bg-maroon/30 mx-auto mb-4" />
 
                 <div className="flex-1 flex flex-col gap-4">
-                  <p className="text-charcoal/90 text-sm lg:text-base leading-relaxed font-normal">
+                  <p className="text-charcoal/90 text-sm lg:text-base leading-relaxed font-normal text-justify">
                     {doctor.bio}
                   </p>
 
