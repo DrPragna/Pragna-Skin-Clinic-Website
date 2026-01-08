@@ -33,7 +33,7 @@ const doctors = [
   {
     id: 'pragna',
     name: 'Dr. Pragna Surapaneni',
-    role: 'Consultant Dermatologist',
+    role: 'Dermatologist',
     credentials: 'MBBS, MD, MRCP-SCE (UK)',
     experience: 'Advanced Aesthetic Dermatology',
     bio: 'A State Ranker and Gold Medalist, Dr. Pragna combines strong academic grounding with advanced aesthetic training. She specialises in personalised, results-driven care that balances medical safety with refined, natural-looking outcomes.',
