@@ -18,9 +18,14 @@ const doctors = [
     id: 'padmavathi',
     name: 'Dr. Padmavathi Surapaneni',
     role: 'Senior Dermatologist & Founder',
-    credentials: 'MBBS, DVD, DNB',
+    credentials: 'MBBS, DD',
     experience: '25+ Years of Excellence',
-    bio: 'A pioneer in clinical dermatology, Dr. Padmavathi has spent over two decades refining the art of skin care. Known for her diagnostic precision and ethical approach, she combines deep medical knowledge with an eye for aesthetic harmony.',
+    bio: 'A pioneer in clinical and aesthetic dermatology in South India with over 25 years of experience. She was among the first to introduce advanced technologies like HIFU and cryolipolysis to the region, combining diagnostic precision with an eye for aesthetic harmony.',
+    highlights: [
+      'Renowned National & International Faculty',
+      'Speaker at IMCAS Paris & 5CC Barcelona',
+      'National Trainer for Injectables & Lasers'
+    ],
     image: '/doctors/padmavathi-portrait.jpg', // Placeholder path
     signature: 'Expertise & Ethics',
     badge: '25+ Years Experience',
@@ -29,9 +34,13 @@ const doctors = [
     id: 'pragna',
     name: 'Dr. Pragna Surapaneni',
     role: 'Consultant Dermatologist',
-    credentials: 'MBBS, MD (Dermatology)',
-    experience: 'Advanced Laser Specialist',
-    bio: 'Representing the next generation of dermatology, Dr. Pragna specializes in advanced laser technologies and cosmetic procedures. Her approach is holistic, ensuring every treatment is tailored to the patient’s unique lifestyle and goals.',
+    credentials: 'MBBS, MD, MRCP-SCE (UK)',
+    experience: 'Advanced Aesthetic Dermatology',
+    bio: 'A State Ranker and Gold Medalist, Dr. Pragna combines strong academic grounding with advanced aesthetic training. She specialises in personalised, results-driven care that balances medical safety with refined, natural-looking outcomes.',
+    highlights: [
+      'State Ranker & Gold Medalist in Dermatology',
+      'MRCP-SCE (UK) Certified'
+    ],
     image: '/doctors/pragna-portrait.jpg', // Placeholder path
     signature: 'Innovation & Care',
     badge: 'Gold Medalist',
@@ -71,7 +80,7 @@ export default function Doctors() {
 
         {/* Doctor Profiles - Side by Side Grid - More Compact */}
         <motion.div 
-          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start"
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -79,7 +88,7 @@ export default function Doctors() {
           {doctors.map((doctor, index) => (
             <div
               key={doctor.id}
-              className="flex flex-col items-center text-center bg-white p-8 rounded-[2.5rem] shadow-sm border border-maroon/5 hover:shadow-md transition-all duration-500 group"
+              className="flex flex-col items-center text-center bg-white p-8 rounded-[2.5rem] shadow-sm border border-maroon/5 hover:shadow-md transition-all duration-500 group h-full"
             >
               {/* Image Section - Even Smaller */}
               <div className="w-full max-w-[260px] relative mb-8 group-hover:scale-105 transition-transform duration-700">
@@ -120,31 +129,48 @@ export default function Doctors() {
                 </div>
 
               {/* Text Content - Improved Contrast */}
-              <div className="w-full max-w-md space-y-4">
-                  <div>
-                  <h3 className="text-2xl lg:text-3xl font-display text-charcoal font-medium mb-1">
+              <div className="w-full max-w-md flex flex-col flex-1">
+                  <div className="mb-4">
+                    <h3 className="text-2xl lg:text-3xl font-display text-charcoal font-medium mb-1">
                       {doctor.name}
                     </h3>
-                  <p className="text-base text-maroon/80 font-medium italic">
-                    {doctor.role}
-                  </p>
+                    <p className="text-base text-maroon/80 font-medium italic">
+                      {doctor.role}
+                    </p>
                   </div>
                   
-                <div className="w-12 h-px bg-maroon/30 mx-auto" />
+                <div className="w-12 h-px bg-maroon/30 mx-auto mb-4" />
 
-                <div className="space-y-3">
-                  <p className="text-charcoal/90 text-sm lg:text-base leading-relaxed font-normal line-clamp-4 lg:line-clamp-none">
+                <div className="flex-1 flex flex-col gap-4">
+                  <p className="text-charcoal/90 text-sm lg:text-base leading-relaxed font-normal">
                     {doctor.bio}
                   </p>
+
+                  {/* Highlights Section */}
+                  {doctor.highlights && (
+                    <div className="py-3 px-4 bg-maroon/[0.03] rounded-xl border border-maroon/5">
+                      <ul className="space-y-2">
+                        {doctor.highlights.map((item, i) => (
+                          <li key={i} className="text-xs lg:text-sm text-maroon/80 font-medium flex items-center justify-center gap-2 text-center">
+                            <span className="w-1.5 h-1.5 rounded-full bg-maroon/40 flex-shrink-0" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   
-                  <div className="pt-1">
+                  <div className="pt-2 border-t border-maroon/5 mt-auto">
                     <p className="text-[10px] text-maroon/60 uppercase tracking-widest mb-1 font-bold">Credentials</p>
                     <p className="text-charcoal font-medium font-sans text-sm">{doctor.credentials}</p>
                   </div>
                 </div>
 
-                <div className="pt-3">
-                  <a href="#contact" className="inline-flex items-center gap-2 text-maroon text-xs uppercase tracking-widest hover:opacity-70 transition-opacity group">
+                <div className="pt-6 mt-auto">
+                  <a 
+                    href="#contact" 
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-maroon/20 text-maroon text-xs uppercase tracking-widest font-medium hover:bg-maroon hover:text-white hover:border-maroon transition-all duration-300 group"
+                  >
                     <span>Book Consultation</span>
                     <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
