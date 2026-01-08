@@ -17,17 +17,17 @@ const pillars = [
   {
     number: '01',
     title: 'Legacy of\nMastery',
-    description: 'Founded by Dr. N.K. Pragna, with over 25 years of clinical excellence. We don’t just treat skin; we understand its story.',
+    description: "Founded by Dr. Padmavathi Surapaneni, with 25+ years of experience. Tailored plans, transparent care, and results designed to look natural.",
   },
   {
     number: '02',
     title: 'Curated\nInnovation',
-    description: 'We don’t chase trends. We invest in gold-standard technologies proven to deliver safe, transformative results.',
+    description: 'We invest in proven, gold-standard technology, not trends. Each treatment is chosen for safety, consistency, and outcomes you can see (and trust) over time.',
   },
   {
     number: '03',
     title: 'Integrity\nby Design',
-    description: 'No hidden costs, no unnecessary procedures. Just honest, evidence-based dermatology centered on your well-being.',
+    description: 'No unnecessary procedures. No surprise costs. Just honest, evidence-based dermatology with clear options, clear timelines, and long-term skin health as the goal.',
   },
 ];
 
