@@ -97,7 +97,7 @@ export default function PageLoader() {
                 delay: isExiting ? 0 : 0.5
               }}
             >
-              World Class Aesthetic Care
+              World Class Dermatology Care
             </motion.p>
             
             {/* Loading indicator line */}
