@@ -86,6 +86,7 @@ export const treatmentFamilies: TreatmentFamily[] = [
       { slug: 'fine-lines-wrinkles-treatment', name: 'Fine Lines & Wrinkles Treatment', description: 'Smooth expression lines and creases', relatedConditions: ['ageing-skin-lines-wrinkles'] },
       { slug: 'face-neck-skin-tightening', name: 'Face & Neck Skin Tightening', description: 'Lift and firm sagging skin non-surgically', relatedConditions: ['ageing-skin-lines-wrinkles', 'neck-lines-sagging-neck'] },
       { slug: 'jawline-chin-contouring', name: 'Jawline & Chin Contouring', description: 'Define and sculpt your lower face', relatedConditions: ['double-chin-jawline-fullness'] },
+      { slug: 'double-chin-fat-reduction', name: 'Double Chin Fat Reduction', description: 'Define your jawline without surgery', relatedConditions: ['double-chin-jawline-fullness'] },
       { slug: 'neck-lines-treatment', name: 'Neck Lines Treatment', description: 'Reduce horizontal lines and crepey texture', relatedConditions: ['neck-lines-sagging-neck'] },
       { slug: 'under-eye-rejuvenation', name: 'Under-Eye Rejuvenation', description: 'Refresh tired, hollow or dark under-eyes', relatedConditions: ['dark-circles-under-eye'] },
       { slug: 'hand-decollete-rejuvenation', name: 'Hand & Décolleté Rejuvenation', description: 'Restore youthful appearance to hands and chest', relatedConditions: ['ageing-skin-lines-wrinkles'] },
@@ -144,7 +145,6 @@ export const treatmentFamilies: TreatmentFamily[] = [
       { slug: 'tummy-love-handles-shaping', name: 'Tummy & Love Handles Shaping', description: 'Target midsection bulges that resist diet and exercise', relatedConditions: ['stubborn-fat-body-shaping'] },
       { slug: 'thigh-hip-contouring', name: 'Thigh & Hip Contouring', description: 'Slim and smooth your lower body silhouette', relatedConditions: ['stubborn-fat-body-shaping'] },
       { slug: 'arm-fat-reduction', name: 'Arm Fat Reduction', description: 'Tone and tighten upper arms', relatedConditions: ['stubborn-fat-body-shaping'] },
-      { slug: 'double-chin-fat-reduction', name: 'Double Chin Fat Reduction', description: 'Define your jawline without surgery', relatedConditions: ['double-chin-jawline-fullness'] },
       { slug: 'post-pregnancy-body-shaping', name: 'Post-Pregnancy Body Shaping', description: 'Restore your pre-baby confidence', relatedConditions: ['stubborn-fat-body-shaping', 'stretch-marks'] },
     ]
   },
@@ -280,7 +280,7 @@ export const conditions: Condition[] = [
     name: 'Double Chin & Jawline Fullness', 
     subtitle: 'Fullness under the chin or a softer, less-defined jawline',
     group: 'Body',
-    relatedTreatmentFamilies: ['anti-ageing-tightening-contouring', 'body-contouring-fat-reduction']
+    relatedTreatmentFamilies: ['anti-ageing-tightening-contouring']
   },
   { 
     slug: 'neck-lines-sagging-neck',

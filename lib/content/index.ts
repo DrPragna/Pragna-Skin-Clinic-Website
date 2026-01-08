@@ -67,6 +67,7 @@ import { teenAcneTreatmentContent } from './sub-treatments/teen-acne-treatment';
 import { fineLinesWrinklesTreatmentContent } from './sub-treatments/fine-lines-wrinkles-treatment';
 import { faceNeckSkinTighteningContent } from './sub-treatments/face-neck-skin-tightening';
 import { jawlineChinContouringContent } from './sub-treatments/jawline-chin-contouring';
+import { doubleChinFatReductionContent } from './sub-treatments/double-chin-fat-reduction';
 import { neckLinesTreatmentContent } from './sub-treatments/neck-lines-treatment';
 import { underEyeRejuvenationContent } from './sub-treatments/under-eye-rejuvenation';
 import { handDecolleteRejuvenationContent } from './sub-treatments/hand-decollete-rejuvenation';
@@ -94,7 +95,6 @@ import { lowLevelLightTherapyHairContent } from './sub-treatments/low-level-ligh
 import { tummyLoveHandlesShapingContent } from './sub-treatments/tummy-love-handles-shaping';
 import { thighHipContouringContent } from './sub-treatments/thigh-hip-contouring';
 import { armFatReductionContent } from './sub-treatments/arm-fat-reduction';
-import { doubleChinFatReductionContent } from './sub-treatments/double-chin-fat-reduction';
 import { postPregnancyBodyShapingContent } from './sub-treatments/post-pregnancy-body-shaping';
 
 // Stretch Mark & Body Scar Revision family
@@ -153,6 +153,7 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
   'fine-lines-wrinkles-treatment': fineLinesWrinklesTreatmentContent,
   'face-neck-skin-tightening': faceNeckSkinTighteningContent,
   'jawline-chin-contouring': jawlineChinContouringContent,
+  'double-chin-fat-reduction': doubleChinFatReductionContent,
   'neck-lines-treatment': neckLinesTreatmentContent,
   'under-eye-rejuvenation': underEyeRejuvenationContent,
   'hand-decollete-rejuvenation': handDecolleteRejuvenationContent,
@@ -180,7 +181,6 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
   'tummy-love-handles-shaping': tummyLoveHandlesShapingContent,
   'thigh-hip-contouring': thighHipContouringContent,
   'arm-fat-reduction': armFatReductionContent,
-  'double-chin-fat-reduction': doubleChinFatReductionContent,
   'post-pregnancy-body-shaping': postPregnancyBodyShapingContent,
   
   // Stretch Mark & Body Scar Revision
