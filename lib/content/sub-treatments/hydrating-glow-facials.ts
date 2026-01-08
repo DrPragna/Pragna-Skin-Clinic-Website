@@ -3,79 +3,78 @@ import { SubTreatmentContent } from "@/lib/navigationData";
 export const hydratingGlowFacialsContent: SubTreatmentContent = {
   hero: {
     title: "Hydrating & Glow Facials",
-    tagline: "Deep moisture, visible radiance",
+    tagline: "Calm, plump, comfort-first",
     intro:
-      "Hydrating & Glow Facials focus on moisture, barrier repair and instant radiance. They are ideal before events or during stressful phases when your skin feels tight, lifeless or flaky from travel, air-conditioning or strong treatments.",
+      "Skin feeling tight, tired or lifeless from travel, stress or strong actives? Hydrating & Glow facials are doctor-approved, non-device facials that focus on soothing, moisturising and gently brightening the skin barrier—more advanced than a parlour clean-up, but far gentler than peels or machines.",
   },
   quickStats: {
-    sessions: "Often every four–six weeks",
-    duration: "Roughly 45–60 minute sessions",
-    downtime: "Usually no visible downtime",
-    painLevel: "Comfortable, mild tingling only",
+    sessions: "Every 4–6 weeks or as needed",
+    duration: "45–60 mins",
+    downtime: "None; mild pinkness for 1–2 hours",
+    painLevel: "Relaxing; mild tingling during active steps",
   },
   overview:
-    "These facials combine gentle exfoliation, hydrafacials, masks and hydrating serums to restore dewiness and comfort. They are particularly helpful when your barrier feels stressed from travel, screen-heavy work or active treatments like retinoids and peels.",
+    "These facials use gentle cleansing, light enzyme or lactic acid exfoliation, massage, hydrating serums and cream or gel masks to restore comfort and glow. There are no vacuum devices or aggressive scrubs involved—the focus is on feeding and calming the skin, especially when you are on acne, pigmentation or anti-ageing treatment.",
   isThisForYou: [
-    "Your skin feels tight, dull or rough despite using moisturiser regularly.",
-    "High AC, flights or night shifts leave your face looking tired and flat.",
-    "You have a function, shoot or trip soon and want reliable glow.",
-    "Strong actives like retinoids are making your skin flaky or uncomfortable.",
-    "You prefer gentle facials because your skin reacts easily to harsh scrubs.",
+    "Your skin feels dry, tight or \"stretched\" after starting retinoids or acne medicines",
+    "You look dull and flat in the mirror even when breakouts are under control",
+    "You want a facial that relaxes you but is still aligned with your dermat plan",
+    "You often travel, work long hours or stay in AC and your skin shows it",
+    "You are not ready for peels or devices yet, but want more than a basic clean-up",
   ],
   process: {
     steps: [
       {
         phase: "before",
-        title: "Understand hydration needs",
+        title: "Barrier and routine check",
         description:
-          "We discuss your routine, travel, sleep, work stress and active treatments, then examine texture and dryness. This helps us decide how much exfoliation versus pure hydration your skin can comfortably handle that day.",
+          "We look at your current medicines and actives, check for irritation or flaking and ask about recent peels or procedures. Based on this, we decide how strong the exfoliation can be and what kind of mask and serums your skin can handle comfortably.",
       },
       {
         phase: "during",
-        title: "Deliver moisture-focused care",
+        title: "Gentle cleanse, light exfoliation, deep hydration",
         description:
-          "We perform cleansing, mild exfoliation, hydrafacials, masks and serum infusions focused on moisture and plumpness. Massage and relaxation remain part of the experience, but product choices stay aligned with dermatologist guidance.",
+          "After a thorough but mild cleanse, we may use a soft enzyme or low-strength acid step to loosen dead cells, followed by massage, hydrating serums and a cream or gel mask chosen for your skin type. The experience is meant to be relaxing—no harsh scrubbing or painful extractions.",
       },
       {
         phase: "after",
-        title: "Support glow at home",
+        title: "Soft, comfortable glow",
         description:
-          "You leave with simple aftercare, including how to layer moisturiser and sunscreen over the next few days. We suggest when to repeat sessions and how to prevent dehydration triggers where possible.",
+          "Skin usually feels plumper and more comfortable straight away, with a healthy, rested look. We finish with moisturiser and sunscreen and guide you to avoid scrubs, home peels and very hot water for a couple of days so your barrier stays happy.",
       },
     ],
   },
   results: {
     timeline:
-      "Most people notice immediate softness and bounce, with makeup sitting better the same week. Regular sessions help stabilise your barrier so it copes better with weather changes, work travel and occasional stronger treatments.",
+      "You will see and feel a difference as soon as the facial is done—skin looks dewy rather than greasy and fine dryness lines appear softer. With regular sessions alongside the right home routine, many patients notice fewer \"bad skin days\" and better tolerance to treatment actives.",
     recovery:
-      "Hydrating facials rarely need downtime. Very sensitive skin may show brief pinkness, which usually settles within hours with moisturiser, cool compresses and gentle, fragrance-free products.",
+      "There is essentially no downtime. Very sensitive skin may feel lightly warm or pink for a short time, which settles with moisturiser.",
   },
   faqs: [
     {
-      question: "Are Hydrating & Glow Facials suitable for oily skin?",
+      question: "How is this different from medifacials like Hydrafacial or Oxygeneo?",
       answer:
-        "Yes, as long as products are chosen correctly. We avoid heavy creams and focus on water-based serums, light hydrafacial steps and masks that hydrate without clogging pores or triggering extra shine.",
+        "Hydrating & Glow facials are non-device treatments focused on comfort and barrier support. Medifacials like Hydrafacial or Oxygeneo use machines for deeper cleansing or oxygenation. We often use this facial when your skin needs a break from devices or stronger peels.",
     },
     {
-      question: "How close to an event should I schedule this facial?",
+      question: "Can I do this while I am on acne or pigmentation medicines?",
       answer:
-        "Many people like doing it three to seven days before functions. That window lets any minor pinkness settle while keeping glow and smoothness at their most noticeable for photos and meetings.",
+        "Yes. These facials are often chosen specifically to offset dryness or irritation from treatment. We adjust products so they do not clash with your prescription creams or tablets.",
     },
     {
-      question: "Can I combine Hydrating facials with chemical peels?",
+      question: "Will this clog my pores or cause breakouts?",
       answer:
-        "Often we alternate them. Hydrating facials support your barrier between stronger peels, improving comfort and results. Sometimes we blend mild exfoliation and hydration in one sitting, depending on your skin's recent reactions.",
+        "We avoid heavy, comedogenic oils and thick massage creams in acne-prone skin. Products are chosen to hydrate without blocking pores, and we skip anything that feels heavy or occlusive for your skin type.",
     },
     {
-      question: "Will Hydrating facials make my skin dependent on them?",
+      question: "How often should I book a Hydrating & Glow facial?",
       answer:
-        "No. They give your barrier a boost and short-term glow. Good home routines keep skin stable between sessions, so facials feel like helpful extras, not something your skin collapses without.",
+        "Many patients like doing this once every 4–6 weeks during active treatment phases, then less frequently once their skin is more stable. We will help you decide a rhythm based on your goals and schedule.",
     },
     {
-      question: "Are these facials safe during pregnancy?",
+      question: "Is this just like a parlour facial?",
       answer:
-        "Many hydrating steps are pregnancy-safe, but some actives and machines are avoided. We adjust protocols, focus on comfort and barrier repair, and coordinate with your gynaecologist if any medicine-related concerns arise.",
+        "No. While it feels relaxing, the products and steps are chosen by dermatologists to support your ongoing treatment, avoid irritating actives and keep your barrier healthy—without bleaching agents or random scrubs.",
     },
   ],
 };
-

@@ -1,3 +1,6 @@
+// DEPRECATED: Replaced by the new Medifacials family under the Wellness pillar.
+// This file is kept for reference but is no longer imported or used in the app.
+
 import { SubTreatmentContent } from "@/lib/navigationData";
 
 export const signatureMedifacialsContent: SubTreatmentContent = {

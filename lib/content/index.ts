@@ -65,6 +65,9 @@ import { teenAcneTreatmentContent } from './sub-treatments/teen-acne-treatment';
 
 // Anti-Ageing, Tightening & Contouring family
 import { fineLinesWrinklesTreatmentContent } from './sub-treatments/fine-lines-wrinkles-treatment';
+import { botoxAntiWrinkleTreatmentContent } from './sub-treatments/botox-anti-wrinkle-treatment';
+import { dermalFillersFacialContouringContent } from './sub-treatments/dermal-fillers-facial-contouring';
+import { hifuFaceNeckTighteningContent } from './sub-treatments/hifu-face-neck-tightening';
 import { faceNeckSkinTighteningContent } from './sub-treatments/face-neck-skin-tightening';
 import { jawlineChinContouringContent } from './sub-treatments/jawline-chin-contouring';
 import { doubleChinFatReductionContent } from './sub-treatments/double-chin-fat-reduction';
@@ -79,7 +82,6 @@ import { tanRemovalBrighteningContent } from './sub-treatments/tan-removal-brigh
 import { glowRadianceFacialsContent } from './sub-treatments/glow-radiance-facials';
 
 // Advanced Facials, Boosters & Skin Maintenance family
-import { signatureMedifacialsContent } from './sub-treatments/signature-medifacials';
 import { hydratingGlowFacialsContent } from './sub-treatments/hydrating-glow-facials';
 import { chemicalPeelsContent } from './sub-treatments/chemical-peels';
 import { skinBoostersProfhiloContent } from './sub-treatments/skin-boosters-profhilo';
@@ -151,6 +153,9 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
   
   // Anti-Ageing, Tightening & Contouring
   'fine-lines-wrinkles-treatment': fineLinesWrinklesTreatmentContent,
+  'botox-anti-wrinkle-treatment': botoxAntiWrinkleTreatmentContent,
+  'dermal-fillers-facial-contouring': dermalFillersFacialContouringContent,
+  'hifu-face-neck-tightening': hifuFaceNeckTighteningContent,
   'face-neck-skin-tightening': faceNeckSkinTighteningContent,
   'jawline-chin-contouring': jawlineChinContouringContent,
   'double-chin-fat-reduction': doubleChinFatReductionContent,
@@ -165,7 +170,6 @@ export const subTreatmentContentMap: Record<string, SubTreatmentContent> = {
   'glow-radiance-facials': glowRadianceFacialsContent,
   
   // Advanced Facials, Boosters & Skin Maintenance
-  'signature-medifacials': signatureMedifacialsContent,
   'hydrating-glow-facials': hydratingGlowFacialsContent,
   'chemical-peels': chemicalPeelsContent,
   'skin-boosters-profhilo': skinBoostersProfhiloContent,

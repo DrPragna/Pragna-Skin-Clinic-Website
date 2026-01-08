@@ -2,75 +2,75 @@ import { TreatmentFamilyContent } from "@/lib/navigationData";
 
 export const advancedFacialsBoostersContent: TreatmentFamilyContent = {
   hero: {
-    eyebrow: "SKIN • FACIAL BOOSTERS",
+    eyebrow: "SKIN • MAINTENANCE",
     title: "Advanced Facials, Boosters & Skin Maintenance",
-    subtitle: "Medical facials and long-term glow support",
+    subtitle: "Support for long-term skin health",
     intro:
-      "Busy schedules, sun exposure and past experiments with random facials can leave skin dull, sensitive or uneven. This family offers medical-grade facials, peels and injectable boosters planned by a dermatologist, giving you safer glow, smoother texture and long-term skin support instead of only a one-day shine.",
+      "These are the in-clinic treatments that keep your skin on track between bigger procedures. Advanced facials, gentle peels, skin boosters and review visits are planned around your acne, pigmentation or anti-ageing treatment so you stay glowing, comfortable and barrier-safe over the long term.",
   },
   trustIndicators: [
     {
-      value: "Doctor-led",
-      label: "Dermatology-first facials",
-    },
-    {
-      value: "Tech + touch",
-      label: "Hydrafacials, peels, boosters",
+      value: "Plan-first",
+      label: "Built around your main treatment",
     },
     {
       value: "Barrier-safe",
-      label: "Sensitive-skin mindful",
+      label: "Balanced for Indian skin",
+    },
+    {
+      value: "Maintenance",
+      label: "Helps results last longer",
     },
   ],
   howItWorks: {
     description:
-      "We first understand your skin type, current medicines and upcoming events. Then we choose the right mix of medifacials, peels and boosters, adjusting strength and gaps so your skin barrier stays comfortable while you slowly gain better glow, smoother texture and resilience.",
+      "Instead of random parlour facials, we design a maintenance layer around your main skin goals. Depending on whether you are treating acne, pigmentation or early ageing, we use a mix of hydrating facials, medical-grade peels, injectable skin boosters and skincare tweaks to keep results going without over-doing it.",
     steps: [
       {
-        title: "Review skin and history",
+        title: "Start from your main concern",
         text:
-          "We review your history, products, medications and past facial experiences, then examine texture, pores, pigment and sensitivity. This helps us identify what to avoid, which technologies to emphasise and how gently we should begin your first few sessions.",
+          "We first look at the bigger picture—are you on treatment for acne, pigmentation or ageing, or just starting your journey? We check how your skin is tolerating medicines or procedures, note any sensitivity, and understand your routine and upcoming events.",
         icon: "consultation",
       },
       {
-        title: "Perform targeted treatments",
+        title: "Choose the right maintenance tools",
         text:
-          "We perform medifacials, hydrafacials, peels or boosters as planned, watching how your skin feels during and after. Strength is increased slowly, keeping sensations tolerable while still offering visible freshness and support for acne, pigment or ageing concerns.",
+          "Based on that, we suggest the right mix of hydrating facials, peels, skin boosters or review visits. The idea is to support your plan—calm dryness from retinoids, keep pores clear, brighten tan or add back hydration—without clashing with your core treatment.",
         icon: "treatment",
       },
       {
-        title: "Plan long-term maintenance",
+        title: "Set a realistic rhythm",
         text:
-          "We plan maintenance spacing that suits your work, budget and other treatments. Over time, regular sessions plus a simple home routine help keep your skin balanced, more resilient and ready for occasional stronger procedures when needed.",
+          "We then space these sessions across the year—maybe once a month in active treatment phases, then less often for maintenance. You will know which sessions are optional \"nice-to-have\" and which ones are important to protect your results.",
         icon: "results",
       },
     ],
   },
   whoIsThisFor: {
-    headline: "Who this family helps",
+    headline: "Ideal for you if…",
     list: [
-      "You want facials that do more than temporary brightness and actually support acne, pigment or ageing treatments.",
-      "Your skin often reacts to parlour facials with burning, breakouts or redness that lingers for several days.",
-      "You are starting prescription treatments and want clinic facials that fit, not clash, with active ingredients.",
-      "You have a big event approaching and want glow that looks polished yet believable in real life.",
-      "You prefer a dermatologist-designed maintenance plan instead of guessing new facial, mask or peel each month.",
+      "You are already treating acne, pigmentation or ageing and want to maintain results",
+      "Your skin swings between dry and oily because of medicines or actives",
+      "You are confused whether parlour facials will undo your dermatologist's work",
+      "You prefer a plan for the whole year instead of booking random sessions",
+      "You want facials, peels and boosters that respect your skin barrier",
     ],
   },
   whyPragna: [
     {
-      title: "Dermatologist-planned, not menu-based",
+      title: "Designed by dermatologists, not menus",
       description:
-        "These are not menu facials. Your dermatologist plans every protocol around your diagnosis, medicines and social calendar, so treatments fit into life without unexpectedly clashing with actives, peels, events or photoshoots.",
+        "Every \"extra\" facial, peel or booster is chosen by your dermatologist based on what your skin is going through—not picked blindly from a spa menu.",
     },
     {
-      title: "Technology plus mindful touch",
+      title: "Syncs with your main treatment",
       description:
-        "Protocols combine cleansing, exfoliation, brightening and hydration with technologies like hydrafacials, peels or MNRF when needed, so you build both instant glow and slow, structural improvements in texture, pores and fine lines.",
+        "Maintenance sessions are timed to support your acne, pigmentation or anti-ageing plan. We avoid anything that increases irritation or pigmentation risk in Indian skin.",
     },
     {
-      title: "Gentle protocols for sensitive skin",
+      title: "Clear guidance on what matters",
       description:
-        "We are careful with sensitive or pigment-prone skin, adjusting strengths, patch testing when required and explaining aftercare clearly, so your facials feel like investments in skin health, not quick, anxious experiments.",
+        "We will tell you honestly which visits are essential and which are optional, so you can prioritise time and budget without guessing.",
     },
   ],
   relatedConditionSlugs: [
@@ -81,4 +81,3 @@ export const advancedFacialsBoostersContent: TreatmentFamilyContent = {
     "rosacea-facial-redness",
   ],
 };
-

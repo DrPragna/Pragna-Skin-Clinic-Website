@@ -84,6 +84,9 @@ export const treatmentFamilies: TreatmentFamily[] = [
     summary: 'Turn back time with treatments that lift, firm, and restore youthful definition.',
     subTreatments: [
       { slug: 'fine-lines-wrinkles-treatment', name: 'Fine Lines & Wrinkles Treatment', description: 'Smooth expression lines and creases', relatedConditions: ['ageing-skin-lines-wrinkles'] },
+      { slug: 'botox-anti-wrinkle-treatment', name: 'Botox Anti-Wrinkle Treatment', description: 'Soften expression lines naturally', relatedConditions: ['ageing-skin-lines-wrinkles'] },
+      { slug: 'dermal-fillers-facial-contouring', name: 'Dermal Fillers & Facial Contouring', description: 'Restore volume and define facial structure', relatedConditions: ['ageing-skin-lines-wrinkles', 'dark-circles-under-eye'] },
+      { slug: 'hifu-face-neck-tightening', name: 'HIFU Face & Neck Tightening', description: 'Lift and tighten without surgery', relatedConditions: ['ageing-skin-lines-wrinkles', 'neck-lines-sagging-neck', 'double-chin-jawline-fullness'] },
       { slug: 'face-neck-skin-tightening', name: 'Face & Neck Skin Tightening', description: 'Lift and firm sagging skin non-surgically', relatedConditions: ['ageing-skin-lines-wrinkles', 'neck-lines-sagging-neck'] },
       { slug: 'jawline-chin-contouring', name: 'Jawline & Chin Contouring', description: 'Define and sculpt your lower face', relatedConditions: ['double-chin-jawline-fullness'] },
       { slug: 'double-chin-fat-reduction', name: 'Double Chin Fat Reduction', description: 'Define your jawline without surgery', relatedConditions: ['double-chin-jawline-fullness'] },
@@ -96,10 +99,9 @@ export const treatmentFamilies: TreatmentFamily[] = [
     slug: 'advanced-facials-boosters',
     name: 'Advanced Facials, Boosters & Skin Maintenance',
     pillar: 'Skin',
-    summary: 'Medical-grade facials and skin boosters that go beyond the surface for lasting results.',
+    summary: 'Clinical maintenance and support for acne, pigmentation and anti-ageing plans.',
     subTreatments: [
-      { slug: 'signature-medifacials', name: 'Signature Medifacials', description: 'Customised clinical facials for your skin goals', relatedConditions: ['uneven-skin-tone-texture'] },
-      { slug: 'hydrating-glow-facials', name: 'Hydrating & Glow Facials', description: 'Deep moisture and instant radiance', relatedConditions: ['uneven-skin-tone-texture'] },
+      { slug: 'hydrating-glow-facials', name: 'Hydrating & Glow Facials', description: 'Comfort-first, barrier-safe clinical facials', relatedConditions: ['uneven-skin-tone-texture'] },
       { slug: 'chemical-peels', name: 'Chemical Peels', description: 'Controlled exfoliation for renewal and clarity', relatedConditions: ['acne-breakouts', 'dark-spots-tan-pigmentation', 'uneven-skin-tone-texture'] },
       { slug: 'skin-boosters-profhilo', name: 'Skin Boosters & Profhilo', description: 'Injectable hydration for supple, bouncy skin', relatedConditions: ['ageing-skin-lines-wrinkles'] },
       { slug: 'personalised-skin-care-plan', name: 'Personalised Skin-Care Plan', description: 'A tailored home routine designed by dermatologists', relatedConditions: [] },

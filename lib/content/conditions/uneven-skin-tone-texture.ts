@@ -43,12 +43,6 @@ export const unevenSkinToneTextureContent: ConditionContent = {
     },
     {
       type: 'sub-treatment',
-      slug: 'signature-medifacials',
-      name: 'Signature Medifacials',
-      bestFor: 'Custom facials for multiple concerns',
-    },
-    {
-      type: 'sub-treatment',
       slug: 'chemical-peels',
       name: 'Chemical Peels',
       bestFor: 'Controlled resurfacing for smoother skin',

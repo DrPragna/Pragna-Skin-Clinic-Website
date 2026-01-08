@@ -43,12 +43,6 @@ export const rosaceaFacialRednessContent: ConditionContent = {
     },
     {
       type: 'sub-treatment',
-      slug: 'signature-medifacials',
-      name: 'Signature Medifacials',
-      bestFor: 'Custom routines for reactive, flushed faces',
-    },
-    {
-      type: 'sub-treatment',
       slug: 'hydrating-glow-facials',
       name: 'Hydrating & Glow Facials',
       bestFor: 'Hydrating support without aggressive exfoliation',
