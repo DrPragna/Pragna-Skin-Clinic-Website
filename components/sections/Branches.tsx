@@ -83,7 +83,11 @@ export default function Branches() {
                     src={branch.image}
                     alt={`${branch.name} Clinic Interior`}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                    className={`object-cover group-hover:scale-105 transition-transform duration-1000 ${
+                      branch.id === 'punjagutta' ? 'brightness-[0.95] contrast-[1.05]' : ''
+                    } ${
+                      branch.id === 'kokapet' ? 'brightness-[1.1] contrast-[0.95]' : ''
+                    }`}
                   />
                   {/* Subtle warm overlay to match theme */}
                   <div className="absolute inset-0 bg-maroon/10 mix-blend-overlay" />
