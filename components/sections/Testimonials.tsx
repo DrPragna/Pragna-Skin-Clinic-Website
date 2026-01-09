@@ -1,7 +1,8 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import { motion, useAnimation, PanInfo, useInView } from 'framer-motion';
+import { createPortal } from 'react-dom';
+import { motion, useAnimation, PanInfo, useInView, AnimatePresence } from 'framer-motion';
 
 // --- CLINIC LINKS ---
 const KOKAPET_REVIEWS_LINK = "https://www.google.com/maps/place/Pragna+Skin+Clinic/@17.387853,78.3399881,17z/data=!4m14!1m5!8m4!1e1!2s115999419679947581609!3m1!1e1!3m7!1s0x3bcb951e16e74899:0xe00057759cb62037!8m2!3d17.387853!4d78.342563!9m1!1b1!16s%2Fg%2F11y310_wqr?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MDEwNi4wIKXMDSoKLDEwMDc5MjA3MUgBUAM%3D";
@@ -150,19 +151,110 @@ const GoogleIcon = () => (
 );
 
 const StarIcon = () => (
-  <svg className="w-5 h-5 text-[#FBBC05]" fill="currentColor" viewBox="0 0 20 20">
+  <svg className="w-4 h-4 text-[#FBBC05]" fill="currentColor" viewBox="0 0 20 20">
     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
   </svg>
 );
 
-// --- COMPONENTS ---
-const ReviewCard = ({ review }: { review: typeof testimonials[0] }) => {
+// --- MODAL COMPONENT ---
+const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onClose: () => void }) => {
   const reviewLink = review.clinic === "kokapet" ? KOKAPET_REVIEWS_LINK : PANJAGUTTA_REVIEWS_LINK;
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleEscape);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-charcoal/60 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        onClick={(e) => e.stopPropagation()}
+        className="bg-cream rounded-[2rem] p-8 md:p-10 max-w-2xl w-full shadow-2xl border border-maroon/10 relative overflow-hidden"
+      >
+         {/* Noise Texture */}
+         <div 
+          className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
+
+        <div className="relative z-10">
+          <button 
+            onClick={onClose}
+            className="absolute -top-2 -right-2 w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors text-charcoal/60 hover:text-charcoal"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+
+          <div className="flex items-center gap-4 mb-8">
+            <div className={`w-16 h-16 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-2xl border border-white/50 shadow-sm`}>
+              {review.initial}
+            </div>
+            <div>
+              <h3 className="font-display text-2xl text-charcoal">{review.author}</h3>
+              <div className="flex items-center gap-2 mt-2">
+                <div className="flex items-center gap-0.5">
+                  {[1,2,3,4,5].map(i => <StarIcon key={i} />)}
+                </div>
+                <span className="text-xs font-medium text-charcoal/50 uppercase tracking-wider border border-charcoal/10 px-2 py-0.5 rounded-full">
+                  {review.clinic}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-charcoal/80 text-lg leading-relaxed font-sans mb-8 max-h-[50vh] overflow-y-auto pr-2">
+            "{review.text}"
+          </p>
+
+          <div className="flex justify-end pt-6 border-t border-maroon/10">
+            <a
+              href={reviewLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-maroon flex items-center gap-2 hover:underline"
+            >
+              Read Full Reviews on Google
+              <GoogleIcon />
+            </a>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// --- REVIEW CARD COMPONENT ---
+const TRUNCATE_LENGTH = 200;
+
+const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onClick: () => void }) => {
+  const isTruncated = review.text.length > TRUNCATE_LENGTH;
+  const displayText = isTruncated 
+    ? review.text.slice(0, TRUNCATE_LENGTH).trim() 
+    : review.text;
   
   return (
     <div
-      className="block w-[360px] md:w-[420px] h-[300px] flex-shrink-0 mx-4 select-none relative group"
-      onDragStart={(e) => e.preventDefault()} // Prevent native drag
+      className="block w-[360px] md:w-[420px] h-[280px] flex-shrink-0 mx-4 select-none relative group"
+      onDragStart={(e) => e.preventDefault()}
     >
       <div className="h-full bg-cream rounded-[2rem] p-8 shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-maroon/5 hover:border-maroon/20 hover:shadow-[0_8px_30px_rgba(114,43,43,0.08)] transition-all duration-300 flex flex-col relative overflow-hidden">
         
@@ -174,20 +266,24 @@ const ReviewCard = ({ review }: { review: typeof testimonials[0] }) => {
           }}
         />
 
-        {/* Content Container (z-10 to sit above texture) */}
+        {/* Content Container */}
         <div className="relative z-10 flex flex-col h-full">
           {/* Header */}
-          <div className="flex justify-between items-start mb-6">
+          <div className="flex justify-between items-start mb-4">
             <div className="flex items-center gap-4">
-              {/* Avatar */}
               <div className={`w-12 h-12 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-lg border border-white/50 shadow-sm`}>
                 {review.initial}
               </div>
-              {/* Meta */}
               <div>
                 <h4 className="font-sans font-semibold text-charcoal text-base">{review.author}</h4>
-                <div className="flex items-center gap-1 mt-1">
-                  {[1,2,3,4,5].map(i => <StarIcon key={i} />)}
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="flex items-center gap-0.5">
+                    {[1,2,3,4,5].map(i => <StarIcon key={i} />)}
+                  </div>
+                  {/* Subtle Clinic Badge */}
+                  <span className="text-[10px] font-medium text-charcoal/40 uppercase tracking-wider border border-charcoal/10 px-1.5 py-px rounded-full">
+                    {review.clinic}
+                  </span>
                 </div>
               </div>
             </div>
@@ -195,25 +291,18 @@ const ReviewCard = ({ review }: { review: typeof testimonials[0] }) => {
           </div>
 
           {/* Content */}
-          <div className="flex-grow">
-            <p className="text-charcoal/70 text-[0.95rem] leading-[1.7] font-sans line-clamp-4">
-              "{review.text}"
+          <div>
+            <p className="text-charcoal/70 text-[0.95rem] leading-[1.7] font-sans line-clamp-5">
+              "{displayText}{isTruncated && '... '}
+              {isTruncated && (
+                <button
+                  className="text-maroon hover:underline cursor-pointer font-medium inline text-xs ml-1 align-baseline transition-colors"
+                  onClick={onClick}
+                >
+                  Read More
+                </button>
+              )}"
             </p>
-          </div>
-
-          {/* Footer / Read More */}
-          <div className="mt-4 pt-4 border-t border-maroon/5 flex items-center justify-start opacity-60 group-hover:opacity-100 transition-opacity">
-            <a
-              href={reviewLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-medium text-maroon flex items-center gap-1 group/link hover:underline cursor-pointer relative z-20"
-              onClick={(e) => e.stopPropagation()}
-              onPointerDown={(e) => e.stopPropagation()} // Prevent drag start on link
-            >
-              Read Full Reviews
-              <svg className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
           </div>
         </div>
       </div>
@@ -221,9 +310,24 @@ const ReviewCard = ({ review }: { review: typeof testimonials[0] }) => {
   );
 };
 
+// --- PORTAL COMPONENT FOR MODAL ---
+function ModalPortal({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (!mounted) return null;
+  
+  return createPortal(children, document.body);
+}
+
 export default function Testimonials() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
+  const [selectedReview, setSelectedReview] = useState<typeof testimonials[0] | null>(null);
   
   // Animation state
   const [isHovered, setIsHovered] = useState(false);
@@ -231,7 +335,6 @@ export default function Testimonials() {
   const xPos = useRef(0);
 
   // Triple the list to ensure infinite scroll seamlessness
-  // We need enough copies to fill the screen + buffer for looping
   const extendedList = [...testimonials, ...testimonials, ...testimonials];
 
   // Auto-scroll logic using Framer Motion
@@ -239,7 +342,7 @@ export default function Testimonials() {
     let animationFrameId: number;
     
     const animate = () => {
-      if (!isHovered) {
+      if (!isHovered && !selectedReview) {
         xPos.current -= 0.5; // Controls speed (lower = slower)
         
         // Reset position for seamless loop
@@ -255,97 +358,131 @@ export default function Testimonials() {
 
     animate();
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isHovered, controls]);
+  }, [isHovered, controls, selectedReview]);
 
   // Handle Drag
   const onDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    // Add momentum to the current position based on drag
     xPos.current += info.offset.x;
   };
 
-  const onDrag = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    // We don't need to manually update controls here because 
-    // framer-motion's 'drag' prop handles the visual transform during the gesture.
-    // We just need to capture the delta if needed, but framer handles it.
+  const onDrag = () => {
+    // Framer-motion handles the visual transform during drag
   };
 
   return (
-    <section 
-      ref={containerRef}
-      className="pt-20 lg:pt-24 pb-10 lg:pb-12 bg-beige overflow-hidden relative"
-    >
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-rose-100/20 to-transparent rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
-      </div>
+    <>
+      <section 
+        ref={containerRef}
+        className="pt-20 lg:pt-24 pb-10 lg:pb-12 bg-beige overflow-hidden relative"
+      >
+        {/* Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-rose-100/20 to-transparent rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
+        </div>
 
-      <div className="section-container mb-12 relative z-10">
-        {/* Centered Header */}
-        <div className="text-center max-w-4xl mx-auto mb-10">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-maroon font-medium tracking-[0.2em] uppercase text-xs block mb-4"
+        <div className="section-container mb-12 relative z-10">
+          {/* Centered Header */}
+          <div className="text-center max-w-4xl mx-auto mb-10">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="text-maroon font-medium tracking-[0.2em] uppercase text-xs block mb-4"
+            >
+              Patient Stories
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-4xl lg:text-6xl font-display text-charcoal mb-8"
+            >
+              Real results, <span className="italic text-maroon">real confidence.</span>
+            </motion.h2>
+            
+            {/* Elegant Clinic Pills - Centered */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              {/* Kokapet Pill */}
+              <a
+                href={KOKAPET_REVIEWS_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm px-6 py-3 rounded-full border border-maroon/10 shadow-sm hover:bg-white/60 hover:shadow-md transition-all group"
+              >
+                <div className="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                  <StarIcon />
+                </div>
+                <div className="text-left">
+                  <span className="font-bold text-charcoal block leading-none text-sm">4.9/5 Rating</span>
+                  <span className="text-charcoal/60 text-xs">Kokapet Clinic</span>
+                </div>
+              </a>
+
+              {/* Panjagutta Pill */}
+              <a
+                href={PANJAGUTTA_REVIEWS_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm px-6 py-3 rounded-full border border-maroon/10 shadow-sm hover:bg-white/60 hover:shadow-md transition-all group"
+              >
+                <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                  <StarIcon />
+                </div>
+                <div className="text-left">
+                  <span className="font-bold text-charcoal block leading-none text-sm">4.8/5 Rating</span>
+                  <span className="text-charcoal/60 text-xs">Panjagutta Clinic</span>
+                </div>
+              </a>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Infinite Marquee Track */}
+        <div 
+          className="relative w-full cursor-grab active:cursor-grabbing pb-4"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Gradient Masks - Soft Fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-beige via-beige/90 to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-beige via-beige/90 to-transparent z-20 pointer-events-none" />
+
+          <motion.div 
+            className="flex w-max px-4 py-4" 
+            animate={controls}
+            drag="x"
+            dragConstraints={{ left: -7232, right: 0 }} 
+            onDragEnd={onDragEnd}
+            onDrag={onDrag}
+            whileTap={{ cursor: "grabbing" }}
           >
-            Patient Stories
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl lg:text-6xl font-display text-charcoal mb-6"
-          >
-            Real results, <span className="italic text-maroon">real confidence.</span>
-          </motion.h2>
-          
-          {/* Elegant Rating Badge - Centered */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm px-5 py-2.5 rounded-full border border-maroon/10 shadow-sm"
-          >
-             <div className="flex -space-x-2">
-                {[1,2,3].map(i => (
-                  <div key={i} className={`w-6 h-6 rounded-full border border-white flex items-center justify-center text-[8px] font-bold text-white shadow-sm ${i === 1 ? 'bg-rose-300' : i === 2 ? 'bg-maroon' : 'bg-charcoal'}`}>
-                    {i === 3 ? '250+' : ''}
-                  </div>
-                ))}
-            </div>
-            <div className="text-xs text-left">
-              <span className="font-bold text-charcoal block leading-none">4.9/5 Rating</span>
-              <span className="text-charcoal/60">on Google Reviews</span>
-            </div>
+            {extendedList.map((review, i) => (
+              <ReviewCard 
+                key={`${review.id}-${i}`} 
+                review={review}
+                onClick={() => setSelectedReview(review)}
+              />
+            ))}
           </motion.div>
         </div>
-      </div>
+      </section>
 
-      {/* Infinite Marquee Track */}
-      <div 
-        className="relative w-full cursor-grab active:cursor-grabbing pb-4"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Gradient Masks - Soft Fade */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-beige via-beige/90 to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-beige via-beige/90 to-transparent z-20 pointer-events-none" />
-
-        <motion.div 
-          className="flex w-max px-4 py-4" 
-          animate={controls}
-          drag="x"
-          dragConstraints={{ left: -7232, right: 0 }} 
-          onDragEnd={onDragEnd}
-          onDrag={onDrag}
-          whileTap={{ cursor: "grabbing" }}
-        >
-          {extendedList.map((review, i) => (
-            <ReviewCard key={`${review.id}-${i}`} review={review} />
-          ))}
-        </motion.div>
-      </div>
-
-    </section>
+      {/* Modal Portal - Renders outside section to avoid overflow:hidden */}
+      <ModalPortal>
+        <AnimatePresence>
+          {selectedReview && (
+            <ReviewModal 
+              review={selectedReview} 
+              onClose={() => setSelectedReview(null)} 
+            />
+          )}
+        </AnimatePresence>
+      </ModalPortal>
+    </>
   );
 }
