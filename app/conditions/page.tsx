@@ -37,7 +37,7 @@ const THEMES: Record<ThemeKey, {
     title: 'What Concerns You?',
     description: "Every concern deserves attention. Find yours below.",
     gradient: 'from-transparent to-transparent',
-    heroImage: '/clinic-interior.png',
+    heroImage: '/images/clinic-reception.jpg',
     hex: '#3D2E2E'
   },
   'Skin': {
@@ -244,8 +244,8 @@ function ConditionsContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className={`
-                  text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display leading-[0.9] mb-8
-                  ${activeFilter === 'All' ? 'xl:max-w-[14ch]' : ''}
+                  font-display leading-[0.9] mb-8
+                  ${activeFilter === 'All' ? 'text-4xl md:text-6xl lg:text-7xl xl:text-8xl xl:max-w-[14ch]' : 'text-5xl md:text-7xl lg:text-8xl xl:text-9xl'}
                   ${theme.heroText}
                 `}
               >
