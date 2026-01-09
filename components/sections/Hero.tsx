@@ -39,7 +39,7 @@ export default function Hero() {
           playsInline
           poster="/doctors-hero.png"
         >
-          <source src="/hero-video.mp4?v=new" type="video/mp4" />
+          <source src="/hero-video2.mp4" type="video/mp4" />
         </video>
 
         {/* Fallback Image (visible if video fails or loads slow) */}
