@@ -26,7 +26,8 @@ const doctors = [
       'Speaker at IMCAS Paris & 5CC Barcelona',
       'National Trainer for Injectables & Lasers'
     ],
-    image: '/doctors/padmavathi-portrait.jpg', // Placeholder path
+    image: '/images/Dr Padmavathi.jpg',
+    imageStyle: 'scale-[1.4] object-[center_15%]',
     signature: 'Expertise & Ethics',
     badge: '25+ Years Experience',
   },
@@ -41,7 +42,8 @@ const doctors = [
       'State Ranker & Gold Medalist in Dermatology',
       'MRCP-SCE (UK) Certified'
     ],
-    image: '/doctors/pragna-portrait.jpg', // Placeholder path
+    image: '/images/Dr Pragna.jpg',
+    imageStyle: 'scale-[1.6] object-[center_12%]',
     signature: 'Innovation & Care',
     badge: 'Gold Medalist',
   },
@@ -90,18 +92,22 @@ export default function Doctors() {
               key={doctor.id}
               className="flex flex-col items-center text-center bg-white p-8 rounded-[2.5rem] shadow-sm border border-maroon/5 hover:shadow-md transition-all duration-500 group h-full"
             >
-              {/* Image Section - Even Smaller */}
-              <div className="w-full max-w-[260px] relative mb-8 group-hover:scale-105 transition-transform duration-700">
-                <div className="relative aspect-[4/5] overflow-visible rounded-[2rem] shadow-xl shadow-maroon/5">
+              {/* Image Section */}
+              <div className="w-full max-w-[280px] relative mb-8 group-hover:scale-[1.02] transition-transform duration-700">
+                <div className="relative aspect-[4/5] overflow-visible rounded-[2rem] shadow-xl shadow-maroon/10">
                   <div className="absolute inset-0 rounded-[2rem] overflow-hidden">
-                    {/* Portrait Placeholder / Image */}
-                    <div className="absolute inset-0 bg-beige-warm flex items-center justify-center">
-                      {/* Actual Image would go here */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
-                      <span className="text-maroon/20 font-display text-xl italic">
-                        Portrait
-                      </span>
-                    </div>
+                    {/* Doctor Portrait Image - Zoomed in on face */}
+                    <Image
+                      src={doctor.image}
+                      alt={doctor.name}
+                      fill
+                      className={`object-cover ${doctor.imageStyle} brightness-[1.02] contrast-[1.02] saturate-[0.95] sepia-[0.05] transition-all duration-500 group-hover:brightness-[1.05]`}
+                      sizes="(max-width: 768px) 280px, 280px"
+                    />
+                    {/* Warm overlay to match aesthetic */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-rose-gold/5 via-transparent to-maroon/10 mix-blend-multiply" />
+                    {/* Soft vignette */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/15 via-transparent to-transparent" />
                   </div>
 
                   {/* Floating Badge - Creative Positioning */}
