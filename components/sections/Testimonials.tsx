@@ -3,63 +3,139 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useAnimation, PanInfo, useInView } from 'framer-motion';
 
-// --- DATA ---
+// --- CLINIC LINKS ---
+const KOKAPET_REVIEWS_LINK = "https://www.google.com/maps/place/Pragna+Skin+Clinic/@17.387853,78.3399881,17z/data=!4m14!1m5!8m4!1e1!2s115999419679947581609!3m1!1e1!3m7!1s0x3bcb951e16e74899:0xe00057759cb62037!8m2!3d17.387853!4d78.342563!9m1!1b1!16s%2Fg%2F11y310_wqr?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MDEwNi4wIKXMDSoKLDEwMDc5MjA3MUgBUAM%3D";
+const PANJAGUTTA_REVIEWS_LINK = "https://www.google.com/maps/place/Pragna+Skin+Clinic/@17.4240657,78.4475407,17z/data=!4m8!3m7!1s0x3bcb97b7fc3e3f91:0x89e1c6a9b15d7f58!8m2!3d17.4240657!4d78.4501156!9m1!1b1!16s%2Fg%2F11s9jq0my8?entry=ttu&g_ep=EgoyMDI2MDEwNi4wIKXMDSoKLDEwMDc5MjA3MUgBUAM%3D";
+
+// --- DATA (Mixed Kokapet & Panjagutta reviews) ---
 const testimonials = [
   {
     id: 1,
-    text: "I came here with multiple concerns and have always been happy with the remarkable results. Dr. Pragna is kind, patient, and caring - a rare combination.",
-    author: "Sony S.",
-    initial: "S",
-    bg: "bg-rose-100"
+    text: "I had an amazing experience with the doctor. She has solved my long pending issue and am very happy with her way of treatment. She doesn't push people to just take any treatment or medicine. She always focuses on the underlying issue and tries solving the roots first and not just a superficial treatment. I am very much satisfied with her and I'd strongly suggest her.",
+    author: "Anuradha Channapragada",
+    initial: "A",
+    bg: "bg-rose-100",
+    clinic: "kokapet"
   },
   {
     id: 2,
-    text: "Dr. Padmavathi is arguably the best dermatologist in Hyderabad. The treatments are world-class, but it's the hygiene and staff warmth that brings me back.",
-    author: "Vinannya S.",
-    initial: "V",
-    bg: "bg-blue-100"
+    text: "Dr. Padmavathi Surapaneni is one of the best dermatologists in the city. She is highly knowledgeable, patient, and takes the time to listen and explain the treatment clearly. I underwent treatment for pigmentation and saw visible results in short time. The staff is also very friendly and informative. I highly recommend this clinic for anyone looking for genuine skin care.",
+    author: "Kavitha Thanubuddi",
+    initial: "K",
+    bg: "bg-amber-100",
+    clinic: "panjagutta"
   },
   {
     id: 3,
-    text: "I see a significant change after just a few sittings. They don't just treat the skin; they educate you on how to maintain it. A truly great experience.",
-    author: "A. Saathvi",
-    initial: "A",
-    bg: "bg-green-100"
+    text: "Visited Dr. Pragna mam for my son's skin dryness. She explained the cause and care routine very clearly and suggested the right medication. Really helpful and approachable doctor!",
+    author: "Kiran Shetty",
+    initial: "K",
+    bg: "bg-blue-100",
+    clinic: "kokapet"
   },
   {
     id: 4,
-    text: "The team at Pragna understands that every skin is different. They didn't push products, just focused on what my skin actually needed.",
-    author: "Priya R.",
-    initial: "P",
-    bg: "bg-yellow-100"
+    text: "I had a really good experience at Pragna Skin Clinic. The doctors were very professional and explained the treatment clearly. The staff was friendly and helpful, and the clinic was well maintained. I'm already seeing good results and would definitely recommend this clinic to anyone looking for skin care treatments.",
+    author: "Lakshman Kumar Blina",
+    initial: "L",
+    bg: "bg-orange-100",
+    clinic: "panjagutta"
   },
   {
     id: 5,
-    text: "My wedding prep was handled beautifully. The glow was real, and I felt so confident. Thank you for making my big day special.",
-    author: "Meghana K.",
-    initial: "M",
-    bg: "bg-purple-100"
+    text: "Best skin clinic with the state of the art facilities. I have come here with multiple problems and have always been happy with remarkable results. Dr Pragna is kind, patient and caring. A one stop destination for all your skin and hair problems.",
+    author: "Sony Sharma",
+    initial: "S",
+    bg: "bg-green-100",
+    clinic: "kokapet"
   },
   {
     id: 6,
-    text: "Professional, ethical, and effective. I've visited many clinics, but Pragna stands out for their honesty and results.",
-    author: "Rahul V.",
-    initial: "R",
-    bg: "bg-orange-100"
+    text: "Consulted for skin issues. Liked the attention towards the issues and treatment done successfully. I have been visiting Padmavathi mam for past 4 years. Extremely happy with the results.",
+    author: "Pavithra Gera",
+    initial: "P",
+    bg: "bg-teal-100",
+    clinic: "panjagutta"
   },
   {
     id: 7,
-    text: "Best clinic in Kokapet! The hydrafacial results were instant. Love the ambiance and the professional staff.",
-    author: "Sneha Reddy",
+    text: "Love the doctors, explanations, procedures, everything. Dr. Pragna is very professional, kind, and attentive. She really listens and explains things clearly. I had a great experience and highly recommend!",
+    author: "Saania Reddy",
     initial: "S",
-    bg: "bg-teal-100"
+    bg: "bg-yellow-100",
+    clinic: "kokapet"
   },
   {
     id: 8,
-    text: "Dr. Pragna's approach to acne scars is amazing. I've seen 80% improvement in just 3 sessions.",
-    author: "Karthik M.",
+    text: "I have been coming here since 4 years. Dr Padmavathi is my fav doctor here and I have seen effective results. Staff service is also excellent.",
+    author: "Juweria Anam",
+    initial: "J",
+    bg: "bg-indigo-100",
+    clinic: "panjagutta"
+  },
+  {
+    id: 9,
+    text: "Dr. Pragna is very knowledgeable and understood our concerns perfectly and explained the causal agents to our problems. I'd definitely refer her to everyone for any dermatology condition.",
+    author: "Rishik Sharma",
+    initial: "R",
+    bg: "bg-purple-100",
+    clinic: "kokapet"
+  },
+  {
+    id: 10,
+    text: "Dr Padmavati is a well experienced doctor with a decent staff. I had undergone my acne treatment and Melasma control well. Pragna Skin Clinic is one of the best clinics in Hyderabad.",
+    author: "Kumar Chiguru",
     initial: "K",
-    bg: "bg-indigo-100"
+    bg: "bg-pink-100",
+    clinic: "panjagutta"
+  },
+  {
+    id: 11,
+    text: "Doctor is really good and one thing which differentiates her is her simplicity and sincerely listening to patients' problems. Overall cost including appointment and medicine is comparatively economical. Don't hesitate, just make an appointment for your skin and hair related issues. Thank you, Dr. Padmavati madam.",
+    author: "Chandra Shekhar Mekala",
+    initial: "C",
+    bg: "bg-cyan-100",
+    clinic: "panjagutta"
+  },
+  {
+    id: 12,
+    text: "Dr. Padmavathi garu is a very good doctor. We had great experience till now. Thanks for Dr. Padmavathi garu, she is an excellent dermatologist. She is soft spoken and very friendly, she clears all the doubts. I got good results. And the whole staff is also very friendly.",
+    author: "Kavya Olupalli",
+    initial: "K",
+    bg: "bg-lime-100",
+    clinic: "panjagutta"
+  },
+  {
+    id: 13,
+    text: "I had an amazing experience with Dr. Padmathi. Their expertise and personalized approach truly stood out. The diagnosis was spot-on, and the treatment plan yielded remarkable results. The clinic's atmosphere is welcoming, and the staff is friendly and professional. I highly recommend Dr. Padmathi for anyone seeking top-notch dermatological care.",
+    author: "Sowjanya Pandranki",
+    initial: "S",
+    bg: "bg-emerald-100",
+    clinic: "panjagutta"
+  },
+  {
+    id: 14,
+    text: "Dr. Padmavathi Surapaneni is truly one of the best and most experienced dermatologists I've ever consulted. Her knowledge and the way she explains everything in detail show how strong she is in her subject. I've never faced any issues with the treatments or creams she has prescribed - they've always worked beautifully for me. What I really appreciate is that she never recommends anything unnecessary, which shows her integrity and genuine care for patients. The clinic staff are also very friendly, helpful, and well-trained. Highly recommend her clinic for anyone looking for trustworthy and effective dermatological care.",
+    author: "Swathi Kodali",
+    initial: "S",
+    bg: "bg-violet-100",
+    clinic: "panjagutta"
+  },
+  {
+    id: 15,
+    text: "We had a great experience at Pragna Skin Clinic. Dr. Padmavathi ma'am and Dr. Pragna ma'am are extremely knowledgeable and kind. The support staff were courteous and helpful. Highly recommended for anyone seeking treatment for hair and skin-related concerns.",
+    author: "Saran Ravipati",
+    initial: "S",
+    bg: "bg-fuchsia-100",
+    clinic: "panjagutta"
+  },
+  {
+    id: 16,
+    text: "I'm very pleased with the care and treatment I received. From the first consultation, you took the time to listen to my concerns, explain the underlying issues, and walk me through the treatment options clearly. Your expertise and personalized approach made a big difference, and I've seen noticeable improvement in both my hair. Thank you for your professionalism.",
+    author: "Nayeem Mohammed",
+    initial: "N",
+    bg: "bg-sky-100",
+    clinic: "panjagutta"
   }
 ];
 
@@ -80,66 +156,70 @@ const StarIcon = () => (
 );
 
 // --- COMPONENTS ---
-const ReviewCard = ({ review }: { review: typeof testimonials[0] }) => (
-  <div
-    className="block w-[360px] md:w-[420px] h-[300px] flex-shrink-0 mx-4 select-none relative group"
-    onDragStart={(e) => e.preventDefault()} // Prevent native drag
-  >
-    <div className="h-full bg-cream rounded-[2rem] p-8 shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-maroon/5 hover:border-maroon/20 hover:shadow-[0_8px_30px_rgba(114,43,43,0.08)] transition-all duration-300 flex flex-col relative overflow-hidden">
-      
-      {/* Noise Texture Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
+const ReviewCard = ({ review }: { review: typeof testimonials[0] }) => {
+  const reviewLink = review.clinic === "kokapet" ? KOKAPET_REVIEWS_LINK : PANJAGUTTA_REVIEWS_LINK;
+  
+  return (
+    <div
+      className="block w-[360px] md:w-[420px] h-[300px] flex-shrink-0 mx-4 select-none relative group"
+      onDragStart={(e) => e.preventDefault()} // Prevent native drag
+    >
+      <div className="h-full bg-cream rounded-[2rem] p-8 shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-maroon/5 hover:border-maroon/20 hover:shadow-[0_8px_30px_rgba(114,43,43,0.08)] transition-all duration-300 flex flex-col relative overflow-hidden">
+        
+        {/* Noise Texture Overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
 
-      {/* Content Container (z-10 to sit above texture) */}
-      <div className="relative z-10 flex flex-col h-full">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-6">
-          <div className="flex items-center gap-4">
-            {/* Avatar */}
-            <div className={`w-12 h-12 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-lg border border-white/50 shadow-sm`}>
-              {review.initial}
-            </div>
-            {/* Meta */}
-            <div>
-              <h4 className="font-sans font-semibold text-charcoal text-base">{review.author}</h4>
-              <div className="flex items-center gap-1 mt-1">
-                {[1,2,3,4,5].map(i => <StarIcon key={i} />)}
+        {/* Content Container (z-10 to sit above texture) */}
+        <div className="relative z-10 flex flex-col h-full">
+          {/* Header */}
+          <div className="flex justify-between items-start mb-6">
+            <div className="flex items-center gap-4">
+              {/* Avatar */}
+              <div className={`w-12 h-12 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-lg border border-white/50 shadow-sm`}>
+                {review.initial}
+              </div>
+              {/* Meta */}
+              <div>
+                <h4 className="font-sans font-semibold text-charcoal text-base">{review.author}</h4>
+                <div className="flex items-center gap-1 mt-1">
+                  {[1,2,3,4,5].map(i => <StarIcon key={i} />)}
+                </div>
               </div>
             </div>
+            <GoogleIcon />
           </div>
-          <GoogleIcon />
-        </div>
 
-        {/* Content */}
-        <div className="flex-grow">
-          <p className="text-charcoal/70 text-[0.95rem] leading-[1.7] font-sans line-clamp-4">
-            "{review.text}"
-          </p>
-        </div>
+          {/* Content */}
+          <div className="flex-grow">
+            <p className="text-charcoal/70 text-[0.95rem] leading-[1.7] font-sans line-clamp-4">
+              "{review.text}"
+            </p>
+          </div>
 
-        {/* Footer / Read More */}
-        <div className="mt-4 pt-4 border-t border-maroon/5 flex items-center justify-start opacity-60 group-hover:opacity-100 transition-opacity">
-          <a
-            href="https://www.google.com/maps/place/Pragna+Skin+Clinic"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-medium text-maroon flex items-center gap-1 group/link hover:underline cursor-pointer relative z-20"
-            onClick={(e) => e.stopPropagation()}
-            onPointerDown={(e) => e.stopPropagation()} // Prevent drag start on link
-          >
-            Read Full Reviews
-            <svg className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </a>
+          {/* Footer / Read More */}
+          <div className="mt-4 pt-4 border-t border-maroon/5 flex items-center justify-start opacity-60 group-hover:opacity-100 transition-opacity">
+            <a
+              href={reviewLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-maroon flex items-center gap-1 group/link hover:underline cursor-pointer relative z-20"
+              onClick={(e) => e.stopPropagation()}
+              onPointerDown={(e) => e.stopPropagation()} // Prevent drag start on link
+            >
+              Read Full Reviews
+              <svg className="w-3 h-3 group-hover/link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function Testimonials() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -163,8 +243,8 @@ export default function Testimonials() {
         xPos.current -= 0.5; // Controls speed (lower = slower)
         
         // Reset position for seamless loop
-        // Width calculation: (Card Width 420 + Margin 32) * 8 cards = 3616px
-        if (xPos.current <= -3616) {
+        // Width calculation: (Card Width 420 + Margin 32) * 16 cards = 7232px
+        if (xPos.current <= -7232) {
           xPos.current = 0;
         }
         
@@ -255,7 +335,7 @@ export default function Testimonials() {
           className="flex w-max px-4 py-4" 
           animate={controls}
           drag="x"
-          dragConstraints={{ left: -3616, right: 0 }} 
+          dragConstraints={{ left: -7232, right: 0 }} 
           onDragEnd={onDragEnd}
           onDrag={onDrag}
           whileTap={{ cursor: "grabbing" }}
