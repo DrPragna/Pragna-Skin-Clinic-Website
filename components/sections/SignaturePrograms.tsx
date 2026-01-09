@@ -96,7 +96,7 @@ function ProgramCard({
               src={program.image}
               alt={program.title}
               onError={() => setImageError(true)}
-              className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
+              className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-[1.5s] ease-out"
             />
           ) : (
             // Gradient Fallback with texture
@@ -111,8 +111,9 @@ function ProgramCard({
             </div>
           )}
           
-          {/* Overlay - Balanced gradient for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1510] via-[#1A1510]/[0.48] to-[#1A1510]/10 opacity-95 group-hover:opacity-85 transition-opacity duration-700" />
+          {/* Overlay - IMPROVED LEGIBILITY */}
+          {/* Darker gradient start and via points to ensure text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1510] via-[#1A1510]/80 to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-700" />
           
           {/* Sophisticated Hover Glow */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-1000 bg-gradient-to-tr from-maroon/20 via-transparent to-transparent pointer-events-none" />
@@ -124,29 +125,29 @@ function ProgramCard({
           <div className="flex justify-between items-start">
             <div className="overflow-hidden">
               <span 
-                className="text-white text-[10px] tracking-[0.2em] uppercase border border-white/40 px-3 py-1.5 rounded-full inline-block backdrop-blur-sm bg-white/10 group-hover:bg-white/20 group-hover:border-white/60 transition-all duration-500"
+                className="text-white font-medium text-[10px] tracking-[0.2em] uppercase border border-white/40 px-3 py-1.5 rounded-full inline-block backdrop-blur-sm bg-black/20 group-hover:bg-white/20 group-hover:border-white/60 transition-all duration-500 shadow-sm"
               >
                 {program.duration}
               </span>
             </div>
-            <span className="text-white/70 font-display text-xl group-hover:text-white transition-colors duration-500">
+            <span className="text-white/90 font-display text-xl group-hover:text-white transition-colors duration-500 drop-shadow-md">
                       0{index + 1}
                     </span>
           </div>
 
           {/* Bottom - Animated Slide Up */}
           <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-out">
-            <span className="text-[#D4A5A5] text-[11px] tracking-[0.25em] uppercase font-medium mb-3 block group-hover:text-[#E8C4C4] transition-colors duration-500">
+            <span className="text-[#D4A5A5] text-[11px] tracking-[0.25em] uppercase font-bold mb-3 block group-hover:text-[#E8C4C4] transition-colors duration-500 drop-shadow-sm">
                       {program.subtitle}
                     </span>
-            <h3 className="text-3xl lg:text-4xl font-display text-white mb-4 group-hover:text-white transition-colors leading-tight drop-shadow-sm">
+            <h3 className="text-3xl lg:text-4xl font-display text-white mb-4 group-hover:text-white transition-colors leading-tight drop-shadow-lg">
                     {program.title}
                   </h3>
-            <p className="text-white/80 font-light text-sm leading-relaxed line-clamp-3 mb-6 border-l border-white/20 pl-4 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+            <p className="text-white/95 text-sm leading-relaxed line-clamp-3 mb-6 border-l-2 border-white/30 pl-4 opacity-100 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-md font-medium">
                     {program.description}
                   </p>
             
-            <div className="flex items-center gap-3 text-white/70 group-hover:text-white transition-colors text-[10px] tracking-widest uppercase font-medium">
+            <div className="flex items-center gap-3 text-white group-hover:text-white transition-colors text-[10px] tracking-widest uppercase font-bold drop-shadow-md">
               <span className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-500 group-hover:after:w-full">
                 View Journey
               </span>
