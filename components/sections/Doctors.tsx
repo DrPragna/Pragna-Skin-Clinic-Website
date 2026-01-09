@@ -28,6 +28,7 @@ const doctors = [
     ],
     image: '/images/Dr Padmavathi.jpg',
     imageStyle: 'scale-[1.4] object-[center_15%]',
+    hoverStyle: 'group-hover:scale-[1.45]',
     signature: 'Expertise & Ethics',
     badge: '25+ Years Experience',
   },
@@ -44,6 +45,7 @@ const doctors = [
     ],
     image: '/images/Dr Pragna.jpg',
     imageStyle: 'scale-[1.6] object-[center_12%]',
+    hoverStyle: 'group-hover:scale-[1.65]',
     signature: 'Innovation & Care',
     badge: 'Gold Medalist',
   },
@@ -121,7 +123,7 @@ export default function Doctors() {
                       src={doctor.image}
                       alt={doctor.name}
                       fill
-                      className={`object-cover ${doctor.imageStyle} brightness-[1.03] contrast-[1.05] saturate-[0.9] transition-all duration-700 group-hover:scale-110 group-hover:brightness-[1.08] group-hover:saturate-100`}
+                      className={`object-cover ${doctor.imageStyle} ${(doctor as any).hoverStyle} brightness-[1.03] contrast-[1.05] saturate-[0.9] transition-all duration-[1.5s] ease-out group-hover:brightness-[1.08] group-hover:saturate-100`}
                       sizes="(max-width: 768px) 300px, 300px"
                     />
                     {/* Cinematic Gradient Overlay */}
