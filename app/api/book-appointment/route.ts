@@ -73,10 +73,12 @@ export async function POST(request: NextRequest) {
       source: source || 'website',
     };
 
-    // Save to Google Sheets
-    const sheetResult = await appendToGoogleSheet(bookingData);
+    // Fire and forget - save to Google Sheets in background (don't wait)
+    appendToGoogleSheet(bookingData).catch(err => {
+      console.error('Background sheet append failed:', err);
+    });
 
-    // Generate WhatsApp link for client-side redirect
+    // Generate WhatsApp link immediately
     const whatsappNumber = process.env.WHATSAPP_NUMBER || '919380551547';
     const branchDisplay = bookingData.branch ? BRANCH_NAMES[bookingData.branch] || bookingData.branch : 'Not specified';
     const whatsappMessage = encodeURIComponent(
@@ -89,11 +91,11 @@ export async function POST(request: NextRequest) {
     );
     const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
+    // Return immediately - user sees success instantly
     return NextResponse.json({
       success: true,
       message: 'Booking request received',
       whatsappLink,
-      savedToSheet: sheetResult,
     });
 
   } catch (error) {
