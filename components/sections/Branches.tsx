@@ -17,20 +17,18 @@ const branches = [
   {
     id: 'punjagutta',
     name: 'Punjagutta',
-    label: 'Flagship Clinic',
     address: '22B, 6-3-347, 1/1,\nSai Baba Temple Rd,\nPunjagutta, Hyderabad - 500082',
     phone: '098483 67000',
     mapUrl: 'https://maps.app.goo.gl/GHW2EhGtHpeUrU228',
-    image: '/clinics/punjagutta.jpg', // Placeholder
+    image: '/images/Punjagutta.jpg',
   },
   {
     id: 'kokapet',
     name: 'Kokapet',
-    label: 'Advanced Center',
     address: '3rd Floor, Above Vijetha Supermarket,\nGandipet Main Rd, Opp. Rajapushpa Regalia,\nNarsingi, Hyderabad - 500075',
     phone: '088864 21111',
     mapUrl: 'https://maps.app.goo.gl/RZjN7F1WbhMAo5eL9',
-    image: '/clinics/kokapet.jpg', // Placeholder
+    image: '/images/Kokapet.jpg',
   },
 ];
 
@@ -81,17 +79,14 @@ export default function Branches() {
               <div className="flex flex-col h-full">
                 {/* Image Section - Top Half */}
                 <div className="relative h-64 lg:h-72 overflow-hidden bg-beige-warm">
-                  {/* Placeholder for Clinic Image */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-terracotta/20 to-beige flex items-center justify-center group-hover:scale-105 transition-transform duration-1000">
-                     <span className="text-maroon/20 font-display text-xl italic">Clinic Interior</span>
-              </div>
-
-                  {/* Overlay Badge */}
-                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full">
-                    <span className="text-xs font-medium text-maroon uppercase tracking-wider">
-                      {branch.label}
-                    </span>
-                </div>
+                  <Image
+                    src={branch.image}
+                    alt={`${branch.name} Clinic Interior`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                  />
+                  {/* Subtle warm overlay to match theme */}
+                  <div className="absolute inset-0 bg-maroon/10 mix-blend-overlay" />
                 </div>
                 
                 {/* Info Section - Bottom Half */}
