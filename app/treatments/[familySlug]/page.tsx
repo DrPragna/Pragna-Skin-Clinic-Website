@@ -321,14 +321,14 @@ export default async function TreatmentFamilyPage({
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {family.subTreatments.map((treatment, i) => {
               const treatmentImage = (treatment as any).image;
-              // Sophisticated, muted gradient tones
+              // Unified pillar gradient tones (matches Directory & Conditions palette)
               const gradientClass = family.pillar === 'Skin' 
-                ? 'from-[#C9A9A6] via-[#8B6F6B] to-[#5C4A47]' // Dusty rose to warm taupe
+                ? 'from-[#C28E79] via-[#8B5A4A] to-[#5C2E26]' // Terracotta to Deep Burgundy
                 : family.pillar === 'Hair'
-                ? 'from-[#B8A99A] via-[#7D6E5D] to-[#4A4039]' // Warm beige to soft brown
+                ? 'from-[#CDAA5C] via-[#A68A3D] to-[#5C4D22]' // True Gold (distinct from Skin & Body)
                 : family.pillar === 'Body'
-                ? 'from-[#C4A98C] via-[#8B7355] to-[#5A4A3A]' // Muted clay to warm umber
-                : 'from-[#A3B5A6] via-[#6B7D6E] to-[#3D4A3F]'; // Sage to forest
+                ? 'from-[#9E8C6B] via-[#736243] to-[#423D33]' // Clay/Olive to Deep Olive
+                : 'from-[#87A896] via-[#527862] to-[#2A3B33]'; // Sage to Deep Forest
               
               return (
                 <Reveal key={treatment.slug} delay={i * 0.1} className="h-full">

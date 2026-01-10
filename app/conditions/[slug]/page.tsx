@@ -27,9 +27,9 @@ const THEMES: Record<ThemeKey, {
     bgSoft: '#FFF8F5',
   },
   'Hair': {
-    gradientFrom: '#4A3B2A',
-    gradientTo: '#2C241B',
-    textAccent: '#BFA57D',
+    gradientFrom: '#5C4D22',
+    gradientTo: '#3D3316',
+    textAccent: '#CDAA5C',
     textLight: '#F5F2EB',
     bgSoft: '#FCFBF7',
   },

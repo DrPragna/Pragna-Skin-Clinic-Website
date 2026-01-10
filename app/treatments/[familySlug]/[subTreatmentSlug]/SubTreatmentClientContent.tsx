@@ -24,13 +24,13 @@ export default function SubTreatmentClientContent({
   const [activeSection, setActiveSection] = useState('overview');
   const { openBookingModal } = useBookingModal();
 
-  // Helper for Abstract Gradient Fallback - Sophisticated, muted tones
+  // Helper for Abstract Gradient Fallback - Unified pillar palette (matches Directory & Conditions)
   const getGradientClass = (pillar: string) => {
     switch (pillar) {
-        case 'Skin': return 'from-[#C9A9A6] via-[#8B6F6B] to-[#5C4A47]'; // Dusty rose to warm taupe
-        case 'Hair': return 'from-[#B8A99A] via-[#7D6E5D] to-[#4A4039]'; // Warm beige to soft brown
-        case 'Body': return 'from-[#C4A98C] via-[#8B7355] to-[#5A4A3A]'; // Muted clay to warm umber
-        default: return 'from-[#A3B5A6] via-[#6B7D6E] to-[#3D4A3F]'; // Sage to forest
+        case 'Skin': return 'from-[#C28E79] via-[#8B5A4A] to-[#5C2E26]'; // Terracotta to Deep Burgundy
+        case 'Hair': return 'from-[#CDAA5C] via-[#A68A3D] to-[#5C4D22]'; // True Gold (distinct from Skin & Body)
+        case 'Body': return 'from-[#9E8C6B] via-[#736243] to-[#423D33]'; // Clay/Olive to Deep Olive
+        default: return 'from-[#87A896] via-[#527862] to-[#2A3B33]'; // Sage to Deep Forest
     }
   };
 

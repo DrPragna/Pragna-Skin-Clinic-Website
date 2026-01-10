@@ -15,7 +15,7 @@ const filters = ['All', 'Skin', 'Hair', 'Body', 'Wellness'];
 const getPillarColors = (pillar: string) => {
   switch (pillar) {
     case 'Skin': return { text: '#C28E79', hover: '#A66249' }; // Warm Terracotta / Copper (Distinct from Maroon)
-    case 'Hair': return { text: '#BFA57D', hover: '#8F7348' }; // Golden Bronze (Brighter than beige)
+    case 'Hair': return { text: '#CDAA5C', hover: '#A68A3D' }; // True Gold (distinct from Skin & Body)
     case 'Body': return { text: '#9E8C6B', hover: '#736243' }; // Rich Clay / Olive
     default: return { text: '#87A896', hover: '#527862' };     // Fresh Sage / Forest
   }

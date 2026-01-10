@@ -49,22 +49,22 @@ const THEMES: Record<ThemeKey, {
     accent: 'text-[#A66249]', // Terracotta accent
     title: 'Face & Skin',
     description: "From acne to ageing, restore your skin's natural health and radiance.",
-    gradient: 'from-[#C28E79]/10 to-[#A66249]/5',
+    gradient: 'from-[#C28E79]/40 to-[#A66249]/20',
     heroImage: '/images/areas-of-focus/Skin.jpg',
     hex: '#5C2E26'
   },
   'Hair': {
-    heroBg: 'bg-[#4A3B2A]', // Deep Bronze
+    heroBg: 'bg-[#5C4D22]', // Deep Gold
     heroText: 'text-white',
     heroSub: 'text-white/80',
     cardBg: 'bg-[#FCFBF7]', 
     cardHover: 'group-hover:bg-[#F5F2E8]',
-    accent: 'text-[#8F7348]', // Bronze accent
+    accent: 'text-[#A68A3D]', // True Gold accent
     title: 'Hair & Scalp',
     description: 'Science-backed solutions for restoration, growth, and scalp health.',
-    gradient: 'from-[#BFA57D]/10 to-[#8F7348]/5',
+    gradient: 'from-[#CDAA5C]/40 to-[#A68A3D]/20',
     heroImage: '/images/areas-of-focus/Hair.jpg',
-    hex: '#4A3B2A'
+    hex: '#5C4D22'
   },
   'Body': {
     heroBg: 'bg-[#423D33]', // Deep Olive/Clay
@@ -75,7 +75,7 @@ const THEMES: Record<ThemeKey, {
     accent: 'text-[#736243]', // Olive accent
     title: 'Body & Shape',
     description: 'Sculpt, tone, and refine your silhouette with advanced non-surgical care.',
-    gradient: 'from-[#9E8C6B]/10 to-[#736243]/5',
+    gradient: 'from-[#9E8C6B]/40 to-[#736243]/20',
     heroImage: '/images/areas-of-focus/Body.jpg',
     hex: '#423D33'
   },
@@ -88,7 +88,7 @@ const THEMES: Record<ThemeKey, {
     accent: 'text-[#527862]', // Forest accent
     title: 'Wellness & Corrective',
     description: 'Targeted treatments for sweating, skin growths, tattoo removal and overall wellbeing.',
-    gradient: 'from-[#87A896]/10 to-[#527862]/5'
+    gradient: 'from-[#87A896]/40 to-[#527862]/20'
   }
 };
 
@@ -345,9 +345,9 @@ function ConditionsContent() {
                           ${activeFilter === 'All' ? 'hover:shadow-lg' : ''}
                       `}
                   >
-                    {/* Abstract Gradient Background on Hover */}
+                    {/* Abstract Gradient Background - visible by default, stronger on hover */}
                     <div className={`
-                        absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br
+                        absolute inset-0 opacity-75 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br
                         ${cardTheme.gradient}
                     `} />
 
