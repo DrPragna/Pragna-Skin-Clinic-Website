@@ -47,7 +47,7 @@ export default function Hero() {
             }
           }}
         >
-          <source src="/hero-video2.mp4" type="video/mp4" />
+          <source src="/hero-video3.mp4" type="video/mp4" />
         </video>
 
         {/* Fallback Image (visible if video fails or loads slow) */}
