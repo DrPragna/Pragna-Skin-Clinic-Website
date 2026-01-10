@@ -52,7 +52,7 @@ export default function Hero() {
 
         {/* Fallback Image (visible if video fails or loads slow) */}
         <img 
-          src="/clinic-interior.png" 
+          src="/images/clinic-interior.jpg" 
           alt="Pragna Skin Clinic"
           className="absolute inset-0 w-full h-full object-cover -z-10"
           loading="eager"

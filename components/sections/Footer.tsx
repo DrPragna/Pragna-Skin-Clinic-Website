@@ -46,7 +46,7 @@ export default function Footer() {
       <div className="absolute inset-0 z-0">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/clinic-interior.png)' }}
+          style={{ backgroundImage: 'url(/images/clinic-interior.jpg)' }}
         />
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/85" />
@@ -100,7 +100,7 @@ export default function Footer() {
             >
               <Link href="/" className="inline-flex flex-col items-center mb-6">
                 <Image 
-                  src="/Icon_Master.png" 
+                  src="/icons/Icon_Master.png" 
                   alt="Pragna Skin Clinic" 
                   width={80} 
                   height={80}

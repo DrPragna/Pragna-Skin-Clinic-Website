@@ -181,7 +181,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center group z-50 relative">
             <Image 
-              src="/Icon_Master.png" 
+              src="/icons/Icon_Master.png" 
               alt="Pragna Skin Clinic" 
               width={72} 
               height={72}
