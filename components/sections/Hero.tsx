@@ -27,8 +27,8 @@ export default function Hero() {
         className="absolute inset-0 z-0"
         style={{ y, opacity }}
       >
-        {/* Overlay for text readability - increased opacity for better contrast */}
-        <div className="absolute inset-0 bg-black/40 z-10" /> 
+        {/* Overlay for text readability - decreased opacity for better contrast */}
+        <div className="absolute inset-0 bg-black/[0.35] z-10" /> 
         
         {/* The Video */}
         <video
