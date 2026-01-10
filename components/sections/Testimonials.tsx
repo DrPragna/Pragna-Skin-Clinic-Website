@@ -15,7 +15,7 @@ const testimonials = [
     text: "I had an amazing experience with the doctor. She has solved my long pending issue and am very happy with her way of treatment. She doesn't push people to just take any treatment or medicine. She always focuses on the underlying issue and tries solving the roots first and not just a superficial treatment. I am very much satisfied with her and I'd strongly suggest her.",
     author: "Anuradha Channapragada",
     initial: "A",
-    bg: "bg-rose-100",
+    bg: "bg-maroon-50",
     clinic: "kokapet"
   },
   {
@@ -23,7 +23,7 @@ const testimonials = [
     text: "Dr. Padmavathi Surapaneni is one of the best dermatologists in the city. She is highly knowledgeable, patient, and takes the time to listen and explain the treatment clearly. I underwent treatment for pigmentation and saw visible results in short time. The staff is also very friendly and informative. I highly recommend this clinic for anyone looking for genuine skin care.",
     author: "Kavitha Thanubuddi",
     initial: "K",
-    bg: "bg-amber-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -31,7 +31,7 @@ const testimonials = [
     text: "Visited Dr. Pragna mam for my son's skin dryness. She explained the cause and care routine very clearly and suggested the right medication. Really helpful and approachable doctor!",
     author: "Kiran Shetty",
     initial: "K",
-    bg: "bg-blue-100",
+    bg: "bg-maroon-50",
     clinic: "kokapet"
   },
   {
@@ -39,7 +39,7 @@ const testimonials = [
     text: "I had a really good experience at Pragna Skin Clinic. The doctors were very professional and explained the treatment clearly. The staff was friendly and helpful, and the clinic was well maintained. I'm already seeing good results and would definitely recommend this clinic to anyone looking for skin care treatments.",
     author: "Lakshman Kumar Blina",
     initial: "L",
-    bg: "bg-orange-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -47,7 +47,7 @@ const testimonials = [
     text: "Best skin clinic with the state of the art facilities. I have come here with multiple problems and have always been happy with remarkable results. Dr Pragna is kind, patient and caring. A one stop destination for all your skin and hair problems.",
     author: "Sony Sharma",
     initial: "S",
-    bg: "bg-green-100",
+    bg: "bg-maroon-50",
     clinic: "kokapet"
   },
   {
@@ -55,7 +55,7 @@ const testimonials = [
     text: "Consulted for skin issues. Liked the attention towards the issues and treatment done successfully. I have been visiting Padmavathi mam for past 4 years. Extremely happy with the results.",
     author: "Pavithra Gera",
     initial: "P",
-    bg: "bg-teal-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -63,7 +63,7 @@ const testimonials = [
     text: "Love the doctors, explanations, procedures, everything. Dr. Pragna is very professional, kind, and attentive. She really listens and explains things clearly. I had a great experience and highly recommend!",
     author: "Saania Reddy",
     initial: "S",
-    bg: "bg-yellow-100",
+    bg: "bg-maroon-50",
     clinic: "kokapet"
   },
   {
@@ -71,7 +71,7 @@ const testimonials = [
     text: "I have been coming here since 4 years. Dr Padmavathi is my fav doctor here and I have seen effective results. Staff service is also excellent.",
     author: "Juweria Anam",
     initial: "J",
-    bg: "bg-indigo-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -79,7 +79,7 @@ const testimonials = [
     text: "Dr. Pragna is very knowledgeable and understood our concerns perfectly and explained the causal agents to our problems. I'd definitely refer her to everyone for any dermatology condition.",
     author: "Rishik Sharma",
     initial: "R",
-    bg: "bg-purple-100",
+    bg: "bg-maroon-50",
     clinic: "kokapet"
   },
   {
@@ -87,7 +87,7 @@ const testimonials = [
     text: "Dr Padmavati is a well experienced doctor with a decent staff. I had undergone my acne treatment and Melasma control well. Pragna Skin Clinic is one of the best clinics in Hyderabad.",
     author: "Kumar Chiguru",
     initial: "K",
-    bg: "bg-pink-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -95,7 +95,7 @@ const testimonials = [
     text: "Doctor is really good and one thing which differentiates her is her simplicity and sincerely listening to patients' problems. Overall cost including appointment and medicine is comparatively economical. Don't hesitate, just make an appointment for your skin and hair related issues. Thank you, Dr. Padmavati madam.",
     author: "Chandra Shekhar Mekala",
     initial: "C",
-    bg: "bg-cyan-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -103,7 +103,7 @@ const testimonials = [
     text: "Dr. Padmavathi garu is a very good doctor. We had great experience till now. Thanks for Dr. Padmavathi garu, she is an excellent dermatologist. She is soft spoken and very friendly, she clears all the doubts. I got good results. And the whole staff is also very friendly.",
     author: "Kavya Olupalli",
     initial: "K",
-    bg: "bg-lime-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -111,7 +111,7 @@ const testimonials = [
     text: "I had an amazing experience with Dr. Padmathi. Their expertise and personalized approach truly stood out. The diagnosis was spot-on, and the treatment plan yielded remarkable results. The clinic's atmosphere is welcoming, and the staff is friendly and professional. I highly recommend Dr. Padmathi for anyone seeking top-notch dermatological care.",
     author: "Sowjanya Pandranki",
     initial: "S",
-    bg: "bg-emerald-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -119,7 +119,7 @@ const testimonials = [
     text: "Dr. Padmavathi Surapaneni is truly one of the best and most experienced dermatologists I've ever consulted. Her knowledge and the way she explains everything in detail show how strong she is in her subject. I've never faced any issues with the treatments or creams she has prescribed - they've always worked beautifully for me. What I really appreciate is that she never recommends anything unnecessary, which shows her integrity and genuine care for patients. The clinic staff are also very friendly, helpful, and well-trained. Highly recommend her clinic for anyone looking for trustworthy and effective dermatological care.",
     author: "Swathi Kodali",
     initial: "S",
-    bg: "bg-violet-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -127,7 +127,7 @@ const testimonials = [
     text: "We had a great experience at Pragna Skin Clinic. Dr. Padmavathi ma'am and Dr. Pragna ma'am are extremely knowledgeable and kind. The support staff were courteous and helpful. Highly recommended for anyone seeking treatment for hair and skin-related concerns.",
     author: "Saran Ravipati",
     initial: "S",
-    bg: "bg-fuchsia-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   },
   {
@@ -135,14 +135,14 @@ const testimonials = [
     text: "I'm very pleased with the care and treatment I received. From the first consultation, you took the time to listen to my concerns, explain the underlying issues, and walk me through the treatment options clearly. Your expertise and personalized approach made a big difference, and I've seen noticeable improvement in both my hair. Thank you for your professionalism.",
     author: "Nayeem Mohammed",
     initial: "N",
-    bg: "bg-sky-100",
+    bg: "bg-maroon-50",
     clinic: "panjagutta"
   }
 ];
 
 // --- ICONS ---
 const GoogleIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
     <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
     <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
@@ -434,35 +434,35 @@ export default function Testimonials() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="flex flex-wrap justify-center gap-4"
             >
-              {/* Kokapet Pill */}
-              <a
-                href={KOKAPET_REVIEWS_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm px-6 py-3 rounded-full border border-maroon/10 shadow-sm hover:bg-white/60 hover:shadow-md transition-all group"
-              >
-                <div className="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
-                  <StarIcon />
-                </div>
-                <div className="text-left">
-                  <span className="font-bold text-charcoal block leading-none text-sm">4.9/5 Rating</span>
-                  <span className="text-charcoal/60 text-xs">Kokapet Clinic</span>
-                </div>
-              </a>
-
-              {/* Panjagutta Pill */}
+              {/* Panjagutta Pill - Reordered First */}
               <a
                 href={PANJAGUTTA_REVIEWS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm px-6 py-3 rounded-full border border-maroon/10 shadow-sm hover:bg-white/60 hover:shadow-md transition-all group"
               >
-                <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 rounded-full bg-maroon/10 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
                   <StarIcon />
                 </div>
                 <div className="text-left">
                   <span className="font-bold text-charcoal block leading-none text-sm">4.8/5 Rating</span>
                   <span className="text-charcoal/60 text-xs">Panjagutta Clinic</span>
+                </div>
+              </a>
+
+              {/* Kokapet Pill - Reordered Second */}
+              <a
+                href={KOKAPET_REVIEWS_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm px-6 py-3 rounded-full border border-maroon/10 shadow-sm hover:bg-white/60 hover:shadow-md transition-all group"
+              >
+                <div className="w-8 h-8 rounded-full bg-maroon/10 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                  <StarIcon />
+                </div>
+                <div className="text-left">
+                  <span className="font-bold text-charcoal block leading-none text-sm">5/5 Rating</span>
+                  <span className="text-charcoal/60 text-xs">Kokapet Clinic</span>
                 </div>
               </a>
             </motion.div>
