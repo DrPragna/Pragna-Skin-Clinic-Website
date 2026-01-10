@@ -47,6 +47,7 @@ export default function Hero() {
             }
           }}
         >
+          <source src="/hero-main.webm" type="video/webm" />
           <source src="/hero-main.mp4" type="video/mp4" />
         </video>
 
