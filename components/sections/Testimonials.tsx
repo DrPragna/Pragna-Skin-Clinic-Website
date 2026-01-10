@@ -243,17 +243,26 @@ const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onCl
 };
 
 // --- REVIEW CARD COMPONENT ---
-const TRUNCATE_LENGTH = 200;
-
 const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onClick: () => void }) => {
-  const isTruncated = review.text.length > TRUNCATE_LENGTH;
-  const displayText = isTruncated 
-    ? review.text.slice(0, TRUNCATE_LENGTH).trim() 
-    : review.text;
+  // Responsive threshold: wider cards on md+ screens fit more text
+  const [charThreshold, setCharThreshold] = useState(180);
   
+  useEffect(() => {
+    const updateThreshold = () => {
+      // md breakpoint (768px) has wider cards (420px vs 360px)
+      // More width = more chars per line = higher threshold needed
+      setCharThreshold(window.innerWidth >= 768 ? 220 : 180);
+    };
+    updateThreshold();
+    window.addEventListener("resize", updateThreshold);
+    return () => window.removeEventListener("resize", updateThreshold);
+  }, []);
+
+  const showReadMore = review.text.length > charThreshold;
+
   return (
     <div
-      className="block w-[360px] md:w-[420px] h-[280px] flex-shrink-0 mx-4 select-none relative group"
+      className="block w-[360px] md:w-[420px] h-[320px] flex-shrink-0 mx-4 select-none relative group"
       onDragStart={(e) => e.preventDefault()}
     >
       <div className="h-full bg-cream rounded-[2rem] p-8 shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-maroon/5 hover:border-maroon/20 hover:shadow-[0_8px_30px_rgba(114,43,43,0.08)] transition-all duration-300 flex flex-col relative overflow-hidden">
@@ -291,18 +300,26 @@ const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onCli
           </div>
 
           {/* Content */}
-          <div>
+          <div className="flex-1 flex flex-col">
             <p className="text-charcoal/70 text-[0.95rem] leading-[1.7] font-sans line-clamp-5">
-              "{displayText}{isTruncated && '... '}
-              {isTruncated && (
+              "{review.text}"
+            </p>
+            {showReadMore && (
+              <div className="mt-auto pt-3">
                 <button
-                  className="text-maroon hover:underline cursor-pointer font-medium inline text-xs ml-1 align-baseline transition-colors"
+                  className="text-maroon hover:underline cursor-pointer font-medium text-sm transition-colors flex items-center gap-1 group/btn"
                   onClick={onClick}
                 >
                   Read More
+                  <svg 
+                    className="w-3 h-3 transform group-hover/btn:translate-x-0.5 transition-transform" 
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
                 </button>
-              )}"
-            </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
