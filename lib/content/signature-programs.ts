@@ -5,6 +5,7 @@ export interface SignatureProgram {
   description: string;
   duration: string;
   image: string; // Path to image
+  imagePosition?: string; // CSS object-position value for fine-tuning (e.g., 'center top', 'center 30%')
   heroImage: string;
   gradient: string; // Tailwind gradient classes for fallback
   longDescription: string;
@@ -157,6 +158,7 @@ export const signaturePrograms: SignatureProgram[] = [
     description: 'A layered pre-wedding journey that clears, brightens and refines skin, hair and body gently.',
     duration: '3-6 months',
     image: '/images/signature/Bridal Beauty.jpg',
+    imagePosition: 'center top', // Position at top to move subject down significantly
     heroImage: '/images/signature/Bridal Beauty.jpg',
     gradient: 'from-[#7A5A4A] via-[#5E4639] to-[#3B2C24]',
     longDescription: "Bridal Beauty is designed to take you from tired and tanned to calm, polished and photo-ready without crash treatments. Over a few months, we combine acne or pigmentation care, glow facials, skin boosters, hair support and body shaping in a sequence that respects your calendar, outfits and rituals.",

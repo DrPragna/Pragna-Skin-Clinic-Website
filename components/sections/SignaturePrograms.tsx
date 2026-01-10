@@ -97,6 +97,7 @@ function ProgramCard({
               alt={program.title}
               onError={() => setImageError(true)}
               className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-[1.5s] ease-out"
+              style={{ objectPosition: program.imagePosition || 'center center' }}
             />
           ) : (
             // Gradient Fallback with texture
