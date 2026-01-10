@@ -3,6 +3,47 @@
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useBookingModal } from "./BookingModal";
+import Lenis from "lenis";
+
+// Declare lenis on window for TypeScript
+declare global {
+  interface Window {
+    lenis?: Lenis;
+  }
+}
+
+/**
+ * Helper function to scroll to an element while bypassing Lenis conflicts.
+ * Stops Lenis, uses native smooth scroll, then restarts Lenis.
+ */
+const scrollToElementBypassingLenis = (elementId: string, offset: number = 100) => {
+  const targetElement = document.getElementById(elementId);
+  if (!targetElement) return;
+
+  const targetRect = targetElement.getBoundingClientRect();
+  const lenis = window.lenis;
+
+  if (lenis) {
+    // Stop Lenis to prevent it from fighting with native scroll
+    lenis.stop();
+    // Remove the class that hides scrollbar (lenis-stopped adds overflow:hidden)
+    document.documentElement.classList.remove("lenis-stopped");
+  }
+
+  // Calculate absolute position
+  const absoluteTop = window.scrollY + targetRect.top - offset;
+
+  // Use native smooth scroll instead of Lenis
+  window.scrollTo({
+    top: absoluteTop,
+    behavior: "smooth"
+  });
+
+  // Re-enable Lenis after scroll animation completes
+  if (lenis) {
+    setTimeout(() => lenis.start(), 1200); // Match scroll duration
+  }
+};
 
 /**
  * FloatingActions Component
@@ -108,13 +149,8 @@ export default function FloatingActions() {
     }, 300);
     
     if (isHomePage) {
-      // Smooth scroll to contact section with offset
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        const offset = 100;
-        const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-      }
+      // Smooth scroll to contact section with offset (bypassing Lenis)
+      scrollToElementBypassingLenis("contact", 100);
     } else {
       // Open booking modal on other pages
       openBookingModal();

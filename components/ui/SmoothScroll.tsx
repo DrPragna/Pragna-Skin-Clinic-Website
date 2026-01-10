@@ -4,11 +4,21 @@ import { useEffect, useRef, ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 
+// Declare lenis on window for TypeScript
+declare global {
+  interface Window {
+    lenis?: Lenis;
+  }
+}
+
 /**
  * SmoothScroll Component
  * 
  * Provides buttery smooth, momentum-based scrolling using Lenis.
  * This creates a premium, luxury feel that's essential for world-class websites.
+ * 
+ * The Lenis instance is exposed on window.lenis for programmatic scroll control
+ * that needs to bypass Lenis (e.g., when scrolling after manual wheel scroll).
  */
 
 interface SmoothScrollProps {
@@ -33,6 +43,10 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     });
 
     lenisRef.current = lenis;
+    
+    // Expose lenis instance on window for programmatic scroll control
+    // This allows other components to stop/start Lenis when needed
+    window.lenis = lenis;
 
     // Add lenis class to html
     document.documentElement.classList.add('lenis');
@@ -72,6 +86,8 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       lenis.destroy();
       document.documentElement.classList.remove('lenis');
       document.removeEventListener('click', handleAnchorClick);
+      // Clean up window.lenis reference
+      delete window.lenis;
     };
   }, []);
 

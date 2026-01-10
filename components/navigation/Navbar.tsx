@@ -6,6 +6,47 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { navigationData } from '@/lib/navigationData';
 import { useBookingModal } from '@/components/ui/BookingModal';
+import Lenis from 'lenis';
+
+// Declare lenis on window for TypeScript
+declare global {
+  interface Window {
+    lenis?: Lenis;
+  }
+}
+
+/**
+ * Helper function to scroll to an element while bypassing Lenis conflicts.
+ * Stops Lenis, uses native smooth scroll, then restarts Lenis.
+ */
+const scrollToElementBypassingLenis = (elementId: string, offset: number = 100) => {
+  const targetElement = document.getElementById(elementId);
+  if (!targetElement) return;
+
+  const targetRect = targetElement.getBoundingClientRect();
+  const lenis = window.lenis;
+
+  if (lenis) {
+    // Stop Lenis to prevent it from fighting with native scroll
+    lenis.stop();
+    // Remove the class that hides scrollbar (lenis-stopped adds overflow:hidden)
+    document.documentElement.classList.remove('lenis-stopped');
+  }
+
+  // Calculate absolute position
+  const absoluteTop = window.scrollY + targetRect.top - offset;
+
+  // Use native smooth scroll instead of Lenis
+  window.scrollTo({
+    top: absoluteTop,
+    behavior: 'smooth'
+  });
+
+  // Re-enable Lenis after scroll animation completes
+  if (lenis) {
+    setTimeout(() => lenis.start(), 1200); // Match scroll duration
+  }
+};
 
 // Simple ChevronDown Icon
 const ChevronDown = ({ className }: { className?: string }) => (
@@ -563,12 +604,7 @@ export default function Navbar() {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    const offset = 100;
-                    const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
-                    window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-                  }
+                  scrollToElementBypassingLenis('contact', 100);
                 }}
                 className={`text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 cursor-pointer ${
                   useTransparentStyle 
@@ -764,12 +800,7 @@ export default function Navbar() {
                     e.preventDefault();
                     e.stopPropagation();
                     setIsMobileMenuOpen(false);
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                      const offset = 100;
-                      const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
-                      window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-                    }
+                    scrollToElementBypassingLenis('contact', 100);
                   }}
                   className="btn-primary block text-center w-full cursor-pointer"
                 >
