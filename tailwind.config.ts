@@ -162,8 +162,23 @@ const config: Config = {
         'marquee-reverse': 'marquee-reverse 60s linear infinite',
         'spin-slow': 'spin 20s linear infinite',
         'bounce-subtle': 'bounceSubtle 2s ease-in-out infinite',
+        'mesh-rotate': 'meshRotate 20s ease-in-out infinite',
+        'mesh-drift': 'meshDrift 15s ease-in-out infinite',
+        'mesh-breathe': 'meshBreathe 10s ease-in-out infinite',
       },
       keyframes: {
+        meshRotate: {
+          '0%, 100%': { transform: 'rotate(0deg) scale(1)' },
+          '50%': { transform: 'rotate(180deg) scale(1.1)' },
+        },
+        meshDrift: {
+          '0%, 100%': { transform: 'translateY(0) scale(1)' },
+          '50%': { transform: 'translateY(-20px) scale(1.05)' },
+        },
+        meshBreathe: {
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
+          '50%': { transform: 'scale(1.1)', opacity: '1' },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },

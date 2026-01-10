@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { SubTreatment, TreatmentFamily, Condition, SubTreatmentContent } from '@/lib/navigationData';
 import { Reveal } from '@/components/ui/Reveal';
 import { useBookingModal } from '@/components/ui/BookingModal';
+import { LuminousBackground } from '@/components/ui/LuminousBackground';
 
 interface SubTreatmentClientContentProps {
   subTreatment: SubTreatment;
@@ -23,16 +24,6 @@ export default function SubTreatmentClientContent({
 }: SubTreatmentClientContentProps) {
   const [activeSection, setActiveSection] = useState('overview');
   const { openBookingModal } = useBookingModal();
-
-  // Helper for Abstract Gradient Fallback - Unified pillar palette (matches Directory & Conditions)
-  const getGradientClass = (pillar: string) => {
-    switch (pillar) {
-        case 'Skin': return 'from-[#C28E79] via-[#8B5A4A] to-[#5C2E26]'; // Terracotta to Deep Burgundy
-        case 'Hair': return 'from-[#CDAA5C] via-[#A68A3D] to-[#5C4D22]'; // True Gold (distinct from Skin & Body)
-        case 'Body': return 'from-[#9E8C6B] via-[#736243] to-[#423D33]'; // Clay/Olive to Deep Olive
-        default: return 'from-[#87A896] via-[#527862] to-[#2A3B33]'; // Sage to Deep Forest
-    }
-  };
 
   // Content with fallbacks
   const heroTitle = content?.hero.title || subTreatment.name;
@@ -124,9 +115,7 @@ export default function SubTreatmentClientContent({
                 </>
             ) : (
                 // Case B: Abstract Gradient Fallback (No dark overlay needed)
-                <div className={`w-full h-full bg-gradient-to-br ${getGradientClass(family.pillar)} opacity-100`}>
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 mix-blend-overlay" />
-                </div>
+                <LuminousBackground pillar={family.pillar} variant="sub-treatment" />
             )}
         </div>
 

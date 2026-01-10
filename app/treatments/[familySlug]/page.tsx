@@ -5,6 +5,7 @@ import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getTreatmentFamily, getConditionsForFamily } from '@/lib/navigationData';
 import { getTreatmentFamilyContent } from '@/lib/content';
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/ui/Reveal';
+import { LuminousBackground } from '@/components/ui/LuminousBackground';
 
 export function generateStaticParams() {
   return treatmentFamilies.map((family) => ({
@@ -151,17 +152,7 @@ export default async function TreatmentFamilyPage({
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={content.hero.image} alt={heroTitle} className="w-full h-full object-cover opacity-50" />
             ) : (
-                 <div className="w-full h-full bg-gradient-to-br from-charcoal to-black" />
-            )}
-            
-            {(!content?.hero.image || content.hero.image.includes('placeholder') || content.hero.image.startsWith('/images/treatments/')) && (
-               <div className="absolute top-24 right-4 z-20 bg-red-500/20 border border-red-400/50 backdrop-blur-md px-4 py-3 rounded-lg">
-                  <p className="text-red-200 text-xs font-mono flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-                    Missing Hero Image
-                  </p>
-                  <p className="text-red-300/60 text-[10px] font-mono mt-1">{family.name}</p>
-               </div>
+                 <LuminousBackground pillar={family.pillar} variant="family" />
             )}
 
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
@@ -321,14 +312,6 @@ export default async function TreatmentFamilyPage({
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {family.subTreatments.map((treatment, i) => {
               const treatmentImage = (treatment as any).image;
-              // Unified pillar gradient tones (matches Directory & Conditions palette)
-              const gradientClass = family.pillar === 'Skin' 
-                ? 'from-[#C28E79] via-[#8B5A4A] to-[#5C2E26]' // Terracotta to Deep Burgundy
-                : family.pillar === 'Hair'
-                ? 'from-[#CDAA5C] via-[#A68A3D] to-[#5C4D22]' // True Gold (distinct from Skin & Body)
-                : family.pillar === 'Body'
-                ? 'from-[#9E8C6B] via-[#736243] to-[#423D33]' // Clay/Olive to Deep Olive
-                : 'from-[#87A896] via-[#527862] to-[#2A3B33]'; // Sage to Deep Forest
               
               return (
                 <Reveal key={treatment.slug} delay={i * 0.1} className="h-full">
@@ -345,8 +328,8 @@ export default async function TreatmentFamilyPage({
                               className="absolute inset-0 w-full h-full object-cover transition-transform duration-600 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                           />
                       ) : (
-                          <div className={`absolute inset-0 bg-gradient-to-br ${gradientClass} transition-transform duration-600 group-hover:scale-105`}>
-                              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 mix-blend-overlay" />
+                          <div className="absolute inset-0 transition-transform duration-600 group-hover:scale-105">
+                              <LuminousBackground pillar={family.pillar} variant="sub-treatment" />
                           </div>
                       )}
                       

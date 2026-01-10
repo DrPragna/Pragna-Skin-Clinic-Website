@@ -6,6 +6,7 @@ import { conditions, getCondition, getTreatmentFamiliesForCondition } from '@/li
 import { getConditionContent } from '@/lib/content';
 import { Reveal } from '@/components/ui/Reveal';
 import BookingButton from '@/components/ui/BookingButton';
+import { LuminousBackground } from '@/components/ui/LuminousBackground';
 
 // ============================================
 // PILLAR THEMES (Consistent with Menu)
@@ -116,17 +117,7 @@ export default async function ConditionPage({
           ============================================ */}
       <section className="relative min-h-[55vh] flex flex-col justify-center overflow-hidden pt-28 pb-16">
         {/* Abstract Gradient Background */}
-        <div 
-            className="absolute inset-0"
-            style={{
-                background: `linear-gradient(145deg, ${theme.gradientFrom}, ${theme.gradientTo})`
-            }}
-        >
-            {/* Noise Texture - Subtle */}
-            <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay" 
-                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
-            />
-        </div>
+        <LuminousBackground pillar={condition.group} variant="condition" />
 
         <div className="section-container relative z-10 text-center">
             <Reveal>
@@ -136,20 +127,20 @@ export default async function ConditionPage({
             </Reveal>
 
             <Reveal delay={0.1}>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display leading-[0.95] mb-6" style={{ color: theme.textLight }}>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display leading-[0.95] mb-6 text-charcoal">
                     {content?.hero?.title || condition.name}
                 </h1>
             </Reveal>
 
             <Reveal delay={0.2}>
-                <p className="text-lg md:text-xl font-light italic opacity-90 max-w-2xl mx-auto mb-6" style={{ color: theme.textLight }}>
+                <p className="text-lg md:text-xl font-light italic opacity-90 max-w-2xl mx-auto mb-6 text-charcoal/80">
                     &ldquo;{content?.hero?.empathyStatement || condition.subtitle}&rdquo;
                 </p>
             </Reveal>
 
             {content?.hero?.intro && (
                 <Reveal delay={0.3}>
-                    <p className="text-base md:text-lg opacity-80 max-w-xl mx-auto" style={{ color: theme.textLight }}>
+                    <p className="text-base md:text-lg opacity-80 max-w-xl mx-auto text-charcoal/70">
                         {content.hero.intro}
                     </p>
                 </Reveal>
