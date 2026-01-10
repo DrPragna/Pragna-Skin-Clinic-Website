@@ -354,17 +354,33 @@ export default function Testimonials() {
   // Triple the list to ensure infinite scroll seamlessness
   const extendedList = [...testimonials, ...testimonials, ...testimonials];
 
+  // Calculate reset point based on screen size
+  const getResetPoint = () => {
+    // Card width: 360px (mobile) / 420px (desktop at md breakpoint)
+    // Margin: mx-4 = 32px total per card
+    // 16 testimonials per set
+    const cardWidth = typeof window !== "undefined" && window.innerWidth >= 768 ? 420 : 360;
+    const cardMargin = 32;
+    return (cardWidth + cardMargin) * testimonials.length;
+  };
+
   // Auto-scroll logic using Framer Motion
   useEffect(() => {
     let animationFrameId: number;
+    let resetPoint = getResetPoint();
+    
+    // Update reset point on resize
+    const handleResize = () => {
+      resetPoint = getResetPoint();
+    };
+    window.addEventListener("resize", handleResize);
     
     const animate = () => {
       if (!isHovered && !selectedReview) {
         xPos.current -= 0.5; // Controls speed (lower = slower)
         
         // Reset position for seamless loop
-        // Width calculation: (Card Width 420 + Margin 32) * 16 cards = 7232px
-        if (xPos.current <= -7232) {
+        if (xPos.current <= -resetPoint) {
           xPos.current = 0;
         }
         
@@ -374,7 +390,10 @@ export default function Testimonials() {
     };
 
     animate();
-    return () => cancelAnimationFrame(animationFrameId);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [isHovered, controls, selectedReview]);
 
   // Handle Drag
@@ -473,7 +492,7 @@ export default function Testimonials() {
             className="flex w-max px-4 py-4" 
             animate={controls}
             drag="x"
-            dragConstraints={{ left: -7232, right: 0 }} 
+            dragConstraints={{ left: -getResetPoint() * 2, right: 0 }} 
             onDragEnd={onDragEnd}
             onDrag={onDrag}
             whileTap={{ cursor: "grabbing" }}
