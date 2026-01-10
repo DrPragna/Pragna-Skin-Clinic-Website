@@ -17,8 +17,8 @@ export default function PageLoader() {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Minimum display time - keep it snappy
-    const minDisplayTime = 1500;
+    // Minimum display time - total ~2.5s (1.0s display + 1.5s exit fade)
+    const minDisplayTime = 1000;
     const startTime = Date.now();
 
     const handleLoad = () => {
