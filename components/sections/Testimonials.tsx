@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, useAnimation, PanInfo, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence, useMotionValue } from 'framer-motion';
 
 // --- CLINIC LINKS ---
 const KOKAPET_REVIEWS_LINK = "https://www.google.com/maps/place/Pragna+Skin+Clinic/@17.387853,78.3399881,17z/data=!4m14!1m5!8m4!1e1!2s115999419679947581609!3m1!1e1!3m7!1s0x3bcb951e16e74899:0xe00057759cb62037!8m2!3d17.387853!4d78.342563!9m1!1b1!16s%2Fg%2F11y310_wqr?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MDEwNi4wIKXMDSoKLDEwMDc5MjA3MUgBUAM%3D";
@@ -348,8 +348,7 @@ export default function Testimonials() {
   
   // Animation state
   const [isHovered, setIsHovered] = useState(false);
-  const controls = useAnimation();
-  const xPos = useRef(0);
+  const x = useMotionValue(0);
 
   // Triple the list to ensure infinite scroll seamlessness
   const extendedList = [...testimonials, ...testimonials, ...testimonials];
@@ -377,14 +376,15 @@ export default function Testimonials() {
     
     const animate = () => {
       if (!isHovered && !selectedReview) {
-        xPos.current -= 0.5; // Controls speed (lower = slower)
+        let currentX = x.get();
+        currentX -= 0.5; // Controls speed (lower = slower)
         
         // Reset position for seamless loop
-        if (xPos.current <= -resetPoint) {
-          xPos.current += resetPoint;
+        if (currentX <= -resetPoint) {
+          currentX += resetPoint;
         }
         
-        controls.set({ x: xPos.current });
+        x.set(currentX);
       }
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -394,16 +394,7 @@ export default function Testimonials() {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
     };
-  }, [isHovered, controls, selectedReview]);
-
-  // Handle Drag
-  const onDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    xPos.current += info.offset.x;
-  };
-
-  const onDrag = () => {
-    // Framer-motion handles the visual transform during drag
-  };
+  }, [isHovered, selectedReview, x]);
 
   return (
     <>
@@ -490,12 +481,9 @@ export default function Testimonials() {
 
           <motion.div 
             className="flex w-max px-4 py-4" 
-            animate={controls}
+            style={{ x }}
             drag="x"
-            dragMomentum={false}
             dragConstraints={{ left: -getResetPoint() * 2, right: 0 }} 
-            onDragEnd={onDragEnd}
-            onDrag={onDrag}
             whileTap={{ cursor: "grabbing" }}
           >
             {extendedList.map((review, i) => (
