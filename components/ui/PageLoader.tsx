@@ -17,17 +17,20 @@ export default function PageLoader() {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Minimum display time for the loader to feel intentional
+    // Minimum display time - keep it snappy
     const minDisplayTime = 1500;
     const startTime = Date.now();
 
     const handleLoad = () => {
+      // Calculate how much time has passed since mount
       const elapsed = Date.now() - startTime;
+      // Ensure we show the loader for at least minDisplayTime
       const remainingTime = Math.max(0, minDisplayTime - elapsed);
       
       setTimeout(() => {
         setIsExiting(true);
-        setTimeout(() => setIsLoading(false), 800);
+        // Wait for curtain animation to finish before unmounting
+        setTimeout(() => setIsLoading(false), 1200); 
       }, remainingTime);
     };
 
@@ -50,7 +53,7 @@ export default function PageLoader() {
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-cream"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
         >
           {/* Background gradient */}
           <motion.div 
@@ -64,61 +67,55 @@ export default function PageLoader() {
           <div className="relative z-10 flex flex-col items-center">
             {/* Brand Name */}
             <motion.div
-              className="overflow-hidden"
+              className="overflow-hidden px-6 py-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <motion.h1
-                className="text-5xl md:text-7xl font-display font-light text-maroon tracking-tight"
-                initial={{ y: 100 }}
-                animate={{ y: isExiting ? -100 : 0 }}
+                className="text-4xl md:text-6xl lg:text-7xl font-display font-light text-maroon tracking-tight text-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ 
-                  duration: 0.8, 
+                  duration: 0.8,
                   ease: [0.16, 1, 0.3, 1],
-                  delay: isExiting ? 0 : 0.2
+                  delay: 0.1
                 }}
               >
-                Pragna
+                Pragna Skin Clinic
               </motion.h1>
             </motion.div>
             
             {/* Tagline */}
             <motion.p
               className="text-sm tracking-[0.3em] uppercase text-maroon/50 mt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ 
-                opacity: isExiting ? 0 : 1, 
-                y: isExiting ? -20 : 0 
-              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ 
-                duration: 0.5, 
+                duration: 0.6, 
                 ease: [0.16, 1, 0.3, 1],
-                delay: isExiting ? 0 : 0.5
+                delay: 0.5
               }}
             >
               World Class Dermatology Care
             </motion.p>
             
-            {/* Loading indicator line */}
+            {/* Loading indicator line - oscillating */}
             <motion.div
-              className="mt-8 h-px bg-maroon/20 overflow-hidden"
-              initial={{ width: 0 }}
-              animate={{ width: isExiting ? 0 : 120 }}
-              transition={{ 
-                duration: isExiting ? 0.3 : 1,
-                ease: [0.16, 1, 0.3, 1],
-                delay: isExiting ? 0 : 0.6
-              }}
+              className="mt-8 h-px bg-maroon/20 overflow-hidden w-32"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.2 }}
             >
               <motion.div
-                className="h-full bg-maroon"
-                initial={{ x: '-100%' }}
-                animate={{ x: isExiting ? '100%' : '100%' }}
+                className="h-full w-full bg-maroon"
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
                 transition={{
                   duration: 1,
-                  ease: 'linear',
-                  repeat: isExiting ? 0 : Infinity,
+                  ease: "easeInOut",
+                  repeat: Infinity,
                 }}
               />
             </motion.div>

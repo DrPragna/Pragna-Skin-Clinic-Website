@@ -58,7 +58,7 @@ export default function Branches() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-4xl lg:text-5xl font-display text-charcoal"
           >
-            Visit our <span className="italic text-maroon">Sanctuaries</span>
+            Visit our <span className="italic text-maroon">Clinics</span>
           </motion.h2>
         </div>
 
