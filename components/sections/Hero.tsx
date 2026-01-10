@@ -37,16 +37,25 @@ export default function Hero() {
           muted
           loop
           playsInline
-          poster="/doctors-hero.png"
+          preload="auto"
+          onError={(e) => {
+            console.error("Video failed to load:", e);
+            // Hide video on error, fallback image will show
+            const video = e.target as HTMLVideoElement;
+            if (video) {
+              video.style.display = "none";
+            }
+          }}
         >
           <source src="/hero-video2.mp4" type="video/mp4" />
         </video>
 
         {/* Fallback Image (visible if video fails or loads slow) */}
         <img 
-          src="/doctors-hero.png" 
+          src="/clinic-interior.png" 
           alt="Pragna Skin Clinic"
           className="absolute inset-0 w-full h-full object-cover -z-10"
+          loading="eager"
         />
       </motion.div>
 
