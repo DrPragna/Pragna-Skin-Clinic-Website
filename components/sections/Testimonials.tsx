@@ -381,7 +381,7 @@ export default function Testimonials() {
         
         // Reset position for seamless loop
         if (xPos.current <= -resetPoint) {
-          xPos.current = 0;
+          xPos.current += resetPoint;
         }
         
         controls.set({ x: xPos.current });
@@ -492,6 +492,7 @@ export default function Testimonials() {
             className="flex w-max px-4 py-4" 
             animate={controls}
             drag="x"
+            dragMomentum={false}
             dragConstraints={{ left: -getResetPoint() * 2, right: 0 }} 
             onDragEnd={onDragEnd}
             onDrag={onDrag}
