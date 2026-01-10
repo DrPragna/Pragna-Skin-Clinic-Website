@@ -114,7 +114,6 @@ export default function Contact() {
       {/* Artistic Background Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-gold/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none mix-blend-multiply" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-maroon/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none mix-blend-multiply" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('/noise.png')] opacity-[0.03] pointer-events-none" />
       
       <div className="section-container max-w-5xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
