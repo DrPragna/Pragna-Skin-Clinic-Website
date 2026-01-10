@@ -121,26 +121,26 @@ export default async function ConditionPage({
 
         <div className="section-container relative z-10 text-center">
             <Reveal>
-                <span className="inline-block text-[10px] md:text-xs font-medium uppercase tracking-[0.3em] mb-4" style={{ color: theme.textAccent }}>
+                <span className="inline-block text-[10px] md:text-xs font-medium uppercase tracking-[0.3em] mb-4 text-white/60 border border-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
                     {condition.group} Concerns
                 </span>
             </Reveal>
 
             <Reveal delay={0.1}>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display leading-[0.95] mb-6 text-charcoal">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display leading-[0.95] mb-6 text-white">
                     {content?.hero?.title || condition.name}
                 </h1>
             </Reveal>
 
             <Reveal delay={0.2}>
-                <p className="text-lg md:text-xl font-light italic opacity-90 max-w-2xl mx-auto mb-6 text-charcoal/80">
+                <p className="text-lg md:text-xl font-light italic opacity-90 max-w-2xl mx-auto mb-6 text-white/80">
                     &ldquo;{content?.hero?.empathyStatement || condition.subtitle}&rdquo;
                 </p>
             </Reveal>
 
             {content?.hero?.intro && (
                 <Reveal delay={0.3}>
-                    <p className="text-base md:text-lg opacity-80 max-w-xl mx-auto text-charcoal/70">
+                    <p className="text-base md:text-lg opacity-80 max-w-xl mx-auto text-white/70">
                         {content.hero.intro}
                     </p>
                 </Reveal>

@@ -39,9 +39,8 @@ export function LuminousBackground({ pillar, variant }: LuminousBackgroundProps)
   const colors = PILLAR_COLORS[pillar] || PILLAR_COLORS['Others'];
 
   // Base background color
-  // Condition pages are now "Light & Clear" (White/Cream base)
-  // Family/Sub-treatment pages retain "Luminous Depth" (Dark base)
-  const baseBg = variant === 'condition' ? 'bg-[#FCFBF9]' : 'bg-[#111111]';
+  // Condition pages now use a "Dimmed" dark theme to match the user's preference for contrast
+  const baseBg = variant === 'condition' ? 'bg-[#0F0F0F]' : 'bg-[#111111]';
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${baseBg}`}>
@@ -50,8 +49,8 @@ export function LuminousBackground({ pillar, variant }: LuminousBackgroundProps)
         className="absolute inset-0 opacity-40 mix-blend-soft-light"
         style={{
           background: variant === 'condition'
-            ? `radial-gradient(circle at 50% 50%, ${colors.accent}, transparent 70%)` // Light mode base
-            : `radial-gradient(circle at 50% 50%, ${colors.primary}, transparent 70%)` // Dark mode base
+            ? `radial-gradient(circle at 50% 50%, ${colors.primary}, transparent 70%)` // Switch to Primary for consistency
+            : `radial-gradient(circle at 50% 50%, ${colors.primary}, transparent 70%)`
         }}
       />
 
@@ -94,13 +93,13 @@ export function LuminousBackground({ pillar, variant }: LuminousBackgroundProps)
 
         {variant === 'condition' && (
           <div className="relative w-full h-full flex items-center justify-center animate-mesh-breathe">
-            {/* Single Central Glow - Light Mode */}
+            {/* Single Central Glow - Dark Mode to match Family/Sub-treatment */}
             <div 
-              className="w-[60%] h-[60%] rounded-full blur-[100px] opacity-20 mix-blend-multiply"
+              className="w-[60%] h-[60%] rounded-full blur-[90px] opacity-40 mix-blend-screen"
               style={{ background: colors.primary }}
             />
             <div 
-              className="absolute w-[40%] h-[40%] rounded-full blur-[80px] opacity-40 mix-blend-multiply"
+              className="absolute w-[40%] h-[40%] rounded-full blur-[80px] opacity-30 mix-blend-screen"
               style={{ background: colors.accent }}
             />
           </div>
@@ -111,9 +110,7 @@ export function LuminousBackground({ pillar, variant }: LuminousBackgroundProps)
       <div className="absolute inset-0 bg-noise opacity-[0.07] mix-blend-overlay pointer-events-none" />
       
       {/* 4. Darken overlay for text readability on dark modes */}
-      {variant !== 'condition' && (
-        <div className="absolute inset-0 bg-black/20" />
-      )}
+      <div className="absolute inset-0 bg-black/20" />
     </div>
   );
 }
