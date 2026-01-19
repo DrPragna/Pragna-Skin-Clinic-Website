@@ -4,19 +4,6 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.pragnaskinclinic.com"
-        }
-      ],
-      "destination": "https://pragnaskinclinic.com/:path*",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/(.*\\.mp4)",
