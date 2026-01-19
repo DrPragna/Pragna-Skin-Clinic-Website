@@ -4,7 +4,7 @@ import { MetadataRoute } from 'next'
  * Pragna Skin Clinic Robots.txt Generator
  * Ensures proper indexing and points to the sitemap.
  * 
- * Target URL: https://www.pragnaskinclinic.com/robots.txt
+ * Target URL: https://pragnaskinclinic.com/robots.txt
  */
 
 export default function robots(): MetadataRoute.Robots {
@@ -18,6 +18,6 @@ export default function robots(): MetadataRoute.Robots {
                 '/test/',     // Future proofing
             ],
         },
-        sitemap: 'https://www.pragnaskinclinic.com/sitemap.xml',
+        sitemap: 'https://pragnaskinclinic.com/sitemap.xml',
     }
 }

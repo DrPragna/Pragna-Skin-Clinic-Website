@@ -6,14 +6,14 @@ import { signaturePrograms } from '@/lib/content/signature-programs'
  * Pragna Skin Clinic Sitemap Generator
  * Automatically includes all static and dynamic routes.
  * 
- * Target URL: https://www.pragnaskinclinic.com/sitemap.xml
+ * Target URL: https://pragnaskinclinic.com/sitemap.xml
  */
 
-const BASE_URL = 'https://www.pragnaskinclinic.com'
+const BASE_URL = 'https://pragnaskinclinic.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
-  
+
   // 1. Static Pages
   const staticPages: MetadataRoute.Sitemap = [
     {
@@ -41,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
   ]
-  
+
   // 2. Condition Pages (~16 pages)
   const conditionPages: MetadataRoute.Sitemap = conditions.map(c => ({
     url: `${BASE_URL}/conditions/${c.slug}`,
@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly',
     priority: 0.7,
   }))
-  
+
   // 3. Treatment Family Pages (~10 pages)
   const familyPages: MetadataRoute.Sitemap = treatmentFamilies.map(f => ({
     url: `${BASE_URL}/treatments/${f.slug}`,
@@ -57,7 +57,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly',
     priority: 0.7,
   }))
-  
+
   // 4. Sub-Treatment Pages (~51 pages)
   const subTreatmentPages: MetadataRoute.Sitemap = treatmentFamilies.flatMap(f =>
     f.subTreatments.map(st => ({
@@ -67,7 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     }))
   )
-  
+
   // 5. Signature Program Pages (~5 pages)
   const programPages: MetadataRoute.Sitemap = signaturePrograms.map(p => ({
     url: `${BASE_URL}/signature-programs/${p.slug}`,
@@ -75,7 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly',
     priority: 0.7,
   }))
-  
+
   return [
     ...staticPages,
     ...conditionPages,
