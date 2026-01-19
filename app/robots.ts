@@ -14,8 +14,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: [
                 '/api/',      // Exclude API routes
-                '/_next/',    // Exclude Next.js internals
-                '/static/',   // Exclude static assets if needed
                 '/admin/',    // Future proofing
                 '/test/',     // Future proofing
             ],
