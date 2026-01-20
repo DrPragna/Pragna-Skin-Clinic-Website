@@ -16,7 +16,7 @@ const pillars = [
   {
     number: '01',
     title: 'Legacy of\nMastery',
-    description: "Founded by Dr. Padmavathi Surapaneni, with 25+ years of experience. Tailored plans, transparent care, and results designed to look natural.",
+    description: "Established 25 years ago by Dr. Padmavathi Surapaneni, a pioneer in South Indian dermatology. Her approach shaped modern aesthetic practice in the region.",
   },
   {
     number: '02',
