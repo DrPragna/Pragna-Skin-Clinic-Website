@@ -14,7 +14,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
     // Minimum display time - total ~2.5s (1.0s display + 1.5s exit fade)
@@ -28,9 +27,7 @@ export default function PageLoader() {
       const remainingTime = Math.max(0, minDisplayTime - elapsed);
       
       setTimeout(() => {
-        setIsExiting(true);
-        // Wait for curtain animation to finish before unmounting
-        setTimeout(() => setIsLoading(false), 1200); 
+        setIsLoading(false);
       }, remainingTime);
     };
 
@@ -51,9 +48,9 @@ export default function PageLoader() {
       {isLoading && (
         <motion.div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-cream"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          initial={{ y: 0 }}
+          exit={{ y: "-100%" }}
+          transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
         >
           {/* Background gradient */}
           <motion.div 
@@ -64,7 +61,11 @@ export default function PageLoader() {
           />
           
           {/* Animated logo */}
-          <div className="relative z-10 flex flex-col items-center">
+          <motion.div 
+            className="relative z-10 flex flex-col items-center"
+            exit={{ opacity: 0, y: 100 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
             {/* Brand Name */}
             <motion.div
               className="overflow-hidden px-6 py-2"
@@ -119,15 +120,15 @@ export default function PageLoader() {
                 }}
               />
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Decorative elements */}
           <motion.div
             className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-terracotta/10 blur-3xl"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
-              scale: isExiting ? 2 : 1, 
-              opacity: isExiting ? 0 : 0.5 
+              scale: 1, 
+              opacity: 0.5 
             }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           />
@@ -135,8 +136,8 @@ export default function PageLoader() {
             className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-rose-gold/10 blur-3xl"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
-              scale: isExiting ? 2 : 1, 
-              opacity: isExiting ? 0 : 0.5 
+              scale: 1, 
+              opacity: 0.5 
             }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           />
