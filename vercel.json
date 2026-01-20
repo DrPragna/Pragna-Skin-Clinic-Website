@@ -22,5 +22,392 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/about-us/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/:path*",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/book/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/appointment/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/category/hair-care/:path*",
+      "destination": "/conditions/hair-fall-thinning-hair",
+      "permanent": true
+    },
+    {
+      "source": "/category/skin-care/:path*",
+      "destination": "/conditions",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/dermal-fillers/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/dermal-fillers-facial-contouring",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/hifu/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/hifu-face-neck-tightening",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/carbon-laser-peel/:path*",
+      "destination": "/treatments/pigmentation-tanning-glow",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/radiofrequency-skin-tightening/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/face-neck-skin-tightening",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/subcision/:path*",
+      "destination": "/treatments/acne-acne-scar-solutions/acne-scar-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/prf/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/prp-gfc-hair-growth",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/fractional-erbium-glass-laser/:path*",
+      "destination": "/treatments/acne-acne-scar-solutions/acne-scar-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/mnrf/:path*",
+      "destination": "/treatments/acne-acne-scar-solutions/acne-scar-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/personalized-skin-care-routine/:path*",
+      "destination": "/treatments/advanced-facials-boosters/personalised-skin-care-plan",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/laser-hair-reduction/:path*",
+      "destination": "/treatments/laser-hair-reduction",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/dermapen/:path*",
+      "destination": "/treatments/acne-acne-scar-solutions/acne-scar-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/prp-and-gfc-vampire-facial/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/prp-gfc-hair-growth",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/hand-rejuvenation/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/hand-decollete-rejuvenation",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/medifacials/:path*",
+      "destination": "/treatments/medifacials",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/thread-lift/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/face-neck-skin-tightening",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/:space*laser-toning/:path*",
+      "destination": "/treatments/pigmentation-tanning-glow",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/laser-toning/:path*",
+      "destination": "/treatments/pigmentation-tanning-glow",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/laser-toning-2/:path*",
+      "destination": "/treatments/pigmentation-tanning-glow",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/fractional-co2-laser/:path*",
+      "destination": "/treatments/acne-acne-scar-solutions/acne-scar-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/mommy-makeover/:path*",
+      "destination": "/treatments/wellness-iv-drips-corrective/mommy-makeover-program",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/chemical-peels/:path*",
+      "destination": "/treatments/advanced-facials-boosters/chemical-peels",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/morpheus8/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/face-neck-skin-tightening",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/mesotherapy/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/mesotherapy-hair",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/skin-boosters/:path*",
+      "destination": "/treatments/advanced-facials-boosters/skin-boosters-profhilo",
+      "permanent": true
+    },
+    {
+      "source": "/botoxs/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/botox-anti-wrinkle-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/struggling-with-double-chin/:path*",
+      "destination": "/conditions/double-chin-jawline-fullness",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/struggling-with-melasma/:path*",
+      "destination": "/treatments/pigmentation-tanning-glow/melasma-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/struggling-with-stretch-marks/:path*",
+      "destination": "/conditions/stretch-marks",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/ageing/:path*",
+      "destination": "/conditions/ageing-skin-lines-wrinkles",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/acne/:path*",
+      "destination": "/conditions/acne-breakouts",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/struggling-with-uneven-skin-tone/:path*",
+      "destination": "/conditions/uneven-skin-tone-texture",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/struggling-with-neck-lines/:path*",
+      "destination": "/conditions/neck-lines-sagging-neck",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/dark-circles/:path*",
+      "destination": "/conditions/dark-circles-under-eye",
+      "permanent": true
+    },
+    {
+      "source": "/conditions/hair-fall-and-hair-thinning/:path*",
+      "destination": "/conditions/hair-fall-thinning-hair",
+      "permanent": true
+    },
+    {
+      "source": "/services/alopecia/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/hair-fall-thinning-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/services/chemical-peel/:path*",
+      "destination": "/treatments/advanced-facials-boosters/chemical-peels",
+      "permanent": true
+    },
+    {
+      "source": "/services/laser-tattoo-removal/:path*",
+      "destination": "/treatments/wellness-iv-drips-corrective/tattoo-removal",
+      "permanent": true
+    },
+    {
+      "source": "/services/dermal-fillers/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/dermal-fillers-facial-contouring",
+      "permanent": true
+    },
+    {
+      "source": "/services/hifu/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/hifu-face-neck-tightening",
+      "permanent": true
+    },
+    {
+      "source": "/services/platelet-rich-plasma-therapy/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/prp-gfc-hair-growth",
+      "permanent": true
+    },
+    {
+      "source": "/services/laser-hair-reduction/:path*",
+      "destination": "/treatments/laser-hair-reduction",
+      "permanent": true
+    },
+    {
+      "source": "/services/botox/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/botox-anti-wrinkle-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/discover-the-magic-of-prp-secrets-to-achieving-timeless-and-youthful-skin/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/prp-gfc-hair-growth",
+      "permanent": true
+    },
+    {
+      "source": "/laser-hair-removal-vs-electrolysis/:path*",
+      "destination": "/treatments/laser-hair-reduction",
+      "permanent": true
+    },
+    {
+      "source": "/understanding-laser-hair-removal-is-it-right-for-you/:path*",
+      "destination": "/treatments/laser-hair-reduction",
+      "permanent": true
+    },
+    {
+      "source": "/know-your-math-about-skin-tats-a-map-to-navigate-the-nuances-of-laser-tattoo-removal/:path*",
+      "destination": "/conditions/tattoo-ink-pigment-removal",
+      "permanent": true
+    },
+    {
+      "source": "/botox-and-dermal-fillers-understanding-the-differences-and-choosing-the-right-option/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring",
+      "permanent": true
+    },
+    {
+      "source": "/10-skincare-mistakes-that-are-damaging-your-skin-and-how-to-avoid-them/:path*",
+      "destination": "/conditions",
+      "permanent": true
+    },
+    {
+      "source": "/the-benefits-of-a-regular-facial-for-maintaining-healthy-skin/:path*",
+      "destination": "/treatments/advanced-facials-boosters/hydrating-glow-facials",
+      "permanent": true
+    },
+    {
+      "source": "/the-art-of-choosing-the-right-hair-oil/:path*",
+      "destination": "/conditions/hair-fall-thinning-hair",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-choose-the-best-hair-oil-for-hair-growth/:path*",
+      "destination": "/conditions/hair-fall-thinning-hair",
+      "permanent": true
+    },
+    {
+      "source": "/if-youre-looking-for-a-youthful-complexion-without-the-downtime-and-risks-of-surgery/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring",
+      "permanent": true
+    },
+    {
+      "source": "/the-ultimate-guide-to-skincare-tips-for-healthy-glowing-skin/:path*",
+      "destination": "/conditions",
+      "permanent": true
+    },
+    {
+      "source": "/the-importance-of-hydration-for-healthy-skin-and-hair/:path*",
+      "destination": "/conditions",
+      "permanent": true
+    },
+    {
+      "source": "/cryotherapy-facials-the-trendy-skin-prep-exigency/:path*",
+      "destination": "/treatments/medifacials",
+      "permanent": true
+    },
+    {
+      "source": "/top-5-derma-trends/:path*",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/take-the-stress-out-of-your-tress-3-easy-hair-masks-to-whip-yourself/:path*",
+      "destination": "/conditions/hair-fall-thinning-hair",
+      "permanent": true
+    },
+    {
+      "source": "/quintessence-of-skin-resurfacing/:path*",
+      "destination": "/treatments/acne-acne-scar-solutions",
+      "permanent": true
+    },
+    {
+      "source": "/understanding-skin-pigmentation-the-science-behind-our-skins-colors/:path*",
+      "destination": "/conditions/dark-spots-tan-pigmentation",
+      "permanent": true
+    },
+    {
+      "source": "/sunscreen-a-monsoon-must-have-for-skin-protection/:path*",
+      "destination": "/conditions",
+      "permanent": true
+    },
+    {
+      "source": "/chin-augmentation/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/jawline-chin-contouring",
+      "permanent": true
+    },
+    {
+      "source": "/botox-injections-a-surprising-solution-for-excessive-sweating/:path*",
+      "destination": "/treatments/wellness-iv-drips-corrective/excess-sweating-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/prp-hair-loss-injections/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/prp-gfc-hair-growth",
+      "permanent": true
+    },
+    {
+      "source": "/lifestyle-habits-and-acne-scarring-understanding-the-connection-and-prevention/:path*",
+      "destination": "/conditions/acne-scars",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post/turn-back-the-clock-with-ultrasound/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/hifu-face-neck-tightening",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post/fast-fixes-for-your-skin---medifacials/:path*",
+      "destination": "/treatments/medifacials",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post/the-science-of-beauty/:path*",
+      "destination": "/treatments",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post/freeze-out-the-fat-with-cryolipolysis/:path*",
+      "destination": "/treatments/body-contouring-fat-reduction",
+      "permanent": true
+    }
   ]
 }
