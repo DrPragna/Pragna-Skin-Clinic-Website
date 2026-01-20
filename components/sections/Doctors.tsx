@@ -105,40 +105,38 @@ export default function Doctors() {
           {doctors.map((doctor, index) => (
             <div
               key={doctor.id}
-              className="flex flex-col items-center text-center bg-white/95 p-8 lg:p-10 rounded-[2rem] border border-white/50 shadow-lg shadow-maroon/5 hover:shadow-xl hover:shadow-maroon/10 transition-all duration-700 group h-full relative overflow-hidden"
+              className="flex flex-col items-center text-center bg-white p-8 rounded-2xl border border-maroon/5 shadow-md shadow-maroon/5 hover:shadow-xl hover:shadow-maroon/10 transition-all duration-500 group h-full relative overflow-hidden"
             >
-              {/* Card Highlight Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-transparent to-transparent opacity-50" />
               
               {/* Image Section */}
-              <div className="w-full max-w-[300px] relative mb-10 group-hover:scale-[1.02] transition-transform duration-700 z-10">
-                <div className="relative aspect-[4/5] overflow-visible">
-                  <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl shadow-maroon/10">
-                    {/* Doctor Portrait Image - Cinematic Treatment */}
-                    <Image
-                      src={doctor.image}
-                      alt={doctor.name}
-                      fill
-                      className={`object-cover ${doctor.imageStyle} ${(doctor as any).hoverStyle} brightness-[1.03] contrast-[1.05] saturate-[0.9] transition-all duration-[1.5s] ease-out group-hover:brightness-[1.08] group-hover:saturate-100`}
-                      sizes="(max-width: 768px) 300px, 300px"
-                    />
-                    {/* Cinematic Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-maroon/20 via-transparent to-transparent opacity-60 mix-blend-multiply group-hover:opacity-40 transition-opacity duration-700" />
-                    
-                    {/* Inner Border */}
-                    <div className="absolute inset-0 border border-white/10 rounded-2xl z-10" />
+              <div className="w-full max-w-[280px] relative mb-8 z-10">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-t-[10rem] rounded-b-3xl shadow-2xl shadow-maroon/10 group-hover:shadow-maroon/20 transition-all duration-500">
+                  {/* Doctor Portrait Image */}
+                  <div className="absolute inset-0 overflow-hidden rounded-t-[10rem] rounded-b-3xl">
+                    <div className="relative w-full h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105">
+                      <Image
+                        src={doctor.image}
+                        alt={doctor.name}
+                        fill
+                        className={`object-cover ${doctor.imageStyle} brightness-[1.02] contrast-[1.05] saturate-[0.95]`}
+                        sizes="(max-width: 768px) 300px, 300px"
+                      />
+                    </div>
                   </div>
+                  
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-maroon/20 via-transparent to-transparent opacity-40 mix-blend-multiply transition-opacity duration-500" />
+                </div>
 
-                  {/* Floating Badge - Centered & Elegant */}
-                  <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]">
-                    <motion.div 
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="bg-white/95 backdrop-blur-sm border border-maroon/10 px-6 py-2.5 rounded-full shadow-lg flex items-center gap-2.5 mx-auto"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-rose-gold animate-pulse" />
-                      <span className="text-maroon font-display text-sm font-medium whitespace-nowrap tracking-wide">{doctor.badge}</span>
-                    </motion.div>
-                  </div>
+                {/* Badge - Integrated */}
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]">
+                  <motion.div 
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="bg-white border border-maroon/10 px-5 py-2 rounded-full shadow-lg flex items-center gap-2"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-gold animate-pulse" />
+                    <span className="text-maroon font-display text-sm font-medium whitespace-nowrap tracking-wide">{doctor.badge}</span>
+                  </motion.div>
                 </div>
               </div>
 

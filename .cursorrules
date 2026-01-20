@@ -1,0 +1,11 @@
+# Cursor Rules for PSC Project
+
+## Git Operations
+- Do NOT run `git add`, `git commit`, or `git push` commands without explicit permission from the user.
+- The user prefers to handle version control manually.
+- Only execute git commands when the user explicitly asks for it.
+
+## Performance
+- Avoid expensive CSS filters like backdrop-blur and SVG feTurbulence on elements that animate or scroll.
+- Lenis smooth scroll is disabled on mobile (touch devices) for better performance.
+- Prefer CSS gradients over blur filters for visual effects.
