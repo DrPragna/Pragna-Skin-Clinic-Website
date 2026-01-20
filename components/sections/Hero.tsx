@@ -125,8 +125,8 @@ export default function Hero() {
         className="absolute inset-0 z-0"
         style={{ y, opacity }}
       >
-        {/* Overlay for text readability - decreased opacity for better contrast */}
-        <div className="absolute inset-0 bg-black/[0.4] z-10" /> 
+        {/* Overlay for text readability - darker on mobile due to warmer video tones */}
+        <div className={`absolute inset-0 z-10 ${isMobile ? 'bg-black/[0.5]' : 'bg-black/[0.4]'}`} /> 
         
         {/* Poster image - exact first frame of video, shows until video plays */}
         {isLoaded && (
