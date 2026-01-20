@@ -28,21 +28,35 @@ async function appendToGoogleSheet(data: BookingData): Promise<boolean> {
   }
 
   try {
+    // Add timeout to prevent hanging
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+
     const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
+      signal: controller.signal,
     });
 
+    clearTimeout(timeoutId);
+
     if (!response.ok) {
+      console.error('[Google Sheets] HTTP error:', response.status, response.statusText);
       throw new Error(`Google Sheets error: ${response.status}`);
     }
 
+    const result = await response.text();
+    console.log('[Google Sheets] Response:', result.substring(0, 200)); // Log first 200 chars
     return true;
   } catch (error) {
-    console.error('Failed to append to Google Sheet:', error);
+    if (error instanceof Error && error.name === 'AbortError') {
+      console.error('[Google Sheets] Request timeout after 8 seconds');
+    } else {
+      console.error('[Google Sheets] Failed to append:', error);
+    }
     return false;
   }
 }
@@ -73,10 +87,19 @@ export async function POST(request: NextRequest) {
       source: source || 'website',
     };
 
-    // Fire and forget - save to Google Sheets in background (don't wait)
-    appendToGoogleSheet(bookingData).catch(err => {
-      console.error('Background sheet append failed:', err);
-    });
+    // Try to save to Google Sheets (with timeout protection)
+    let sheetSuccess = false;
+    try {
+      console.log('[Booking API] Attempting to save to Google Sheets...', {
+        name: bookingData.name,
+        timestamp: bookingData.timestamp
+      });
+      sheetSuccess = await appendToGoogleSheet(bookingData);
+      console.log('[Booking API] Google Sheets save result:', sheetSuccess);
+    } catch (err) {
+      console.error('[Booking API] Google Sheets save failed:', err);
+      // Don't fail the whole request - WhatsApp is the primary action
+    }
 
     // Generate WhatsApp link immediately
     const whatsappNumber = process.env.WHATSAPP_NUMBER || '918886531111';
