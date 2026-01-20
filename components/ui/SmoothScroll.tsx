@@ -45,11 +45,12 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
     // Initialize Lenis for desktop/mouse users only
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 1.35, // Lighter, floaty feel (was 0.8)
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Expo easing
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
+      wheelMultiplier: 1.1, // Slight sensitivity boost
       // touchMultiplier is not needed as we disabled it on touch
       infinite: false,
     });

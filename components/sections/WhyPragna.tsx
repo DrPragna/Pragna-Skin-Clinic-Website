@@ -2,7 +2,6 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { NoiseTexture } from '@/components/ui/ArtisticElements';
 
 /**
  * WHY PRAGNA - Glass Prism Redesign
@@ -42,10 +41,9 @@ export default function WhyPragna() {
     >
       {/* Pure White Background */}
       <div className="absolute inset-0 bg-white" />
-      <NoiseTexture opacity={0.03} />
       
-      {/* Elegant Static Line with Traveling Dot */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none z-[1] overflow-visible">
+      {/* Elegant Static Line with Traveling Dot - Hidden on mobile */}
+      <svg className="hidden md:block absolute inset-0 w-full h-full pointer-events-none z-[1] overflow-visible">
         <defs>
           <linearGradient id="flow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#722B2B" stopOpacity="0" />
@@ -67,23 +65,14 @@ export default function WhyPragna() {
           transition={{ duration: 2.5, ease: "easeInOut" }}
         />
 
-        {/* Traveling Particle - Energy Flow */}
-        <circle r="4" fill="#B76E79" filter="url(#glow)">
+        {/* Traveling Particle - Energy Flow (Optimized: No blur filter) */}
+        <circle r="4" fill="#B76E79">
           <animateMotion 
             dur="12s" 
             repeatCount="indefinite"
             path="M-200,300 C200,100 600,500 1000,300 S1800,100 2200,300"
           />
         </circle>
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
       </svg>
 
       <div className="section-container max-w-7xl mx-auto px-6 relative z-10">
