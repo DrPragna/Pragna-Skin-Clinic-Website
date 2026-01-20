@@ -119,7 +119,7 @@ export default function FloatingActions() {
   }, []);
 
   // WhatsApp number for Pragna Skin Clinic
-  const whatsappNumber = "919380551547"; // Format: country code + number
+  const whatsappNumber = "918886531111"; // Format: country code + number
   const whatsappMessage = encodeURIComponent(
     "Hi, I would like to book a consultation at Pragna Skin Clinic."
   );
@@ -133,21 +133,21 @@ export default function FloatingActions() {
 
   // Handle book button click
   const handleBookClick = (e: React.MouseEvent) => {
-      e.preventDefault();
+    e.preventDefault();
     e.stopPropagation();
-    
+
     // Prevent double-firing from mousedown + click
     if (actionTriggeredRef.current) {
       actionTriggeredRef.current = false;
       return;
     }
     actionTriggeredRef.current = true;
-    
+
     // Reset after a short delay
     setTimeout(() => {
       actionTriggeredRef.current = false;
     }, 300);
-    
+
     if (isHomePage) {
       // Smooth scroll to contact section with offset (bypassing Lenis)
       scrollToElementBypassingLenis("contact", 100);

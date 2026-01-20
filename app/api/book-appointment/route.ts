@@ -21,7 +21,7 @@ const BRANCH_NAMES: Record<string, string> = {
 // Google Sheets Integration
 async function appendToGoogleSheet(data: BookingData): Promise<boolean> {
   const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
-  
+
   if (!GOOGLE_SCRIPT_URL) {
     console.warn('Google Script URL not configured - skipping sheet logging');
     return false;
@@ -50,10 +50,10 @@ async function appendToGoogleSheet(data: BookingData): Promise<boolean> {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     // Validate required fields
     const { name, email, countryCode, phone, branch, concerns, source } = body;
-    
+
     if (!name || !phone) {
       return NextResponse.json(
         { success: false, error: 'Missing required fields' },
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Generate WhatsApp link immediately
-    const whatsappNumber = process.env.WHATSAPP_NUMBER || '919380551547';
+    const whatsappNumber = process.env.WHATSAPP_NUMBER || '918886531111';
     const branchDisplay = bookingData.branch ? BRANCH_NAMES[bookingData.branch] || bookingData.branch : 'Not specified';
     const whatsappMessage = encodeURIComponent(
       `Hi, I would like to book a consultation.\n\n` +
@@ -109,8 +109,8 @@ export async function POST(request: NextRequest) {
 
 // Health check endpoint
 export async function GET() {
-  return NextResponse.json({ 
-    status: 'ok', 
+  return NextResponse.json({
+    status: 'ok',
     service: 'booking-api',
     timestamp: new Date().toISOString(),
   });
