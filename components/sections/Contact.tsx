@@ -105,7 +105,7 @@ export default function Contact() {
   };
 
   return (
-    <section 
+    <section
       id="contact"
       ref={containerRef}
       className="py-12 lg:py-16 relative overflow-hidden"
@@ -114,10 +114,10 @@ export default function Contact() {
       {/* Artistic Background Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-gold/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none mix-blend-multiply" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-maroon/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none mix-blend-multiply" />
-      
+
       <div className="section-container max-w-5xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
-          
+
           {/* Left: Artistic Typography & Invite */}
           <div className="lg:col-span-5 relative">
             <motion.div
@@ -130,7 +130,7 @@ export default function Contact() {
                 <span className="w-1.5 h-1.5 rounded-full bg-maroon animate-pulse" />
                 Book Consultation
               </span>
-              
+
               <h2 className="text-4xl lg:text-[3.5rem] font-display text-charcoal mb-4 leading-[1.1] -tracking-[0.02em]">
                 Begin your <br />
                 <span className="italic text-maroon font-light relative inline-block">
@@ -146,33 +146,33 @@ export default function Contact() {
               </p>
             </motion.div>
           </div>
-            
+
           {/* Right: Creative Form Card */}
           <div className="lg:col-span-7 relative">
             {/* Decorative overlapping element */}
             <div className="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-rose-gold/20 to-transparent rounded-full blur-2xl pointer-events-none" />
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="bg-white/80 backdrop-blur-xl rounded-[2rem] rounded-tr-none p-6 lg:p-8 shadow-[0_15px_30px_-10px_rgba(114,43,43,0.05)] border border-white/50 relative overflow-hidden"
             >
-               {/* Rotating Badge - Absolute Positioned on Card */}
-               <div className="absolute -top-4 -right-4 w-24 h-24 hidden md:block pointer-events-none opacity-40 mix-blend-multiply">
-                 <div className="absolute inset-0 animate-[spin_12s_linear_infinite]">
-                   <svg viewBox="0 0 100 100" className="w-full h-full">
-                     <defs>
-                       <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
-                     </defs>
-                     <text fontSize="10" letterSpacing="2">
-                       <textPath href="#circle" className="fill-maroon font-mono uppercase font-bold">
-                         • PRAGNA SKIN CLINIC • PRAGNA SKIN CLINIC
-                       </textPath>
-                     </text>
-                   </svg>
-                 </div>
-               </div>
+              {/* Rotating Badge - Absolute Positioned on Card */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 hidden md:block pointer-events-none opacity-40 mix-blend-multiply">
+                <div className="absolute inset-0 animate-[spin_12s_linear_infinite]">
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <defs>
+                      <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+                    </defs>
+                    <text fontSize="10" letterSpacing="2">
+                      <textPath href="#circle" className="fill-maroon font-mono uppercase font-bold">
+                        • PRAGNA SKIN CLINIC • PRAGNA SKIN CLINIC
+                      </textPath>
+                    </text>
+                  </svg>
+                </div>
+              </div>
 
               <AnimatePresence mode="wait">
                 {formState === 'success' ? (
@@ -192,16 +192,16 @@ export default function Contact() {
                     <p className="text-charcoal/60 text-sm font-light mb-6">
                       Your details have been saved. Send us a WhatsApp message for instant confirmation.
                     </p>
-                    
+
                     {/* WhatsApp CTA Button */}
-                    <a 
+                    <a
                       href={whatsappLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-xl font-medium hover:bg-[#20BD5A] transition-all duration-300 shadow-lg shadow-green-500/20 hover:shadow-green-500/30 hover:scale-[1.02]"
                     >
                       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                       </svg>
                       Send WhatsApp Message
                     </a>
@@ -209,8 +209,8 @@ export default function Contact() {
                     <p className="text-charcoal/40 text-xs mt-4">
                       We&apos;ll also reach out to you via email/phone shortly.
                     </p>
-                    
-                    <button 
+
+                    <button
                       onClick={resetForm}
                       className="text-maroon text-[10px] uppercase tracking-widest mt-6 hover:opacity-70 transition-opacity underline underline-offset-4"
                     >
@@ -237,20 +237,20 @@ export default function Contact() {
                     <p className="text-charcoal/50 text-xs mb-6">
                       You can also reach us directly on WhatsApp or call us.
                     </p>
-                    
+
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <a 
+                      <a
                         href="https://wa.me/919380551547?text=Hi%2C%20I%20would%20like%20to%20book%20a%20consultation%20at%20Pragna%20Skin%20Clinic."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-xl font-medium hover:bg-[#20BD5A] transition-all duration-300"
                       >
                         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                         </svg>
                         WhatsApp Us
                       </a>
-                      <button 
+                      <button
                         onClick={resetForm}
                         className="px-6 py-3 border border-charcoal/20 text-charcoal rounded-xl font-medium hover:bg-charcoal/5 transition-all duration-300"
                       >
@@ -259,12 +259,12 @@ export default function Contact() {
                     </div>
                   </motion.div>
                 ) : (
-                  <motion.form 
+                  <motion.form
                     key="form"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    onSubmit={handleSubmit} 
+                    onSubmit={handleSubmit}
                     className="space-y-4"
                   >
                     <div className="space-y-3">
@@ -277,27 +277,26 @@ export default function Contact() {
                           onChange={handleInputChange}
                           required
                           className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
-                          placeholder="Your Name" 
+                          placeholder="Your Name"
                         />
                       </div>
-                      
+
                       {/* Email Field */}
                       <div className="group">
                         <input
-                          type="email"
+                          type="text"
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          required
                           className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
-                          placeholder="Email Address" 
+                          placeholder="Email Address (Optional)"
                         />
                       </div>
-                      
+
                       {/* Phone with Country Code */}
                       <div className="flex gap-2">
                         <div className="relative w-28 shrink-0">
-                          <select 
+                          <select
                             name="countryCode"
                             value={formData.countryCode}
                             onChange={handleInputChange}
@@ -322,7 +321,7 @@ export default function Contact() {
                           onChange={handleInputChange}
                           required
                           className="flex-1 bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
-                          placeholder="Phone Number" 
+                          placeholder="Phone Number"
                         />
                       </div>
 
@@ -333,9 +332,8 @@ export default function Contact() {
                           value={formData.branch}
                           onChange={handleInputChange}
                           required
-                          className={`w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm ${
-                            formData.branch ? "text-charcoal" : "text-charcoal/40"
-                          }`}
+                          className={`w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm ${formData.branch ? "text-charcoal" : "text-charcoal/40"
+                            }`}
                         >
                           {BRANCHES.map((branch) => (
                             <option key={branch.value} value={branch.value} className="text-charcoal">
@@ -352,16 +350,16 @@ export default function Contact() {
                     </div>
 
                     <div className="group">
-                       <textarea
-                          name="concerns"
-                          value={formData.concerns}
-                          onChange={handleInputChange}
-                          rows={2}
-                          className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light resize-none shadow-sm"
-                          placeholder="Any specific concerns? (Optional)" 
-                        />
+                      <textarea
+                        name="concerns"
+                        value={formData.concerns}
+                        onChange={handleInputChange}
+                        rows={2}
+                        className="w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light resize-none shadow-sm"
+                        placeholder="Any specific concerns? (Optional)"
+                      />
                     </div>
-                      
+
                     <div className="pt-4">
                       <button
                         type="submit"
