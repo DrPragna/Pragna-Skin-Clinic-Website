@@ -186,7 +186,7 @@ const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onCl
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-gradient-to-br from-[#fffbf5] to-[#fff3e6] rounded-[2rem] p-8 md:p-10 max-w-2xl w-full shadow-2xl border border-maroon/10 relative overflow-hidden"
+        className="bg-white rounded-[2rem] p-8 md:p-10 max-w-2xl w-full shadow-2xl border border-gray-200 relative overflow-hidden"
       >
         {/* Decorative Top Gradient Line */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-maroon/20 to-transparent" />
@@ -200,7 +200,7 @@ const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onCl
           </button>
 
           <div className="flex items-center gap-4 mb-8">
-            <div className={`w-16 h-16 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-2xl border border-white/50 shadow-sm`}>
+            <div className={`w-16 h-16 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-2xl border border-gray-100 shadow-sm`}>
               {review.initial}
             </div>
             <div>
@@ -209,7 +209,7 @@ const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onCl
                 <div className="flex items-center gap-0.5">
                   {[1,2,3,4,5].map(i => <StarIcon key={i} />)}
                 </div>
-                <span className="text-xs font-medium text-charcoal/50 uppercase tracking-wider border border-charcoal/10 px-2 py-0.5 rounded-full">
+                <span className="text-xs font-medium text-charcoal/50 uppercase tracking-wider border border-gray-200 px-2 py-0.5 rounded-full">
                   {review.clinic}
                 </span>
               </div>
@@ -260,7 +260,7 @@ const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onCli
       className="block w-[360px] md:w-[420px] h-[320px] flex-shrink-0 mx-4 select-none relative group"
       onDragStart={(e) => e.preventDefault()}
     >
-      <div className="h-full bg-gradient-to-br from-[#fffbf5] to-[#fff3e6] rounded-[2rem] p-8 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] border border-maroon/5 hover:border-maroon/20 hover:shadow-[0_20px_40px_-15px_rgba(114,43,43,0.1)] transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1">
+      <div className="h-full bg-white rounded-[2rem] p-8 shadow-lg shadow-gray-200/50 border border-gray-200 hover:border-maroon/20 hover:shadow-xl hover:shadow-maroon/5 transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1">
         {/* Decorative Top Gradient Line */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-maroon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
@@ -269,7 +269,7 @@ const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onCli
           {/* Header */}
           <div className="flex justify-between items-start mb-4">
             <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-lg border border-white/50 shadow-sm`}>
+              <div className={`w-12 h-12 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-lg border border-gray-100 shadow-sm`}>
                 {review.initial}
               </div>
               <div>
@@ -279,7 +279,7 @@ const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onCli
                     {[1,2,3,4,5].map(i => <StarIcon key={i} />)}
                   </div>
                   {/* Subtle Clinic Badge */}
-                  <span className="text-[10px] font-medium text-charcoal/40 uppercase tracking-wider border border-charcoal/10 px-1.5 py-px rounded-full">
+                  <span className="text-[10px] font-medium text-charcoal/40 uppercase tracking-wider border border-gray-200 px-1.5 py-px rounded-full">
                     {review.clinic}
                   </span>
                 </div>
@@ -389,11 +389,11 @@ export default function Testimonials() {
     <>
       <section 
         ref={containerRef}
-        className="pt-20 lg:pt-24 pb-10 lg:pb-12 bg-beige overflow-hidden relative"
+        className="pt-20 lg:pt-24 pb-10 lg:pb-12 bg-gray-100 overflow-hidden relative"
       >
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-rose-100/20 to-transparent rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-rose-100/30 to-transparent rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
         </div>
 
         <div className="section-container mb-12 relative z-10">
@@ -428,9 +428,9 @@ export default function Testimonials() {
                 href={PANJAGUTTA_REVIEWS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm px-6 py-3 rounded-full border border-maroon/10 shadow-sm hover:bg-white/60 hover:shadow-md transition-all group"
+                className="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all group"
               >
-                <div className="w-8 h-8 rounded-full bg-maroon/10 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
                   <StarIcon />
                 </div>
                 <div className="text-left">
@@ -444,9 +444,9 @@ export default function Testimonials() {
                 href={KOKAPET_REVIEWS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-white/40 backdrop-blur-sm px-6 py-3 rounded-full border border-maroon/10 shadow-sm hover:bg-white/60 hover:shadow-md transition-all group"
+                className="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all group"
               >
-                <div className="w-8 h-8 rounded-full bg-maroon/10 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
                   <StarIcon />
                 </div>
                 <div className="text-left">
@@ -465,8 +465,8 @@ export default function Testimonials() {
           onMouseLeave={() => setIsHovered(false)}
         >
           {/* Gradient Masks - Soft Fade */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-beige via-beige/90 to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-beige via-beige/90 to-transparent z-20 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-gray-100 via-gray-100/90 to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-gray-100 via-gray-100/90 to-transparent z-20 pointer-events-none" />
 
           <motion.div 
             className="flex w-max px-4 py-4" 
