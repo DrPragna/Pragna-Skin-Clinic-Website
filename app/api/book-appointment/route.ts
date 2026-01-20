@@ -28,9 +28,9 @@ async function appendToGoogleSheet(data: BookingData): Promise<boolean> {
   }
 
   try {
-    // Add timeout to prevent hanging
+    // Add timeout to prevent hanging (reduced to 5s for faster UX)
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
     const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
@@ -53,7 +53,7 @@ async function appendToGoogleSheet(data: BookingData): Promise<boolean> {
     return true;
   } catch (error) {
     if (error instanceof Error && error.name === 'AbortError') {
-      console.error('[Google Sheets] Request timeout after 8 seconds');
+      console.error('[Google Sheets] Request timeout after 5 seconds');
     } else {
       console.error('[Google Sheets] Failed to append:', error);
     }
@@ -87,14 +87,13 @@ export async function POST(request: NextRequest) {
       source: source || 'website',
     };
 
-    // Save to Google Sheets in background (fire-and-forget with better logging)
-    appendToGoogleSheet(bookingData)
-      .then((success) => {
-        console.log('[Booking API] Google Sheets save result:', success);
-      })
-      .catch((err) => {
-        console.error('[Booking API] Google Sheets save failed:', err);
-      });
+    // Save to Google Sheets (must await in serverless to prevent early termination)
+    try {
+      await appendToGoogleSheet(bookingData);
+    } catch (err) {
+      // Log error but don't fail the request - WhatsApp redirect is primary
+      console.error('[Booking API] Sheets logging failed, continuing with WhatsApp redirect');
+    }
 
     // Generate WhatsApp link immediately
     const whatsappNumber = process.env.WHATSAPP_NUMBER || '918886531111';
