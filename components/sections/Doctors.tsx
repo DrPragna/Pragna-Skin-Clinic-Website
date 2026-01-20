@@ -69,10 +69,6 @@ export default function Doctors() {
           <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-maroon/10 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }} />
         </div>
         
-        {/* Grain Texture - Local subtle grain if global isn't enough */}
-        <div className="absolute inset-0 opacity-[0.03]" 
-             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
-        />
       </div>
 
       <div className="section-container max-w-6xl mx-auto relative z-10">
@@ -109,7 +105,7 @@ export default function Doctors() {
           {doctors.map((doctor, index) => (
             <div
               key={doctor.id}
-              className="flex flex-col items-center text-center bg-white/60 backdrop-blur-md p-8 lg:p-10 rounded-[2rem] border border-white/50 shadow-lg shadow-maroon/5 hover:shadow-xl hover:shadow-maroon/10 transition-all duration-700 group h-full relative overflow-hidden"
+              className="flex flex-col items-center text-center bg-white/95 p-8 lg:p-10 rounded-[2rem] border border-white/50 shadow-lg shadow-maroon/5 hover:shadow-xl hover:shadow-maroon/10 transition-all duration-700 group h-full relative overflow-hidden"
             >
               {/* Card Highlight Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-transparent to-transparent opacity-50" />

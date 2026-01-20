@@ -186,17 +186,12 @@ const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onCl
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-cream rounded-[2rem] p-8 md:p-10 max-w-2xl w-full shadow-2xl border border-maroon/10 relative overflow-hidden"
+        className="bg-gradient-to-br from-[#fffbf5] to-[#fff3e6] rounded-[2rem] p-8 md:p-10 max-w-2xl w-full shadow-2xl border border-maroon/10 relative overflow-hidden"
       >
-         {/* Noise Texture */}
-         <div 
-          className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
+        {/* Decorative Top Gradient Line */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-maroon/20 to-transparent" />
 
-        <div className="relative z-10">
+        <div className="relative">
           <button 
             onClick={onClose}
             className="absolute -top-2 -right-2 w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors text-charcoal/60 hover:text-charcoal"
@@ -265,18 +260,12 @@ const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onCli
       className="block w-[360px] md:w-[420px] h-[320px] flex-shrink-0 mx-4 select-none relative group"
       onDragStart={(e) => e.preventDefault()}
     >
-      <div className="h-full bg-cream rounded-[2rem] p-8 shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-maroon/5 hover:border-maroon/20 hover:shadow-[0_8px_30px_rgba(114,43,43,0.08)] transition-all duration-300 flex flex-col relative overflow-hidden">
+      <div className="h-full bg-gradient-to-br from-[#fffbf5] to-[#fff3e6] rounded-[2rem] p-8 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] border border-maroon/5 hover:border-maroon/20 hover:shadow-[0_20px_40px_-15px_rgba(114,43,43,0.1)] transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1">
+        {/* Decorative Top Gradient Line */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-maroon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
-        {/* Noise Texture Overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
-
         {/* Content Container */}
-        <div className="relative z-10 flex flex-col h-full">
+        <div className="relative flex flex-col h-full">
           {/* Header */}
           <div className="flex justify-between items-start mb-4">
             <div className="flex items-center gap-4">
