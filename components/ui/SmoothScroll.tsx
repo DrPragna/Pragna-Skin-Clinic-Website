@@ -31,14 +31,26 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
   // Initialize Lenis once
   useEffect(() => {
-    // Initialize Lenis
+    // Check if touch device - disable Lenis on mobile to prevent "vibrating" scroll
+    // Native scroll is much smoother on touch devices
+    const isTouchDevice = 
+      'ontouchstart' in window || 
+      navigator.maxTouchPoints > 0;
+
+    if (isTouchDevice) {
+      // Add class for optional native-scroll specific styles
+      document.documentElement.classList.add('native-scroll');
+      return;
+    }
+
+    // Initialize Lenis for desktop/mouse users only
     const lenis = new Lenis({
       duration: 0.8,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Expo easing
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 2,
+      // touchMultiplier is not needed as we disabled it on touch
       infinite: false,
     });
 

@@ -71,7 +71,7 @@ export default function PageLoader() {
               className="overflow-hidden px-6 py-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+              exit={{ opacity: 0, scale: 1.1 }} // Removed blur filter to improve mobile performance
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <motion.h1
@@ -130,6 +130,7 @@ export default function PageLoader() {
               scale: 1, 
               opacity: 0.5 
             }}
+            exit={{ opacity: 0 }} // Fade out blur before lift
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           />
           <motion.div
@@ -139,6 +140,7 @@ export default function PageLoader() {
               scale: 1, 
               opacity: 0.5 
             }}
+            exit={{ opacity: 0 }} // Fade out blur before lift
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           />
         </motion.div>
