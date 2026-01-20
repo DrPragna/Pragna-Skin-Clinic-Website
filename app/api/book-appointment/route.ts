@@ -87,19 +87,14 @@ export async function POST(request: NextRequest) {
       source: source || 'website',
     };
 
-    // Try to save to Google Sheets (with timeout protection)
-    let sheetSuccess = false;
-    try {
-      console.log('[Booking API] Attempting to save to Google Sheets...', {
-        name: bookingData.name,
-        timestamp: bookingData.timestamp
+    // Save to Google Sheets in background (fire-and-forget with better logging)
+    appendToGoogleSheet(bookingData)
+      .then((success) => {
+        console.log('[Booking API] Google Sheets save result:', success);
+      })
+      .catch((err) => {
+        console.error('[Booking API] Google Sheets save failed:', err);
       });
-      sheetSuccess = await appendToGoogleSheet(bookingData);
-      console.log('[Booking API] Google Sheets save result:', sheetSuccess);
-    } catch (err) {
-      console.error('[Booking API] Google Sheets save failed:', err);
-      // Don't fail the whole request - WhatsApp is the primary action
-    }
 
     // Generate WhatsApp link immediately
     const whatsappNumber = process.env.WHATSAPP_NUMBER || '918886531111';
