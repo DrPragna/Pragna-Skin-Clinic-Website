@@ -161,7 +161,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -203,12 +203,6 @@ export default function Navbar() {
   const useTransparentStyle = hasMounted && isHomepage && !isScrolled;
 
   // Determine navbar styles based on scroll state and page
-  const navbarClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-    useTransparentStyle
-      ? 'bg-gradient-to-b from-black/50 via-black/20 to-transparent'
-      : 'bg-beige-warm/95 backdrop-blur-md shadow-soft'
-  }`;
-
   const linkClasses = `transition-colors duration-200 font-medium cursor-pointer flex items-center gap-1 ${
     useTransparentStyle 
       ? 'text-white/90 hover:text-white' 
@@ -216,8 +210,28 @@ export default function Navbar() {
   }`;
 
   return (
-    <nav className={navbarClasses}>
-      <div className="section-container">
+    <nav className="fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300">
+      
+      {/* LAYER 1: The "Scrolled" State (Heavy Style)
+          We render this always, but simply toggle its opacity.
+          This means the blur/shadow is calculated once and just faded in/out. 
+      */}
+      <div 
+        className={`absolute inset-0 bg-beige-warm/95 backdrop-blur-md shadow-soft transition-opacity duration-300 ease-in-out ${
+          useTransparentStyle ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
+
+      {/* LAYER 2: The "Top" State (Transparent/Gradient)
+          Fades out when scrolled.
+      */}
+      <div 
+        className={`absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent transition-opacity duration-300 ease-in-out ${
+          useTransparentStyle ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+
+      <div className="relative z-10 section-container">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center group z-50 relative">
