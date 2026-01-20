@@ -25,38 +25,63 @@
   ],
   "redirects": [
     {
-      "source": "/about-us/:path*",
-      "destination": "/",
+      "source": "/services/alopecia/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/hair-fall-thinning-treatment",
       "permanent": true
     },
     {
-      "source": "/contact-us/:path*",
-      "destination": "/",
+      "source": "/services/chemical-peel/:path*",
+      "destination": "/treatments/advanced-facials-boosters/chemical-peels",
       "permanent": true
     },
     {
-      "source": "/services/:path*",
+      "source": "/services/laser-tattoo-removal/:path*",
+      "destination": "/treatments/wellness-iv-drips-corrective/tattoo-removal",
+      "permanent": true
+    },
+    {
+      "source": "/services/dermal-fillers/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/dermal-fillers-facial-contouring",
+      "permanent": true
+    },
+    {
+      "source": "/services/hifu/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/hifu-face-neck-tightening",
+      "permanent": true
+    },
+    {
+      "source": "/services/platelet-rich-plasma-therapy/:path*",
+      "destination": "/treatments/hair-growth-scalp-treatments/prp-gfc-hair-growth",
+      "permanent": true
+    },
+    {
+      "source": "/services/laser-hair-reduction/:path*",
+      "destination": "/treatments/laser-hair-reduction",
+      "permanent": true
+    },
+    {
+      "source": "/services/botox/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/botox-anti-wrinkle-treatment",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post/turn-back-the-clock-with-ultrasound/:path*",
+      "destination": "/treatments/anti-ageing-tightening-contouring/hifu-face-neck-tightening",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post/fast-fixes-for-your-skin---medifacials/:path*",
+      "destination": "/treatments/medifacials",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post/the-science-of-beauty/:path*",
       "destination": "/treatments",
       "permanent": true
     },
     {
-      "source": "/book/:path*",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/appointment/:path*",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/:path*",
-      "destination": "/treatments",
-      "permanent": true
-    },
-    {
-      "source": "/gallery/:path*",
-      "destination": "/",
+      "source": "/blog-post/freeze-out-the-fat-with-cryolipolysis/:path*",
+      "destination": "/treatments/body-contouring-fat-reduction",
       "permanent": true
     },
     {
@@ -145,7 +170,12 @@
       "permanent": true
     },
     {
-      "source": "/treatment/:space*laser-toning/:path*",
+      "source": "/treatment/%20laser-toning/:path*",
+      "destination": "/treatments/pigmentation-tanning-glow",
+      "permanent": true
+    },
+    {
+      "source": "/treatment/%2520laser-toning/:path*",
       "destination": "/treatments/pigmentation-tanning-glow",
       "permanent": true
     },
@@ -237,46 +267,6 @@
     {
       "source": "/conditions/hair-fall-and-hair-thinning/:path*",
       "destination": "/conditions/hair-fall-thinning-hair",
-      "permanent": true
-    },
-    {
-      "source": "/services/alopecia/:path*",
-      "destination": "/treatments/hair-growth-scalp-treatments/hair-fall-thinning-treatment",
-      "permanent": true
-    },
-    {
-      "source": "/services/chemical-peel/:path*",
-      "destination": "/treatments/advanced-facials-boosters/chemical-peels",
-      "permanent": true
-    },
-    {
-      "source": "/services/laser-tattoo-removal/:path*",
-      "destination": "/treatments/wellness-iv-drips-corrective/tattoo-removal",
-      "permanent": true
-    },
-    {
-      "source": "/services/dermal-fillers/:path*",
-      "destination": "/treatments/anti-ageing-tightening-contouring/dermal-fillers-facial-contouring",
-      "permanent": true
-    },
-    {
-      "source": "/services/hifu/:path*",
-      "destination": "/treatments/anti-ageing-tightening-contouring/hifu-face-neck-tightening",
-      "permanent": true
-    },
-    {
-      "source": "/services/platelet-rich-plasma-therapy/:path*",
-      "destination": "/treatments/hair-growth-scalp-treatments/prp-gfc-hair-growth",
-      "permanent": true
-    },
-    {
-      "source": "/services/laser-hair-reduction/:path*",
-      "destination": "/treatments/laser-hair-reduction",
-      "permanent": true
-    },
-    {
-      "source": "/services/botox/:path*",
-      "destination": "/treatments/anti-ageing-tightening-contouring/botox-anti-wrinkle-treatment",
       "permanent": true
     },
     {
@@ -390,23 +380,38 @@
       "permanent": true
     },
     {
-      "source": "/blog-post/turn-back-the-clock-with-ultrasound/:path*",
-      "destination": "/treatments/anti-ageing-tightening-contouring/hifu-face-neck-tightening",
+      "source": "/about-us/:path*",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/blog-post/fast-fixes-for-your-skin---medifacials/:path*",
-      "destination": "/treatments/medifacials",
+      "source": "/contact-us/:path*",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/blog-post/the-science-of-beauty/:path*",
+      "source": "/book/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/appointment/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/:path*",
       "destination": "/treatments",
       "permanent": true
     },
     {
-      "source": "/blog-post/freeze-out-the-fat-with-cryolipolysis/:path*",
-      "destination": "/treatments/body-contouring-fat-reduction",
+      "source": "/blog/:path*",
+      "destination": "/treatments",
       "permanent": true
     }
   ]
