@@ -203,13 +203,14 @@ export default function BookingModal({
               </svg>
             </button>
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {formState === "success" ? (
                 <motion.div
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                   className="p-8 text-center"
                 >
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600 mb-4">
@@ -251,6 +252,7 @@ export default function BookingModal({
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                   className="p-8 text-center"
                 >
                   <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto text-red-600 mb-4">
@@ -289,6 +291,7 @@ export default function BookingModal({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
                 >
                   {/* Header */}
                   <div className="p-6 pb-4">
