@@ -266,12 +266,12 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8 h-full">
             <Link href="/" className={linkClasses}>Home</Link>
             
             {/* Treatments Dropdown (Mega Menu) */}
             <div 
-              className="relative py-4"
+              className="relative h-full flex items-center"
               onMouseEnter={() => openDropdown('treatments')}
               onMouseLeave={closeDropdown}
             >
@@ -367,7 +367,7 @@ export default function Navbar() {
 
             {/* Conditions Dropdown Trigger */}
             <div 
-              className="relative py-4"
+              className="relative h-full flex items-center"
               onMouseEnter={() => openDropdown('conditions')}
               onMouseLeave={closeDropdown}
             >
@@ -535,7 +535,7 @@ export default function Navbar() {
 
             {/* Signature Programs Dropdown Trigger */}
             <div 
-              className="relative py-4"
+              className="relative h-full flex items-center"
               onMouseEnter={() => openDropdown('signature-programs')}
               onMouseLeave={closeDropdown}
             >
@@ -664,14 +664,6 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-
-      {/* Invisible backdrop to close mega menus on hover outside */}
-      <div 
-        className={`fixed inset-0 top-[80px] z-40 ${
-          activeDropdown ? 'visible pointer-events-auto' : 'invisible pointer-events-none'
-        }`}
-        onMouseEnter={closeDropdown}
-      />
 
       {/* Mobile Menu Overlay */}
       <div 
