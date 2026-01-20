@@ -41,7 +41,6 @@ const config: Config = {
         // Accent - Rose Gold (Premium moments)
         rose: {
           gold: '#B76E79',
-          light: '#D4A5AD',
           dark: '#8B4D55',
         },
         
