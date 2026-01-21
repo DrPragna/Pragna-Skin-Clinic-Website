@@ -82,19 +82,19 @@ const StylizedText = ({ text, className = '', ampersandClassName = 'text-maroon'
 
 // Animation Variants
 const menuContainerVariants = {
-  hidden: { x: '100%' },
+  hidden: { opacity: 0 },
   visible: {
-    x: '0%',
+    opacity: 1,
     transition: {
-      duration: 0.8,
-      ease: [0.32, 0.72, 0, 1] as any, // Graceful editorial easing
+      duration: 0.5,
+      ease: "easeInOut",
     },
   },
   exit: {
-    x: '100%',
+    opacity: 0,
     transition: {
       duration: 0.5,
-      ease: [0.32, 0.72, 0, 1] as any,
+      ease: "easeInOut",
     },
   },
 };
@@ -612,10 +612,13 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 space-y-6">
+                          <Link href="/treatments" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors mb-4">
+                            View All Treatments <ArrowRight className="w-4 h-4" />
+                          </Link>
                           {navigationData.treatments.map((pillar) => (
                             <div key={pillar.pillar} className="space-y-3">
                               <h3 className="font-sans text-xs text-maroon/60 font-bold uppercase tracking-widest pl-1">{pillar.pillar}</h3>
@@ -642,7 +645,7 @@ export default function Navbar() {
                                           initial={{ height: 0, opacity: 0 }}
                                           animate={{ height: 'auto', opacity: 1 }}
                                           exit={{ height: 0, opacity: 0 }}
-                                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                                          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                                           className="overflow-hidden bg-maroon/[0.02]"
                                         >
                                           <div className="pl-6 py-2 space-y-1 border-l-2 border-maroon/10 ml-4 mb-4">
@@ -698,10 +701,13 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 space-y-2">
+                          <Link href="/conditions" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors mb-4 px-2">
+                            View All Conditions <ArrowRight className="w-4 h-4" />
+                          </Link>
                           {navigationData.conditions.map((group) => (
                             <div key={group.group} className="overflow-hidden border-b border-maroon/5 last:border-0">
                               {/* Group Toggle */}
@@ -771,10 +777,13 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 pt-2 space-y-3">
+                          <Link href="/signature-programs" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors mb-4">
+                            View All Signature Programmes <ArrowRight className="w-4 h-4" />
+                          </Link>
                           {navigationData.signaturePrograms.map((program) => (
                             <Link 
                               key={program.name} 
