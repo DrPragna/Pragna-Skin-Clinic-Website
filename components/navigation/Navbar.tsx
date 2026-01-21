@@ -82,27 +82,31 @@ const StylizedText = ({ text, className = '', ampersandClassName = 'text-maroon'
 
 // Animation Variants
 const menuContainerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { x: '100%' },
   visible: {
-    opacity: 1,
+    x: '0%',
     transition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 30,
       staggerChildren: 0.1,
-      delayChildren: 0.1,
+      delayChildren: 0.2,
     },
   },
   exit: {
-    opacity: 0,
+    x: '100%',
     transition: {
-      staggerChildren: 0.05,
-      staggerDirection: -1,
+      type: 'spring',
+      stiffness: 300,
+      damping: 30,
     },
   },
 };
 
 const menuItemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.33, 1, 0.68, 1] as any } },
-  exit: { opacity: 0, y: 10, transition: { duration: 0.3 } },
+  hidden: { opacity: 0, x: 20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  exit: { opacity: 0, x: 10, transition: { duration: 0.2 } },
 };
 
 export default function Navbar() {
@@ -569,12 +573,12 @@ export default function Navbar() {
             <div className="min-h-screen flex flex-col pt-24 px-6 pb-12">
               
               {/* Menu Items Container */}
-              <div className="flex-1 space-y-2 relative">
+              <div className="flex-1 space-y-0 divide-y divide-maroon/10 border-t border-maroon/10 relative mt-12">
 
                 {/* Close Button - Internal */}
                 <button 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="absolute -top-16 right-0 p-2 text-charcoal/50 hover:text-maroon transition-colors"
+                  className="absolute -top-20 right-0 p-2 text-charcoal/50 hover:text-maroon transition-colors"
                   aria-label="Close menu"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -584,25 +588,25 @@ export default function Navbar() {
                 </button>
                 
                 {/* 1. HOME */}
-                <motion.div variants={menuItemVariants} className="border-b border-maroon/10">
+                <motion.div variants={menuItemVariants} className="group">
                   <Link 
                     href="/" 
                     onClick={() => setIsMobileMenuOpen(false)} 
-                    className="block py-5 text-3xl font-display text-charcoal hover:text-maroon transition-colors"
+                    className="block py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors"
                   >
                     Home
                   </Link>
                 </motion.div>
 
                 {/* 2. TREATMENTS (Accordion) */}
-                <motion.div variants={menuItemVariants} className="border-b border-maroon/10">
+                <motion.div variants={menuItemVariants} className="group">
                   <button 
                     onClick={() => toggleMobileDropdown('treatments')}
-                    className="flex items-center justify-between w-full py-5 text-3xl font-display text-charcoal hover:text-maroon transition-colors text-left group"
+                    className="flex items-center justify-between w-full py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors text-left"
                   >
                     Treatments
                     <span className={`transform transition-transform duration-300 ${activeMobileDropdown === 'treatments' ? 'rotate-180' : 'rotate-0'}`}>
-                      <ChevronDown className="w-6 h-6 text-maroon/50 group-hover:text-maroon" />
+                      <ChevronDown className="w-5 h-5 text-maroon/40 group-hover:text-maroon" />
                     </span>
                   </button>
                   
@@ -615,21 +619,21 @@ export default function Navbar() {
                         transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-6 pl-2 space-y-6">
+                        <div className="pb-8 space-y-6">
                           {navigationData.treatments.map((pillar) => (
                             <div key={pillar.pillar} className="space-y-3">
                               <h3 className="font-sans text-xs text-maroon/60 font-bold uppercase tracking-widest pl-1">{pillar.pillar}</h3>
-                              <div className="space-y-1">
+                              <div className="space-y-1 divide-y divide-maroon/5 border-t border-b border-maroon/5">
                                 {pillar.categories.map((category) => (
-                                  <div key={category.category} className="rounded-xl overflow-hidden">
+                                  <div key={category.category} className="overflow-hidden">
                                     {/* Category Toggle */}
                                     <button 
                                       onClick={() => toggleMobileCategory(category.category)}
-                                      className="w-full flex items-center justify-between py-3 px-2 text-left hover:bg-maroon/5 transition-colors rounded-lg group/cat"
+                                      className="w-full flex items-center justify-between py-4 px-2 text-left hover:bg-maroon/5 transition-colors group/cat"
                                     >
                                       <StylizedText 
                                         text={category.category} 
-                                        className="font-display text-xl text-charcoal group-hover/cat:text-maroon transition-colors"
+                                        className="font-display text-lg text-charcoal group-hover/cat:text-maroon transition-colors"
                                         ampersandClassName="font-serif italic text-maroon/60"
                                       />
                                       <ChevronDown className={`w-4 h-4 text-maroon/30 transition-transform duration-300 ${activeMobileCategory === category.category ? 'rotate-180' : ''}`} />
@@ -643,24 +647,26 @@ export default function Navbar() {
                                           animate={{ height: 'auto', opacity: 1 }}
                                           exit={{ height: 0, opacity: 0 }}
                                           transition={{ duration: 0.3 }}
-                                          className="overflow-hidden"
+                                          className="overflow-hidden bg-maroon/[0.02]"
                                         >
-                                          <div className="pl-6 py-2 space-y-2 border-l border-maroon/10 ml-4 my-2">
+                                          <div className="pl-6 py-2 space-y-1 border-l-2 border-maroon/10 ml-4 mb-4">
                                             <Link 
                                               href={category.href}
                                               onClick={() => setIsMobileMenuOpen(false)}
-                                              className="block text-xs font-bold text-maroon uppercase tracking-wider py-2"
+                                              className="flex items-center gap-2 text-xs font-bold text-maroon uppercase tracking-wider py-3 px-2 rounded-lg hover:bg-maroon/5 transition-colors"
                                             >
                                               Overview
+                                              <ArrowRight className="w-3 h-3" />
                                             </Link>
                                             {category.items.map((item) => (
                                               <Link 
                                                 key={item.name} 
                                                 href={item.href}
                                                 onClick={() => setIsMobileMenuOpen(false)}
-                                                className="block text-base text-charcoal/70 hover:text-maroon py-1.5 transition-colors font-light"
+                                                className="flex items-center justify-between text-base text-charcoal/80 hover:text-maroon py-3 px-2 rounded-lg hover:bg-maroon/5 transition-all font-medium border-b border-maroon/5 last:border-0"
                                               >
                                                 {item.name}
+                                                <ArrowRight className="w-4 h-4 text-maroon/30" />
                                               </Link>
                                             ))}
                                           </div>
@@ -679,14 +685,14 @@ export default function Navbar() {
                 </motion.div>
 
                 {/* 3. CONDITIONS (Accordion) */}
-                <motion.div variants={menuItemVariants} className="border-b border-maroon/10">
+                <motion.div variants={menuItemVariants} className="group">
                   <button 
                     onClick={() => toggleMobileDropdown('conditions')}
-                    className="flex items-center justify-between w-full py-5 text-3xl font-display text-charcoal hover:text-maroon transition-colors text-left group"
+                    className="flex items-center justify-between w-full py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors text-left"
                   >
                     Conditions
                     <span className={`transform transition-transform duration-300 ${activeMobileDropdown === 'conditions' ? 'rotate-180' : 'rotate-0'}`}>
-                      <ChevronDown className="w-6 h-6 text-maroon/50 group-hover:text-maroon" />
+                      <ChevronDown className="w-5 h-5 text-maroon/40 group-hover:text-maroon" />
                     </span>
                   </button>
                   
@@ -699,15 +705,15 @@ export default function Navbar() {
                         transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-6 pl-2 space-y-2">
+                        <div className="pb-8 space-y-2">
                           {navigationData.conditions.map((group) => (
-                            <div key={group.group} className="rounded-xl overflow-hidden">
+                            <div key={group.group} className="overflow-hidden border-b border-maroon/5 last:border-0">
                               {/* Group Toggle */}
                               <button 
                                 onClick={() => toggleMobileCategory(group.group)}
-                                className="w-full flex items-center justify-between py-3 px-2 text-left hover:bg-maroon/5 transition-colors rounded-lg group/cat"
+                                className="w-full flex items-center justify-between py-4 px-2 text-left hover:bg-maroon/5 transition-colors group/cat"
                               >
-                                <span className="font-serif text-xl text-charcoal group-hover/cat:text-maroon transition-colors">
+                                <span className="font-serif text-lg text-charcoal group-hover/cat:text-maroon transition-colors">
                                   {group.group}
                                 </span>
                                 <ChevronDown className={`w-4 h-4 text-maroon/30 transition-transform duration-300 transform ${activeMobileCategory === group.group ? 'rotate-180' : 'rotate-0'}`} />
@@ -721,18 +727,18 @@ export default function Navbar() {
                                     animate={{ height: 'auto', opacity: 1 }}
                                     exit={{ height: 0, opacity: 0 }}
                                     transition={{ duration: 0.3 }}
-                                    className="overflow-hidden"
+                                    className="overflow-hidden bg-maroon/[0.02]"
                                   >
-                                    <div className="pl-6 py-2 space-y-2 border-l border-maroon/10 ml-4 my-2">
+                                    <div className="pl-6 py-2 space-y-1 border-l-2 border-maroon/10 ml-4 mb-4">
                                       {group.items.map((item) => (
                                         <Link 
                                           key={item.name} 
                                           href={item.href}
                                           onClick={() => setIsMobileMenuOpen(false)}
-                                          className="block group/item py-1.5"
+                                          className="block group/item py-2"
                                         >
-                                          <div className="flex items-center justify-between">
-                                             <span className={`text-base ${item.isTopConcern ? 'text-maroon font-medium' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors font-light`}>
+                                          <div className="flex items-center justify-between pr-4">
+                                             <span className={`text-sm ${item.isTopConcern ? 'text-maroon font-medium' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors font-light`}>
                                               {item.name}
                                             </span>
                                             {item.isTopConcern && <StarIcon className="w-3 h-3 text-maroon/40" />}
@@ -752,14 +758,14 @@ export default function Navbar() {
                 </motion.div>
 
                 {/* 4. SIGNATURE PROGRAMS (Accordion) */}
-                <motion.div variants={menuItemVariants} className="border-b border-maroon/10">
+                <motion.div variants={menuItemVariants} className="group">
                   <button 
                     onClick={() => toggleMobileDropdown('signature-programs')}
-                    className="flex items-center justify-between w-full py-5 text-3xl font-display text-charcoal hover:text-maroon transition-colors text-left group"
+                    className="flex items-center justify-between w-full py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors text-left"
                   >
                     Signature Programs
                     <span className={`transform transition-transform duration-300 ${activeMobileDropdown === 'signature-programs' ? 'rotate-180' : 'rotate-0'}`}>
-                      <ChevronDown className="w-6 h-6 text-maroon/50 group-hover:text-maroon" />
+                      <ChevronDown className="w-5 h-5 text-maroon/40 group-hover:text-maroon" />
                     </span>
                   </button>
                   
@@ -772,7 +778,7 @@ export default function Navbar() {
                         transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-6 pl-2 space-y-4">
+                        <div className="pb-8 pt-2 space-y-3">
                           {navigationData.signaturePrograms.map((program) => (
                             <Link 
                               key={program.name} 
@@ -784,7 +790,7 @@ export default function Navbar() {
                                 <span className="font-serif text-maroon font-medium text-lg group-hover/prog:text-maroon-dark transition-colors">{program.name}</span>
                                 <ArrowRight className="w-4 h-4 text-maroon/40" />
                               </div>
-                              <p className="text-sm text-maroon/60 mb-1">{program.subtitle}</p>
+                              <p className="text-xs text-maroon/60 mb-1">{program.subtitle}</p>
                             </Link>
                           ))}
                         </div>
@@ -794,11 +800,11 @@ export default function Navbar() {
                 </motion.div>
 
                 {/* 5. ABOUT */}
-                <motion.div variants={menuItemVariants} className="border-b border-maroon/10">
+                <motion.div variants={menuItemVariants} className="group">
                   <Link 
                     href="/#about" 
                     onClick={() => setIsMobileMenuOpen(false)} 
-                    className="block py-5 text-3xl font-display text-charcoal hover:text-maroon transition-colors"
+                    className="block py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors"
                   >
                     About
                   </Link>
