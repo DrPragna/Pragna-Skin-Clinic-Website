@@ -97,7 +97,7 @@ const menuContainerVariants = {
       ease: "easeInOut",
     },
   },
-};
+} as const;
 
 const menuItemVariants = {
   hidden: { opacity: 1, x: 0 },
