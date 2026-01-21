@@ -5,6 +5,11 @@
 - The user prefers to handle version control manually.
 - Only execute git commands when the user explicitly asks for it.
 
+## Ask Mode
+- NEVER write code in Ask mode.
+- Ask mode is exclusively for reaching consensus on plans and brainstorming.
+- Use Ask mode only for discussion, planning, and ideation - not for implementation.
+
 ## Performance
 - Avoid expensive CSS filters like backdrop-blur and SVG feTurbulence on elements that animate or scroll.
 - Lenis smooth scroll is disabled on mobile (touch devices) for better performance.
