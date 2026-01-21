@@ -86,27 +86,23 @@ const menuContainerVariants = {
   visible: {
     x: '0%',
     transition: {
-      type: 'spring' as const,
-      stiffness: 300,
-      damping: 30,
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      duration: 0.8,
+      ease: [0.32, 0.72, 0, 1] as any, // Graceful editorial easing
     },
   },
   exit: {
     x: '100%',
     transition: {
-      type: 'spring' as const,
-      stiffness: 300,
-      damping: 30,
+      duration: 0.5,
+      ease: [0.32, 0.72, 0, 1] as any,
     },
   },
 };
 
 const menuItemVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' as any } },
-  exit: { opacity: 0, x: 10, transition: { duration: 0.2 } },
+  hidden: { opacity: 1, x: 0 },
+  visible: { opacity: 1, x: 0 },
+  exit: { opacity: 1, x: 0 },
 };
 
 export default function Navbar() {
