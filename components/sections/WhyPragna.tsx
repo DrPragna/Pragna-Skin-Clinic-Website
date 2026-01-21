@@ -77,12 +77,12 @@ export default function WhyPragna() {
 
       <div className="section-container max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12 lg:mb-16">
+        <div className="text-center mb-10 lg:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-maroon/80 font-medium tracking-[0.2em] uppercase text-xs block mb-6"
+            className="text-maroon/80 font-medium tracking-[0.2em] uppercase text-xs block mb-4 lg:mb-6"
           >
             The Pragna Promise
           </motion.span>
@@ -91,14 +91,14 @@ export default function WhyPragna() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl lg:text-7xl font-display text-charcoal tracking-tight"
+            className="text-4xl lg:text-7xl font-display text-charcoal tracking-tight"
           >
             Why patients <span className="italic text-maroon font-serif">trust us</span>
           </motion.h2>
         </div>
 
-        {/* Glass Prism Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
+        {/* Glass Prism Grid - Adaptive Layout */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 scrollbar-hide lg:grid lg:grid-cols-3 lg:gap-10 lg:pb-0 lg:mx-0 lg:px-0">
           {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.number}
@@ -109,30 +109,30 @@ export default function WhyPragna() {
                 delay: 0.2 + (index * 0.15),
                 ease: [0.22, 1, 0.36, 1]
               }}
-              className="group relative"
+              className="min-w-[85vw] snap-center lg:min-w-0 group relative"
             >
-              <div className="relative h-full p-10 lg:p-14 bg-white/95 rounded-[2rem] border border-stone-200/50 shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 hover:bg-white hover:shadow-[0_20px_40px_rgba(183,110,121,0.15)] hover:border-rose-gold/40 overflow-hidden group-hover:after:opacity-100 after:opacity-0 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none">
+              <div className="relative h-full p-8 lg:p-14 bg-white/95 rounded-2xl lg:rounded-[2rem] border border-stone-200/50 shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 lg:hover:-translate-y-2 lg:hover:bg-white lg:hover:shadow-[0_20px_40px_rgba(183,110,121,0.15)] lg:hover:border-rose-gold/40 overflow-hidden group-hover:after:opacity-100 after:opacity-0 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none">
                 
                 {/* Decorative Number Layered Behind - Larger & More Editorial */}
-                <span className="absolute top-6 left-8 text-[8rem] lg:text-[10rem] leading-none font-display text-stone-200/80 select-none pointer-events-none transition-colors duration-500 group-hover:text-maroon/[0.08]">
+                <span className="absolute top-4 left-6 lg:top-6 lg:left-8 text-[6rem] lg:text-[10rem] leading-none font-display text-stone-200/80 select-none pointer-events-none transition-colors duration-500 group-hover:text-maroon/[0.08]">
                   {pillar.number}
                 </span>
 
-                {/* Subtle Gradient Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                {/* Subtle Gradient Overlay on Hover (Desktop only) */}
+                <div className="hidden lg:block absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 
                 {/* Content */}
-                <div className="relative z-10 flex flex-col h-full min-h-[280px]">
+                <div className="relative z-10 flex flex-col h-full min-h-[240px] lg:min-h-[280px]">
                   {/* Icon/Accent Line - Extending on Hover */}
-                  <div className="mb-auto w-12 h-[2px] bg-gradient-to-r from-maroon/40 to-transparent group-hover:from-maroon group-hover:w-24 transition-all duration-500" />
+                  <div className="mb-auto w-12 h-[2px] bg-gradient-to-r from-maroon/40 to-transparent lg:group-hover:from-maroon lg:group-hover:w-24 transition-all duration-500" />
 
                   {/* Title */}
-                  <h3 className="text-3xl xl:text-4xl font-display text-charcoal mb-6 leading-[1.1] group-hover:text-maroon transition-colors duration-500 mt-auto">
+                  <h3 className="text-2xl lg:text-3xl xl:text-4xl font-display text-charcoal mb-4 lg:mb-6 leading-[1.1] lg:group-hover:text-maroon transition-colors duration-500 mt-auto">
                     {pillar.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-charcoal/70 leading-relaxed text-[15px] lg:text-base font-light tracking-wide">
+                  <p className="text-charcoal/70 leading-relaxed text-sm lg:text-base font-light tracking-wide">
                     {pillar.description}
                   </p>
                 </div>

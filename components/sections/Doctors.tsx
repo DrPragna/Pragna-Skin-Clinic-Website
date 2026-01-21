@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
 /**
@@ -54,6 +54,11 @@ const doctors = [
 export default function Doctors() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-50px' });
+  const [expandedBios, setExpandedBios] = useState<Record<string, boolean>>({});
+
+  const toggleBio = (id: string) => {
+    setExpandedBios(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   return (
     <section 
@@ -105,11 +110,11 @@ export default function Doctors() {
           {doctors.map((doctor, index) => (
             <div
               key={doctor.id}
-              className="flex flex-col items-center text-center bg-white p-8 rounded-2xl border border-maroon/5 shadow-md shadow-maroon/5 hover:shadow-xl hover:shadow-maroon/10 transition-all duration-500 group h-full relative overflow-hidden"
+              className="flex flex-col items-center text-center bg-white p-6 md:p-8 rounded-2xl border border-maroon/5 shadow-md shadow-maroon/5 hover:shadow-xl hover:shadow-maroon/10 transition-all duration-500 group h-full relative overflow-hidden"
             >
               
               {/* Image Section */}
-              <div className="w-full max-w-[280px] relative mb-8 z-10">
+              <div className="w-full max-w-[240px] lg:max-w-[280px] relative mb-8 z-10">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-t-[10rem] rounded-b-3xl shadow-2xl shadow-maroon/10 group-hover:shadow-maroon/20 transition-all duration-500">
                   {/* Doctor Portrait Image */}
                   <div className="absolute inset-0 overflow-hidden rounded-t-[10rem] rounded-b-3xl">
@@ -132,10 +137,10 @@ export default function Doctors() {
                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]">
                   <motion.div 
                     whileHover={{ scale: 1.05, y: -2 }}
-                    className="bg-white border border-maroon/10 px-5 py-2 rounded-full shadow-lg flex items-center gap-2"
+                    className="bg-white border border-maroon/10 px-4 py-2 lg:px-5 rounded-full shadow-lg flex items-center gap-2"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-rose-gold animate-pulse" />
-                    <span className="text-maroon font-display text-sm font-medium whitespace-nowrap tracking-wide">{doctor.badge}</span>
+                    <span className="text-maroon font-display text-xs lg:text-sm font-medium whitespace-nowrap tracking-wide">{doctor.badge}</span>
                   </motion.div>
                 </div>
               </div>
@@ -143,10 +148,10 @@ export default function Doctors() {
               {/* Text Content - Elegant Typography */}
               <div className="w-full max-w-md flex flex-col flex-1 relative z-10">
                   <div className="mb-6">
-                    <h3 className="text-3xl lg:text-4xl font-display text-charcoal font-medium mb-2 leading-tight">
+                    <h3 className="text-2xl lg:text-4xl font-display text-charcoal font-medium mb-2 leading-tight">
                       {doctor.name}
                     </h3>
-                    <p className="text-sm tracking-widest uppercase text-maroon/80 font-medium">
+                    <p className="text-xs lg:text-sm tracking-widest uppercase text-maroon/80 font-medium">
                       {doctor.role}
                     </p>
                   </div>
@@ -154,18 +159,27 @@ export default function Doctors() {
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-maroon/20 to-transparent mb-6" />
 
                 <div className="flex-1 flex flex-col gap-5">
-                  <p className="text-charcoal/80 text-base leading-relaxed font-light text-center">
-                    {doctor.bio}
-                  </p>
+                  {/* Bio with Read More on Mobile */}
+                  <div className="relative">
+                    <p className={`text-charcoal/80 text-sm lg:text-base leading-relaxed font-light text-center ${!expandedBios[doctor.id] ? 'line-clamp-3 lg:line-clamp-none' : ''}`}>
+                      {doctor.bio}
+                    </p>
+                    <button 
+                      onClick={() => toggleBio(doctor.id)}
+                      className="lg:hidden text-maroon text-xs font-medium mt-2 hover:underline focus:outline-none"
+                    >
+                      {expandedBios[doctor.id] ? 'Read Less' : 'Read More'}
+                    </button>
+                  </div>
 
                   {/* Highlights Section */}
                   {doctor.highlights && (
                     <div className="py-2 flex justify-center">
                       <ul className="space-y-2 text-left inline-block">
                         {doctor.highlights.map((item, i) => (
-                          <li key={i} className="flex items-center gap-3 group/item">
-                            <span className="w-1 h-1 rounded-full bg-rose-gold group-hover/item:scale-150 transition-transform duration-300" />
-                            <span className="text-sm text-charcoal/70 font-medium group-hover/item:text-charcoal transition-colors duration-300">{item}</span>
+                          <li key={i} className="flex items-start gap-3 group/item">
+                            <span className="w-1 h-1 rounded-full bg-rose-gold mt-2 group-hover/item:scale-150 transition-transform duration-300 shrink-0" />
+                            <span className="text-xs lg:text-sm text-charcoal/70 font-medium group-hover/item:text-charcoal transition-colors duration-300">{item}</span>
                           </li>
                         ))}
                       </ul>
@@ -174,7 +188,7 @@ export default function Doctors() {
                   
                   <div className="pt-4 mt-auto">
                     <p className="text-[10px] text-maroon/50 uppercase tracking-[0.2em] mb-2 font-bold text-center">Credentials</p>
-                    <p className="text-charcoal/90 font-serif italic text-lg">{doctor.credentials}</p>
+                    <p className="text-charcoal/90 font-serif italic text-base lg:text-lg">{doctor.credentials}</p>
                   </div>
                 </div>
 

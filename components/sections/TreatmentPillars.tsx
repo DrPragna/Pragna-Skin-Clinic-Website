@@ -39,10 +39,10 @@ export default function TreatmentPillars() {
 
   return (
     <section className="relative py-12 lg:py-16 bg-cream overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-4 lg:px-6">
+      <div className="max-w-[1440px] mx-auto lg:px-6">
         
         {/* Section Header - Center Aligned */}
-        <div className="text-center mb-12 lg:mb-16">
+        <div className="text-center mb-10 lg:mb-16 px-6">
           <span className="text-maroon font-medium tracking-[0.2em] uppercase text-xs block mb-4">
               Our Expertise
             </span>
@@ -141,13 +141,13 @@ export default function TreatmentPillars() {
           ))}
         </div>
 
-        {/* Mobile: Stacked Cards */}
-        <div className="lg:hidden space-y-4 px-4">
+        {/* Mobile: Stacked Cards (Edge to Edge) */}
+        <div className="lg:hidden space-y-1">
           {pillars.map((pillar, index) => (
             <Link
               key={pillar.id}
               href={pillar.href}
-              className="block relative h-[400px] overflow-hidden rounded-xl group"
+              className="block relative h-[250px] overflow-hidden group"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
@@ -155,16 +155,19 @@ export default function TreatmentPillars() {
                 alt={pillar.title}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               
-              <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
-                <h3 className="text-5xl font-display text-white mb-2">{pillar.title}</h3>
-                <p className="text-white/90 text-lg mb-4">{pillar.subtitle}</p>
-                <div className="flex items-center gap-2 text-white/80 text-sm uppercase tracking-widest">
-                  <span>Explore</span>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
+                <div className="flex justify-between items-end">
+                  <div>
+                    <h3 className="text-4xl font-display text-white mb-1">{pillar.title}</h3>
+                    <p className="text-white/80 text-sm font-light">{pillar.subtitle}</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white mb-1">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
+                  </div>
                 </div>
               </div>
             </Link>

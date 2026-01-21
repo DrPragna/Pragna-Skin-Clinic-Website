@@ -24,11 +24,11 @@ export default function SignaturePrograms() {
   return (
     <section 
       ref={containerRef}
-      className="py-16 lg:py-24 bg-white relative overflow-hidden"
+      className="py-12 lg:py-24 bg-white relative overflow-hidden"
     >
       <div className="section-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - Center Aligned like Treatment Pillars */}
-        <div className="text-center mb-12 lg:mb-16">
+        <div className="text-center mb-10 lg:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -47,8 +47,8 @@ export default function SignaturePrograms() {
           </motion.h2>
         </div>
 
-        {/* Uniform Grid - All same size */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Uniform Grid - Adaptive Layout */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-4 px-4 scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-5 md:pb-0 md:mx-0 md:px-0">
           {signaturePrograms.map((program, index) => (
             <ProgramCard 
               key={program.slug}
@@ -77,16 +77,16 @@ function ProgramCard({
   const gradient = program.gradient || defaultGradient;
 
   return (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ 
-                duration: 0.8, 
-                delay: index * 0.1,
-                ease: [0.16, 1, 0.3, 1]
-              }}
-      className="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer"
-            >
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ 
+        duration: 0.8, 
+        delay: index * 0.1,
+        ease: [0.16, 1, 0.3, 1]
+      }}
+      className="group relative min-w-[80vw] snap-center md:min-w-0 aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer"
+    >
       <Link href={`/signature-programs/${program.slug}`} scroll={true} className="block h-full w-full">
         {/* Background: Image or Gradient */}
         <div className="absolute inset-0 overflow-hidden">
@@ -121,7 +121,7 @@ function ProgramCard({
         </div>
 
         {/* Content */}
-        <div className="relative h-full p-8 flex flex-col justify-between z-10">
+        <div className="relative h-full p-6 md:p-8 flex flex-col justify-between z-10">
           {/* Top */}
           <div className="flex justify-between items-start">
             <div className="overflow-hidden">
@@ -132,21 +132,21 @@ function ProgramCard({
               </span>
             </div>
             <span className="text-white/90 font-display text-xl group-hover:text-white transition-colors duration-500 drop-shadow-md">
-                      0{index + 1}
-                    </span>
+              0{index + 1}
+            </span>
           </div>
 
           {/* Bottom - Animated Slide Up */}
           <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-out">
-            <span className="text-[#D4A5A5] text-[11px] tracking-[0.25em] uppercase font-bold mb-3 block group-hover:text-[#E8C4C4] transition-colors duration-500 drop-shadow-sm">
-                      {program.subtitle}
-                    </span>
-            <h3 className="text-3xl lg:text-4xl font-display text-white mb-4 group-hover:text-white transition-colors leading-tight drop-shadow-lg">
-                    {program.title}
-                  </h3>
-            <p className="text-white/95 text-sm leading-relaxed line-clamp-3 mb-6 border-l-2 border-white/30 pl-4 opacity-100 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-md font-medium">
-                    {program.description}
-                  </p>
+            <span className="text-[#D4A5A5] text-[10px] md:text-[11px] tracking-[0.25em] uppercase font-bold mb-2 md:mb-3 block group-hover:text-[#E8C4C4] transition-colors duration-500 drop-shadow-sm">
+              {program.subtitle}
+            </span>
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-display text-white mb-3 md:mb-4 group-hover:text-white transition-colors leading-tight drop-shadow-lg">
+              {program.title}
+            </h3>
+            <p className="text-white/95 text-sm leading-relaxed line-clamp-3 mb-4 md:mb-6 border-l-2 border-white/30 pl-4 opacity-100 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-md font-medium">
+              {program.description}
+            </p>
             
             <div className="flex items-center gap-3 text-white group-hover:text-white transition-colors text-[10px] tracking-widest uppercase font-bold drop-shadow-md">
               <span className="relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-500 group-hover:after:w-full">
@@ -154,10 +154,10 @@ function ProgramCard({
               </span>
               <div className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-charcoal transition-all duration-500">
                 <svg className="w-3 h-3 transform -rotate-45 group-hover:rotate-0 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </div>
-                </div>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </Link>

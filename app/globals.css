@@ -118,20 +118,20 @@ html.lenis, html.lenis body {
   }
   
   h1 {
-    @apply text-display-hero;
+    @apply text-4xl leading-[1.1] tracking-tight md:text-display-hero;
     font-weight: 300;
   }
   
   h2 {
-    @apply text-display-lg;
+    @apply text-3xl leading-tight tracking-tight md:text-display-lg;
   }
   
   h3 {
-    @apply text-display-md;
+    @apply text-2xl leading-snug md:text-display-md;
   }
   
   h4 {
-    @apply text-display-sm;
+    @apply text-xl md:text-display-sm;
   }
   
   p {
@@ -187,11 +187,11 @@ html.lenis, html.lenis body {
   }
   
   .section-padding {
-    @apply py-14 lg:py-20;
+    @apply py-10 md:py-14 lg:py-20;
   }
   
   .section-padding-lg {
-    @apply py-16 lg:py-24;
+    @apply py-12 md:py-16 lg:py-24;
   }
 
   /* ===========================================
@@ -226,7 +226,7 @@ html.lenis, html.lenis body {
      CARDS
      =========================================== */
   .card {
-    @apply bg-beige rounded-3xl p-8 
+    @apply bg-beige rounded-2xl p-5 md:rounded-3xl md:p-8 
            transition-all duration-500;
   }
   
@@ -587,6 +587,7 @@ body:not(.mega-menu-open) #main-content {
    GRAIN TEXTURE OVERLAY
    =========================================== */
 .grain-overlay {
+  @apply hidden md:block;
   position: fixed;
   top: -50%;
   left: -50%;

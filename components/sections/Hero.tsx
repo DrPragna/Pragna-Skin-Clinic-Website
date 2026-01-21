@@ -217,7 +217,7 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-6"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-6 w-full max-w-xs mx-auto sm:max-w-none"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -229,13 +229,13 @@ export default function Hero() {
                 e.stopPropagation();
                 scrollToElementBypassingLenis('contact', 100);
               }}
-              className="px-8 py-3 sm:py-4 bg-cream text-maroon rounded-full font-medium hover:bg-white hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300 min-w-[180px] cursor-pointer"
+              className="w-full sm:w-auto px-8 py-3 sm:py-4 bg-cream text-maroon rounded-full font-medium hover:bg-white hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300 min-w-[180px] cursor-pointer"
             >
               Book Consultation
             </button>
             <Link 
               href="/treatments"
-              className="px-8 py-3 sm:py-4 border border-cream/30 text-cream rounded-full font-medium hover:bg-cream/20 hover:border-cream/80 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,248,240,0.2)] transition-all duration-300 backdrop-blur-sm min-w-[180px] text-center"
+              className="w-full sm:w-auto px-8 py-3 sm:py-4 border border-cream/30 text-cream rounded-full font-medium hover:bg-cream/20 hover:border-cream/80 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,248,240,0.2)] transition-all duration-300 backdrop-blur-sm min-w-[180px] text-center"
             >
               View Treatments
             </Link>
@@ -249,24 +249,24 @@ export default function Hero() {
       {/* Trust Strip - Fixed at bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-20 bg-black/50 backdrop-blur-md border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-3 md:py-5">
-          <div className="flex flex-wrap justify-center md:justify-between items-center gap-6 md:gap-4 text-white text-xs md:text-sm tracking-widest uppercase font-sans">
+          <div className="flex flex-wrap justify-between md:justify-between items-center gap-4 text-white text-[10px] md:text-sm tracking-widest uppercase font-sans">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-rose-gold" />
-              US-FDA Approved Technology
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-gold" />
+              US-FDA Approved
             </span>
             <span className="hidden md:block text-white/30">|</span>
-            <span className="flex items-center gap-2">
+            <span className="hidden md:flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-rose-gold" />
               1,00,000+ Successful Treatments
             </span>
             <span className="hidden md:block text-white/30">|</span>
-            <span className="flex items-center gap-2">
+            <span className="hidden md:flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-rose-gold" />
               30k+ Happy Patients
             </span>
             <span className="hidden md:block text-white/30">|</span>
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-rose-gold" />
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-gold" />
               25+ Years Excellence
             </span>
           </div>

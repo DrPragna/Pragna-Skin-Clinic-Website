@@ -196,7 +196,7 @@ const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onCl
             onClick={onClose}
             className="absolute -top-2 -right-2 w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors text-charcoal/60 hover:text-charcoal"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
 
           <div className="flex items-center gap-4 mb-8">
@@ -238,7 +238,7 @@ const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onCl
 };
 
 // --- REVIEW CARD COMPONENT ---
-const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onClick: () => void }) => {
+const ReviewCard = ({ review, onClick, className = '' }: { review: typeof testimonials[0], onClick: () => void, className?: string }) => {
   // Responsive threshold: wider cards on md+ screens fit more text
   const [charThreshold, setCharThreshold] = useState(180);
   
@@ -257,7 +257,7 @@ const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onCli
 
   return (
     <div
-      className="block w-[360px] md:w-[420px] h-[320px] flex-shrink-0 mx-4 select-none relative group"
+      className={`block w-[85vw] md:w-[420px] h-[320px] flex-shrink-0 select-none relative group ${className}`}
       onDragStart={(e) => e.preventDefault()}
     >
       <div className="h-full bg-gradient-to-br from-white via-white to-stone-50 rounded-[2rem] p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02),0_10px_30px_-10px_rgba(114,43,43,0.06)] border border-stone-100 hover:border-maroon/20 hover:shadow-[0_20px_40px_-10px_rgba(114,43,43,0.1)] transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1">
@@ -304,7 +304,7 @@ const ReviewCard = ({ review, onClick }: { review: typeof testimonials[0], onCli
                     className="w-3 h-3 transform group-hover/btn:translate-x-0.5 transition-transform" 
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
               </div>
@@ -458,9 +458,21 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Infinite Marquee Track */}
+        {/* Mobile: Native Horizontal Scroll */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-4 scrollbar-hide md:hidden">
+          {testimonials.map((review, i) => (
+            <div key={`${review.id}-${i}`} className="snap-center">
+              <ReviewCard 
+                review={review}
+                onClick={() => setSelectedReview(review)}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: Infinite Marquee Track */}
         <div 
-          className="relative w-full cursor-grab active:cursor-grabbing pb-4"
+          className="hidden md:block relative w-full cursor-grab active:cursor-grabbing pb-4"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -480,6 +492,7 @@ export default function Testimonials() {
                 key={`${review.id}-${i}`} 
                 review={review}
                 onClick={() => setSelectedReview(review)}
+                className="mx-4"
               />
             ))}
           </motion.div>
