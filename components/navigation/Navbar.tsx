@@ -534,7 +534,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden p-2 z-50 relative transition-colors duration-300 ${
+            className={`lg:hidden p-4 z-50 relative transition-colors duration-300 ${
               isMobileMenuOpen 
                 ? 'text-charcoal' // Always dark when menu is open (on light drawer)
                 : useTransparentStyle ? 'text-white' : 'text-charcoal'
@@ -566,7 +566,7 @@ export default function Navbar() {
             variants={menuContainerVariants}
             className="fixed inset-0 bg-beige-warm z-40 lg:hidden overflow-y-auto overflow-x-hidden"
           >
-            <div className="min-h-screen flex flex-col pt-24 px-6 pb-12">
+            <div className="min-h-screen flex flex-col pt-24 px-6 pb-12 scrollbar-hide">
               
               {/* Menu Items Container */}
               <div className="flex-1 space-y-0 divide-y divide-maroon/10 border-t border-maroon/10 relative mt-12">
@@ -574,7 +574,7 @@ export default function Navbar() {
                 {/* Close Button - Internal */}
                 <button 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="absolute -top-20 right-0 p-2 text-charcoal/50 hover:text-maroon transition-colors"
+                  className="absolute -top-20 right-0 p-4 text-charcoal/50 hover:text-maroon transition-colors"
                   aria-label="Close menu"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -612,7 +612,7 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 space-y-6">
@@ -642,7 +642,7 @@ export default function Navbar() {
                                           initial={{ height: 0, opacity: 0 }}
                                           animate={{ height: 'auto', opacity: 1 }}
                                           exit={{ height: 0, opacity: 0 }}
-                                          transition={{ duration: 0.3 }}
+                                          transition={{ duration: 0.3, ease: "easeInOut" }}
                                           className="overflow-hidden bg-maroon/[0.02]"
                                         >
                                           <div className="pl-6 py-2 space-y-1 border-l-2 border-maroon/10 ml-4 mb-4">
@@ -698,7 +698,7 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 space-y-2">
@@ -771,7 +771,7 @@ export default function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 pt-2 space-y-3">
