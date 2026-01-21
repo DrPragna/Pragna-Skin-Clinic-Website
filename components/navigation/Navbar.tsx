@@ -86,7 +86,7 @@ const menuContainerVariants = {
   visible: {
     x: '0%',
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 300,
       damping: 30,
       staggerChildren: 0.1,
@@ -96,7 +96,7 @@ const menuContainerVariants = {
   exit: {
     x: '100%',
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 300,
       damping: 30,
     },
