@@ -118,7 +118,7 @@ export default function Hero() {
     <section 
       ref={containerRef}
       id="home" 
-      className="relative h-[100dvh] w-full overflow-hidden bg-charcoal"
+      className="relative h-[100svh] w-full overflow-hidden bg-charcoal"
     >
       {/* Background Layer - Video with Image Fallback */}
       <motion.div 
