@@ -105,7 +105,7 @@ const menuContainerVariants = {
 
 const menuItemVariants = {
   hidden: { opacity: 0, x: 20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' as any } },
   exit: { opacity: 0, x: 10, transition: { duration: 0.2 } },
 };
 
