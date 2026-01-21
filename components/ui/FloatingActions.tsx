@@ -88,32 +88,23 @@ const CalendarIcon = () => (
 
 export default function FloatingActions() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
   const { openBookingModal } = useBookingModal();
 
   const isHomePage = pathname === "/";
 
   useEffect(() => {
-    // Check if mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
     // Check scroll position
     const handleScroll = () => {
       // Show after scrolling 400px (past the hero)
       setIsVisible(window.scrollY > 400);
     };
 
-    checkMobile();
     handleScroll();
 
-    window.addEventListener("resize", checkMobile);
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("resize", checkMobile);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
@@ -125,8 +116,8 @@ export default function FloatingActions() {
   );
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-  // Always show on mobile, or show after scroll on desktop
-  const shouldShow = isMobile || isVisible;
+  // Only show after scroll
+  const shouldShow = isVisible;
 
   // Track if action was already triggered to prevent double-firing
   const actionTriggeredRef = useRef(false);
