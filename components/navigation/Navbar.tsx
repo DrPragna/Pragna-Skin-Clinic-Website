@@ -231,7 +231,7 @@ export default function Navbar() {
         }`}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
+      <div className="relative z-10 section-container">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center group z-50 relative">
@@ -566,7 +566,7 @@ export default function Navbar() {
             variants={menuContainerVariants}
             className="fixed inset-0 bg-beige-warm z-40 lg:hidden overflow-y-auto overflow-x-hidden"
           >
-            <div className="min-h-screen flex flex-col pt-24 px-4 md:px-6 pb-12 scrollbar-hide">
+            <div className="min-h-screen flex flex-col pt-24 px-6 pb-12 scrollbar-hide">
               
               {/* Menu Items Container */}
               <div className="flex-1 space-y-0 divide-y divide-maroon/10 border-t border-maroon/10 relative mt-12">

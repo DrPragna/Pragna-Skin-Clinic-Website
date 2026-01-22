@@ -54,11 +54,6 @@ const doctors = [
 export default function Doctors() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-50px' });
-  const [expandedBios, setExpandedBios] = useState<Record<string, boolean>>({});
-
-  const toggleBio = (id: string) => {
-    setExpandedBios(prev => ({ ...prev, [id]: !prev[id] }));
-  };
 
   return (
     <section 
@@ -159,17 +154,11 @@ export default function Doctors() {
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-maroon/20 to-transparent mb-6" />
 
                 <div className="flex-1 flex flex-col gap-5">
-                  {/* Bio with Read More on Mobile */}
+                  {/* Bio - Full Text Always */}
                   <div className="relative">
-                    <p className={`text-charcoal/80 text-sm lg:text-base leading-relaxed font-light text-center ${!expandedBios[doctor.id] ? 'line-clamp-3 lg:line-clamp-none' : ''}`}>
+                    <p className="text-charcoal/80 text-sm lg:text-base leading-relaxed font-light text-center">
                       {doctor.bio}
                     </p>
-                    <button 
-                      onClick={() => toggleBio(doctor.id)}
-                      className="lg:hidden text-maroon text-xs font-medium mt-2 hover:underline focus:outline-none"
-                    >
-                      {expandedBios[doctor.id] ? 'Read Less' : 'Read More'}
-                    </button>
                   </div>
 
                   {/* Highlights Section */}

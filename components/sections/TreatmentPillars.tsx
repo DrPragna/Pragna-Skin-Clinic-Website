@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 
 const pillars = [
   {
@@ -33,6 +34,67 @@ const pillars = [
     color: '#EAE4DD', // Beige
   },
 ];
+
+function MobilePillarCard({ pillar }: { pillar: typeof pillars[0] }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll progress of the card relative to the viewport
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Cinematic Zoom: Scale gently from 1.0 to 1.15 as it scrolls
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  
+  // Parallax Text: Text moves slightly slower than card for depth
+  const yText = useTransform(scrollYProgress, [0, 1], [0, -20]);
+
+  return (
+    <Link
+      href={pillar.href}
+      className="block relative h-[250px] overflow-hidden group"
+      ref={cardRef}
+    >
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div 
+          style={{ scale }}
+          className="relative w-full h-full will-change-transform"
+        >
+          <Image 
+            src={pillar.image} 
+            alt={pillar.title}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </motion.div>
+      </div>
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+      
+      <motion.div 
+        style={{ y: yText }}
+        className="absolute inset-0 p-6 flex flex-col justify-end z-10"
+      >
+        <div className="flex justify-between items-end">
+          <div>
+            <h3 className="text-4xl font-display text-white mb-1">{pillar.title}</h3>
+            <p className="text-white/80 text-sm font-light">{pillar.subtitle}</p>
+          </div>
+          
+          <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white mb-1">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </div>
+        </div>
+      </motion.div>
+    </Link>
+  );
+}
 
 export default function TreatmentPillars() {
   const [activeId, setActiveId] = useState<string | null>(null); // Initial state: none selected
@@ -67,16 +129,17 @@ export default function TreatmentPillars() {
             >
               {/* Background Image */}
               <div className="absolute inset-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
+                <Image 
                   src={pillar.image} 
                   alt={pillar.title}
-                  className={`w-full h-full object-cover transition-all duration-1000 ease-out
+                  fill
+                  className={`object-cover transition-all duration-1000 ease-out
                     ${activeId === pillar.id 
                       ? 'scale-100 saturate-100 brightness-100 contrast-100' 
                       : 'scale-110 saturate-[0.6] brightness-[0.8] contrast-110'
                     }
                   `}
+                  sizes="(min-width: 1024px) 33vw, 100vw"
                 />
                 
                 {/* Overlays */}
@@ -141,36 +204,10 @@ export default function TreatmentPillars() {
           ))}
         </div>
 
-        {/* Mobile: Stacked Cards (Edge to Edge) */}
+        {/* Mobile: Cinematic Tall Cards with Scroll Zoom */}
         <div className="lg:hidden space-y-1">
-          {pillars.map((pillar, index) => (
-            <Link
-              key={pillar.id}
-              href={pillar.href}
-              className="block relative h-[250px] overflow-hidden group"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={pillar.image} 
-                alt={pillar.title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              
-              <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
-                <div className="flex justify-between items-end">
-                  <div>
-                    <h3 className="text-4xl font-display text-white mb-1">{pillar.title}</h3>
-                    <p className="text-white/80 text-sm font-light">{pillar.subtitle}</p>
-                  </div>
-                  <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white mb-1">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
+          {pillars.map((pillar) => (
+            <MobilePillarCard key={pillar.id} pillar={pillar} />
           ))}
         </div>
       </div>
