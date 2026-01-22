@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
 /**
@@ -51,6 +51,116 @@ const doctors = [
   },
 ];
 
+function DoctorCard({ doctor }: { doctor: typeof doctors[0] }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  // Track vertical scroll progress for cinematic zoom
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+  
+  // Cinematic Scale: 1.0 -> 1.05
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.05, 1]);
+
+  return (
+    <div
+      ref={cardRef}
+      className="flex flex-col items-center text-center bg-white p-6 md:p-8 rounded-2xl border border-maroon/5 shadow-md shadow-maroon/5 hover:shadow-xl hover:shadow-maroon/10 transition-all duration-500 group h-full relative overflow-hidden"
+    >
+      
+      {/* Image Section */}
+      <div className="w-full max-w-[240px] lg:max-w-[280px] relative mb-8 z-10">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-t-[10rem] rounded-b-3xl shadow-2xl shadow-maroon/10 group-hover:shadow-maroon/20 transition-all duration-500">
+          {/* Doctor Portrait Image */}
+          <div className="absolute inset-0 overflow-hidden rounded-t-[10rem] rounded-b-3xl">
+            <motion.div 
+              style={{ scale }}
+              className="relative w-full h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 will-change-transform"
+            >
+              <Image
+                src={doctor.image}
+                alt={doctor.name}
+                fill
+                className={`object-cover ${doctor.imageStyle} brightness-[1.02] contrast-[1.05] saturate-[0.95]`}
+                sizes="(max-width: 768px) 300px, 300px"
+              />
+            </motion.div>
+          </div>
+          
+          {/* Subtle Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-maroon/20 via-transparent to-transparent opacity-40 mix-blend-multiply transition-opacity duration-500" />
+        </div>
+
+        {/* Badge - Integrated */}
+        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]">
+          <motion.div 
+            whileHover={{ scale: 1.05, y: -2 }}
+            className="bg-white border border-maroon/10 px-4 py-2 lg:px-5 rounded-full shadow-lg flex items-center gap-2"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-gold animate-pulse" />
+            <span className="text-maroon font-display text-xs lg:text-sm font-medium whitespace-nowrap tracking-wide">{doctor.badge}</span>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Text Content - Elegant Typography */}
+      <div className="w-full max-w-md flex flex-col flex-1 relative z-10">
+          <div className="mb-6">
+            <h3 className="text-2xl lg:text-4xl font-display text-charcoal font-medium mb-2 leading-tight">
+              {doctor.name}
+            </h3>
+            <p className="text-xs lg:text-sm tracking-widest uppercase text-maroon/80 font-medium">
+              {doctor.role}
+            </p>
+          </div>
+          
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-maroon/20 to-transparent mb-6" />
+
+        <div className="flex-1 flex flex-col gap-5">
+          {/* Bio - Full Text Always */}
+          <div className="relative">
+            <p className="text-charcoal/80 text-sm lg:text-base leading-relaxed font-light text-center">
+              {doctor.bio}
+            </p>
+          </div>
+
+          {/* Highlights Section */}
+          {doctor.highlights && (
+            <div className="py-2 flex justify-center">
+              <ul className="space-y-2 text-left inline-block">
+                {doctor.highlights.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 group/item">
+                    <span className="w-1 h-1 rounded-full bg-rose-gold mt-2 group-hover/item:scale-150 transition-transform duration-300 shrink-0" />
+                    <span className="text-xs lg:text-sm text-charcoal/70 font-medium group-hover/item:text-charcoal transition-colors duration-300">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          
+          <div className="pt-4 mt-auto">
+            <p className="text-[10px] text-maroon/50 uppercase tracking-[0.2em] mb-2 font-bold text-center">Credentials</p>
+            <p className="text-charcoal/90 font-serif italic text-base lg:text-lg">{doctor.credentials}</p>
+          </div>
+        </div>
+
+        <div className="pt-8 mt-auto">
+          <a 
+            href="#contact" 
+            className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-maroon text-white text-xs uppercase tracking-widest font-medium hover:bg-charcoal transition-all duration-500 shadow-lg shadow-maroon/20 hover:shadow-charcoal/20 group/btn"
+          >
+            <span>Book Consultation</span>
+            <svg className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Doctors() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-50px' });
@@ -86,7 +196,7 @@ export default function Doctors() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl lg:text-6xl font-display text-charcoal"
+            className="text-4xl lg:text-6xl font-display text-charcoal"
             >
             Meet the <span className="italic text-maroon relative inline-block">
               Dermatologists
@@ -102,98 +212,8 @@ export default function Doctors() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          {doctors.map((doctor, index) => (
-            <div
-              key={doctor.id}
-              className="flex flex-col items-center text-center bg-white p-6 md:p-8 rounded-2xl border border-maroon/5 shadow-md shadow-maroon/5 hover:shadow-xl hover:shadow-maroon/10 transition-all duration-500 group h-full relative overflow-hidden"
-            >
-              
-              {/* Image Section */}
-              <div className="w-full max-w-[240px] lg:max-w-[280px] relative mb-8 z-10">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-t-[10rem] rounded-b-3xl shadow-2xl shadow-maroon/10 group-hover:shadow-maroon/20 transition-all duration-500">
-                  {/* Doctor Portrait Image */}
-                  <div className="absolute inset-0 overflow-hidden rounded-t-[10rem] rounded-b-3xl">
-                    <div className="relative w-full h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105">
-                      <Image
-                        src={doctor.image}
-                        alt={doctor.name}
-                        fill
-                        className={`object-cover ${doctor.imageStyle} brightness-[1.02] contrast-[1.05] saturate-[0.95]`}
-                        sizes="(max-width: 768px) 300px, 300px"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-maroon/20 via-transparent to-transparent opacity-40 mix-blend-multiply transition-opacity duration-500" />
-                </div>
-
-                {/* Badge - Integrated */}
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]">
-                  <motion.div 
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className="bg-white border border-maroon/10 px-4 py-2 lg:px-5 rounded-full shadow-lg flex items-center gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-rose-gold animate-pulse" />
-                    <span className="text-maroon font-display text-xs lg:text-sm font-medium whitespace-nowrap tracking-wide">{doctor.badge}</span>
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Text Content - Elegant Typography */}
-              <div className="w-full max-w-md flex flex-col flex-1 relative z-10">
-                  <div className="mb-6">
-                    <h3 className="text-2xl lg:text-4xl font-display text-charcoal font-medium mb-2 leading-tight">
-                      {doctor.name}
-                    </h3>
-                    <p className="text-xs lg:text-sm tracking-widest uppercase text-maroon/80 font-medium">
-                      {doctor.role}
-                    </p>
-                  </div>
-                  
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-maroon/20 to-transparent mb-6" />
-
-                <div className="flex-1 flex flex-col gap-5">
-                  {/* Bio - Full Text Always */}
-                  <div className="relative">
-                    <p className="text-charcoal/80 text-sm lg:text-base leading-relaxed font-light text-center">
-                      {doctor.bio}
-                    </p>
-                  </div>
-
-                  {/* Highlights Section */}
-                  {doctor.highlights && (
-                    <div className="py-2 flex justify-center">
-                      <ul className="space-y-2 text-left inline-block">
-                        {doctor.highlights.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3 group/item">
-                            <span className="w-1 h-1 rounded-full bg-rose-gold mt-2 group-hover/item:scale-150 transition-transform duration-300 shrink-0" />
-                            <span className="text-xs lg:text-sm text-charcoal/70 font-medium group-hover/item:text-charcoal transition-colors duration-300">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  
-                  <div className="pt-4 mt-auto">
-                    <p className="text-[10px] text-maroon/50 uppercase tracking-[0.2em] mb-2 font-bold text-center">Credentials</p>
-                    <p className="text-charcoal/90 font-serif italic text-base lg:text-lg">{doctor.credentials}</p>
-                  </div>
-                </div>
-
-                <div className="pt-8 mt-auto">
-                  <a 
-                    href="#contact" 
-                    className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-maroon text-white text-xs uppercase tracking-widest font-medium hover:bg-charcoal transition-all duration-500 shadow-lg shadow-maroon/20 hover:shadow-charcoal/20 group/btn"
-                  >
-                    <span>Book Consultation</span>
-                    <svg className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
+          {doctors.map((doctor) => (
+            <DoctorCard key={doctor.id} doctor={doctor} />
           ))}
         </motion.div>
       </div>

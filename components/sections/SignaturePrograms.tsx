@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signaturePrograms } from '@/lib/content/signature-programs';
@@ -77,8 +77,18 @@ function ProgramCard({
   const showGradient = imageError || !program.image;
   const gradient = program.gradient || defaultGradient;
 
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+  
+  // Cinematic Scale: 1.0 -> 1.15
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.15, 1]);
+  
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ 
@@ -92,15 +102,17 @@ function ProgramCard({
         {/* Background: Image or Gradient */}
         <div className="absolute inset-0 overflow-hidden">
           {!showGradient ? (
-             <Image 
-              src={program.image}
-              alt={program.title}
-              fill
-              onError={() => setImageError(true)}
-              className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-[1.5s] ease-out"
-              style={{ objectPosition: program.imagePosition || 'center center' }}
-              sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 33vw"
-            />
+             <motion.div className="w-full h-full relative" style={{ scale }}>
+               <Image 
+                src={program.image}
+                alt={program.title}
+                fill
+                onError={() => setImageError(true)}
+                className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-[1.5s] ease-out will-change-transform"
+                style={{ objectPosition: program.imagePosition || 'center center' }}
+                sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </motion.div>
           ) : (
             // Gradient Fallback with texture
             <div className={`w-full h-full bg-gradient-to-br ${gradient} group-hover:scale-110 transition-transform duration-[1.5s] ease-out`}>
