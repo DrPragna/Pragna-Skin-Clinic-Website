@@ -36,7 +36,7 @@ const pillars = [
 ];
 
 function MobilePillarCard({ pillar }: { pillar: typeof pillars[0] }) {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
   
   // Track scroll progress of the card relative to the viewport
   const { scrollYProgress } = useScroll({
