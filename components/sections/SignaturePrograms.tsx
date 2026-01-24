@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -74,8 +74,17 @@ function ProgramCard({
   isInView: boolean;
 }) {
   const [imageError, setImageError] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const showGradient = imageError || !program.image;
   const gradient = program.gradient || defaultGradient;
+
+  // Detect touch devices (mobile) - scroll zoom only for touch
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouchDevice(window.matchMedia('(hover: none)').matches);
+    };
+    checkTouch();
+  }, []);
 
   const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -83,7 +92,7 @@ function ProgramCard({
     offset: ["start end", "end start"]
   });
   
-  // Cinematic Scale: 1.0 -> 1.15
+  // Cinematic Scale: 1.0 -> 1.15 (only on touch/mobile)
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.15, 1]);
   
   return (
@@ -102,7 +111,7 @@ function ProgramCard({
         {/* Background: Image or Gradient */}
         <div className="absolute inset-0 overflow-hidden">
           {!showGradient ? (
-             <motion.div className="w-full h-full relative" style={{ scale }}>
+             <motion.div className="w-full h-full relative" style={isTouchDevice ? { scale } : undefined}>
                <Image 
                 src={program.image}
                 alt={program.title}

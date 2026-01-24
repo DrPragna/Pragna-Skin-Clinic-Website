@@ -80,30 +80,33 @@ const StylizedText = ({ text, className = '', ampersandClassName = 'text-maroon'
   );
 };
 
-// Animation Variants
+// Animation Variants - Elegant, weighted slide from right
 const menuContainerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { 
+    x: '100%',
+  },
   visible: {
-    opacity: 1,
+    x: '0%',
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: 0.8, // Increased from 0.5s for more elegance
+      ease: [0.16, 1, 0.3, 1], // "Expo" ease - fast start, very slow silky finish
     },
   },
   exit: {
-    opacity: 0,
+    x: '100%',
     transition: {
-      duration: 0.5,
-      ease: "easeInOut",
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 } as const;
 
+// No animations for menu items - they're static
 const menuItemVariants = {
-  hidden: { opacity: 1, x: 0 },
-  visible: { opacity: 1, x: 0 },
-  exit: { opacity: 1, x: 0 },
-};
+  hidden: {},
+  visible: {},
+  exit: {},
+} as const;
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -559,14 +562,26 @@ export default function Navbar() {
       */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={menuContainerVariants}
-            className="fixed inset-0 bg-beige-warm z-40 lg:hidden overflow-y-auto overflow-x-hidden"
-          >
-            <div className="min-h-screen flex flex-col pt-24 px-6 pb-12 scrollbar-hide">
+          <>
+            {/* Backdrop overlay - fades in independently */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="fixed inset-0 bg-charcoal/20 z-[35] lg:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            
+            {/* Sliding menu panel - curtain from right */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={menuContainerVariants}
+              className="fixed inset-0 bg-beige-warm z-40 lg:hidden overflow-y-auto overflow-x-hidden will-change-transform"
+            >
+              <div className="min-h-screen flex flex-col pt-24 px-6 pb-12 scrollbar-hide">
               
               {/* Menu Items Container */}
               <div className="flex-1 space-y-0 divide-y divide-maroon/10 border-t border-maroon/10 relative mt-12">
@@ -609,10 +624,15 @@ export default function Navbar() {
                   <AnimatePresence>
                     {activeMobileDropdown === 'treatments' && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                        initial={{ height: 0 }}
+                        animate={{ 
+                          height: 'auto',
+                          transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+                        }}
+                        exit={{ 
+                          height: 0,
+                          transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] }
+                        }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 space-y-6">
@@ -645,7 +665,7 @@ export default function Navbar() {
                                           initial={{ height: 0, opacity: 0 }}
                                           animate={{ height: 'auto', opacity: 1 }}
                                           exit={{ height: 0, opacity: 0 }}
-                                          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                                          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                                           className="overflow-hidden bg-maroon/[0.02]"
                                         >
                                           <div className="pl-6 py-2 space-y-1 border-l-2 border-maroon/10 ml-4 mb-4">
@@ -698,10 +718,10 @@ export default function Navbar() {
                   <AnimatePresence>
                     {activeMobileDropdown === 'conditions' && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                        initial={{ height: 0 }}
+                        animate={{ height: 'auto' }}
+                        exit={{ height: 0 }}
+                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 space-y-2">
@@ -774,10 +794,15 @@ export default function Navbar() {
                   <AnimatePresence>
                     {activeMobileDropdown === 'signature-programs' && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                        initial={{ height: 0 }}
+                        animate={{ 
+                          height: 'auto',
+                          transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] }
+                        }}
+                        exit={{ 
+                          height: 0,
+                          transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+                        }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 pt-2 space-y-3">
@@ -844,6 +869,7 @@ export default function Navbar() {
 
             </div>
           </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

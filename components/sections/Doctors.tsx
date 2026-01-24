@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
@@ -53,6 +53,15 @@ const doctors = [
 
 function DoctorCard({ doctor }: { doctor: typeof doctors[0] }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // Detect touch devices (mobile) - scroll zoom only for touch
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouchDevice(window.matchMedia('(hover: none)').matches);
+    };
+    checkTouch();
+  }, []);
   
   // Track vertical scroll progress for cinematic zoom
   const { scrollYProgress } = useScroll({
@@ -60,7 +69,7 @@ function DoctorCard({ doctor }: { doctor: typeof doctors[0] }) {
     offset: ["start end", "end start"]
   });
   
-  // Cinematic Scale: 1.0 -> 1.05
+  // Cinematic Scale: 1.0 -> 1.05 (only on touch/mobile)
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.05, 1]);
 
   return (
@@ -75,7 +84,7 @@ function DoctorCard({ doctor }: { doctor: typeof doctors[0] }) {
           {/* Doctor Portrait Image */}
           <div className="absolute inset-0 overflow-hidden rounded-t-[10rem] rounded-b-3xl">
             <motion.div 
-              style={{ scale }}
+              style={isTouchDevice ? { scale } : undefined}
               className="relative w-full h-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 will-change-transform"
             >
               <Image

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
@@ -34,6 +34,15 @@ const branches = [
 
 function BranchCard({ branch, index, isInView }: { branch: typeof branches[0], index: number, isInView: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // Detect touch devices (mobile) - scroll zoom only for touch
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouchDevice(window.matchMedia('(hover: none)').matches);
+    };
+    checkTouch();
+  }, []);
   
   // Track vertical scroll progress for cinematic zoom
   const { scrollYProgress } = useScroll({
@@ -41,7 +50,7 @@ function BranchCard({ branch, index, isInView }: { branch: typeof branches[0], i
     offset: ["start end", "end start"]
   });
   
-  // Cinematic Scale: 1.0 -> 1.1 (slightly stronger for architecture)
+  // Cinematic Scale: 1.0 -> 1.1 (only on touch/mobile)
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 1]);
 
   return (
@@ -60,7 +69,7 @@ function BranchCard({ branch, index, isInView }: { branch: typeof branches[0], i
         {/* Image Section - Top Half */}
         <div className="relative h-64 lg:h-72 overflow-hidden bg-beige-warm">
           <motion.div 
-            style={{ scale }}
+            style={isTouchDevice ? { scale } : undefined}
             className="relative w-full h-full group-hover:scale-105 transition-transform duration-1000 will-change-transform"
           >
             <Image

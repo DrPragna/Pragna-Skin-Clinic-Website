@@ -14,3 +14,8 @@
 - Avoid expensive CSS filters like backdrop-blur and SVG feTurbulence on elements that animate or scroll.
 - Lenis smooth scroll is disabled on mobile (touch devices) for better performance.
 - Prefer CSS gradients over blur filters for visual effects.
+
+## Testing & Screenshots
+- NEVER take screenshots after writing code.
+- The user will provide screenshots for testing purposes.
+- Wait for the user to share screenshots before evaluating visual changes.
