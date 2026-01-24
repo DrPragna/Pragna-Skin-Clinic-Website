@@ -210,8 +210,12 @@ export default function Navbar() {
   };
 
   const isHomepage = pathname === '/';
-  // Use transparent style only when menu is CLOSED. When open, we want the dark/solid style for contrast with the beige menu.
-  const useTransparentStyle = hasMounted && isHomepage && !isScrolled && !isMobileMenuOpen;
+  
+  // Defines if we are at the top of the homepage (Hero section) - independent of menu state
+  const isAtHeroSection = hasMounted && isHomepage && !isScrolled;
+  
+  // Use transparent style (white text) only when menu is CLOSED. When open, we want the dark/solid style for contrast with the beige menu.
+  const useTransparentStyle = isAtHeroSection && !isMobileMenuOpen;
 
   const linkClasses = `transition-colors duration-200 font-medium cursor-pointer flex items-center gap-1 ${
     useTransparentStyle 
@@ -225,12 +229,12 @@ export default function Navbar() {
       {/* Background Layers */}
       <div 
         className={`absolute inset-0 bg-beige-warm/95 backdrop-blur-md shadow-soft transition-opacity duration-300 ease-in-out ${
-          useTransparentStyle ? 'opacity-0' : 'opacity-100'
+          isAtHeroSection ? 'opacity-0' : 'opacity-100'
         }`}
       />
       <div 
         className={`absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent transition-opacity duration-300 ease-in-out ${
-          useTransparentStyle ? 'opacity-100' : 'opacity-0'
+          isAtHeroSection ? 'opacity-100' : 'opacity-0'
         }`}
       />
 
@@ -244,14 +248,14 @@ export default function Navbar() {
               width={72} 
               height={72}
               className={`h-[3.9rem] w-auto transition-all duration-300 ${
-                useTransparentStyle 
+                isAtHeroSection
                   ? 'brightness-0 invert' 
                   : ''
               }`}
               priority
             />
             <div className={`flex flex-col -ml-4 transition-colors duration-300 ${
-              useTransparentStyle 
+              isAtHeroSection 
                 ? 'text-white' 
                 : 'text-charcoal'
             }`}>
@@ -259,7 +263,7 @@ export default function Navbar() {
                 Pragna
               </span>
               <span className={`font-sans text-[0.45rem] tracking-[0.15em] uppercase leading-tight mt-0.5 ${
-                useTransparentStyle 
+                isAtHeroSection 
                   ? 'text-white/70' 
                   : 'text-charcoal/60'
               }`}>
@@ -719,9 +723,14 @@ export default function Navbar() {
                     {activeMobileDropdown === 'conditions' && (
                       <motion.div
                         initial={{ height: 0 }}
-                        animate={{ height: 'auto' }}
-                        exit={{ height: 0 }}
-                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                        animate={{ 
+                          height: 'auto',
+                          transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+                        }}
+                        exit={{ 
+                          height: 0,
+                          transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+                        }}
                         className="overflow-hidden"
                       >
                         <div className="pb-8 space-y-2">
