@@ -623,6 +623,14 @@ body:not(.mega-menu-open) #main-content {
          active:scale-95;
 }
 
+/* Hide floating actions when mobile menu is open */
+body.mobile-menu-open .floating-book-btn,
+body.mobile-menu-open .whatsapp-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
 /* ===========================================
    RESPONSIVE TYPOGRAPHY
    =========================================== */
