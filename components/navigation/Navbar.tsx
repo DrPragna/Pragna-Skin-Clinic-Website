@@ -627,11 +627,11 @@ export default function Navbar() {
                         initial={{ height: 0 }}
                         animate={{ 
                           height: 'auto',
-                          transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+                          transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] }
                         }}
                         exit={{ 
                           height: 0,
-                          transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] }
+                          transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] }
                         }}
                         className="overflow-hidden"
                       >
