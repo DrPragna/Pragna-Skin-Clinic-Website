@@ -38,7 +38,7 @@ export default function WhyPragna() {
   return (
     <section 
       ref={containerRef}
-      className="py-12 lg:py-16 bg-white relative overflow-hidden"
+      className="pt-12 pb-4 lg:py-16 bg-white relative overflow-hidden"
     >
       {/* Pure White Background */}
       <div className="absolute inset-0 bg-white" />
@@ -101,7 +101,7 @@ export default function WhyPragna() {
         {/* Glass Prism Grid - Horizontal scroll on mobile, grid on desktop */}
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-4 pt-2 pb-2 -mx-6 px-6 scrollbar-hide lg:grid lg:grid-cols-3 lg:gap-10 lg:pt-0 lg:pb-0 lg:mx-0 lg:px-0 lg:overflow-visible"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 pt-4 pb-8 -mx-6 px-6 scrollbar-hide lg:grid lg:grid-cols-3 lg:gap-10 lg:pt-0 lg:pb-0 lg:mx-0 lg:px-0 lg:overflow-visible"
         >
           {pillars.map((pillar, index) => (
             <PillarCard
@@ -180,7 +180,7 @@ function PillarCard({
       {/* Card - Desktop uses hover:, Mobile uses isActive state */}
       <div className={`relative h-full p-8 lg:p-14 bg-white/95 rounded-2xl lg:rounded-[2rem] border border-stone-200/50 lg:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden
         ${!isTouchDevice ? 'hover:-translate-y-2 hover:bg-white hover:shadow-[0_20px_40px_rgba(183,110,121,0.15)] hover:border-rose-gold/40' : ''}
-        ${isActive ? '-translate-y-1 bg-white border-maroon/60 shadow-[0_24px_48px_rgba(0,0,0,0.08)]' : ''}
+        ${isActive ? '-translate-y-1 bg-white border-maroon/60 shadow-[0_20px_40px_rgba(183,110,121,0.15)]' : ''}
         group-hover:after:opacity-100 after:opacity-0 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none
         ${isActive ? 'after:opacity-100' : ''}`}
       >
