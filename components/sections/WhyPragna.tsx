@@ -112,6 +112,8 @@ export default function WhyPragna() {
               containerRef={scrollContainerRef}
             />
           ))}
+          {/* Trailing spacer - fixes CSS bug where right padding collapses in overflow-x containers */}
+          <div className="min-w-[10vw] shrink-0 lg:hidden" aria-hidden="true" />
         </div>
       </div>
     </section>
