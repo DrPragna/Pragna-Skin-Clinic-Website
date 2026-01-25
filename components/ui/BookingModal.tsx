@@ -549,7 +549,7 @@ export default function BookingModal({
 // BOOKING MODAL CONTEXT & HOOK
 // ============================================
 
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext } from "react";
 
 interface BookingModalContextType {
   openBookingModal: (programName?: string) => void;
