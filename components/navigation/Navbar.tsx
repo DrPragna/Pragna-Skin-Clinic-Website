@@ -593,11 +593,15 @@ export default function Navbar() {
                 <div className="flex items-center justify-end h-20">
                   <button 
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-4 text-charcoal hover:text-maroon transition-colors"
+                    className="group relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90"
                     aria-label="Close menu"
                   >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    {/* Background Layer - Solid on press */}
+                    <div className="absolute inset-0 bg-maroon/5 rounded-full transition-colors duration-300 group-active:bg-maroon" />
+                    
+                    {/* Icon - Light on press */}
+                    <svg className="relative w-6 h-6 text-maroon transition-colors duration-300 group-active:text-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
                 </div>
