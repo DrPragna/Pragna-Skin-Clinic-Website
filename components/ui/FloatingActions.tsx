@@ -1,58 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import { useBookingModal } from "./BookingModal";
-import Lenis from "lenis";
-
-// Declare lenis on window for TypeScript
-declare global {
-  interface Window {
-    lenis?: Lenis;
-  }
-}
-
-/**
- * Helper function to scroll to an element while bypassing Lenis conflicts.
- * Stops Lenis, uses native smooth scroll, then restarts Lenis.
- */
-const scrollToElementBypassingLenis = (elementId: string, offset: number = 100) => {
-  const targetElement = document.getElementById(elementId);
-  if (!targetElement) return;
-
-  const targetRect = targetElement.getBoundingClientRect();
-  const lenis = window.lenis;
-
-  if (lenis) {
-    // Stop Lenis to prevent it from fighting with native scroll
-    lenis.stop();
-    // Remove the class that hides scrollbar (lenis-stopped adds overflow:hidden)
-    document.documentElement.classList.remove("lenis-stopped");
-  }
-
-  // Calculate absolute position
-  const absoluteTop = window.scrollY + targetRect.top - offset;
-
-  // Use native smooth scroll instead of Lenis
-  window.scrollTo({
-    top: absoluteTop,
-    behavior: "smooth"
-  });
-
-  // Re-enable Lenis after scroll animation completes
-  if (lenis) {
-    setTimeout(() => lenis.start(), 1200); // Match scroll duration
-  }
-};
 
 /**
  * FloatingActions Component
  *
  * Provides quick access to booking and WhatsApp contact.
- * - On mobile: Shows both WhatsApp (left) and Book (right) buttons
- * - On desktop: Only shows after scrolling past the hero section
- * - On homepage: Book button scrolls to contact section
- * - On other pages: Book button opens the booking modal
+ * Shows after scrolling past the hero section.
+ * Book button opens the booking modal on all pages.
  */
 
 // WhatsApp icon
@@ -88,10 +44,7 @@ const CalendarIcon = () => (
 
 export default function FloatingActions() {
   const [isVisible, setIsVisible] = useState(false);
-  const pathname = usePathname();
   const { openBookingModal } = useBookingModal();
-
-  const isHomePage = pathname === "/";
 
   useEffect(() => {
     // Check scroll position
@@ -116,40 +69,8 @@ export default function FloatingActions() {
   );
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-  // Only show after scroll
-  const shouldShow = isVisible;
-
-  // Track if action was already triggered to prevent double-firing
-  const actionTriggeredRef = useRef(false);
-
-  // Handle book button click
-  const handleBookClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Prevent double-firing from mousedown + click
-    if (actionTriggeredRef.current) {
-      actionTriggeredRef.current = false;
-      return;
-    }
-    actionTriggeredRef.current = true;
-
-    // Reset after a short delay
-    setTimeout(() => {
-      actionTriggeredRef.current = false;
-    }, 300);
-
-    if (isHomePage) {
-      // Smooth scroll to contact section with offset (bypassing Lenis)
-      scrollToElementBypassingLenis("contact", 100);
-    } else {
-      // Open booking modal on other pages
-      openBookingModal();
-    }
-  };
-
-  // Don't render if not visible (cleaner than pointer-events-none during transitions)
-  if (!shouldShow) {
+  // Don't render if not visible
+  if (!isVisible) {
     return null;
   }
 
@@ -169,11 +90,9 @@ export default function FloatingActions() {
       {/* Book Appointment Button - Right side */}
       <button
         type="button"
-        onClick={handleBookClick}
-        onMouseDown={handleBookClick}
+        onClick={() => openBookingModal()}
         className="floating-book-btn cursor-pointer"
         aria-label="Book an appointment"
-        style={{ touchAction: 'manipulation' }}
       >
         <CalendarIcon />
         <span className="hidden sm:inline">Book Now</span>

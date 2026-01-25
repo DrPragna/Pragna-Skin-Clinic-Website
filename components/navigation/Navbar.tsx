@@ -6,42 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { navigationData } from '@/lib/navigationData';
 import { useBookingModal } from '@/components/ui/BookingModal';
-import Lenis from 'lenis';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// Declare lenis on window for TypeScript
-declare global {
-  interface Window {
-    lenis?: Lenis;
-  }
-}
-
-/**
- * Helper function to scroll to an element while bypassing Lenis conflicts.
- */
-const scrollToElementBypassingLenis = (elementId: string, offset: number = 100) => {
-  const targetElement = document.getElementById(elementId);
-  if (!targetElement) return;
-
-  const targetRect = targetElement.getBoundingClientRect();
-  const lenis = window.lenis;
-
-  if (lenis) {
-    lenis.stop();
-    document.documentElement.classList.remove('lenis-stopped');
-  }
-
-  const absoluteTop = window.scrollY + targetRect.top - offset;
-
-  window.scrollTo({
-    top: absoluteTop,
-    behavior: 'smooth'
-  });
-
-  if (lenis) {
-    setTimeout(() => lenis.start(), 1200);
-  }
-};
 
 // Icons
 const ChevronDown = ({ className }: { className?: string }) => (
@@ -510,35 +475,21 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            {isHomepage ? (
-              <button 
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  scrollToElementBypassingLenis('contact', 100);
-                }}
-                className={`text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 cursor-pointer ${
-                  useTransparentStyle 
-                    ? 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/40 hover:border-white/80 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]' 
-                    : 'bg-maroon text-cream hover:bg-maroon-light hover:shadow-soft-lg'
-                }`}
-              >
-                Book Appointment
-              </button>
-            ) : (
-              <button 
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  openBookingModal();
-                }}
-                className="text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 bg-maroon text-cream hover:bg-maroon-light hover:shadow-soft-lg cursor-pointer"
-              >
-                Book Appointment
-              </button>
-            )}
+            <button 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openBookingModal();
+              }}
+              className={`text-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 cursor-pointer ${
+                useTransparentStyle 
+                  ? 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/40 hover:border-white/80 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]' 
+                  : 'bg-maroon text-cream hover:bg-maroon-light hover:shadow-soft-lg'
+              }`}
+            >
+              Book Appointment
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -869,11 +820,7 @@ export default function Navbar() {
                     e.preventDefault();
                     e.stopPropagation();
                     setIsMobileMenuOpen(false);
-                    if (isHomepage) {
-                      scrollToElementBypassingLenis('contact', 100);
-                    } else {
-                      openBookingModal();
-                    }
+                    openBookingModal();
                   }}
                   className="w-full py-5 rounded-full bg-maroon text-cream font-medium text-lg shadow-lg hover:bg-maroon-light transition-all active:scale-95"
                 >

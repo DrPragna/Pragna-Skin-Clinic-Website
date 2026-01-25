@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /**
@@ -40,10 +40,125 @@ const COUNTRY_CODES = [
 
 // Branch options
 const BRANCHES = [
-  { value: "", label: "Select Branch" },
   { value: "punjagutta", label: "Punjagutta" },
   { value: "kokapet", label: "Kokapet" },
 ];
+
+// Checkmark Icon
+const CheckIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+// Custom Select Component
+interface SelectOption {
+  value: string;
+  label: string;
+  icon?: string;
+}
+
+interface CustomSelectProps {
+  options: SelectOption[];
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  className?: string;
+  icon?: ReactNode;
+}
+
+function CustomSelect({ options, value, onChange, placeholder, className = "", icon }: CustomSelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectedOption = options.find(opt => opt.value === value);
+
+  // Close on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.custom-select-container')) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isOpen]);
+
+  return (
+    <div className={`relative custom-select-container ${className}`}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={`w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-left flex items-center justify-between transition-all duration-300 focus:outline-none focus:border-maroon focus:ring-2 focus:ring-maroon/20 shadow-sm ${
+          value ? "text-charcoal" : "text-charcoal/40"
+        }`}
+      >
+        <span className="flex items-center gap-2 truncate">
+          {selectedOption ? (
+            <>
+              {selectedOption.icon && <span>{selectedOption.icon}</span>}
+              {selectedOption.label}
+            </>
+          ) : (
+            placeholder
+          )}
+        </span>
+        <div className={`text-charcoal/40 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+          {icon || (
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          )}
+        </div>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-charcoal/5 overflow-hidden z-50 max-h-60 overflow-y-auto"
+          >
+            {options.map((option) => {
+              const isSelected = option.value === value;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => {
+                    onChange(option.value);
+                    setIsOpen(false);
+                  }}
+                  className={`w-full px-4 py-3 text-left hover:bg-maroon/5 transition-colors flex items-center justify-between group ${
+                    isSelected ? 'bg-maroon/5 text-maroon font-medium' : 'text-charcoal'
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    {option.icon && <span>{option.icon}</span>}
+                    {option.label}
+                  </span>
+                  {isSelected && <CheckIcon className="w-4 h-4 text-maroon" />}
+                </button>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function BookingModal({
   isOpen,
@@ -334,24 +449,21 @@ export default function BookingModal({
 
                     {/* Phone with Country Code */}
                     <div className="flex gap-2">
-                      <div className="relative w-28 shrink-0">
-                        <select
-                          name="countryCode"
+                      <div className="w-28 shrink-0">
+                        <CustomSelect
+                          options={COUNTRY_CODES.map(c => ({ 
+                            value: c.code, 
+                            label: c.code, 
+                            icon: c.flag 
+                          }))}
                           value={formData.countryCode}
-                          onChange={handleChange}
-                          className="w-full bg-white border border-charcoal/15 rounded-xl px-3 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm"
-                        >
-                          {COUNTRY_CODES.map((country) => (
-                            <option key={country.code} value={country.code}>
-                              {country.flag} {country.code}
-                            </option>
-                          ))}
-                        </select>
-                        <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-charcoal/40">
-                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </div>
+                          onChange={(value) => setFormData(prev => ({ ...prev, countryCode: value }))}
+                          icon={
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          }
+                        />
                       </div>
                       <input
                         type="tel"
@@ -365,27 +477,12 @@ export default function BookingModal({
                     </div>
 
                     {/* Branch Selection */}
-                    <div className="relative">
-                      <select
-                        name="branch"
-                        value={formData.branch}
-                        onChange={handleChange}
-                        required
-                        className={`w-full bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm ${formData.branch ? "text-charcoal" : "text-charcoal/40"
-                          }`}
-                      >
-                        {BRANCHES.map((branch) => (
-                          <option key={branch.value} value={branch.value} className="text-charcoal">
-                            {branch.label}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-charcoal/40">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
+                    <CustomSelect
+                      options={BRANCHES}
+                      value={formData.branch}
+                      onChange={(value) => setFormData(prev => ({ ...prev, branch: value }))}
+                      placeholder="Select Branch"
+                    />
 
                     {/* Concerns */}
                     <textarea
