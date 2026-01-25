@@ -588,22 +588,25 @@ export default function Navbar() {
               variants={menuContainerVariants}
               className="fixed inset-0 bg-beige-warm z-40 lg:hidden overflow-y-auto overflow-x-hidden will-change-transform"
             >
-              <div className="min-h-screen flex flex-col pt-24 px-6 pb-12 scrollbar-hide">
+              {/* Close Button Header */}
+              <div className="relative z-50 section-container">
+                <div className="flex items-center justify-end h-20">
+                  <button 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-4 text-charcoal hover:text-maroon transition-colors"
+                    aria-label="Close menu"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div className="min-h-[calc(100vh-5rem)] flex flex-col px-6 pb-12 scrollbar-hide">
               
               {/* Menu Items Container */}
-              <div className="flex-1 space-y-0 divide-y divide-maroon/10 border-t border-maroon/10 relative mt-12">
-
-                {/* Close Button - Internal */}
-                <button 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="absolute -top-20 right-0 p-4 text-charcoal/40 hover:text-maroon transition-colors"
-                  aria-label="Close menu"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
+              <div className="flex-1 space-y-0 divide-y divide-maroon/10 border-t border-maroon/10 relative mt-4">
                 
                 {/* 1. HOME */}
                 <motion.div variants={menuItemVariants} className="group">
