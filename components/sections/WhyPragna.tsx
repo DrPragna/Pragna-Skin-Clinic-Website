@@ -180,7 +180,7 @@ function PillarCard({
       {/* Card - Desktop uses hover:, Mobile uses isActive state */}
       <div className={`relative h-full p-8 lg:p-14 bg-white/95 rounded-2xl lg:rounded-[2rem] border border-stone-200/50 lg:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden
         ${!isTouchDevice ? 'hover:-translate-y-2 hover:bg-white hover:shadow-[0_20px_40px_rgba(183,110,121,0.15)] hover:border-rose-gold/40' : ''}
-        ${isActive ? '-translate-y-1 bg-white border-rose-gold/60 shadow-[0_0_30px_rgba(183,110,121,0.12)]' : ''}
+        ${isActive ? '-translate-y-1 bg-white border-maroon/60 shadow-[0_24px_48px_rgba(0,0,0,0.08)]' : ''}
         group-hover:after:opacity-100 after:opacity-0 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none
         ${isActive ? 'after:opacity-100' : ''}`}
       >
