@@ -78,12 +78,12 @@ export default function WhyPragna() {
 
       <div className="section-container max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-10 lg:mb-16">
+        <div className="text-center mb-12 lg:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-maroon/80 font-medium tracking-[0.2em] uppercase text-xs block mb-4 lg:mb-6"
+            className="text-maroon/80 font-medium tracking-[0.2em] uppercase text-xs block mb-6"
           >
             The Pragna Promise
           </motion.span>
@@ -92,16 +92,16 @@ export default function WhyPragna() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl lg:text-7xl font-display text-charcoal tracking-tight"
+            className="text-5xl lg:text-7xl font-display text-charcoal tracking-tight"
           >
             Why patients <span className="italic text-maroon font-serif">trust us</span>
           </motion.h2>
         </div>
 
-        {/* Glass Prism Grid - Adaptive Layout */}
+        {/* Glass Prism Grid - Horizontal scroll on mobile, grid on desktop */}
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-4 pt-4 pb-2 -mx-6 px-6 scrollbar-hide lg:grid lg:grid-cols-3 lg:gap-10 lg:pb-0 lg:mx-0 lg:px-0 lg:pt-0"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 pt-2 pb-2 -mx-6 px-6 scrollbar-hide lg:grid lg:grid-cols-3 lg:gap-10 lg:pt-0 lg:pb-0 lg:mx-0 lg:px-0 lg:overflow-visible"
         >
           {pillars.map((pillar, index) => (
             <PillarCard
@@ -112,7 +112,7 @@ export default function WhyPragna() {
               containerRef={scrollContainerRef}
             />
           ))}
-          {/* Trailing spacer - fixes CSS bug where right padding collapses in overflow-x containers */}
+          {/* Trailing spacer for mobile carousel */}
           <div className="min-w-[10vw] shrink-0 lg:hidden" aria-hidden="true" />
         </div>
       </div>
@@ -143,7 +143,7 @@ function PillarCard({
     checkTouch();
   }, []);
 
-  // Horizontal Scroll Tracking for Focus Effect
+  // Horizontal Scroll Tracking for Focus Effect (mobile only)
   const { scrollXProgress } = useScroll({
     container: containerRef,
     target: cardRef,
@@ -151,18 +151,18 @@ function PillarCard({
     offset: ["center end", "center start"]
   });
 
-  // Calculate focus state based on position
+  // Calculate focus state based on position (mobile only)
   useMotionValueEvent(scrollXProgress, "change", (latest) => {
     if (!isTouchDevice) return;
     const isCenter = latest > 0.35 && latest < 0.65;
     setIsFocused(isCenter);
   });
   
-  // Cinematic Scale: Center card is 1.0 (natural), edges shrink slightly
+  // Cinematic Scale for mobile carousel
   const scale = useTransform(scrollXProgress, [0, 0.5, 1], [0.93, 1, 0.93]);
 
-  // Determine if we should show the "Active" state
-  const isActive = isTouchDevice ? isFocused : undefined;
+  // Mobile focus state
+  const isActive = isTouchDevice ? isFocused : false;
 
   return (
     <motion.div
@@ -177,33 +177,40 @@ function PillarCard({
       style={isTouchDevice ? { scale } : undefined}
       className="min-w-[75vw] snap-center lg:min-w-0 group relative"
     >
-      <div className={`relative h-full p-8 lg:p-14 rounded-2xl lg:rounded-[2rem] border transition-all duration-500 overflow-hidden lg:hover:-translate-y-2 lg:hover:bg-white lg:hover:shadow-[0_20px_40px_rgba(183,110,121,0.15)] lg:hover:border-rose-gold/40 group-hover:after:opacity-100 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none
-        ${isActive 
-          ? '-translate-y-2 bg-white shadow-[0_20px_60px_rgba(183,110,121,0.1)] border-rose-gold/40 after:opacity-100' 
-          : 'bg-white/95 border-stone-200/50 shadow-[0_8px_30px_rgba(0,0,0,0.08)] after:opacity-0'
-        }`}
+      {/* Card - Desktop uses hover:, Mobile uses isActive state */}
+      <div className={`relative h-full p-8 lg:p-14 bg-white/95 rounded-2xl lg:rounded-[2rem] border border-stone-200/50 lg:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden
+        ${!isTouchDevice ? 'hover:-translate-y-2 hover:bg-white hover:shadow-[0_20px_40px_rgba(183,110,121,0.15)] hover:border-rose-gold/40' : ''}
+        ${isActive ? '-translate-y-1 bg-white border-stone-300' : ''}
+        group-hover:after:opacity-100 after:opacity-0 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none
+        ${isActive ? 'after:opacity-100' : ''}`}
       >
         
         {/* Decorative Number Layered Behind */}
-        <span className={`absolute top-4 left-6 lg:top-6 lg:left-8 text-[6rem] lg:text-[10rem] leading-none font-display select-none pointer-events-none transition-colors duration-500 lg:group-hover:text-maroon/[0.08]
-          ${isActive ? 'text-maroon/[0.08]' : 'text-stone-200/80'}`}
+        <span className={`absolute top-4 left-6 lg:top-6 lg:left-8 text-[6rem] lg:text-[10rem] leading-none font-display text-stone-200/80 select-none pointer-events-none transition-colors duration-500
+          ${!isTouchDevice ? 'group-hover:text-maroon/[0.08]' : ''}
+          ${isActive ? 'text-maroon/[0.08]' : ''}`}
         >
           {pillar.number}
         </span>
 
-        {/* Subtle Gradient Overlay on Hover (Desktop only) */}
-        <div className="hidden lg:block absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+        {/* Subtle Gradient Overlay on Hover */}
+        <div className={`absolute inset-0 bg-gradient-to-br from-white/40 to-transparent transition-opacity duration-700 pointer-events-none
+          ${!isTouchDevice ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'}
+          ${isActive ? 'opacity-100' : ''}`} 
+        />
         
         {/* Content */}
         <div className="relative z-10 flex flex-col h-full min-h-[240px] lg:min-h-[280px]">
-          {/* Icon/Accent Line - Extending on Hover */}
-          <div className={`mb-auto h-[2px] bg-gradient-to-r transition-all duration-500 lg:group-hover:from-maroon lg:group-hover:w-24
-            ${isActive ? 'w-24 from-maroon' : 'w-12 from-maroon/40'}`} 
+          {/* Icon/Accent Line */}
+          <div className={`mb-auto h-[2px] bg-gradient-to-r from-maroon/40 to-transparent transition-all duration-500
+            ${!isTouchDevice ? 'w-12 group-hover:from-maroon group-hover:w-24' : ''}
+            ${isActive ? 'w-24 from-maroon' : 'w-12'}`} 
           />
 
           {/* Title */}
-          <h3 className={`text-2xl lg:text-3xl xl:text-4xl font-display mb-4 lg:mb-6 leading-[1.1] lg:group-hover:text-maroon transition-colors duration-500 mt-auto
-            ${isActive ? 'text-maroon' : 'text-charcoal'}`}
+          <h3 className={`text-2xl lg:text-3xl xl:text-4xl font-display text-charcoal mb-4 lg:mb-6 leading-[1.1] transition-colors duration-500 mt-auto
+            ${!isTouchDevice ? 'group-hover:text-maroon' : ''}
+            ${isActive ? 'text-maroon' : ''}`}
           >
             {pillar.title}
           </h3>
