@@ -146,8 +146,7 @@ function PillarCard({
     container: containerRef,
     target: cardRef,
     axis: "x",
-    offset: ["center end", "center start"],
-    layoutEffect: false
+    offset: ["center end", "center start"]
   });
 
   // Calculate focus state based on position
