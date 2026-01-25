@@ -217,12 +217,12 @@ export default function Doctors() {
                   <h3 className="text-4xl font-display leading-[0.9] mb-2 text-white/90">
                     {doctor.shortName}
                   </h3>
-                  <p className="text-white/70 text-sm font-light tracking-wide mb-6">
+                  <p className="text-white/70 text-sm font-light tracking-wide mb-4">
                     {doctor.role}
                   </p>
                   
                   {/* Subtle "Read More" Indicator */}
-                  <div className="flex items-center gap-2 text-rose-gold/90 text-xs uppercase tracking-widest font-medium animate-pulse">
+                  <div className="flex items-center gap-2 text-white text-[10px] uppercase tracking-widest font-bold animate-pulse">
                     <span>Tap to read profile</span>
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
