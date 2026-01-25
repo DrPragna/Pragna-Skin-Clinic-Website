@@ -127,7 +127,7 @@ function PillarCard({
   pillar: any; 
   index: number; 
   isInView: boolean;
-  containerRef: RefObject<HTMLDivElement>;
+  containerRef: RefObject<HTMLDivElement | null>;
 }) {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [isFocused, setIsFocused] = useState(false);

@@ -78,7 +78,7 @@ function ProgramCard({
   program: any; 
   index: number; 
   isInView: boolean;
-  containerRef: RefObject<HTMLDivElement>;
+  containerRef: RefObject<HTMLDivElement | null>;
 }) {
   const [imageError, setImageError] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
