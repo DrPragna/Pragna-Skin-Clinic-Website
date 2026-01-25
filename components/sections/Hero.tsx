@@ -248,26 +248,36 @@ export default function Hero() {
       
       {/* Trust Strip - Fixed at bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-20 bg-black/50 backdrop-blur-md border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-3 md:py-5">
-          <div className="flex flex-wrap justify-between md:justify-between items-center gap-4 text-white text-[10px] md:text-sm tracking-widest uppercase font-sans">
+        <div className="max-w-7xl mx-auto px-4 py-3 md:py-4">
+          <div className="grid grid-cols-[auto_auto] justify-between gap-y-3 gap-x-4 lg:flex lg:justify-between lg:w-full items-center text-white text-[10px] md:text-xs lg:text-sm tracking-wider uppercase font-sans">
+            {/* Item 1 */}
             <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-gold" />
-              US-FDA Approved
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-gold shrink-0" />
+              <span className="whitespace-nowrap">US-FDA Approved</span>
             </span>
-            <span className="hidden md:block text-white/30">|</span>
-            <span className="hidden md:flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-rose-gold" />
-              1,00,000+ Successful Treatments
-            </span>
-            <span className="hidden md:block text-white/30">|</span>
-            <span className="hidden md:flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-rose-gold" />
-              30k+ Happy Patients
-            </span>
-            <span className="hidden md:block text-white/30">|</span>
+
+            <span className="hidden lg:block text-white/30">|</span>
+
+            {/* Item 2 */}
             <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-gold" />
-              25+ Years Excellence
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-gold shrink-0" />
+              <span className="whitespace-nowrap">25+ Years Excellence</span>
+            </span>
+
+            <span className="hidden lg:block text-white/30">|</span>
+
+            {/* Item 3 */}
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-gold shrink-0" />
+              <span className="whitespace-nowrap">100k+ Treatments</span>
+            </span>
+
+            <span className="hidden lg:block text-white/30">|</span>
+
+            {/* Item 4 */}
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-rose-gold shrink-0" />
+              <span className="whitespace-nowrap">30k+ Happy Patients</span>
             </span>
           </div>
         </div>
