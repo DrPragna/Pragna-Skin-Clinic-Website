@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect, RefObject } from 'react';
-import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 /**
  * WHY PRAGNA - Glass Prism Redesign
@@ -153,12 +153,27 @@ function PillarCard({
     offset: ["center end", "center start"]
   });
 
-  // Calculate focus state based on position (mobile only)
-  useMotionValueEvent(scrollXProgress, "change", (latest) => {
-    if (!isMobile) return;
-    const isCenter = latest > 0.35 && latest < 0.65;
-    setIsFocused(isCenter);
-  });
+  // 2. IntersectionObserver for Inner Content State
+  // This efficiently toggles the "Active" state for inner elements
+  // without the jank of per-frame state updates.
+  useEffect(() => {
+    if (!isMobile || !cardRef.current || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsFocused(entry.isIntersecting);
+        });
+      },
+      {
+        root: containerRef.current,
+        threshold: 0.6, // Card is considered "focused" when 60% visible
+      }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [isMobile, containerRef]);
   
   // Cinematic Scale for mobile carousel
   const scale = useTransform(scrollXProgress, [0, 0.5, 1], [0.93, 1, 0.93]);
