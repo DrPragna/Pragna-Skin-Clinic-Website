@@ -32,6 +32,7 @@ const doctors = [
     ],
     image: '/images/Dr Padmavathi.jpg',
     imageStyle: 'object-[center_15%]',
+    expandedImageStyle: 'object-[center_25%]',
     badge: '25+ Years Experience',
   },
   {
@@ -49,6 +50,7 @@ const doctors = [
     ],
     image: '/images/Dr Pragna.jpg',
     imageStyle: 'object-[center_12%]',
+    expandedImageStyle: 'object-[center_22%]',
     badge: 'Gold Medalist',
   },
 ];
@@ -287,7 +289,7 @@ export default function Doctors() {
                             src={doctor.image}
                             alt={doctor.name}
                             fill
-                            className={`object-cover ${doctor.imageStyle}`}
+                            className={`object-cover ${doctor.expandedImageStyle}`}
                             priority
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/30" />
