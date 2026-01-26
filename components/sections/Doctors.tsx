@@ -19,7 +19,7 @@ const doctors = [
   {
     id: 'padmavathi',
     name: 'Dr. Padmavathi Surapaneni',
-    shortName: 'Dr. Padmavathi',
+    shortName: 'Dr. Padmavathi Surapaneni',
     role: 'Senior Dermatologist & Founder',
     moniker: '25+ Years Experience',
     credentials: 'MBBS, DD',
@@ -31,14 +31,14 @@ const doctors = [
       'National Trainer for Injectables & Lasers'
     ],
     image: '/images/dr-padmavathi.webp',
-    imageStyle: 'object-[center_15%]',
+    imageStyle: 'object-[center_25%]',
     expandedObjectPosition: 'center 45%',
     badge: '25+ Years Experience',
   },
   {
     id: 'pragna',
     name: 'Dr. Pragna Surapaneni',
-    shortName: 'Dr. Pragna',
+    shortName: 'Dr. Pragna Surapaneni',
     role: 'Dermatologist',
     moniker: 'Gold Medalist',
     credentials: 'MBBS, MD, MRCP-SCE (UK)',
@@ -49,7 +49,7 @@ const doctors = [
       'MRCP-SCE (UK) Certified'
     ],
     image: '/images/dr-pragna.webp',
-    imageStyle: 'object-[center_12%]',
+    imageStyle: 'object-[center_20%]',
     expandedObjectPosition: 'center 42%',
     badge: 'Gold Medalist',
   },
@@ -202,21 +202,21 @@ export default function Doctors() {
                   src={doctor.image}
                   alt={doctor.name}
                   fill
-                  className={`object-cover ${doctor.imageStyle} transition-transform duration-[2s] ease-out scale-100 group-hover:scale-110`}
+                  className={`object-cover ${doctor.imageStyle} transition-transform duration-[2s] ease-out scale-100`}
                   sizes="(max-width: 768px) 100vw, 400px"
                   priority
                 />
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-maroon/90 via-maroon/20 to-transparent opacity-90" />
               </div>
 
               {/* Text Overlay (Collapsed) */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
+              <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
                 <div>
-                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-[10px] uppercase tracking-[0.2em] mb-4 font-medium text-white/90">
+                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-[10px] uppercase tracking-[0.2em] mb-3 font-medium text-white/90">
                     {doctor.moniker}
                   </span>
-                  <h3 className="text-4xl font-display leading-[0.9] mb-2 text-white/90">
+                  <h3 className="text-2xl lg:text-3xl font-display leading-tight mb-2 text-white/90">
                     {doctor.shortName}
                   </h3>
                   <p className="text-white/70 text-sm font-light tracking-wide mb-4">
@@ -275,9 +275,9 @@ export default function Doctors() {
                     {/* Close Button - Sticky/Fixed */}
                     <button 
                       onClick={(e) => { e.stopPropagation(); setSelectedDoctorId(null); }}
-                      className="fixed top-4 right-4 lg:top-6 lg:right-6 z-[10000] w-10 h-10 rounded-full bg-black/20 backdrop-blur-md text-white flex items-center justify-center border border-white/20 active:scale-95 transition-transform"
+                      className="fixed top-4 right-4 lg:top-6 lg:right-6 z-[10000] w-12 h-12 rounded-full bg-white/90 backdrop-blur-md text-maroon shadow-lg flex items-center justify-center border border-maroon/10 active:scale-95 transition-all hover:bg-white"
                     >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
@@ -350,7 +350,7 @@ export default function Doctors() {
                         </div>
 
                         {/* CTA */}
-                        <div className="pt-4 pb-20 lg:pb-8">
+                        <div className="pt-4 pb-20 lg:pb-8 flex flex-col gap-4">
                           <a 
                             href="#contact" 
                             onClick={(e) => { e.stopPropagation(); setSelectedDoctorId(null); }}
@@ -361,6 +361,14 @@ export default function Doctors() {
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                           </a>
+                          
+                          {/* New Go Back Button */}
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setSelectedDoctorId(null); }}
+                            className="w-full py-3 text-xs uppercase tracking-widest text-maroon/60 font-medium hover:text-maroon transition-colors"
+                          >
+                            Go Back
+                          </button>
                         </div>
                       </motion.div>
                     </div>
