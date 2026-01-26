@@ -37,7 +37,7 @@ const THEMES: Record<ThemeKey, {
     title: 'What Concerns You?',
     description: "Every concern deserves attention. Find yours below.",
     gradient: 'from-transparent to-transparent',
-    heroImage: '/images/clinic-reception.jpg',
+    heroImage: '/images/clinic-reception.webp',
     hex: '#3D2E2E'
   },
   'Skin': {
@@ -50,7 +50,7 @@ const THEMES: Record<ThemeKey, {
     title: 'Face & Skin',
     description: "From acne to ageing, restore your skin's natural health and radiance.",
     gradient: 'from-[#C28E79]/40 to-[#A66249]/20',
-    heroImage: '/images/areas-of-focus/Skin.jpg',
+    heroImage: '/images/areas-of-focus/skin.webp',
     hex: '#5C2E26'
   },
   'Hair': {
@@ -63,7 +63,7 @@ const THEMES: Record<ThemeKey, {
     title: 'Hair & Scalp',
     description: 'Science-backed solutions for restoration, growth, and scalp health.',
     gradient: 'from-[#CDAA5C]/40 to-[#A68A3D]/20',
-    heroImage: '/images/areas-of-focus/Hair.jpg',
+    heroImage: '/images/areas-of-focus/hair.webp',
     hex: '#5C4D22'
   },
   'Body': {
@@ -76,7 +76,7 @@ const THEMES: Record<ThemeKey, {
     title: 'Body & Shape',
     description: 'Sculpt, tone, and refine your silhouette with advanced non-surgical care.',
     gradient: 'from-[#9E8C6B]/40 to-[#736243]/20',
-    heroImage: '/images/areas-of-focus/Body.jpg',
+    heroImage: '/images/areas-of-focus/body.webp',
     hex: '#423D33'
   },
   'Others': {

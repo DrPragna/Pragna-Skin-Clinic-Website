@@ -30,7 +30,7 @@ const doctors = [
       'Speaker at IMCAS Paris & 5CC Barcelona',
       'National Trainer for Injectables & Lasers'
     ],
-    image: '/images/Dr Padmavathi.jpg',
+    image: '/images/dr-padmavathi.webp',
     imageStyle: 'object-[center_15%]',
     expandedImageStyle: 'object-[center_25%]',
     badge: '25+ Years Experience',
@@ -48,7 +48,7 @@ const doctors = [
       'State Ranker & Gold Medalist in Dermatology',
       'MRCP-SCE (UK) Certified'
     ],
-    image: '/images/Dr Pragna.jpg',
+    image: '/images/dr-pragna.webp',
     imageStyle: 'object-[center_12%]',
     expandedImageStyle: 'object-[center_22%]',
     badge: 'Gold Medalist',

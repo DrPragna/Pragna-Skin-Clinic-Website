@@ -46,7 +46,7 @@ export default function Footer() {
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/images/clinic-interior.jpg)' }}
+          style={{ backgroundImage: 'url(/images/clinic-interior.webp)' }}
         />
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/85" />

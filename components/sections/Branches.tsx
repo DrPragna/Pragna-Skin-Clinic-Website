@@ -20,7 +20,7 @@ const branches = [
     address: '22B, 6-3-347, 1/1,\nSai Baba Temple Rd,\nPunjagutta, Hyderabad - 500082',
     phone: '098483 67000',
     mapUrl: 'https://maps.app.goo.gl/GHW2EhGtHpeUrU228',
-    image: '/images/Punjagutta.jpg',
+    image: '/images/punjagutta.webp',
   },
   {
     id: 'kokapet',
@@ -28,7 +28,7 @@ const branches = [
     address: '3rd Floor, Above Vijetha Supermarket,\nGandipet Main Rd, Opp. Rajapushpa Regalia,\nNarsingi, Hyderabad - 500075',
     phone: '088864 21111',
     mapUrl: 'https://maps.app.goo.gl/RZjN7F1WbhMAo5eL9',
-    image: '/images/Kokapet.jpg',
+    image: '/images/kokapet.webp',
   },
 ];
 

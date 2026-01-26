@@ -92,7 +92,7 @@ export default function Hero() {
         {/* Poster image - exact first frame of video, shows until video plays */}
         {isLoaded && (
           <img
-            src={isMobile ? "/images/hero-mobile-poster.jpg" : "/images/hero-desktop-poster.jpg"}
+            src={isMobile ? "/images/hero-mobile-poster.webp" : "/images/hero-desktop-poster.webp"}
             alt=""
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
               isVideoPlaying ? "opacity-0 pointer-events-none" : "opacity-100"
