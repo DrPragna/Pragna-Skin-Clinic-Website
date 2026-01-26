@@ -131,16 +131,18 @@ function PillarCard({
   isInView: boolean;
   containerRef: RefObject<HTMLDivElement | null>;
 }) {
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isFocused, setIsFocused] = useState(index === 0);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Detect touch devices (mobile)
+  // Detect mobile view (matches lg:grid breakpoint)
   useEffect(() => {
-    const checkTouch = () => {
-      setIsTouchDevice(window.matchMedia('(hover: none)').matches);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
     };
-    checkTouch();
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Horizontal Scroll Tracking for Focus Effect (mobile only)
@@ -153,7 +155,7 @@ function PillarCard({
 
   // Calculate focus state based on position (mobile only)
   useMotionValueEvent(scrollXProgress, "change", (latest) => {
-    if (!isTouchDevice) return;
+    if (!isMobile) return;
     const isCenter = latest > 0.35 && latest < 0.65;
     setIsFocused(isCenter);
   });
@@ -162,7 +164,7 @@ function PillarCard({
   const scale = useTransform(scrollXProgress, [0, 0.5, 1], [0.93, 1, 0.93]);
 
   // Mobile focus state
-  const isActive = isTouchDevice ? isFocused : false;
+  const isActive = isMobile ? isFocused : false;
 
   return (
     <motion.div
@@ -174,13 +176,13 @@ function PillarCard({
         delay: 0.2 + (index * 0.15),
         ease: [0.22, 1, 0.36, 1]
       }}
-      style={isTouchDevice ? { scale } : undefined}
+      style={isMobile ? { scale } : undefined}
       className="min-w-[75vw] snap-center lg:min-w-0 group relative"
     >
       {/* Card - Desktop uses hover:, Mobile uses isActive state */}
       <div className={`relative h-full p-8 lg:p-14 bg-white/95 rounded-2xl lg:rounded-[2rem] border lg:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden
         ${isActive ? 'border-maroon/60' : 'border-stone-200/50'}
-        ${!isTouchDevice ? 'hover:-translate-y-2 hover:bg-white hover:shadow-[0_20px_40px_rgba(183,110,121,0.15)] hover:border-rose-gold/40' : ''}
+        ${!isMobile ? 'hover:-translate-y-2 hover:bg-white hover:shadow-[0_20px_40px_rgba(183,110,121,0.15)] hover:border-rose-gold/40' : ''}
         ${isActive ? '-translate-y-1 bg-white shadow-[0_20px_40px_rgba(183,110,121,0.15)]' : ''}
         group-hover:after:opacity-100 after:opacity-0 after:absolute after:inset-0 after:bg-gradient-to-tr after:from-rose-gold/5 after:via-white/40 after:to-transparent after:transition-opacity after:duration-500 after:pointer-events-none
         ${isActive ? 'after:opacity-100' : ''}`}
@@ -188,7 +190,7 @@ function PillarCard({
         
         {/* Decorative Number Layered Behind */}
         <span className={`absolute top-4 left-6 lg:top-6 lg:left-8 text-[6rem] lg:text-[10rem] leading-none font-display text-stone-200/80 select-none pointer-events-none transition-colors duration-500
-          ${!isTouchDevice ? 'group-hover:text-maroon/[0.08]' : ''}
+          ${!isMobile ? 'group-hover:text-maroon/[0.08]' : ''}
           ${isActive ? 'text-maroon/[0.08]' : ''}`}
         >
           {pillar.number}
@@ -196,7 +198,7 @@ function PillarCard({
 
         {/* Subtle Gradient Overlay on Hover */}
         <div className={`absolute inset-0 bg-gradient-to-br from-white/40 to-transparent transition-opacity duration-700 pointer-events-none
-          ${!isTouchDevice ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'}
+          ${!isMobile ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'}
           ${isActive ? 'opacity-100' : ''}`} 
         />
         
@@ -204,13 +206,13 @@ function PillarCard({
         <div className="relative z-10 flex flex-col h-full min-h-[240px] lg:min-h-[280px]">
           {/* Icon/Accent Line */}
           <div className={`mb-auto h-[2px] bg-gradient-to-r from-maroon/40 to-transparent transition-all duration-500
-            ${!isTouchDevice ? 'w-12 group-hover:from-maroon group-hover:w-24' : ''}
+            ${!isMobile ? 'w-12 group-hover:from-maroon group-hover:w-24' : ''}
             ${isActive ? 'w-24 from-maroon' : 'w-12'}`} 
           />
 
           {/* Title */}
           <h3 className={`text-2xl lg:text-3xl xl:text-4xl font-display text-charcoal mb-4 lg:mb-6 leading-[1.1] transition-colors duration-500 mt-auto
-            ${!isTouchDevice ? 'group-hover:text-maroon' : ''}
+            ${!isMobile ? 'group-hover:text-maroon' : ''}
             ${isActive ? 'text-maroon' : ''}`}
           >
             {pillar.title}
