@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import { SignatureProgram } from "@/lib/content/signature-programs";
 import BookingModal from "@/components/ui/BookingModal";
 
@@ -95,13 +96,16 @@ function HeroSection({
         transition={{ duration: 1, ease: smoothEase }}
         className="lg:w-1/2 h-[50vh] lg:h-auto lg:min-h-screen relative bg-charcoal overflow-hidden"
       >
-        {program.heroImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={program.heroImage}
+        {program.image ? (
+          <Image
+            src={program.image}
             alt={program.title}
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            fill
+            priority
+            placeholder="blur"
+            className="object-cover"
             style={{ objectPosition: "center 20%" }}
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
         ) : (
           <div

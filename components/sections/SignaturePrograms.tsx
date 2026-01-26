@@ -142,6 +142,8 @@ function ProgramCard({
                 src={program.image}
                 alt={program.title}
                 fill
+                priority={index < 2}
+                placeholder="blur"
                 onError={() => setImageError(true)}
                 className={`object-cover transition-opacity duration-[1.5s] ease-out ${showHoverState ? 'opacity-100' : 'opacity-90 group-hover:opacity-100'}`}
                 style={{ objectPosition: program.imagePosition || 'center center' }}

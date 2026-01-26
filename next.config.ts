@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
         hostname: 'images.unsplash.com',
       },
     ],
-    // Disable caching for development - images update immediately
-    minimumCacheTTL: 0,
+    // Cache optimized images for 1 hour in production, disable in dev for immediate updates
+    minimumCacheTTL: process.env.NODE_ENV === 'development' ? 0 : 3600,
   },
 };
 

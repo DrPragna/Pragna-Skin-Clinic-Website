@@ -1,12 +1,20 @@
+import { StaticImageData } from 'next/image';
+
+// Static imports for automatic blur placeholder generation
+import glowGettersImg from '@/public/images/signature/glow-getters.webp';
+import mommyMakeoverImg from '@/public/images/signature/mommy-makeover.webp';
+import bridalBeautyImg from '@/public/images/signature/bridal-beauty.webp';
+import rewindImg from '@/public/images/signature/rewind.webp';
+import signatureResetImg from '@/public/images/signature/signature-reset.webp';
+
 export interface SignatureProgram {
   slug: string;
   title: string;
   subtitle: string;
   description: string;
   duration: string;
-  image: string; // Path to image
+  image: StaticImageData; // Static import for blur placeholder
   imagePosition?: string; // CSS object-position value for fine-tuning (e.g., 'center top', 'center 30%')
-  heroImage: string;
   gradient: string; // Tailwind gradient classes for fallback
   longDescription: string;
   benefits: string[];
@@ -33,8 +41,7 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Radiance Revival',
     description: 'A personalised glow journey combining facials, peels and boosters to revive tired, uneven, event-ready skin.',
     duration: '4-6 sessions',
-    image: '/images/signature/Glow Getters.jpg',
-    heroImage: '/images/signature/Glow Getters.jpg',
+    image: glowGettersImg,
     gradient: 'from-[#6B5B4F] via-[#524539] to-[#3A302A]',
     longDescription: 'Glow Getters is your structured radiance reset when everyday skincare is no longer enough. Across a few focused sessions, we combine deep cleansing, gentle exfoliation, hydrating medifacials, laser toning and skin boosters to smooth texture, brighten tone and leave your face naturally lit-from-within, not overdone.',
     benefits: [
@@ -95,8 +102,7 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Post-Pregnancy Care',
     description: 'A gentle, structured reset for post-pregnancy body, skin and hair, paced kindly around real motherhood.',
     duration: '6-8 sessions',
-    image: '/images/signature/Mommy Makeover.jpg',
-    heroImage: '/images/signature/Mommy Makeover.jpg',
+    image: mommyMakeoverImg,
     gradient: 'from-[#7A5850] via-[#62413C] to-[#3E2B29]',
     longDescription: 'Motherhood changes your body, skin and energy in ways that diet or facials alone cannot address. The Mommy Makeover brings together body contouring, stretch mark care, C-section scar support, hair recovery and glow facials, sequenced thoughtfully so you feel looked after, not rushed.',
     benefits: [
@@ -157,9 +163,8 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Pre-Wedding Glow',
     description: 'A layered pre-wedding journey that clears, brightens and refines skin, hair and body gently.',
     duration: '3-6 months',
-    image: '/images/signature/Bridal Beauty.jpg',
+    image: bridalBeautyImg,
     imagePosition: 'center top', // Position at top to move subject down significantly
-    heroImage: '/images/signature/Bridal Beauty.jpg',
     gradient: 'from-[#7A5A4A] via-[#5E4639] to-[#3B2C24]',
     longDescription: "Bridal Beauty is designed to take you from tired and tanned to calm, polished and photo-ready without crash treatments. Over a few months, we combine acne or pigmentation care, glow facials, skin boosters, hair support and body shaping in a sequence that respects your calendar, outfits and rituals.",
     benefits: [
@@ -220,8 +225,7 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Anti-Aging',
     description: 'A focused anti-aging journey to soften lines, firm contours and refresh tired, overworked skin gently.',
     duration: '4-8 sessions',
-    image: '/images/signature/rewind.jpg',
-    heroImage: '/images/signature/rewind.jpg',
+    image: rewindImg,
     gradient: 'from-[#6C5A55] via-[#51403B] to-[#362827]',
     longDescription: 'Rewind is for when your face looks more tired than you feel. We combine skin-tightening devices, injectables where appropriate, medifacials, boosters and home routines to address lines, laxity and dullness together. The goal is subtle, believable change that makes colleagues ask if you rested, not what procedure you did.',
     benefits: [
@@ -282,8 +286,7 @@ export const signaturePrograms: SignatureProgram[] = [
     subtitle: 'Complete Revival',
     description: 'A complete inside-out reset combining wellness drips, skin, hair and body care for recovery seasons.',
     duration: '3-5 sessions',
-    image: '/images/signature/Signature Reset.jpg',
-    heroImage: '/images/signature/Signature Reset.jpg',
+    image: signatureResetImg,
     gradient: 'from-[#5F554F] via-[#463A34] to-[#2F2521]',
     longDescription: 'Signature Reset is for phases when life has felt heavy—long work stretches, illness, stress or big changes. We blend IV drips, medifacials, body contouring, hair support and simple nutrition guidance to gently recharge you. The focus is sustainable recovery, not dramatic overnight transformation or impossible, short-term goals.',
     benefits: [
@@ -343,4 +346,3 @@ export const signaturePrograms: SignatureProgram[] = [
 export function getSignatureProgram(slug: string) {
   return signaturePrograms.find((p) => p.slug === slug);
 }
-
