@@ -101,6 +101,9 @@ html.lenis, html.lenis body {
     text-rendering: optimizeLegibility;
     /* Prevent horizontal scroll on Android - must be on html AND body */
     overflow-x: hidden;
+    /* Prevent Android text auto-resizing at 100% zoom */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   
   body {
