@@ -15,6 +15,12 @@ const ChevronDown = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const ChevronRight = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+);
+
 const ArrowRight = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -26,6 +32,14 @@ const StarIcon = ({ className }: { className?: string }) => (
     <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
   </svg>
 );
+
+const PlusMinusIcon = ({ isOpen, className = '' }: { isOpen: boolean; className?: string }) => (
+  <div className={`relative w-5 h-5 ${className}`}>
+    <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-current transform -translate-y-1/2 transition-all duration-300 ease-out" />
+    <span className={`absolute top-0 left-1/2 w-[1.5px] h-full bg-current transform -translate-x-1/2 transition-all duration-300 ease-out ${isOpen ? 'scale-y-0 opacity-0' : 'scale-y-100 opacity-100'}`} />
+  </div>
+);
+
 
 const StylizedText = ({ text, className = '', ampersandClassName = 'text-maroon' }: { text: string; className?: string; ampersandClassName?: string }) => {
   const parts = text.split('&');
@@ -45,7 +59,7 @@ const StylizedText = ({ text, className = '', ampersandClassName = 'text-maroon'
   );
 };
 
-// Animation Variants - Elegant, weighted slide from right
+// Animation Variants
 const menuContainerVariants = {
   hidden: { 
     x: '100%',
@@ -53,8 +67,8 @@ const menuContainerVariants = {
   visible: {
     x: '0%',
     transition: {
-      duration: 0.8, // Increased from 0.5s for more elegance
-      ease: [0.16, 1, 0.3, 1], // "Expo" ease - fast start, very slow silky finish
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
   exit: {
@@ -66,7 +80,6 @@ const menuContainerVariants = {
   },
 } as const;
 
-// No animations for menu items - they're static
 const menuItemVariants = {
   hidden: {},
   visible: {},
@@ -515,142 +528,316 @@ export default function Navbar() {
 
       {/* 
         =============================================
-        MOBILE MENU - FULL SCREEN EDITORIAL TAKEOVER
+        MOBILE MENU - CINEMATIC FOCUS EXPERIENCE
         =============================================
       */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop overlay - fades in independently */}
+            {/* Backdrop overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="fixed inset-0 bg-charcoal/20 z-[35] lg:hidden"
+              className="fixed inset-0 bg-black/20 z-[35] lg:hidden backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             
-            {/* Sliding menu panel - curtain from right */}
+            {/* Main Menu Container */}
             <motion.div
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={menuContainerVariants}
-              className="fixed inset-0 bg-beige-warm z-40 lg:hidden overflow-y-auto overflow-x-hidden will-change-transform"
+              initial={{ x: '100%' }}
+              animate={{ x: '0%' }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed inset-0 bg-cream z-40 lg:hidden overflow-hidden flex flex-col"
             >
-              {/* Close Button Header */}
-              <div className="relative z-50 section-container">
-                <div className="flex items-center justify-end h-20">
-                  <button 
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="group relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90"
-                    aria-label="Close menu"
-                  >
-                    {/* Background Layer - Solid on press */}
-                    <div className="absolute inset-0 bg-maroon/5 rounded-full transition-colors duration-300 group-active:bg-maroon" />
-                    
-                    {/* Icon - Light on press */}
-                    <svg className="relative w-6 h-6 text-maroon transition-colors duration-300 group-active:text-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
+              {/* Cinematic Background */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <Image
+                  src="/mobile-menu.webp"
+                  alt="Menu Background"
+                  fill
+                  className="object-cover object-[center_60%] opacity-100"
+                  priority
+                />
+                {/* Editorial Gradient Overlay - Ensures text legibility while keeping mood */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#FDFBF9]/95 via-[#FDFBF9]/85 to-[#FDFBF9]/95 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#FDFBF9]/90 to-transparent" />
               </div>
 
-              <div className="min-h-[calc(100vh-5rem)] flex flex-col px-6 pb-12 scrollbar-hide">
-              
-              {/* Menu Items Container */}
-              <div className="flex-1 space-y-0 divide-y divide-maroon/10 border-t border-maroon/10 relative mt-4">
+              {/* Content Layer */}
+              <div className="relative z-10 flex flex-col h-full">
                 
-                {/* 1. HOME */}
-                <motion.div variants={menuItemVariants} className="group">
-                  <Link 
-                    href="/" 
-                    onClick={() => setIsMobileMenuOpen(false)} 
-                    className="block py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors"
-                  >
-                    Home
-                  </Link>
-                </motion.div>
-
-                {/* 2. TREATMENTS (Accordion) */}
-                <motion.div variants={menuItemVariants} className="group">
-                  <button 
-                    onClick={() => toggleMobileDropdown('treatments')}
-                    className="flex items-center justify-between w-full py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors text-left"
-                  >
-                    Treatments
-                    <span className={`transform transition-transform duration-300 ${activeMobileDropdown === 'treatments' ? 'rotate-180' : 'rotate-0'}`}>
-                      <ChevronDown className="w-5 h-5 text-maroon/40 group-hover:text-maroon" />
-                    </span>
-                  </button>
-                  
-                  <AnimatePresence>
-                    {activeMobileDropdown === 'treatments' && (
+                {/* Focus View Container */}
+                <div className="flex-1 relative overflow-hidden">
+                  <AnimatePresence mode="wait" initial={false}>
+                    {activeMobileDropdown === null ? (
+                      /* MAIN MENU VIEW */
                       <motion.div
-                        initial={{ height: 0 }}
-                        animate={{ 
-                          height: 'auto',
-                          transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] }
-                        }}
-                        exit={{ 
-                          height: 0,
-                          transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] }
-                        }}
-                        className="overflow-hidden"
+                        key="main-menu"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute inset-0 flex flex-col"
                       >
-                        <div className="pb-8 space-y-6">
-                          <Link href="/treatments" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors mb-4">
-                            View All Treatments <ArrowRight className="w-4 h-4" />
+                        {/* Header: Branding & Close (Moved inside Main Menu) */}
+                        <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-maroon/20 shrink-0 bg-gradient-to-b from-[#FDFBF9]/95 to-transparent">
+                          <div className="flex flex-col">
+                            <span className="font-display text-3xl text-maroon tracking-wide">Pragna</span>
+                            <span className="font-sans text-[0.6rem] text-maroon/60 uppercase tracking-[0.25em] font-medium mt-0.5">Advanced Skin Clinic</span>
+                          </div>
+
+                          <button 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="group relative w-12 h-12 flex items-center justify-center transition-all duration-300 active:scale-90"
+                            aria-label="Close menu"
+                          >
+                            <span className="absolute inset-0 bg-maroon/0 rounded-full transition-colors duration-300 group-active:bg-maroon/5" />
+                            <svg className="w-8 h-8 text-maroon/80 transition-colors duration-300 group-active:text-maroon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                        </div>
+
+                        <div className="flex-1 px-8 flex flex-col justify-center pb-20 pt-4">
+                          <nav className="space-y-6">
+                          <Link 
+                            href="/" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="block text-5xl md:text-6xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 transform origin-left hover:scale-[1.02]"
+                          >
+                            Home
                           </Link>
-                          {navigationData.treatments.map((pillar) => (
-                            <div key={pillar.pillar} className="space-y-3">
-                              <h3 className="font-sans text-xs text-maroon/60 font-bold uppercase tracking-widest pl-1">{pillar.pillar}</h3>
-                              <div className="space-y-1 divide-y divide-maroon/5 border-t border-b border-maroon/5">
-                                {pillar.categories.map((category) => (
-                                  <div key={category.category} className="overflow-hidden">
-                                    {/* Category Toggle */}
+                          
+                          <button 
+                            onClick={() => setActiveMobileDropdown('treatments')}
+                            className="flex items-center justify-between w-full text-5xl md:text-6xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 text-left group"
+                          >
+                            <span>Treatments</span>
+                            <ChevronRight className="w-8 h-8 text-maroon/30 group-hover:text-maroon group-hover:translate-x-2 transition-all duration-300" />
+                          </button>
+
+                          <button 
+                            onClick={() => setActiveMobileDropdown('conditions')}
+                            className="flex items-center justify-between w-full text-5xl md:text-6xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 text-left group"
+                          >
+                            <span>Conditions</span>
+                            <ChevronRight className="w-8 h-8 text-maroon/30 group-hover:text-maroon group-hover:translate-x-2 transition-all duration-300" />
+                          </button>
+
+                          <button 
+                            onClick={() => setActiveMobileDropdown('programs')}
+                            className="flex items-center justify-between w-full text-5xl md:text-6xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 text-left group"
+                          >
+                            <span>Signature Programs</span>
+                            <ChevronRight className="w-8 h-8 text-maroon/30 group-hover:text-maroon group-hover:translate-x-2 transition-all duration-300" />
+                          </button>
+
+                          <Link 
+                            href="/#about" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="block text-5xl md:text-6xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 transform origin-left hover:scale-[1.02]"
+                          >
+                            About
+                          </Link>
+                        </nav>
+
+                        {/* CTA Footer in Main View */}
+                        <div className="absolute bottom-8 left-8 right-8 space-y-4">
+                          <button 
+                            onClick={() => { setIsMobileMenuOpen(false); openBookingModal(); }}
+                            className="w-full py-4 bg-maroon text-cream font-medium text-lg rounded-full shadow-lg"
+                          >
+                            Book Appointment
+                          </button>
+                          
+                          <a
+                            href="https://wa.me/918886531111?text=Hi%2C%20I%20would%20like%20to%20book%20a%20consultation%20at%20Pragna%20Skin%20Clinic."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-4 bg-transparent border border-maroon/20 text-maroon font-medium text-lg rounded-full flex items-center justify-center gap-2 hover:bg-maroon/5 transition-colors"
+                          >
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Contact on WhatsApp
+                          </a>
+                        </div>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      /* FOCUS VIEW (Generic Container for Sub-menus) */
+                      <motion.div
+                        key="focus-view"
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 50 }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute inset-0 flex flex-col bg-transparent"
+                      >
+                        {/* Focus Header */}
+                        <div className="px-6 pb-6 pt-8 border-b border-maroon/20 flex items-center justify-between shrink-0 bg-gradient-to-b from-[#FDFBF9]/95 to-transparent">
+                          <h2 className="text-3xl font-display font-light text-maroon">
+                            {activeMobileDropdown === 'treatments' && 'Treatments'}
+                            {activeMobileDropdown === 'conditions' && 'Conditions'}
+                            {activeMobileDropdown === 'programs' && 'Signature Programs'}
+                          </h2>
+                          <button 
+                            onClick={() => setActiveMobileDropdown(null)}
+                            className="text-xs font-bold text-maroon/60 hover:text-maroon flex items-center gap-2 uppercase tracking-widest"
+                          >
+                            <span className="text-lg leading-none mb-0.5">←</span> Back
+                          </button>
+                        </div>
+
+                        {/* Scrollable Content Area */}
+                        <div className="flex-1 overflow-y-auto px-6 py-8 custom-scrollbar">
+                          
+                          {/* TREATMENTS CONTENT */}
+                          {activeMobileDropdown === 'treatments' && (
+                            <div className="space-y-0 pb-20">
+                               {/* View All Button - Integrated more cleanly */}
+                                <div className="flex justify-start border-b border-maroon/10">
+                                  <Link 
+                                    href="/treatments" 
+                                    onClick={() => setIsMobileMenuOpen(false)} 
+                                    className="flex items-center gap-2 py-4 hover:opacity-70 transition-opacity"
+                                  >
+                                    <span className="font-sans text-xs font-bold uppercase tracking-widest text-maroon">View All Treatments</span>
+                                    <ArrowRight className="w-4 h-4 text-maroon" />
+                                  </Link>
+                                </div>
+                              
+                              {navigationData.treatments.map((pillar, idx) => (
+                                <motion.div 
+                                  key={pillar.pillar}
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: idx * 0.05, duration: 0.4 }}
+                                  className="space-y-0"
+                                >
+                                  {pillar.categories.map((category) => (
+                                      <div key={category.category} className="group/cat border-b border-maroon/10 last:border-0">
+                                        <button 
+                                          onClick={() => toggleMobileCategory(category.category)}
+                                          className="w-full flex items-center justify-between py-4 px-2 -ml-2 text-left transition-colors hover:bg-maroon/[0.02] rounded-lg"
+                                        >
+                                          <div className="pr-4">
+                                            {/* Pillar Label Small */}
+                                            <h3 className="text-[0.6rem] font-bold text-maroon/40 uppercase tracking-[0.2em] mb-1.5">{pillar.pillar}</h3>
+                                            {/* Category Title - Reduced Size */}
+                                            <StylizedText 
+                                              text={category.category} 
+                                              className={`font-display text-xl transition-colors duration-300 ${activeMobileCategory === category.category ? 'text-maroon' : 'text-charcoal'}`}
+                                              ampersandClassName="font-serif italic text-maroon/60"
+                                            />
+                                          </div>
+                                          <div className={`shrink-0 text-maroon transition-transform duration-300 ${activeMobileCategory === category.category ? 'rotate-180' : ''}`}>
+                                            <PlusMinusIcon isOpen={activeMobileCategory === category.category} />
+                                          </div>
+                                        </button>
+                                        
+                                        <AnimatePresence>
+                                          {activeMobileCategory === category.category && (
+                                            <motion.div
+                                              initial={{ height: 0, opacity: 0 }}
+                                              animate={{ height: 'auto', opacity: 1 }}
+                                              exit={{ height: 0, opacity: 0 }}
+                                              transition={{ duration: 0.3, ease: 'easeOut' }}
+                                              className="overflow-hidden bg-maroon/[0.02]"
+                                            >
+                                              <div className="px-4 py-4 space-y-1">
+                                                {/* Overview Link - More Prominent */}
+                                                <Link 
+                                                  href={category.href}
+                                                  onClick={() => setIsMobileMenuOpen(false)}
+                                                  className="flex items-center gap-3 py-3 px-3 -mx-2 rounded-lg bg-white/50 border border-maroon/5 text-maroon mb-2"
+                                                >
+                                                  <span className="font-sans text-xs font-bold uppercase tracking-wider">Overview</span>
+                                                  <ArrowRight className="w-3.5 h-3.5 ml-auto" />
+                                                </Link>
+                                                
+                                                {/* Sub Items - Clear Clickable Look */}
+                                                {category.items.map((item) => (
+                                                  <Link 
+                                                    key={item.name}
+                                                    href={item.href}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    className="block py-2.5 px-3 -mx-2 rounded-lg text-base text-charcoal/80 hover:text-maroon hover:bg-maroon/5 transition-colors flex items-center justify-between group/link"
+                                                  >
+                                                    <span>{item.name}</span>
+                                                    <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                                                  </Link>
+                                                ))}
+                                              </div>
+                                            </motion.div>
+                                          )}
+                                        </AnimatePresence>
+                                      </div>
+                                    ))}
+                                </motion.div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* CONDITIONS CONTENT */}
+                          {activeMobileDropdown === 'conditions' && (
+                            <div className="space-y-0 pb-20">
+                                <div className="flex justify-start border-b border-maroon/10">
+                                  <Link 
+                                    href="/conditions" 
+                                    onClick={() => setIsMobileMenuOpen(false)} 
+                                    className="flex items-center gap-2 py-4 hover:opacity-70 transition-opacity"
+                                  >
+                                    <span className="font-sans text-xs font-bold uppercase tracking-widest text-maroon">View All Conditions</span>
+                                    <ArrowRight className="w-4 h-4 text-maroon" />
+                                  </Link>
+                                </div>
+
+                              {navigationData.conditions.map((group, idx) => (
+                                <motion.div 
+                                  key={group.group}
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: idx * 0.05, duration: 0.4 }}
+                                  className="space-y-0"
+                                >
+                                  {/* Accordion Group */}
+                                  <div className="group/cat border-b border-maroon/10 last:border-0">
                                     <button 
-                                      onClick={() => toggleMobileCategory(category.category)}
-                                      className="w-full flex items-center justify-between py-4 px-2 text-left hover:bg-maroon/5 transition-colors group/cat"
+                                      onClick={() => toggleMobileCategory(group.group)}
+                                      className="w-full flex items-center justify-between py-4 px-2 -ml-2 text-left transition-colors hover:bg-maroon/[0.02] rounded-lg"
                                     >
-                                      <StylizedText 
-                                        text={category.category} 
-                                        className="font-display text-lg text-charcoal group-hover/cat:text-maroon transition-colors"
-                                        ampersandClassName="font-serif italic text-maroon/60"
-                                      />
-                                      <ChevronDown className={`w-4 h-4 text-maroon/30 transition-transform duration-300 ${activeMobileCategory === category.category ? 'rotate-180' : ''}`} />
+                                      <h3 className={`font-display text-xl transition-colors duration-300 ${activeMobileCategory === group.group ? 'text-maroon' : 'text-charcoal'}`}>{group.group}</h3>
+                                      <div className={`shrink-0 text-maroon transition-transform duration-300 ${activeMobileCategory === group.group ? 'rotate-180' : ''}`}>
+                                        <PlusMinusIcon isOpen={activeMobileCategory === group.group} />
+                                      </div>
                                     </button>
 
-                                    {/* Nested Items */}
                                     <AnimatePresence>
-                                      {activeMobileCategory === category.category && (
+                                      {activeMobileCategory === group.group && (
                                         <motion.div
                                           initial={{ height: 0, opacity: 0 }}
                                           animate={{ height: 'auto', opacity: 1 }}
                                           exit={{ height: 0, opacity: 0 }}
-                                          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                                          transition={{ duration: 0.3, ease: 'easeOut' }}
                                           className="overflow-hidden bg-maroon/[0.02]"
                                         >
-                                          <div className="pl-6 py-2 space-y-1 border-l-2 border-maroon/10 ml-4 mb-4">
-                                            <Link 
-                                              href={category.href}
-                                              onClick={() => setIsMobileMenuOpen(false)}
-                                              className="flex items-center gap-2 text-xs font-bold text-maroon uppercase tracking-wider py-3 px-2 rounded-lg hover:bg-maroon/5 transition-colors"
-                                            >
-                                              Overview
-                                              <ArrowRight className="w-3 h-3" />
-                                            </Link>
-                                            {category.items.map((item) => (
+                                          <div className="px-4 py-4 space-y-1">
+                                            {group.items.map((item) => (
                                               <Link 
                                                 key={item.name} 
                                                 href={item.href}
                                                 onClick={() => setIsMobileMenuOpen(false)}
-                                                className="flex items-center justify-between text-base text-charcoal/80 hover:text-maroon py-3 px-2 rounded-lg hover:bg-maroon/5 transition-all font-medium border-b border-maroon/5 last:border-0"
+                                                className="block py-2.5 px-3 -mx-2 rounded-lg text-base text-charcoal/80 hover:text-maroon hover:bg-maroon/5 transition-colors flex items-center justify-between group/link"
                                               >
-                                                {item.name}
-                                                <ArrowRight className="w-4 h-4 text-maroon/30" />
+                                                <span className={`flex items-center gap-2 ${item.isTopConcern ? 'text-maroon font-medium' : ''}`}>
+                                                  {item.name}
+                                                  {item.isTopConcern && <StarIcon className="w-3 h-3 text-rose-gold" />}
+                                                </span>
+                                                <ArrowRight className="w-3 h-3 text-maroon/30 opacity-0 group-hover/link:opacity-100 transition-opacity" />
                                               </Link>
                                             ))}
                                           </div>
@@ -658,220 +845,55 @@ export default function Navbar() {
                                       )}
                                     </AnimatePresence>
                                   </div>
-                                ))}
-                              </div>
+                                </motion.div>
+                              ))}
                             </div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
+                          )}
 
-                {/* 3. CONDITIONS (Accordion) */}
-                <motion.div variants={menuItemVariants} className="group">
-                  <button 
-                    onClick={() => toggleMobileDropdown('conditions')}
-                    className="flex items-center justify-between w-full py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors text-left"
-                  >
-                    Conditions
-                    <span className={`transform transition-transform duration-300 ${activeMobileDropdown === 'conditions' ? 'rotate-180' : 'rotate-0'}`}>
-                      <ChevronDown className="w-5 h-5 text-maroon/40 group-hover:text-maroon" />
-                    </span>
-                  </button>
-                  
-                  <AnimatePresence>
-                    {activeMobileDropdown === 'conditions' && (
-                      <motion.div
-                        initial={{ height: 0 }}
-                        animate={{ 
-                          height: 'auto',
-                          transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
-                        }}
-                        exit={{ 
-                          height: 0,
-                          transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
-                        }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pb-8 space-y-2">
-                          <Link href="/conditions" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors mb-4 px-2">
-                            View All Conditions <ArrowRight className="w-4 h-4" />
-                          </Link>
-                          {navigationData.conditions.map((group) => (
-                            <div key={group.group} className="overflow-hidden border-b border-maroon/5 last:border-0">
-                              {/* Group Toggle */}
-                              <button 
-                                onClick={() => toggleMobileCategory(group.group)}
-                                className="w-full flex items-center justify-between py-4 px-2 text-left hover:bg-maroon/5 transition-colors group/cat"
-                              >
-                                <span className="font-serif text-lg text-charcoal group-hover/cat:text-maroon transition-colors">
-                                  {group.group}
-                                </span>
-                                <ChevronDown className={`w-4 h-4 text-maroon/30 transition-transform duration-300 transform ${activeMobileCategory === group.group ? 'rotate-180' : 'rotate-0'}`} />
-                              </button>
-
-                              {/* Nested Items */}
-                              <AnimatePresence>
-                                {activeMobileCategory === group.group && (
-                                  <motion.div
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: 'auto', opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="overflow-hidden bg-maroon/[0.02]"
+                          {/* SIGNATURE PROGRAMS CONTENT */}
+                          {activeMobileDropdown === 'programs' && (
+                            <div className="space-y-0 pb-20">
+                                <div className="flex justify-start border-b border-maroon/10">
+                                  <Link 
+                                    href="/signature-programs" 
+                                    onClick={() => setIsMobileMenuOpen(false)} 
+                                    className="flex items-center gap-2 py-4 hover:opacity-70 transition-opacity"
                                   >
-                                    <div className="pl-6 py-2 space-y-1 border-l-2 border-maroon/10 ml-4 mb-4">
-                                      {group.items.map((item) => (
-                                        <Link 
-                                          key={item.name} 
-                                          href={item.href}
-                                          onClick={() => setIsMobileMenuOpen(false)}
-                                          className="block group/item py-2"
-                                        >
-                                          <div className="flex items-center justify-between pr-4">
-                                             <span className={`text-sm ${item.isTopConcern ? 'text-maroon font-medium' : 'text-charcoal/70'} group-hover/item:text-maroon transition-colors font-light`}>
-                                              {item.name}
-                                            </span>
-                                            {item.isTopConcern && <StarIcon className="w-3 h-3 text-maroon/40" />}
-                                          </div>
-                                        </Link>
-                                      ))}
+                                    <span className="font-sans text-xs font-bold uppercase tracking-widest text-maroon">View All Programs</span>
+                                    <ArrowRight className="w-4 h-4 text-maroon" />
+                                  </Link>
+                                </div>
+
+                              {navigationData.signaturePrograms.map((program, idx) => (
+                                <motion.div 
+                                  key={program.name} 
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: idx * 0.05, duration: 0.4 }}
+                                >
+                                  <Link
+                                    href={program.href} 
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block py-4 px-2 -ml-2 border-b border-maroon/10 last:border-0 group hover:bg-maroon/[0.02] rounded-lg transition-colors"
+                                  >
+                                    <div className="flex justify-between items-center mb-1">
+                                      <h4 className="font-display text-xl text-charcoal group-hover:text-maroon transition-colors">{program.name}</h4>
+                                      <ArrowRight className="w-4 h-4 text-maroon/30 group-hover:text-maroon transition-colors" />
                                     </div>
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
+                                    <p className="text-sm text-charcoal/50 font-normal leading-relaxed line-clamp-1">{program.subtitle}</p>
+                                  </Link>
+                                </motion.div>
+                              ))}
                             </div>
-                          ))}
+                          )}
+
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </motion.div>
-
-                {/* 4. SIGNATURE PROGRAMS (Accordion) */}
-                <motion.div variants={menuItemVariants} className="group">
-                  <button 
-                    onClick={() => toggleMobileDropdown('signature-programs')}
-                    className="flex items-center justify-between w-full py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors text-left"
-                  >
-                    Signature Programs
-                    <span className={`transform transition-transform duration-300 ${activeMobileDropdown === 'signature-programs' ? 'rotate-180' : 'rotate-0'}`}>
-                      <ChevronDown className="w-5 h-5 text-maroon/40 group-hover:text-maroon" />
-                    </span>
-                  </button>
-                  
-                  <AnimatePresence>
-                    {activeMobileDropdown === 'signature-programs' && (
-                      <motion.div
-                        initial={{ height: 0 }}
-                        animate={{ 
-                          height: 'auto',
-                          transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] }
-                        }}
-                        exit={{ 
-                          height: 0,
-                          transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
-                        }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pb-8 pt-2 space-y-3">
-                          <Link href="/signature-programs" onClick={() => setIsMobileMenuOpen(false)} className="text-sm text-maroon hover:text-maroon-light font-medium flex items-center gap-2 transition-colors mb-4">
-                            View All Signature Programmes <ArrowRight className="w-4 h-4" />
-                          </Link>
-                          {navigationData.signaturePrograms.map((program) => (
-                            <Link 
-                              key={program.name} 
-                              href={program.href} 
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              className="block p-4 rounded-xl bg-white border border-maroon/5 hover:border-maroon/20 transition-all shadow-sm group/prog"
-                            >
-                              <div className="flex items-center justify-between mb-1">
-                                <span className="font-serif text-maroon font-medium text-lg group-hover/prog:text-maroon-dark transition-colors">{program.name}</span>
-                                <ArrowRight className="w-4 h-4 text-maroon/40" />
-                              </div>
-                              <p className="text-xs text-maroon/60 mb-1">{program.subtitle}</p>
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-
-                {/* 5. ABOUT */}
-                <motion.div variants={menuItemVariants} className="group">
-                  <Link 
-                    href="/#about" 
-                    onClick={(e) => {
-                      // Check if we're already on the homepage
-                      if (pathname === '/') {
-                        e.preventDefault();
-                        setIsMobileMenuOpen(false);
-                        // Small delay to allow menu close animation and scroll unlock
-                        setTimeout(() => {
-                          const targetElement = document.getElementById('about');
-                          if (targetElement) {
-                            const headerOffset = 80;
-                            const elementPosition = targetElement.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition + window.scrollY - headerOffset;
-                            
-                            if (window.lenis) {
-                              window.lenis.scrollTo(offsetPosition, { duration: 1.5 });
-                            } else {
-                              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                            }
-                          }
-                          // Update URL hash without triggering navigation
-                          window.history.pushState(null, '', '/#about');
-                        }, 300);
-                      } else {
-                        // On a different page - let the Link navigate, then scroll will be handled by SmoothScroll
-                        setIsMobileMenuOpen(false);
-                      }
-                    }} 
-                    className="block py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors"
-                  >
-                    About
-                  </Link>
-                </motion.div>
+                </div>
 
               </div>
-
-              {/* Footer / CTA */}
-              <motion.div variants={menuItemVariants} className="mt-12 space-y-4">
-                <button 
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setIsMobileMenuOpen(false);
-                    openBookingModal();
-                  }}
-                  className="w-full py-5 rounded-full bg-maroon text-cream font-medium text-lg shadow-lg hover:bg-maroon-light transition-all active:scale-95"
-                >
-                  Book Appointment
-                </button>
-
-                <a
-                  href="https://wa.me/918886531111?text=Hi%2C%20I%20would%20like%20to%20book%20a%20consultation%20at%20Pragna%20Skin%20Clinic."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-4 rounded-full border border-maroon/20 text-maroon font-medium text-base hover:bg-maroon/5 transition-all active:scale-95 flex items-center justify-center gap-2"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                  </svg>
-                  Contact on WhatsApp
-                </a>
-                
-                <div className="text-center space-y-2 pt-4">
-                  <p className="text-xs text-maroon/60 tracking-widest uppercase font-bold">Pragna Skin Clinic</p>
-                  <p className="text-xs text-charcoal/40 font-light">Advanced Dermatological Care</p>
-                </div>
-              </motion.div>
-
-            </div>
             </motion.div>
           </>
         )}
