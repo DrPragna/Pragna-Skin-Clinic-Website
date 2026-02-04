@@ -180,7 +180,8 @@ export default function Doctors() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-4xl lg:text-6xl font-display text-charcoal"
             >
-            Meet the <span className="italic text-maroon relative inline-block">
+            <span className="whitespace-nowrap">Meet the</span>{' '}
+            <span className="italic text-maroon relative inline-block">
               Dermatologists
               <span className="absolute -bottom-2 left-0 w-full h-px bg-gradient-to-r from-transparent via-maroon/30 to-transparent" />
             </span>
