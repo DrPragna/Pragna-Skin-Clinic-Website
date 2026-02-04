@@ -119,7 +119,7 @@ export default function Hero() {
             // Disable default controls to prevent play button
             controls={false}
             onError={(e) => {
-              console.error("Video failed to load:", e);
+              // Silently fail to poster image if video doesn't load (common in simulators)
               setIsVideoPlaying(false);
             }}
           >
