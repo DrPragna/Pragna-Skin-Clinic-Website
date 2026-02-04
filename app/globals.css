@@ -99,6 +99,8 @@ html.lenis, html.lenis body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Prevent horizontal scroll on Android - must be on html AND body */
+    overflow-x: hidden;
   }
   
   body {
@@ -108,6 +110,9 @@ html.lenis, html.lenis body {
     font-size: 16px;
     line-height: 1.7;
     overflow-x: hidden;
+    /* Extra Android fix: contain paint operations within body */
+    overflow-y: auto;
+    overscroll-behavior-x: none;
   }
   
   /* Typography Hierarchy */

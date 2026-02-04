@@ -443,8 +443,8 @@ export default function Testimonials() {
         ref={containerRef}
         className="pt-20 lg:pt-24 pb-10 lg:pb-12 bg-[#F9FAFB] overflow-hidden relative"
       >
-        {/* Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
+        {/* Background Elements - Wrapped in overflow container for Android */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-rose-100/30 to-transparent rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
         </div>
 

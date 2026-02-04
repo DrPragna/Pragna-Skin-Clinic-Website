@@ -39,8 +39,11 @@ export default function RootLayout({
           {/* Smooth Scroll Provider */}
           <SmoothScroll>
             {/* Main content wrapper - will be blurred when mega menu opens */}
-            <div id="main-content">
-              {children}
+            {/* Outer wrapper prevents horizontal overflow on Android */}
+            <div className="w-full overflow-x-clip">
+              <div id="main-content">
+                {children}
+              </div>
             </div>
             
             {/* Global UI Elements */}
