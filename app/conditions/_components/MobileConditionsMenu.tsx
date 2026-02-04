@@ -4,7 +4,10 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
-import { Condition, ConditionGroup } from '@/lib/navigationData';
+import { Condition } from '@/lib/navigationData';
+
+// Type for the grouped conditions data
+type ConditionGroup = { group: string; items: Condition[] };
 
 // --- THEME CONFIGURATION ---
 type ThemeKey = 'All' | 'Skin' | 'Hair' | 'Body' | 'Others';
