@@ -550,7 +550,7 @@ export default function Navbar() {
               animate={{ x: '0%' }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-0 bg-cream z-40 lg:hidden overflow-hidden flex flex-col"
+              className="fixed inset-0 h-[100dvh] bg-cream z-40 lg:hidden overflow-hidden flex flex-col"
             >
               {/* Cinematic Background */}
               <div className="absolute inset-0 z-0 pointer-events-none">
@@ -580,7 +580,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute inset-0 flex flex-col"
+                        className="absolute inset-0 flex flex-col h-full overflow-y-auto custom-scrollbar"
                       >
                         {/* Header: Branding & Close (Moved inside Main Menu) */}
                         <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-maroon/20 shrink-0 bg-gradient-to-b from-[#FDFBF9]/95 to-transparent">
@@ -601,7 +601,7 @@ export default function Navbar() {
                           </button>
                         </div>
 
-                        <div className="flex-1 px-8 flex flex-col justify-center pb-20 pt-4">
+                        <div className="flex-1 px-8 flex flex-col pt-4 pb-8 min-h-0">
                           <nav className="space-y-6">
                           <Link 
                             href="/" 
@@ -645,7 +645,7 @@ export default function Navbar() {
                         </nav>
 
                         {/* CTA Footer in Main View */}
-                        <div className="absolute bottom-8 left-8 right-8 space-y-4">
+                        <div className="mt-auto pt-8 space-y-4">
                           <button 
                             onClick={() => { setIsMobileMenuOpen(false); openBookingModal(); }}
                             className="w-full py-4 bg-maroon text-cream font-medium text-lg rounded-full shadow-lg"
