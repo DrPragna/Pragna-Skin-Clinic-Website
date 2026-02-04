@@ -803,7 +803,33 @@ export default function Navbar() {
                 <motion.div variants={menuItemVariants} className="group">
                   <Link 
                     href="/#about" 
-                    onClick={() => setIsMobileMenuOpen(false)} 
+                    onClick={(e) => {
+                      // Check if we're already on the homepage
+                      if (pathname === '/') {
+                        e.preventDefault();
+                        setIsMobileMenuOpen(false);
+                        // Small delay to allow menu close animation and scroll unlock
+                        setTimeout(() => {
+                          const targetElement = document.getElementById('about');
+                          if (targetElement) {
+                            const headerOffset = 80;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                            
+                            if (window.lenis) {
+                              window.lenis.scrollTo(offsetPosition, { duration: 1.5 });
+                            } else {
+                              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                            }
+                          }
+                          // Update URL hash without triggering navigation
+                          window.history.pushState(null, '', '/#about');
+                        }, 300);
+                      } else {
+                        // On a different page - let the Link navigate, then scroll will be handled by SmoothScroll
+                        setIsMobileMenuOpen(false);
+                      }
+                    }} 
                     className="block py-6 text-2xl font-display text-charcoal hover:text-maroon transition-colors"
                   >
                     About

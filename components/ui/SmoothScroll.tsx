@@ -106,9 +106,35 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     };
   }, []);
 
-  // Reset scroll position on route change
+  // Reset scroll position on route change (unless there's a hash in the URL)
   useEffect(() => {
-    // Force scroll to top on route change
+    // Check if there's a hash in the URL - if so, let the browser handle scrolling to that element
+    const hash = window.location.hash;
+    if (hash) {
+      // Small delay to ensure the DOM is ready, then scroll to the hash target
+      setTimeout(() => {
+        const targetElement = document.querySelector(hash);
+        if (targetElement) {
+          if (lenisRef.current) {
+            // Use smooth scroll "glide" on load instead of instant jump for a more premium feel
+            lenisRef.current.scrollTo(targetElement as HTMLElement, {
+              offset: -80, // Account for fixed header
+              duration: 1.5,
+              immediate: false, 
+            });
+          } else {
+            // Fallback for mobile/touch
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          }
+        }
+      }, 100);
+      return;
+    }
+    
+    // No hash - scroll to top
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
     }
