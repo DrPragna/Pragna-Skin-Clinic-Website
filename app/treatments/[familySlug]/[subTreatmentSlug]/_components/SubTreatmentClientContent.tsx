@@ -7,6 +7,8 @@ import { Reveal } from '@/components/ui/Reveal';
 import { useBookingModal } from '@/components/ui/BookingModal';
 import { LuminousBackground } from '@/components/ui/LuminousBackground';
 
+import MobileSubTreatment from './MobileSubTreatment';
+
 interface SubTreatmentClientContentProps {
   subTreatment: SubTreatment;
   family: TreatmentFamily;
@@ -15,13 +17,15 @@ interface SubTreatmentClientContentProps {
   content: SubTreatmentContent | null;
 }
 
-export default function SubTreatmentClientContent({
-  subTreatment,
-  family,
-  relatedConditions,
-  siblingTreatments,
-  content,
-}: SubTreatmentClientContentProps) {
+export default function SubTreatmentClientContent(props: SubTreatmentClientContentProps) {
+  const {
+    subTreatment,
+    family,
+    relatedConditions,
+    siblingTreatments,
+    content,
+  } = props;
+
   const [activeSection, setActiveSection] = useState('overview');
   const { openBookingModal } = useBookingModal();
 
@@ -94,6 +98,10 @@ export default function SubTreatmentClientContent({
 
   return (
     <>
+      <div className="md:hidden">
+        <MobileSubTreatment {...props} />
+      </div>
+      <div className="hidden md:block">
       {/* ============================================
           HERO - Cinematic Left-Aligned
           ============================================ */}
@@ -432,6 +440,7 @@ export default function SubTreatmentClientContent({
           </div>
         </section>
       )}
+      </div>
     </>
   );
 }

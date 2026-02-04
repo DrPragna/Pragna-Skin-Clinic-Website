@@ -91,9 +91,9 @@ export default function MobileTreatmentFamily({
     <main className="w-full bg-beige-warm overflow-x-hidden">
       
       {/* ==================== 
-          1. HERO (Compact ~65svh)
+          1. HERO (Compact ~55svh)
       ==================== */}
-      <section className="relative h-[65svh] w-full overflow-hidden bg-charcoal rounded-b-[2rem] shadow-xl shadow-black/20">
+      <section className="relative h-[55svh] w-full overflow-hidden bg-charcoal rounded-b-[2rem] shadow-xl shadow-black/20">
         {/* Background */}
         <div className="absolute inset-0 z-0">
           {content?.hero.image ? (
