@@ -6,17 +6,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 import { Condition, ConditionGroup } from '@/lib/navigationData';
 
-// --- THEME CONFIGURATION (Matches Desktop) ---
+// --- THEME CONFIGURATION ---
 type ThemeKey = 'All' | 'Skin' | 'Hair' | 'Body' | 'Others';
 
 const THEMES: Record<ThemeKey, {
-  heroBg: string; // Used for fallback if image fails or during load
+  heroBg: string;
   heroText: string;
   heroSub: string;
   accent: string;
   title: string;
   description: string;
   heroImage?: string; 
+  // Page Background Colors (Behind the cards)
+  pageBg: string;
+  // Card Accents
+  pillBg: string;    
+  primary: string;   
+  gradient: string;  
 }> = {
   'All': {
     heroBg: 'bg-[#3D2E2E]', 
@@ -26,6 +32,10 @@ const THEMES: Record<ThemeKey, {
     title: 'What Concerns You?',
     description: "Every concern deserves attention. Find yours below.",
     heroImage: '/images/clinic-reception.webp',
+    pageBg: 'bg-[#FAF9F6]', // Warm Neutral
+    pillBg: 'bg-charcoal/5',
+    primary: '#722B2B', 
+    gradient: 'from-[#3D2E2E]/80 via-[#3D2E2E]/20 to-[#3D2E2E]/60'
   },
   'Skin': {
     heroBg: 'bg-[#5C2E26]', 
@@ -35,15 +45,23 @@ const THEMES: Record<ThemeKey, {
     title: 'Face & Skin',
     description: "Restore your skin's natural health and radiance.",
     heroImage: '/images/areas-of-focus/skin.webp',
+    pageBg: 'bg-[#FAF5F2]', // Light Terracotta Wash
+    pillBg: 'bg-[#C28E79]/10',
+    primary: '#C28E79',
+    gradient: 'from-[#5C2E26]/80 via-[#C28E79]/20 to-[#5C2E26]/60'
   },
   'Hair': {
     heroBg: 'bg-[#5C4D22]', 
     heroText: 'text-white',
-    heroSub: 'text-white/80',
+    heroSub: 'text-white/80', 
     accent: 'text-[#A68A3D]', 
     title: 'Hair & Scalp',
     description: 'Science-backed solutions for restoration.',
     heroImage: '/images/areas-of-focus/hair.webp',
+    pageBg: 'bg-[#FBF9F2]', // Light Gold Wash
+    pillBg: 'bg-[#CDAA5C]/10',
+    primary: '#CDAA5C',
+    gradient: 'from-[#5C4D22]/80 via-[#CDAA5C]/20 to-[#5C4D22]/60'
   },
   'Body': {
     heroBg: 'bg-[#423D33]', 
@@ -53,6 +71,10 @@ const THEMES: Record<ThemeKey, {
     title: 'Body & Shape',
     description: 'Sculpt and tone with advanced care.',
     heroImage: '/images/areas-of-focus/body.webp',
+    pageBg: 'bg-[#F7F7F4]', // Light Olive Wash
+    pillBg: 'bg-[#9E8C6B]/10',
+    primary: '#9E8C6B',
+    gradient: 'from-[#423D33]/80 via-[#9E8C6B]/20 to-[#423D33]/60'
   },
   'Others': {
     heroBg: 'bg-[#2A3B33]', 
@@ -61,6 +83,10 @@ const THEMES: Record<ThemeKey, {
     accent: 'text-[#527862]', 
     title: 'Wellness',
     description: 'Targeted treatments for overall wellbeing.',
+    pageBg: 'bg-[#F5F8F6]', // Light Sage Wash
+    pillBg: 'bg-[#87A896]/10',
+    primary: '#87A896',
+    gradient: 'from-[#2A3B33]/80 via-[#87A896]/20 to-[#2A3B33]/60'
   }
 };
 
@@ -112,12 +138,13 @@ export default function MobileConditionsMenu({
   const theme = THEMES[activeFilter];
 
   return (
-    <main className={`min-h-screen relative transition-colors duration-700 ${theme.heroBg}`}>
+    // Apply the Page Background Color here to the main container
+    <main className={`min-h-screen relative transition-colors duration-700 ${theme.pageBg}`}>
       
       {/* ==================== 
           1. IMMERSIVE HERO
       ==================== */}
-      <section className="relative h-[55vh] w-full overflow-hidden rounded-b-[2.5rem] shadow-xl shadow-black/30 z-10">
+      <section className="relative h-[55vh] w-full overflow-hidden rounded-b-[2.5rem] shadow-xl shadow-black/10 z-10 bg-charcoal">
          {/* Background Image Transition */}
          <AnimatePresence mode="popLayout">
             <motion.div
@@ -133,11 +160,12 @@ export default function MobileConditionsMenu({
                     <img 
                         src={theme.heroImage} 
                         alt={theme.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover opacity-80"
                     />
                 )}
-                {/* Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80 mix-blend-multiply`} />
+                {/* Subtle gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-b ${theme.gradient} mix-blend-multiply opacity-60 transition-all duration-700`} />
+                <div className="absolute inset-0 bg-black/10" />
             </motion.div>
          </AnimatePresence>
 
@@ -149,7 +177,9 @@ export default function MobileConditionsMenu({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
             >
-                <span className="text-white/60 text-[10px] uppercase tracking-[0.2em] font-medium mb-3 block">
+                <span 
+                    className="text-[10px] uppercase tracking-[0.2em] font-medium mb-3 block transition-colors duration-500 text-white/70"
+                >
                     {activeFilter === 'All' ? 'Our Expertise' : `${activeFilter} Care`}
                 </span>
                 <h1 className="text-5xl font-display text-white leading-[0.95] mb-4 text-shadow-sm">
@@ -166,7 +196,7 @@ export default function MobileConditionsMenu({
           2. FLOATING TABS
       ==================== */}
       <div className="sticky top-4 z-30 px-4 -mt-6">
-        <div className="bg-white/90 backdrop-blur-md rounded-full shadow-lg border border-white/20 p-1.5 flex overflow-x-auto no-scrollbar snap-x scrollbar-hide" ref={scrollContainerRef}>
+        <div className="bg-white/95 backdrop-blur-md rounded-full shadow-lg border border-charcoal/5 p-1.5 flex overflow-x-auto no-scrollbar snap-x scrollbar-hide" ref={scrollContainerRef}>
             {filters.map((filter) => {
                 const isActive = activeFilter === filter;
                 return (
@@ -182,7 +212,8 @@ export default function MobileConditionsMenu({
                         {isActive && (
                             <motion.div
                                 layoutId="activePill"
-                                className="absolute inset-0 bg-charcoal rounded-full"
+                                className="absolute inset-0 rounded-full"
+                                style={{ backgroundColor: filter === 'All' ? '#1F2937' : THEMES[filter as ThemeKey].primary }}
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             />
                         )}
@@ -198,22 +229,36 @@ export default function MobileConditionsMenu({
       ==================== */}
       <section className="px-4 pb-20 pt-8 min-h-[50vh]">
          <div className="space-y-4">
-            <AnimatePresence mode="popLayout">
-                {filteredConditions.map((condition, i) => (
-                    <motion.div
-                        key={condition.slug}
-                        layout
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.4, delay: i * 0.05 }}
-                    >
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={activeFilter}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="space-y-4"
+                >
+                    {filteredConditions.map((condition, i) => {
+                        // Use consistent card styling for "All" and filtered views
+                        const itemTheme = THEMES[condition.group as ThemeKey] || THEMES['Others'];
+                        
+                        return (
                         <Link 
+                            key={condition.slug}
                             href={`/conditions/${condition.slug}`}
-                            className="block bg-[#FDFCFB] p-6 rounded-2xl shadow-lg shadow-black/5 border border-white/10 active:scale-[0.98] transition-transform duration-300"
+                            className={`
+                                block p-6 rounded-2xl shadow-sm transition-all duration-300 active:scale-[0.98] relative overflow-hidden group
+                                bg-white border border-charcoal/5
+                            `}
                         >
-                            <div className="flex justify-between items-start mb-4">
-                                <span className="text-[10px] uppercase tracking-widest font-bold text-maroon/60 bg-maroon/5 px-2 py-1 rounded">
+                            <div className="flex justify-between items-start mb-4 pl-1">
+                                <span 
+                                    className="text-[10px] uppercase tracking-widest font-bold px-2 py-1 rounded transition-colors"
+                                    style={{ 
+                                        color: itemTheme.primary, 
+                                        backgroundColor: `${itemTheme.primary}10`
+                                    }}
+                                >
                                     {condition.group}
                                 </span>
                                 <span className="text-charcoal/10 font-display text-xl">
@@ -221,27 +266,30 @@ export default function MobileConditionsMenu({
                                 </span>
                             </div>
                             
-                            <h3 className="text-2xl font-display text-charcoal mb-2 pr-8">
+                            <h3 className="text-2xl font-display text-charcoal mb-2 pr-8 pl-1">
                                 {condition.name}
                             </h3>
-                            <p className="text-charcoal/60 text-sm line-clamp-2 leading-relaxed">
+                            <p className="text-charcoal/60 text-sm line-clamp-2 leading-relaxed pl-1">
                                 {condition.subtitle}
                             </p>
                             
                             <div className="mt-4 pt-4 border-t border-charcoal/5 flex justify-end">
-                                <div className="w-8 h-8 rounded-full bg-beige-warm flex items-center justify-center text-charcoal/40">
+                                <div 
+                                    className="w-8 h-8 rounded-full flex items-center justify-center transition-colors border border-charcoal/5 bg-white"
+                                    style={{ color: itemTheme.primary }}
+                                >
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>
                                 </div>
                             </div>
                         </Link>
-                    </motion.div>
-                ))}
+                    )})}
+                </motion.div>
             </AnimatePresence>
 
             {filteredConditions.length === 0 && (
-                <div className="py-20 text-center text-white/60">
+                <div className="py-20 text-center text-charcoal/40">
                     <p>No conditions found.</p>
                 </div>
             )}

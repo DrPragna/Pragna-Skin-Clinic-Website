@@ -18,6 +18,8 @@ PSC/
 │   │   └── book-appointment/
 │   ├── conditions/                   # Conditions pages
 │   │   ├── page.tsx                  # Conditions directory
+│   │   ├── _components/              # Page-specific components
+│   │   │   └── MobileConditionsMenu.tsx
 │   │   └── [slug]/page.tsx           # Individual condition page
 │   ├── signature-programs/           # Signature programs pages
 │   │   ├── page.tsx                  # Programs directory
@@ -40,7 +42,8 @@ PSC/
 │           └── [subTreatmentSlug]/
 │               ├── page.tsx          # Sub-treatment page
 │               └── _components/
-│                   └── SubTreatmentClientContent.tsx
+│                   ├── SubTreatmentClientContent.tsx
+│                   └── MobileSubTreatment.tsx
 │
 ├── components/                       # Shared/reusable components
 │   ├── navigation/
@@ -90,6 +93,21 @@ app/treatments/[familySlug]/
 └── _components/
     ├── TreatmentFamilyClient.tsx     # Client wrapper (handles mobile/desktop)
     └── MobileTreatmentFamily.tsx     # Mobile-specific layout
+```
+
+```
+app/treatments/[familySlug]/[subTreatmentSlug]/
+├── page.tsx                          # Server Component
+└── _components/
+    ├── SubTreatmentClientContent.tsx # Client wrapper (handles mobile/desktop)
+    └── MobileSubTreatment.tsx        # Mobile-specific layout
+```
+
+```
+app/conditions/
+├── page.tsx                          # Server Component (handles mobile/desktop)
+└── _components/
+    └── MobileConditionsMenu.tsx      # Mobile-specific layout
 ```
 
 **Why `_components/`?**
@@ -166,11 +184,11 @@ When creating mobile adaptive designs for a new page:
 | Home | ✅ Done | Uses isMobile in sections |
 | Treatments Menu | ✅ Done | MobileTreatmentsMenu.tsx |
 | Treatment Family | ✅ Done | MobileTreatmentFamily.tsx |
-| Sub-Treatment | ⏳ Pending | - |
+| Sub-Treatment | ✅ Done | MobileSubTreatment.tsx |
+| Conditions Directory | ✅ Done | MobileConditionsMenu.tsx |
+| Condition Detail | ⏳ Pending | - |
 | Signature Programs Directory | ⏳ Pending | - |
 | Signature Program Detail | ⏳ Pending | - |
-| Conditions Directory | ⏳ Pending | - |
-| Condition Detail | ⏳ Pending | - |
 
 ---
 
