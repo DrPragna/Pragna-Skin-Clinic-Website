@@ -468,26 +468,26 @@ export default function Testimonials() {
               Real results, <span className="italic text-maroon">real confidence.</span>
             </motion.h2>
             
-            {/* Elegant Clinic Pills - Centered */}
+            {/* Elegant Clinic Pills - Centered, side by side on all screens */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-wrap justify-center gap-4"
+              className="flex flex-nowrap justify-center gap-2 md:gap-4"
             >
               {/* Panjagutta Pill - Reordered First */}
               <a
                 href={PANJAGUTTA_REVIEWS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-white border border-stone-100 shadow-[0_4px_20px_-4px_rgba(114,43,43,0.05)] px-6 py-3 rounded-full hover:shadow-[0_8px_25px_-5px_rgba(114,43,43,0.1)] transition-all group"
+                className="inline-flex items-center gap-2 md:gap-3 bg-white border border-stone-100 shadow-[0_4px_20px_-4px_rgba(114,43,43,0.05)] px-3 md:px-6 py-2 md:py-3 rounded-full hover:shadow-[0_8px_25px_-5px_rgba(114,43,43,0.1)] transition-all group"
               >
-                <div className="w-8 h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
                   <StarIcon />
                 </div>
                 <div className="text-left">
-                  <span className="font-bold text-charcoal block leading-none text-sm">4.8/5 Rating</span>
-                  <span className="text-charcoal/60 text-xs">Panjagutta Clinic</span>
+                  <span className="font-bold text-charcoal block leading-none text-xs md:text-sm">4.8/5 Rating</span>
+                  <span className="text-charcoal/60 text-[10px] md:text-xs">Panjagutta</span>
                 </div>
               </a>
 
@@ -496,14 +496,14 @@ export default function Testimonials() {
                 href={KOKAPET_REVIEWS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-white border border-stone-100 shadow-[0_4px_20px_-4px_rgba(114,43,43,0.05)] px-6 py-3 rounded-full hover:shadow-[0_8px_25px_-5px_rgba(114,43,43,0.1)] transition-all group"
+                className="inline-flex items-center gap-2 md:gap-3 bg-white border border-stone-100 shadow-[0_4px_20px_-4px_rgba(114,43,43,0.05)] px-3 md:px-6 py-2 md:py-3 rounded-full hover:shadow-[0_8px_25px_-5px_rgba(114,43,43,0.1)] transition-all group"
               >
-                <div className="w-8 h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
                   <StarIcon />
                 </div>
                 <div className="text-left">
-                  <span className="font-bold text-charcoal block leading-none text-sm">5/5 Rating</span>
-                  <span className="text-charcoal/60 text-xs">Kokapet Clinic</span>
+                  <span className="font-bold text-charcoal block leading-none text-xs md:text-sm">5/5 Rating</span>
+                  <span className="text-charcoal/60 text-[10px] md:text-xs">Kokapet</span>
                 </div>
               </a>
             </motion.div>
