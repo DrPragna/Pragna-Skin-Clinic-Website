@@ -186,7 +186,7 @@ When creating mobile adaptive designs for a new page:
 | Treatment Family | ✅ Done | MobileTreatmentFamily.tsx |
 | Sub-Treatment | ✅ Done | MobileSubTreatment.tsx |
 | Conditions Directory | ✅ Done | MobileConditionsMenu.tsx |
-| Condition Detail | ⏳ Pending | - |
+| Condition Detail | ✅ Done | MobileConditionPage.tsx |
 | Signature Programs Directory | ⏳ Pending | - |
 | Signature Program Detail | ⏳ Pending | - |
 
