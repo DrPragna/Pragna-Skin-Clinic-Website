@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { SubTreatment, TreatmentFamily, Condition, SubTreatmentContent } from '@/lib/navigationData';
@@ -8,19 +8,20 @@ import { LuminousBackground } from '@/components/ui/LuminousBackground';
 import { Reveal } from '@/components/ui/Reveal';
 import { useBookingModal } from '@/components/ui/BookingModal';
 
-// --- SHARED UI: ScrollScaleCard ---
+// --- SHARED UI: ScrollScaleCard with Focus State ---
 function ScrollScaleCard({ 
   children, 
   index, 
   containerRef,
   className = ""
 }: { 
-  children: React.ReactNode; 
+  children: (isActive: boolean) => React.ReactNode; // Render prop for active state
   index: number; 
   containerRef: React.RefObject<HTMLDivElement | null>;
   className?: string;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isActive, setIsActive] = useState(false);
   
   const { scrollXProgress } = useScroll({
     container: containerRef,
@@ -29,17 +30,37 @@ function ScrollScaleCard({
     offset: ["center end", "center start"]
   });
 
-  // Keep scale subtle
-  const scale = useTransform(scrollXProgress, [0, 0.5, 1], [0.94, 1, 0.94]);
-  const opacity = useTransform(scrollXProgress, [0, 0.5, 1], [0.6, 1, 0.6]);
+  // Scale effect
+  const scale = useTransform(scrollXProgress, [0, 0.5, 1], [0.93, 1, 0.93]);
+  const opacity = useTransform(scrollXProgress, [0, 0.5, 1], [0.85, 1, 0.85]);
+
+  // Intersection Observer for "Active" Highlight
+  useEffect(() => {
+    if (!cardRef.current || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsActive(entry.isIntersecting);
+        });
+      },
+      {
+        root: containerRef.current,
+        threshold: 0.7, // 70% visible = active
+      }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [containerRef]);
   
   return (
     <motion.div
       ref={cardRef}
-      style={{ scale, opacity }}
+      style={{ scale, opacity: isActive ? 1 : opacity }}
       className={`snap-center snap-always flex-shrink-0 ${className}`}
     >
-      {children}
+      {children(isActive)}
     </motion.div>
   );
 }
@@ -282,7 +303,7 @@ export default function MobileSubTreatment({
                 {/* ==================== 
                     4. RESULTS (Horizontal Snap Cards)
                 ==================== */}
-                <section className="py-12 overflow-hidden bg-[#FDFCFB]">
+                <section className="pt-12 pb-5 overflow-hidden bg-[#FDFCFB]">
                     <div className="px-6 mb-6">
                         <span className="text-maroon/60 font-medium uppercase tracking-[0.2em] text-[10px] block mb-2">
                         Expectations
@@ -294,37 +315,45 @@ export default function MobileSubTreatment({
 
                     <div 
                         ref={resultsContainerRef}
-                        className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-6 pb-8 -mx-6 scrollbar-hide"
+                        className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-6 pb-3 -mx-6 scrollbar-hide"
                         style={{ paddingLeft: 'max(1.5rem, calc(50vw - 40vw))', paddingRight: 'max(1.5rem, calc(50vw - 40vw))' }}
                     >
                         {/* Card 1: Timeline */}
                         <ScrollScaleCard index={0} containerRef={resultsContainerRef} className="w-[80vw]">
-                            <div className="h-full bg-white p-6 rounded-2xl border border-charcoal/5 shadow-sm flex flex-col justify-between min-h-[220px] group-hover:border-maroon/30 transition-colors">
+                            {(isActive) => (
+                            <div className={`h-full bg-white p-6 rounded-2xl border transition-all duration-500 shadow-sm flex flex-col justify-between min-h-[220px] 
+                                ${isActive ? 'border-maroon/40 shadow-md' : 'border-charcoal/5'}`}>
                                 <div>
-                                    <div className="w-10 h-10 rounded-full bg-beige-warm flex items-center justify-center mb-4 text-maroon border border-maroon/10">
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-4 border transition-colors
+                                        ${isActive ? 'bg-maroon text-white border-maroon' : 'bg-beige-warm text-maroon border-maroon/10'}`}>
                                         <span className="font-display text-xl">01</span>
                                     </div>
-                                    <h3 className="text-lg font-display text-charcoal mb-3 group-hover:text-maroon transition-colors">Timeline</h3>
+                                    <h3 className={`text-lg font-display mb-3 transition-colors ${isActive ? 'text-maroon' : 'text-charcoal'}`}>Timeline</h3>
                                     <p className="text-charcoal/60 text-sm leading-relaxed">
                                         {resultsTimeline}
                                     </p>
                                 </div>
                             </div>
+                            )}
                         </ScrollScaleCard>
 
                         {/* Card 2: Recovery */}
                         <ScrollScaleCard index={1} containerRef={resultsContainerRef} className="w-[80vw]">
-                            <div className="h-full bg-white p-6 rounded-2xl border border-charcoal/5 shadow-sm flex flex-col justify-between min-h-[220px] group-hover:border-maroon/30 transition-colors">
+                            {(isActive) => (
+                            <div className={`h-full bg-white p-6 rounded-2xl border transition-all duration-500 shadow-sm flex flex-col justify-between min-h-[220px] 
+                                ${isActive ? 'border-maroon/40 shadow-md' : 'border-charcoal/5'}`}>
                                 <div>
-                                    <div className="w-10 h-10 rounded-full bg-beige-warm flex items-center justify-center mb-4 text-maroon border border-maroon/10">
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-4 border transition-colors
+                                        ${isActive ? 'bg-maroon text-white border-maroon' : 'bg-beige-warm text-maroon border-maroon/10'}`}>
                                         <span className="font-display text-xl">02</span>
                                     </div>
-                                    <h3 className="text-lg font-display text-charcoal mb-3 group-hover:text-maroon transition-colors">Recovery</h3>
+                                    <h3 className={`text-lg font-display mb-3 transition-colors ${isActive ? 'text-maroon' : 'text-charcoal'}`}>Recovery</h3>
                                     <p className="text-charcoal/60 text-sm leading-relaxed">
                                         {resultsRecovery}
                                     </p>
                                 </div>
                             </div>
+                            )}
                         </ScrollScaleCard>
                     </div>
                 </section>
