@@ -473,37 +473,37 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-nowrap justify-center gap-2 md:gap-4"
+              className="flex flex-nowrap justify-center gap-3 w-full max-w-md mx-auto"
             >
-              {/* Panjagutta Pill - Reordered First */}
+              {/* Panjagutta Pill */}
               <a
                 href={PANJAGUTTA_REVIEWS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 md:gap-3 bg-white border border-stone-100 shadow-[0_4px_20px_-4px_rgba(114,43,43,0.05)] px-3 md:px-6 py-2 md:py-3 rounded-full hover:shadow-[0_8px_25px_-5px_rgba(114,43,43,0.1)] transition-all group"
+                className="flex-1 flex items-center justify-center gap-3 bg-white border border-stone-100 shadow-[0_4px_20px_-4px_rgba(114,43,43,0.05)] px-3 py-2.5 rounded-2xl hover:shadow-[0_8px_25px_-5px_rgba(114,43,43,0.1)] transition-all group min-w-0"
               >
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform shrink-0">
                   <StarIcon />
                 </div>
-                <div className="text-left">
-                  <span className="font-bold text-charcoal block leading-none text-xs md:text-sm">4.8/5 Rating</span>
-                  <span className="text-charcoal/60 text-[10px] md:text-xs">Panjagutta</span>
+                <div className="text-left min-w-0">
+                  <span className="font-bold text-charcoal block leading-none text-xs sm:text-sm truncate">4.8/5 Rating</span>
+                  <span className="text-charcoal/50 text-[10px] sm:text-xs font-medium uppercase tracking-wide truncate block mt-0.5">Panjagutta</span>
                 </div>
               </a>
 
-              {/* Kokapet Pill - Reordered Second */}
+              {/* Kokapet Pill */}
               <a
                 href={KOKAPET_REVIEWS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 md:gap-3 bg-white border border-stone-100 shadow-[0_4px_20px_-4px_rgba(114,43,43,0.05)] px-3 md:px-6 py-2 md:py-3 rounded-full hover:shadow-[0_8px_25px_-5px_rgba(114,43,43,0.1)] transition-all group"
+                className="flex-1 flex items-center justify-center gap-3 bg-white border border-stone-100 shadow-[0_4px_20px_-4px_rgba(114,43,43,0.05)] px-3 py-2.5 rounded-2xl hover:shadow-[0_8px_25px_-5px_rgba(114,43,43,0.1)] transition-all group min-w-0"
               >
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 rounded-full bg-maroon/5 flex items-center justify-center text-maroon shadow-sm group-hover:scale-110 transition-transform shrink-0">
                   <StarIcon />
                 </div>
-                <div className="text-left">
-                  <span className="font-bold text-charcoal block leading-none text-xs md:text-sm">5/5 Rating</span>
-                  <span className="text-charcoal/60 text-[10px] md:text-xs">Kokapet</span>
+                <div className="text-left min-w-0">
+                  <span className="font-bold text-charcoal block leading-none text-xs sm:text-sm truncate">5/5 Rating</span>
+                  <span className="text-charcoal/50 text-[10px] sm:text-xs font-medium uppercase tracking-wide truncate block mt-0.5">Kokapet</span>
                 </div>
               </a>
             </motion.div>
