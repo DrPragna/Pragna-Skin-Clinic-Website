@@ -94,6 +94,8 @@ const THEMES: Record<ThemeKey, {
 
 const filters = ['All', 'Skin', 'Hair', 'Body', 'Others'];
 
+import MobileConditionsMenu from './_components/MobileConditionsMenu';
+
 // Separate component for SearchParams logic to wrap in Suspense
 function ConditionsContent() {
   const searchParams = useSearchParams();
@@ -144,7 +146,12 @@ function ConditionsContent() {
   const theme = THEMES[activeFilter];
 
   return (
-    <main className="min-h-screen transition-colors duration-700 ease-in-out bg-white">
+    <>
+    <div className="md:hidden">
+      <MobileConditionsMenu conditionsByGroup={conditionsByGroup} />
+    </div>
+
+    <main className="hidden md:block min-h-screen transition-colors duration-700 ease-in-out bg-white">
       
       {/* ============================================
           SMART HERO - Dynamic based on Filter
@@ -414,6 +421,7 @@ function ConditionsContent() {
       
       <Footer />
     </main>
+    </>
   );
 }
 
