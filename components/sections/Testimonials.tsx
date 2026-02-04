@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, RefObject } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, useInView, AnimatePresence, useMotionValue } from 'framer-motion';
+import { motion, useInView, AnimatePresence, useMotionValue, useScroll, useTransform } from 'framer-motion';
 
 // --- CLINIC LINKS ---
 const KOKAPET_REVIEWS_LINK = "https://www.google.com/maps/place/Pragna+Skin+Clinic/@17.387853,78.3399881,17z/data=!4m14!1m5!8m4!1e1!2s115999419679947581609!3m1!1e1!3m7!1s0x3bcb951e16e74899:0xe00057759cb62037!8m2!3d17.387853!4d78.342563!9m1!1b1!16s%2Fg%2F11y310_wqr?hl=en-IN&entry=ttu&g_ep=EgoyMDI2MDEwNi4wIKXMDSoKLDEwMDc5MjA3MUgBUAM%3D";
@@ -238,9 +238,48 @@ const ReviewModal = ({ review, onClose }: { review: typeof testimonials[0], onCl
 };
 
 // --- REVIEW CARD COMPONENT ---
-const ReviewCard = ({ review, onClick, className = '' }: { review: typeof testimonials[0], onClick: () => void, className?: string }) => {
+interface ReviewCardProps {
+  review: typeof testimonials[0];
+  onClick: () => void;
+  className?: string;
+  containerRef?: RefObject<HTMLDivElement | null>;
+  isMobileView?: boolean;
+}
+
+const ReviewCard = ({ review, onClick, className = '', containerRef, isMobileView = false }: ReviewCardProps) => {
   // Responsive threshold: wider cards on md+ screens fit more text
   const [charThreshold, setCharThreshold] = useState(180);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  
+  // 1. SCROLL SCALING (Cinematic breathing effect) for mobile
+  // Only runs if we have a containerRef (i.e., on mobile)
+  const { scrollXProgress } = useScroll({
+    container: containerRef,
+    target: cardRef,
+    axis: "x",
+    offset: ["center end", "center start"]
+  });
+
+  const scale = useTransform(scrollXProgress, [0, 0.5, 1], [0.93, 1, 0.93]);
+
+  // 2. FOCUS DETECTION
+  useEffect(() => {
+    if (!isMobileView || !cardRef.current || !containerRef?.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => setIsFocused(entry.isIntersecting));
+      },
+      {
+        root: containerRef.current,
+        threshold: 0.7, // High threshold so only CENTER card is focused
+      }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [isMobileView, containerRef]);
   
   useEffect(() => {
     const updateThreshold = () => {
@@ -254,15 +293,27 @@ const ReviewCard = ({ review, onClick, className = '' }: { review: typeof testim
   }, []);
 
   const showReadMore = review.text.length > charThreshold;
+  
+  // Mobile "Active" state for styling
+  const isActive = isMobileView ? isFocused : false;
 
   return (
-    <div
-      className={`block w-[85vw] md:w-[420px] h-[320px] flex-shrink-0 select-none relative group ${className}`}
+    <motion.div
+      ref={cardRef}
+      style={isMobileView ? { scale } : undefined}
+      className={`block w-[70vw] md:w-[420px] h-[320px] flex-shrink-0 select-none relative group ${className}`}
       onDragStart={(e) => e.preventDefault()}
     >
-      <div className="h-full bg-gradient-to-br from-white via-white to-stone-50 rounded-[2rem] p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02),0_10px_30px_-10px_rgba(114,43,43,0.06)] border border-stone-100 hover:border-maroon/20 hover:shadow-[0_20px_40px_-10px_rgba(114,43,43,0.1)] transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1">
+      <div className={`h-full bg-gradient-to-br from-white via-white to-stone-50 rounded-[2rem] p-8 transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1
+        ${isActive 
+          ? 'border-maroon/20 shadow-[0_20px_40px_-10px_rgba(114,43,43,0.1)] border -translate-y-1' 
+          : 'border border-stone-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02),0_10px_30px_-10px_rgba(114,43,43,0.06)] hover:border-maroon/20 hover:shadow-[0_20px_40px_-10px_rgba(114,43,43,0.1)]'
+        }
+      `}>
         {/* Decorative Top Gradient Line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-maroon/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-maroon/20 to-transparent transition-opacity duration-500
+          ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}
+        `} />
         
         {/* Content Container */}
         <div className="relative flex flex-col h-full">
@@ -312,7 +363,7 @@ const ReviewCard = ({ review, onClick, className = '' }: { review: typeof testim
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -332,6 +383,7 @@ function ModalPortal({ children }: { children: React.ReactNode }) {
 
 export default function Testimonials() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
   const [selectedReview, setSelectedReview] = useState<typeof testimonials[0] | null>(null);
   
@@ -459,12 +511,17 @@ export default function Testimonials() {
         </div>
 
         {/* Mobile: Native Horizontal Scroll */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-4 scrollbar-hide md:hidden">
+        <div 
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pt-4 pb-4 scrollbar-hide md:hidden"
+        >
           {testimonials.map((review, i) => (
-            <div key={`${review.id}-${i}`} className="snap-center">
+            <div key={`${review.id}-${i}`} className="snap-center shrink-0">
               <ReviewCard 
                 review={review}
                 onClick={() => setSelectedReview(review)}
+                containerRef={scrollContainerRef}
+                isMobileView={true}
               />
             </div>
           ))}
