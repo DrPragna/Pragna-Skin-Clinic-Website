@@ -111,17 +111,15 @@ export default function Contact() {
       className="py-12 lg:py-16 relative overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #F5EDE8 0%, #FAF4F0 50%, #F8EFE8 100%)' }}
     >
-      {/* Artistic Background Elements - Wrapped in clipping container for Android compatibility */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-gold/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 mix-blend-multiply" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-maroon/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 mix-blend-multiply" />
-      </div>
+      {/* Artistic Background Elements - Hidden on mobile to prevent Android overflow */}
+      <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] bg-rose-gold/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 mix-blend-multiply pointer-events-none" />
+      <div className="hidden md:block absolute bottom-0 left-0 w-[400px] h-[400px] bg-maroon/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 mix-blend-multiply pointer-events-none" />
 
-      <div className="section-container max-w-5xl mx-auto relative z-10">
+      <div className="section-container max-w-5xl mx-auto relative z-10 overflow-hidden">
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
 
           {/* Left: Artistic Typography & Invite */}
-          <div className="lg:col-span-5 relative">
+          <div className="lg:col-span-5 relative min-w-0">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -133,7 +131,7 @@ export default function Contact() {
                 Book Consultation
               </span>
 
-              <h2 className="text-4xl lg:text-[3.5rem] font-display text-charcoal mb-4 leading-[1.1] -tracking-[0.02em]">
+              <h2 className="text-4xl lg:text-[3.5rem] font-display text-charcoal mb-4 leading-[1.1] -tracking-[0.02em] break-words">
                 Begin your <br />
                 <span className="italic text-maroon font-light relative inline-block">
                   transformation
@@ -150,9 +148,9 @@ export default function Contact() {
           </div>
 
           {/* Right: Creative Form Card */}
-          <div className="lg:col-span-7 relative">
-            {/* Decorative overlapping element - adjusted position to prevent Android overflow */}
-            <div className="absolute -top-4 right-0 w-24 h-24 bg-gradient-to-br from-rose-gold/20 to-transparent rounded-full blur-2xl pointer-events-none" />
+          <div className="lg:col-span-7 relative min-w-0">
+            {/* Decorative overlapping element - hidden on mobile to prevent Android overflow */}
+            <div className="hidden md:block absolute -top-4 right-0 w-24 h-24 bg-gradient-to-br from-rose-gold/20 to-transparent rounded-full blur-2xl pointer-events-none" />
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

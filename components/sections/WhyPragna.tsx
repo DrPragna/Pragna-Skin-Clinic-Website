@@ -192,7 +192,7 @@ function PillarCard({
         ease: [0.22, 1, 0.36, 1]
       }}
       style={isMobile ? { scale } : undefined}
-      className="min-w-[75vw] snap-center lg:min-w-0 group relative"
+      className="min-w-[75vw] snap-center snap-always lg:min-w-0 group relative"
     >
       {/* Card - Desktop uses hover:, Mobile uses isActive state */}
       <div className={`relative h-full p-8 lg:p-14 bg-white/95 rounded-2xl lg:rounded-[2rem] border lg:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden

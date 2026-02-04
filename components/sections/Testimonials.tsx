@@ -304,7 +304,7 @@ const ReviewCard = ({ review, onClick, className = '', containerRef, isMobileVie
       className={`block w-[70vw] md:w-[420px] h-[320px] flex-shrink-0 select-none relative group ${className}`}
       onDragStart={(e) => e.preventDefault()}
     >
-      <div className={`h-full bg-gradient-to-br from-white via-white to-stone-50 rounded-[2rem] p-8 transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1
+      <div className={`h-full bg-gradient-to-br from-white via-white to-stone-50 rounded-[2rem] p-5 md:p-8 transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1
         ${isActive 
           ? 'border-maroon/20 shadow-[0_20px_40px_-10px_rgba(114,43,43,0.1)] border -translate-y-1' 
           : 'border border-stone-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02),0_10px_30px_-10px_rgba(114,43,43,0.06)] hover:border-maroon/20 hover:shadow-[0_20px_40px_-10px_rgba(114,43,43,0.1)]'
@@ -318,13 +318,13 @@ const ReviewCard = ({ review, onClick, className = '', containerRef, isMobileVie
         {/* Content Container */}
         <div className="relative flex flex-col h-full">
           {/* Header */}
-          <div className="flex justify-between items-start mb-4">
-            <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-lg border border-stone-100 shadow-sm`}>
+          <div className="flex justify-between items-start mb-4 gap-2">
+            <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1">
+              <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full ${review.bg} flex items-center justify-center text-charcoal/80 font-display font-bold text-base md:text-lg border border-stone-100 shadow-sm shrink-0`}>
                 {review.initial}
               </div>
-              <div>
-                <h4 className="font-sans font-semibold text-charcoal text-base">{review.author}</h4>
+              <div className="min-w-0 flex-1">
+                <h4 className="font-sans font-semibold text-charcoal text-sm md:text-base truncate">{review.author}</h4>
                 <div className="flex items-center gap-2 mt-1">
                   <div className="flex items-center gap-0.5">
                     {[1,2,3,4,5].map(i => <StarIcon key={i} />)}
@@ -336,12 +336,14 @@ const ReviewCard = ({ review, onClick, className = '', containerRef, isMobileVie
                 </div>
               </div>
             </div>
-            <GoogleIcon />
+            <div className="shrink-0">
+              <GoogleIcon />
+            </div>
           </div>
 
           {/* Content */}
-          <div className="flex-1 flex flex-col">
-            <p className="text-charcoal/70 text-[0.95rem] leading-[1.7] font-sans line-clamp-5">
+          <div className="flex-1 flex flex-col min-w-0">
+            <p className="text-charcoal/70 text-sm md:text-[0.95rem] leading-[1.6] md:leading-[1.7] font-sans line-clamp-5">
               "{review.text}"
             </p>
             {showReadMore && (
@@ -443,10 +445,8 @@ export default function Testimonials() {
         ref={containerRef}
         className="pt-20 lg:pt-24 pb-10 lg:pb-12 bg-[#F9FAFB] overflow-hidden relative"
       >
-        {/* Background Elements - Wrapped in overflow container for Android */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-rose-100/30 to-transparent rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
-        </div>
+        {/* Background Elements - Hidden on mobile to prevent Android overflow */}
+        <div className="hidden md:block absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-rose-100/30 to-transparent rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
 
         <div className="section-container mb-12 relative z-10">
           {/* Centered Header */}
@@ -516,7 +516,7 @@ export default function Testimonials() {
           className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pt-4 pb-4 scrollbar-hide md:hidden"
         >
           {testimonials.map((review, i) => (
-            <div key={`${review.id}-${i}`} className="snap-center shrink-0">
+            <div key={`${review.id}-${i}`} className="snap-center snap-always shrink-0">
               <ReviewCard 
                 review={review}
                 onClick={() => setSelectedReview(review)}

@@ -52,8 +52,8 @@ export default function Footer() {
       </div>
 
       {/* Top Marquee - Seamless Infinite Scroll */}
-      <div className="relative z-10 py-2.5 border-b border-cream/10 overflow-hidden">
-        <div className="flex whitespace-nowrap">
+      <div className="relative z-10 py-2.5 border-b border-cream/10 overflow-hidden w-full max-w-full">
+        <div className="flex whitespace-nowrap w-full">
           {/* First set - will scroll out */}
           <div className="flex shrink-0 animate-marquee">
             {[...Array(6)].map((_, i) => (

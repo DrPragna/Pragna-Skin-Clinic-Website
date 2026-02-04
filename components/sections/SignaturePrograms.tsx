@@ -141,7 +141,7 @@ function ProgramCard({
       }}
       // RESTORED: Continuous scale transform on mobile (0.92 -> 1.0)
       style={isMobile ? { scale } : undefined}
-      className={`group relative min-w-[78vw] snap-center md:min-w-0 aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer will-change-transform ${isFocused ? 'mobile-focused' : ''}`}
+      className={`group relative min-w-[78vw] snap-center snap-always md:min-w-0 aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer will-change-transform ${isFocused ? 'mobile-focused' : ''}`}
     >
       <Link href={`/signature-programs/${program.slug}`} scroll={true} className="block h-full w-full">
         {/* Background: Image or Gradient */}

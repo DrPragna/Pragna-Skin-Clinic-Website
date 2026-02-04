@@ -183,7 +183,9 @@ html.lenis, html.lenis body {
 @layer components {
   /* Layout */
   .section-container {
-    @apply max-w-7xl mx-auto px-6 lg:px-8;
+    @apply mx-auto px-4 sm:px-6 lg:px-8 w-full;
+    /* Prevent content from exceeding viewport on Android */
+    max-width: min(80rem, 100%);
   }
   
   .section-container-wide {
