@@ -366,19 +366,15 @@ export default function Doctors() {
                 })()}
               </motion.div>
 
-              {/* Close Button - Moved outside to prevent scrollbar snap */}
-              <motion.button 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
+              {/* Close Button - Outside animated container, no fade animation to prevent blink */}
+              <button 
                 onClick={(e) => { e.stopPropagation(); setSelectedDoctorId(null); }}
-                className="fixed top-4 right-4 lg:top-6 lg:right-6 z-[10000] w-12 h-12 rounded-full bg-white/90 backdrop-blur-md text-maroon shadow-lg flex items-center justify-center border border-maroon/10 active:scale-95 transition-all hover:bg-white"
+                className="fixed top-4 right-4 z-[10000] w-12 h-12 rounded-full bg-white/90 backdrop-blur-md text-maroon shadow-lg flex items-center justify-center border border-maroon/10 active:scale-95 transition-all hover:bg-white lg:hidden"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
-              </motion.button>
+              </button>
             </>
           )}
         </AnimatePresence>,
