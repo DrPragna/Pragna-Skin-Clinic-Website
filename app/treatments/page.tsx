@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies } from '@/lib/navigationData';
-import TreatmentsDirectory from './TreatmentsDirectory';
+import TreatmentsDirectory from './_components/TreatmentsDirectory';
 
 export const metadata: Metadata = {
   title: 'Treatments Menu | Pragna Skin Clinic',

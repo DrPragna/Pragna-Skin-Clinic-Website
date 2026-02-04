@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Footer from '@/components/sections/Footer';
 import { treatmentFamilies, getSubTreatment, conditions } from '@/lib/navigationData';
 import { getSubTreatmentContent } from '@/lib/content';
-import SubTreatmentClientContent from './SubTreatmentClientContent';
+import SubTreatmentClientContent from './_components/SubTreatmentClientContent';
 
 // Generate static params for all sub-treatments
 export function generateStaticParams() {

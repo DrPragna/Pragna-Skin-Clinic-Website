@@ -5,7 +5,7 @@ import {
   signaturePrograms,
   getSignatureProgram,
 } from "@/lib/content/signature-programs";
-import SignatureProgramClientContent from "./SignatureProgramClientContent";
+import SignatureProgramClientContent from "./_components/SignatureProgramClientContent";
 
 export function generateStaticParams() {
   return signaturePrograms.map((program) => ({

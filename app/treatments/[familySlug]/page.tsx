@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { treatmentFamilies, getTreatmentFamily, getConditionsForFamily } from '@/lib/navigationData';
 import { getTreatmentFamilyContent } from '@/lib/content';
-import TreatmentFamilyClient from '@/components/sections/treatments/TreatmentFamilyClient';
+import TreatmentFamilyClient from './_components/TreatmentFamilyClient';
 
 export function generateStaticParams() {
   return treatmentFamilies.map((family) => ({

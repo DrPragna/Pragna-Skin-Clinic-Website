@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TreatmentFamily } from '@/lib/navigationData';
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/ui/Reveal';
-import MobileTreatmentsMenu from '@/components/sections/treatments/MobileTreatmentsMenu';
+import MobileTreatmentsMenu from './MobileTreatmentsMenu';
 
 interface TreatmentsDirectoryProps {
   families: TreatmentFamily[];
