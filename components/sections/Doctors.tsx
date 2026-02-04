@@ -272,6 +272,18 @@ export default function Doctors() {
                   const doctor = doctors.find(d => d.id === selectedDoctorId)!;
                   return (
                     <div className="relative min-h-full pb-20">
+                      {/* Sticky Close Button - Moves with card, sticks on scroll, no snap */}
+                      <div className="sticky top-0 z-[10000] flex justify-end p-4 lg:p-6 h-0 overflow-visible pointer-events-none">
+                        <button 
+                          onClick={(e) => { e.stopPropagation(); setSelectedDoctorId(null); }}
+                          className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md text-maroon shadow-lg flex items-center justify-center border border-maroon/10 active:scale-95 transition-all hover:bg-white pointer-events-auto"
+                        >
+                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+
                       {/* Header Image */}
                       <div className="relative w-full h-[50vh]">
                         <div className="absolute inset-0 w-full h-full">
@@ -365,16 +377,6 @@ export default function Doctors() {
                   );
                 })()}
               </motion.div>
-
-              {/* Close Button - Outside animated container, no fade animation to prevent blink */}
-              <button 
-                onClick={(e) => { e.stopPropagation(); setSelectedDoctorId(null); }}
-                className="fixed top-4 right-4 z-[10000] w-12 h-12 rounded-full bg-white/90 backdrop-blur-md text-maroon shadow-lg flex items-center justify-center border border-maroon/10 active:scale-95 transition-all hover:bg-white lg:hidden"
-              >
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
             </>
           )}
         </AnimatePresence>,
