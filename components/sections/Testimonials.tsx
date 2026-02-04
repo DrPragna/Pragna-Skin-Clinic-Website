@@ -301,7 +301,7 @@ const ReviewCard = ({ review, onClick, className = '', containerRef, isMobileVie
     <motion.div
       ref={cardRef}
       style={isMobileView ? { scale } : undefined}
-      className={`block w-[70vw] md:w-[420px] h-[320px] flex-shrink-0 select-none relative group ${className}`}
+      className={`block w-[70vw] md:w-[420px] h-[275px] md:h-[320px] flex-shrink-0 select-none relative group ${className}`}
       onDragStart={(e) => e.preventDefault()}
     >
       <div className={`h-full bg-gradient-to-br from-white via-white to-stone-50 rounded-[2rem] p-5 md:p-8 transition-all duration-300 flex flex-col relative overflow-hidden group-hover:-translate-y-1
