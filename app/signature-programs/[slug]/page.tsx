@@ -5,7 +5,7 @@ import {
   signaturePrograms,
   getSignatureProgram,
 } from "@/lib/content/signature-programs";
-import SignatureProgramClientContent from "./_components/SignatureProgramClientContent";
+import SignatureProgramClient from "./_components/SignatureProgramClient";
 
 export function generateStaticParams() {
   return signaturePrograms.map((program) => ({
@@ -45,8 +45,10 @@ export default async function SignatureProgramPage({
 
   return (
     <main className="overflow-x-hidden bg-white">
-      <SignatureProgramClientContent program={program} />
-      <Footer />
+      <SignatureProgramClient program={program} />
+      <div className="hidden md:block">
+        <Footer />
+      </div>
     </main>
   );
 }
