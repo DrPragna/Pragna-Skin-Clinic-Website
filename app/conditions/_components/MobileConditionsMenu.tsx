@@ -43,7 +43,7 @@ const THEMES: Record<ThemeKey, {
     heroSub: 'text-white/80', 
     accent: 'text-[#A66249]', 
     title: 'Face & Skin',
-    description: "Restore your skin's natural health and radiance.",
+    description: "From acne to ageing, restore your skin's natural health and radiance.",
     heroImage: '/images/areas-of-focus/skin.webp',
     pageBg: 'bg-[#FAF5F2]', // Light Terracotta Wash
     pillBg: 'bg-[#C28E79]/10',
@@ -56,7 +56,7 @@ const THEMES: Record<ThemeKey, {
     heroSub: 'text-white/80', 
     accent: 'text-[#A68A3D]', 
     title: 'Hair & Scalp',
-    description: 'Science-backed solutions for restoration.',
+    description: 'Science-backed solutions for restoration, growth, and scalp health.',
     heroImage: '/images/areas-of-focus/hair.webp',
     pageBg: 'bg-[#FBF9F2]', // Light Gold Wash
     pillBg: 'bg-[#CDAA5C]/10',
@@ -69,7 +69,7 @@ const THEMES: Record<ThemeKey, {
     heroSub: 'text-white/80', 
     accent: 'text-[#736243]', 
     title: 'Body & Shape',
-    description: 'Sculpt and tone with advanced care.',
+    description: 'Sculpt, tone, and refine your silhouette with advanced non-surgical care.',
     heroImage: '/images/areas-of-focus/body.webp',
     pageBg: 'bg-[#F7F7F4]', // Light Olive Wash
     pillBg: 'bg-[#9E8C6B]/10',
@@ -81,8 +81,8 @@ const THEMES: Record<ThemeKey, {
     heroText: 'text-[#ECF2EE]',
     heroSub: 'text-[#A3C2B0]', 
     accent: 'text-[#527862]', 
-    title: 'Wellness',
-    description: 'Targeted treatments for overall wellbeing.',
+    title: 'Wellness & Corrective',
+    description: 'Targeted treatments for sweating, skin growths, tattoo removal and overall wellbeing.',
     pageBg: 'bg-[#F5F8F6]', // Light Sage Wash
     pillBg: 'bg-[#87A896]/10',
     primary: '#87A896',
