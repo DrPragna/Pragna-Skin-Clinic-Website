@@ -90,15 +90,15 @@ export default function Footer() {
 
       {/* Main Footer Content - Compact */}
       <div className="relative z-10 section-container py-8 lg:py-12">
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-4 gap-y-8 lg:gap-6">
           {/* Brand Column */}
-          <div className="lg:col-span-5">
+          <div className="col-span-2 lg:col-span-5 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              <Link href="/" className="inline-flex flex-col items-center mb-6">
+              <Link href="/" className="inline-flex flex-col items-center lg:items-start mb-4 lg:mb-6">
                 <Image
                   src="/icons/Icon_Master.png"
                   alt="Pragna Skin Clinic"
@@ -114,14 +114,14 @@ export default function Footer() {
                 </span>
               </Link>
 
-              <p className="text-cream/50 text-sm leading-relaxed max-w-sm mb-4">
+              <p className="hidden lg:block text-cream/50 text-sm leading-relaxed max-w-sm mb-4">
                 Established in 2001, Pragna Skin & Laser Clinics has been Hyderabad's trusted destination
                 for advanced dermatology. With 25+ years of experience, we combine ethical practice,
                 cutting-edge technology, and personalized care.
               </p>
 
               {/* Social Links - Smaller */}
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center justify-center lg:justify-start gap-2.5">
                 {footerLinks.social.map((social) => (
                   <a
                     key={social.name}
@@ -153,7 +153,7 @@ export default function Footer() {
           </div>
 
           {/* Links Columns */}
-          <div className="lg:col-span-3">
+          <div className="col-span-1 lg:col-span-3">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -175,7 +175,7 @@ export default function Footer() {
             </motion.div>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="col-span-1 lg:col-span-3">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
