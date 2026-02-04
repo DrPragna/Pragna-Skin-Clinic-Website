@@ -89,7 +89,7 @@ export default function Footer() {
 
       {/* Main Footer Content - Compact */}
       <div className="relative z-10 section-container py-8 lg:py-12">
-        <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-4 gap-y-8 lg:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-4 gap-y-12 lg:gap-6">
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-5 text-center lg:text-left">
             <motion.div
@@ -147,14 +147,15 @@ export default function Footer() {
           </div>
 
           {/* Links Columns */}
-          <div className="col-span-1 lg:col-span-3">
+          <div className="col-span-1 lg:col-span-3 flex flex-col items-center lg:block lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
+              className="w-fit lg:w-full"
             >
-              <h4 className="text-cream/40 text-[10px] uppercase tracking-[0.15em] mb-3">Quick Links</h4>
-              <ul className="space-y-2">
+              <h4 className="text-center lg:text-left text-cream/40 text-[10px] uppercase tracking-[0.15em] mb-3">Quick Links</h4>
+              <ul className="space-y-2 text-left">
                 {footerLinks.main.map((link) => (
                   <li key={link.name}>
                     <Link
@@ -169,14 +170,15 @@ export default function Footer() {
             </motion.div>
           </div>
 
-          <div className="col-span-1 lg:col-span-3">
+          <div className="col-span-1 lg:col-span-3 flex flex-col items-center lg:block lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 }}
+              className="w-fit lg:w-full"
             >
-              <h4 className="text-cream/40 text-[10px] uppercase tracking-[0.15em] mb-3">Popular Treatments</h4>
-              <ul className="space-y-2">
+              <h4 className="text-center lg:text-left text-cream/40 text-[10px] uppercase tracking-[0.15em] mb-3">Popular Treatments</h4>
+              <ul className="space-y-2 text-left">
                 {footerLinks.treatments.map((link) => (
                   <li key={link.name}>
                     <Link
