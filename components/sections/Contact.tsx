@@ -294,13 +294,13 @@ export default function Contact() {
                       </div>
 
                       {/* Phone with Country Code */}
-                      <div className="flex gap-2">
-                        <div className="relative w-28 shrink-0">
+                      <div className="flex gap-2 min-w-0">
+                        <div className="relative w-24 md:w-28 shrink-0">
                           <select
                             name="countryCode"
                             value={formData.countryCode}
                             onChange={handleInputChange}
-                            className="w-full bg-white border border-charcoal/15 rounded-xl px-3 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm"
+                            className="w-full bg-white border border-charcoal/15 rounded-xl px-2 md:px-3 py-3.5 text-sm md:text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 appearance-none cursor-pointer font-light shadow-sm"
                           >
                             {COUNTRY_CODES.map((country) => (
                               <option key={country.code} value={country.code}>
@@ -320,7 +320,7 @@ export default function Contact() {
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          className="flex-1 bg-white border border-charcoal/15 rounded-xl px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
+                          className="flex-1 min-w-0 bg-white border border-charcoal/15 rounded-xl px-3 md:px-4 py-3.5 text-base text-charcoal focus:border-maroon focus:ring-2 focus:ring-maroon/20 focus:outline-none transition-all duration-300 placeholder:text-charcoal/40 font-light shadow-sm"
                           placeholder="Phone Number"
                         />
                       </div>
