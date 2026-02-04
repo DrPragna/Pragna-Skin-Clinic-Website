@@ -111,9 +111,11 @@ export default function Contact() {
       className="py-12 lg:py-16 relative overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #F5EDE8 0%, #FAF4F0 50%, #F8EFE8 100%)' }}
     >
-      {/* Artistic Background Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-gold/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none mix-blend-multiply" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-maroon/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none mix-blend-multiply" />
+      {/* Artistic Background Elements - Wrapped in clipping container for Android compatibility */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-gold/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 mix-blend-multiply" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-maroon/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 mix-blend-multiply" />
+      </div>
 
       <div className="section-container max-w-5xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
@@ -149,8 +151,8 @@ export default function Contact() {
 
           {/* Right: Creative Form Card */}
           <div className="lg:col-span-7 relative">
-            {/* Decorative overlapping element */}
-            <div className="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-rose-gold/20 to-transparent rounded-full blur-2xl pointer-events-none" />
+            {/* Decorative overlapping element - adjusted position to prevent Android overflow */}
+            <div className="absolute -top-4 right-0 w-24 h-24 bg-gradient-to-br from-rose-gold/20 to-transparent rounded-full blur-2xl pointer-events-none" />
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
