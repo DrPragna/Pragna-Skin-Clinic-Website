@@ -144,7 +144,7 @@ export default function MobileConditionPage({
       {/* ==================== 
           1. HERO (Immersive 55svh)
       ==================== */}
-      <section className="relative h-[55svh] w-full flex flex-col justify-end bg-charcoal">
+      <section className="relative min-h-[65svh] w-full flex flex-col justify-end bg-charcoal pt-32">
         {/* Background */}
         <div className="absolute inset-0 z-0">
            <LuminousBackground pillar={condition.group} variant="condition" />
@@ -153,22 +153,22 @@ export default function MobileConditionPage({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 px-6 pb-16">
+        <div className="relative z-10 px-6 pb-20">
             <Reveal>
-                <div className="inline-block px-3 py-1 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white/80 font-sans text-[10px] tracking-[0.2em] uppercase mb-4">
+                <div className="inline-block px-3 py-1 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white/80 font-sans text-[10px] tracking-[0.2em] uppercase mb-6">
                     {condition.group} Concerns
                 </div>
 
-                <h1 className="text-4xl xs:text-5xl font-display text-white leading-[1.05] mb-4 shadow-sm">
+                <h1 className="text-3xl xs:text-4xl font-display text-white leading-[1.1] mb-6 shadow-sm">
                     {heroTitle}
                 </h1>
                 
-                <p className="text-white/80 font-light text-lg leading-relaxed mb-6 italic opacity-90 border-l-2 border-white/30 pl-4">
+                <p className="text-white/80 font-light text-lg leading-relaxed mb-8 italic opacity-90 border-l-2 border-white/30 pl-4">
                     &ldquo;{heroEmpathy}&rdquo;
                 </p>
 
                 {heroIntro && (
-                    <p className="text-white/60 text-sm mb-6 leading-relaxed max-w-sm">
+                    <p className="text-white/60 text-sm mb-8 leading-relaxed max-w-sm">
                         {heroIntro}
                     </p>
                 )}
