@@ -149,16 +149,19 @@ export default function Navbar() {
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
       document.body.classList.add('mobile-menu-open');
       // Also stop lenis if it exists
       window.lenis?.stop();
     } else {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       document.body.classList.remove('mobile-menu-open');
       window.lenis?.start();
     }
     return () => {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       document.body.classList.remove('mobile-menu-open');
       window.lenis?.start();
     };
@@ -580,7 +583,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute inset-0 flex flex-col h-full overflow-y-auto custom-scrollbar"
+                        className="absolute inset-0 flex flex-col h-full overflow-y-auto custom-scrollbar overscroll-contain"
                       >
                         {/* Header: Branding & Close (Moved inside Main Menu) */}
                         <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-maroon/20 shrink-0 bg-gradient-to-b from-[#FDFBF9]/95 to-transparent">
@@ -693,7 +696,7 @@ export default function Navbar() {
                         </div>
 
                         {/* Scrollable Content Area */}
-                        <div className="flex-1 overflow-y-auto px-6 py-8 custom-scrollbar">
+                        <div className="flex-1 overflow-y-auto px-6 py-8 custom-scrollbar overscroll-contain">
                           
                           {/* TREATMENTS CONTENT */}
                           {activeMobileDropdown === 'treatments' && (
