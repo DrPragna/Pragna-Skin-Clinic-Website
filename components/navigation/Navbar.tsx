@@ -601,19 +601,19 @@ export default function Navbar() {
                           </button>
                         </div>
 
-                        <div className="flex-1 px-8 flex flex-col pt-4 pb-8 min-h-0">
-                          <nav className="space-y-4">
+                        <div className="flex-1 px-8 flex flex-col pt-12 pb-8 min-h-0">
+                          <nav className="space-y-8">
                           <Link 
                             href="/" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="block text-4xl md:text-5xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 transform origin-left hover:scale-[1.02]"
+                            className="block text-4xl md:text-5xl font-display font-light leading-tight text-charcoal hover:text-maroon transition-all duration-300 transform origin-left hover:scale-[1.02]"
                           >
                             Home
                           </Link>
                           
                           <button 
                             onClick={() => setActiveMobileDropdown('treatments')}
-                            className="flex items-center justify-between w-full text-4xl md:text-5xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 text-left group"
+                            className="flex items-center justify-between w-full text-4xl md:text-5xl font-display font-light leading-tight text-charcoal hover:text-maroon transition-all duration-300 text-left group"
                           >
                             <span>Treatments</span>
                             <ChevronRight className="w-6 h-6 text-maroon/30 group-hover:text-maroon group-hover:translate-x-2 transition-all duration-300" />
@@ -621,7 +621,7 @@ export default function Navbar() {
 
                           <button 
                             onClick={() => setActiveMobileDropdown('conditions')}
-                            className="flex items-center justify-between w-full text-4xl md:text-5xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 text-left group"
+                            className="flex items-center justify-between w-full text-4xl md:text-5xl font-display font-light leading-tight text-charcoal hover:text-maroon transition-all duration-300 text-left group"
                           >
                             <span>Conditions</span>
                             <ChevronRight className="w-6 h-6 text-maroon/30 group-hover:text-maroon group-hover:translate-x-2 transition-all duration-300" />
@@ -629,7 +629,7 @@ export default function Navbar() {
 
                           <button 
                             onClick={() => setActiveMobileDropdown('programs')}
-                            className="flex items-center justify-between w-full text-4xl md:text-5xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 text-left group"
+                            className="flex items-center justify-between w-full text-4xl md:text-5xl font-display font-light leading-tight text-charcoal hover:text-maroon transition-all duration-300 text-left group"
                           >
                             <span>Signature Programs</span>
                             <ChevronRight className="w-6 h-6 text-maroon/30 group-hover:text-maroon group-hover:translate-x-2 transition-all duration-300" />
@@ -638,7 +638,7 @@ export default function Navbar() {
                           <Link 
                             href="/#about" 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="block text-4xl md:text-5xl font-display font-light text-charcoal hover:text-maroon transition-all duration-300 transform origin-left hover:scale-[1.02]"
+                            className="block text-4xl md:text-5xl font-display font-light leading-tight text-charcoal hover:text-maroon transition-all duration-300 transform origin-left hover:scale-[1.02]"
                           >
                             About
                           </Link>
