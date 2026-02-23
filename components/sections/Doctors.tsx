@@ -31,8 +31,8 @@ const doctors = [
       'National Trainer for Injectables & Lasers'
     ],
     image: '/images/dr-padmavathi.webp',
-    imageStyle: 'object-[center_25%]',
-    expandedObjectPosition: 'center 45%',
+    imageStyle: 'object-[center_85%]',
+    expandedObjectPosition: 'center 16%',
     badge: '25+ Years Experience',
   },
   {
