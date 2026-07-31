@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import GrainOverlay from "@/components/ui/GrainOverlay";
 import FloatingActions from "@/components/ui/FloatingActions";
@@ -28,6 +29,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-cream text-charcoal antialiased">
+        {/* Google Ads tag */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18160084401"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18160084401');
+          `}
+        </Script>
+
         {/* Page Loader - Premium first impression */}
         <PageLoader />
         
